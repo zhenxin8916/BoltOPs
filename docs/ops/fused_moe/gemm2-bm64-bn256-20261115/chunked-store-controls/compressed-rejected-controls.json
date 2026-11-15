@@ -1,0 +1,90 @@
+[
+  {
+    "case": "half-store-control",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-control/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-control/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "d0982cffe3ec6846f88e7e100491a9368df66ac3a57df10ab11ad32e82e184ef",
+    "uncompressed_bytes": 100759853,
+    "compressed_bytes": 12358021
+  },
+  {
+    "case": "half-store-lookahead",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-lookahead/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-lookahead/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "ed2eaa057ff320cf6c58ac0ee85067f85b9cf5334782f0f4f8be9ce3c1d707ba",
+    "uncompressed_bytes": 108812013,
+    "compressed_bytes": 13037986
+  },
+  {
+    "case": "half-store-linear-control",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-linear-control/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-linear-control/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "d0982cffe3ec6846f88e7e100491a9368df66ac3a57df10ab11ad32e82e184ef",
+    "uncompressed_bytes": 100759853,
+    "compressed_bytes": 12358021
+  },
+  {
+    "case": "half-store-linear-async",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-linear-async/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-linear-async/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "47cefde7310fd0633f1bc056f2333120907409c2191258fd8762ab43d81be35f",
+    "uncompressed_bytes": 108811285,
+    "compressed_bytes": 13091441
+  },
+  {
+    "case": "consumer-ready-probed-lookahead",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-ready-probed-lookahead/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-ready-probed-lookahead/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "17ec43a28f8801d43ebef38c9085334e7578bc7e27ba1bf972027fcfd2c4fbbe",
+    "uncompressed_bytes": 100949424,
+    "compressed_bytes": 12100344
+  },
+  {
+    "case": "half-store-async-lookahead",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-async-lookahead/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/half-store-async-lookahead/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "47cefde7310fd0633f1bc056f2333120907409c2191258fd8762ab43d81be35f",
+    "uncompressed_bytes": 108811285,
+    "compressed_bytes": 13091441
+  },
+  {
+    "case": "independent-m-pairs-k128",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-k128/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-k128/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "21a44f336fac8461af20f4f7291d26a8f248c615ea8808eaa76a647073d149e3",
+    "uncompressed_bytes": 82191548,
+    "compressed_bytes": 10365217
+  },
+  {
+    "case": "independent-m-pairs-meta-prefetch",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-meta-prefetch/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-meta-prefetch/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "8eb654de8d7616bad52ba2457878b7a3c370bbe7d15c958bce55edf34142914d",
+    "uncompressed_bytes": 82229486,
+    "compressed_bytes": 10346993
+  },
+  {
+    "case": "independent-m-pairs-meta-overlap",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-meta-overlap/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-meta-overlap/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "d5b74aeabbd85288058926c6a98b21f65d3aabcb16c952baf977cfd42302e588",
+    "uncompressed_bytes": 82271746,
+    "compressed_bytes": 10318061
+  },
+  {
+    "case": "consumer-pending-fp32",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-pending-fp32/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-pending-fp32/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "5651a8cfc84754d7872a4ae61262bd10865f39dd0a8819d6f3b8d5a9789b8452",
+    "uncompressed_bytes": 110943866,
+    "compressed_bytes": 13092758
+  },
+  {
+    "case": "consumer-pending-single-current",
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-pending-single-current/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-pending-single-current/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "e0f6ad92b0923d8f6fa0b92f0d50b7f81fedc5859043be185ddffe82b51cdda1",
+    "uncompressed_bytes": 104606410,
+    "compressed_bytes": 12286448
+  }
+]

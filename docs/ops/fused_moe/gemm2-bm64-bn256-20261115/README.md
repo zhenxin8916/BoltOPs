@@ -157,3 +157,31 @@ The pending-FP32 control loads and computes the next output before applying the 
 The evidence rejects these specific alternatives: concurrent independent-M pairs add a K-boundary and longer single-output epilogues, while moving all stores after both MMAC bodies shifts work into a longer drain. It does not prove that all compute/store overlap is ineffective. Further work should preserve the retained split-N roles and avoid delaying the entire epilogue until the end.
 
 [Metrics, launch records, phase analyses, source hashes and full-N results](persistent-output-controls/summary.json) accompany this report. Rejected sources remain scratch-only. Completed full-N pair IT traces are gzip-compressed with decompressed SHA verification to recover space; their `.gz` paths and hashes are recorded in the accompanying compression manifest. The best source remains code commit973bc63,12.168060 μs;≤9.602 μs is still unmet.
+
+
+## Continuation: chunked stores, asynchronous reads and readiness probes
+
+Retained code remains973bc63,12.168060 μs/9.358% whole-dispatch MMAC. The following source-only controls retain the same2P2C split-N roles,99KiB LDS,48 CU, two output tiles per persistent TG, frozen inputs/GPU addresses,1.8GHz and strict scale order. Every passing run checks1,315,072 elements with zero mismatches, canonical output hash and untouched tail. These are bounded two-output results; no new full-N correctness claim is made for these rejected controls. No Triton or LLVM source change was made.
+
+| Control | dispatch μs | whole48-CU MMAC | static store instructions across both consumer bodies |
+|---|---:|---:|---|
+| retained |12.168060|9.358%|32 dword|
+| split32-row stores, no prefetch |13.127160|8.674%|64 short|
+| split stores, blocking read helper between halves |13.682604|8.322%|64 short|
+| full-output async read helper before epilogue |13.240028|8.600%|32 dword|
+| split stores, defer LDS completion until next MMAC |13.585304|8.382%|64 short|
+| rebuild split-store addresses, no prefetch |12.206424|9.329%|32 dword|
+| rebuilt addresses, async prefetch between halves |12.754640|8.928%|32 dword|
+| nonblocking READY probe before optional prefetch |13.460204|8.460%|32 dword|
+| prepare full epilogue before directly replacing current prefetch variables |13.240028|8.600%|32 dword|
+| replace variables directly between rebuilt split stores |12.754640|8.928%|32 dword|
+
+The first split implementation used reshape/permute/split on packed output, offsets and masks. It was numerically correct, but inspection found `buffer_store_short` instead of retained `buffer_store_dword`: static stores doubled32→64. Canonicalizing only the half-tile layout to a DistributedLinearLayout did not restore width; those controls retained exactly13.127160 and13.585304 μs. Rebuilding offsets after splitting the32-row route/expert vectors, with a new contiguous N arange in each half, restored dword stores without false alignment assumptions. Its no-prefetch control reduces13.127160→12.206424 μs but still loses to retained by0.038364 μs. Thus raw split-store timings must not be interpreted as a test of otherwise equivalent memory instruction width.
+
+The asynchronous helper issues A/B/SB/row-metadata LDS reads but defers explicit `wait_lgkmcnt(0)` and A/B EMPTY returns until the next iteration before MMAC. This protects both matrix and metadata lifetimes: credits are not returned while pending reads are outstanding. It does not make READY acquisition nonblocking. Perf for full-output async prefetch still shows C0/C1 B READY wait-to-next-issued-instruction intervals764/316 cycles **before the current first store**. A separate control calls native nonblocking `abarrier_test_wait` for B, and for A/metadata at an M boundary; only when all are complete does it prefetch, otherwise it completes the old stores and performs the blocking read at next-iteration entry. It passes numerical checks and uses the real hardware probe API, but its extra state/control does not improve dispatch.
+
+With rebuilt split-store addresses and async prefetch, C0's last-store→next-MMAC interval falls792→184 cycles, and its entire inter-output MMAC gap falls3488→3388 cycles. However, C1's gap grows2336→4116 cycles; first→last store issue intervals are2652/2708 cycles because the prefetch work is now between the stores. C0/C1 first MMAC times are8.336108/9.123404 μs; tails after the final MMAC are2820/1280 cycles. Consequently a shorter last-store→MMAC interval is not sufficient evidence of a faster dispatch.
+
+Moving the prefetch helper until after current packed values/addresses are prepared and assigning A/B/metadata directly instead of through `na/nb/...` changed register demand but not measured elapsed time: full-store13.240028 μs and split-store12.754640 μs remain identical to their preceding controls. All recorded final native quotas remain legal and scratch size is0. No code control was promoted.
+
+[Combined launch records, numerical results, metrics, phases, source/assembly hashes and instruction-width counts](chunked-store-controls/summary.json) accompany this report. Completed rejected IT traces were losslessly gzip-compressed and their decompressed SHA256 verified to recover approximately0.96GB; canonical and current key comparison traces remain available. [Compression manifest](chunked-store-controls/compressed-rejected-controls.json) records restored paths and hashes. Original≤9.602 μs gate remains unmet.

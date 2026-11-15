@@ -106,7 +106,7 @@ def upsert_record(stage, record, directory=CONFIG_DIR):
         entry.update({name: row[name] for name in CASE_FIELDS + TOOLCHAIN_FIELDS})
         time_column, mmac_column = frequency_columns(gc)
         entry[time_column] = row["time_us"]
-        entry[mmac_column] = "" if mmac is None else f"{mmac:.6f}"
+        entry[mmac_column] = "" if mmac is None else f"{mmac:.6f}%"
         rows[key(row)] = entry
         def write(stream):
             writer=csv.DictWriter(stream,fieldnames=FIELDS,lineterminator="\n")

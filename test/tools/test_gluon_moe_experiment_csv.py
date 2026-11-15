@@ -58,4 +58,4 @@ def test_frequency_updates_preserve_other_measurements(tmp_path):
         rows = list(csv.DictReader(stream))
     assert len(rows) == 1
     assert [rows[0][f"time_us_{gc}ghz"] for gc in ("2_2", "1_8", "1_5")] == ["55.000000", "60.000000", "68.000000"]
-    assert [rows[0][f"mmac_total_pct_{gc}ghz"] for gc in ("2_2", "1_8", "1_5")] == ["65.000000", "70.000000", "75.000000"]
+    assert [rows[0][f"mmac_total_pct_{gc}ghz"] for gc in ("2_2", "1_8", "1_5")] == ["65.000000%", "70.000000%", "75.000000%"]

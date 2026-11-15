@@ -15,21 +15,22 @@ from pathlib import Path
 
 import torch
 from boltops.tools.gluon_moe_gemm1 import prepare_cpu, save_kernel
-from boltops.fused_moe.gluon.gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
-    gemm_bottom_w8a8_channel_wasp_persistent, DEFAULT_LAUNCH_OPTIONS,
-)
+
 
 
 def main():
     p = argparse.ArgumentParser(__doc__)
     p.add_argument('--mode', choices=('gluon', 'triton'), default='gluon')
-    p.add_argument('--bn', type=int, choices=(128, 256), default=256)
-    p.add_argument('--bk', type=int, choices=(128,), default=128)
-    p.add_argument('--a-buffer', action='store_true')
+    p.add_argument('--bn', type=int, choices=(256, 512), default=256)
+    p.add_argument('--bk', type=int, choices=(64, 128), default=None)
     p.add_argument('--tiles', type=int, default=384)
     p.add_argument('--grid', type=int, default=48)
     p.add_argument('--compile-only', action='store_true')
     args = p.parse_args()
+    expected_bk = 128 if args.bn == 256 else 64
+    if args.bk is not None and args.bk != expected_bk:
+        p.error(f"BN{args.bn} requires BK{expected_bk}")
+    args.bk = expected_bk
     root = Path.cwd()
     case = dict(M=4096, E=256, N=256, K=2048, topk=8)
     M, E, N, K, TOPK, BM = 4096, 256, 2048, 256, 8, 128
@@ -54,19 +55,14 @@ def main():
     gpu = {n: v.cuda() for n, v in t.items()}
     c = torch.full((M * TOPK, N), float('nan'), dtype=torch.bfloat16).cuda()
     if args.mode == 'gluon':
-        if args.bn == 256 and args.bk == 128 and not args.a_buffer:
-            from boltops.fused_moe.gluon.gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128 import (
-                gemm_bottom_w8a8_channel_wasp_persistent as optimized,
-            )
+        if args.bn == 256:
+            from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128 as mod
         else:
-            optimized = None
-        kernel = gemm_bottom_w8a8_channel_wasp_persistent
-        options = dict(DEFAULT_LAUNCH_OPTIONS, N=N, K=K, top_k=TOPK,
+            from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn512xbk64 as mod
+        kernel = mod.gemm_bottom_w8a8_channel_wasp_persistent
+        options = dict(mod.DEFAULT_LAUNCH_OPTIONS, N=N, K=K, top_k=TOPK,
                        BLOCK_SIZE_M=BM, BLOCK_SIZE_N=args.bn, BLOCK_SIZE_K=args.bk,
-                       USE_MLS_LOAD_A=not args.a_buffer, CK_SORTING=True)
-        if optimized is not None:
-            kernel = optimized
-            options.pop('USE_MLS_LOAD_A')
+                       CK_SORTING=True)
         arguments = (gpu['A'], gpu['B'], gpu['SA'], gpu['SB'], c,
                      gpu['SortedWeights'], gpu['Sorted'], gpu['Experts'], rows, M * TOPK, total)
     else:

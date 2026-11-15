@@ -1,0 +1,15 @@
+{
+  "removed_kernel": "gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128.py",
+  "reason": "Only standalone probe imported this early implementation; production dispatch and retained performance CSVs use dedicated BN256/BK128 and BN512/BK64 kernels. The obsolete path also fails normal compiler SGPR validation.",
+  "historical_numerical_records": [
+    "docs/ops/fused_moe/gemm2-20261114/row-persistent-a-reuse-bn128/result.json",
+    "docs/ops/fused_moe/gemm2-20261114/regression-bn128-bk128/result.json"
+  ],
+  "historical_records_preserved": true,
+  "standalone_probe_choices": {
+    "BN256": "BK128",
+    "BN512": "BK64"
+  },
+  "production_kernels_changed": false,
+  "validation": "CLI --help imports successfully; no live references to removed kernel remain."
+}

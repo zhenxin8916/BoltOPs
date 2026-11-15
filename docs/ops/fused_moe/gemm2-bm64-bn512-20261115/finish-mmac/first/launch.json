@@ -1,0 +1,91 @@
+{
+  "case": {
+    "M": 4096,
+    "E": 256,
+    "N": 256,
+    "K": 2048,
+    "topk": 8
+  },
+  "kind": "fp8",
+  "grid": 48,
+  "bm": 64,
+  "bn": 512,
+  "bk": 64,
+  "cu_count": 48,
+  "tiles_per_tg": 2,
+  "total_tiles": 96,
+  "output_elements_per_tg": 65536,
+  "kernel_total_tiles_argument": 384,
+  "N_TILES_LIMIT": 1,
+  "input_sha256": {
+    "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+    "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+    "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+    "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+    "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+    "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+    "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+    "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+    "golden": "45c78093f81060ea9c4fec15b35c8e85d0b11170c92522f6015d4e3aa9ecf242",
+    "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+  },
+  "options": {
+    "num_warps": 4,
+    "num_stages": 2,
+    "use_async_copy": true,
+    "wasp_partition_warps": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "wasp_wdra": true,
+    "N": 2048,
+    "K": 256,
+    "top_k": 8,
+    "BLOCK_SIZE_M": 64,
+    "BLOCK_SIZE_N": 512,
+    "BLOCK_SIZE_K": 64,
+    "CK_SORTING": true,
+    "N_TILES_LIMIT": 1
+  },
+  "source_sha256": "c8624ee6f18ef403e424f055e5637bddef040a968e59eca9d783a312753d0bb5",
+  "gpu_buffers": {
+    "A": {
+      "address": 140728445435904,
+      "bytes": 10354688
+    },
+    "B": {
+      "address": 140723261276160,
+      "bytes": 134217728
+    },
+    "SA": {
+      "address": 140728409784320,
+      "bytes": 161792
+    },
+    "SB": {
+      "address": 140728455790592,
+      "bytes": 2097152
+    },
+    "Sorted": {
+      "address": 140728409946112,
+      "bytes": 161792
+    },
+    "Experts": {
+      "address": 140728410107904,
+      "bytes": 2528
+    },
+    "RouteWeights": {
+      "address": 140728410110464,
+      "bytes": 131072
+    },
+    "SortedWeights": {
+      "address": 140728410241536,
+      "bytes": 161792
+    },
+    "C": {
+      "address": 140722992840704,
+      "bytes": 134217728
+    }
+  }
+}

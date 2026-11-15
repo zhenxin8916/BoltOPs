@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.218832 us / whole-dispatch MMAC14.964197%, live-barriers. The 60% target remains open.**
+**Current best: 15.145996 us / whole-dispatch MMAC15.036159%, finish-mmac. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -99,3 +99,13 @@ This reduces startup/teardown instructions left over from the earlier two-slot B
 
 
 Production documentation was refreshed after testing to describe the full-K B protocol and twelve live barrier IDs. The tested source is retained unchanged; repeat-proof.json records the tested and production hashes and the documentation-only AST comparison.
+
+## Complete both final K64 MMAC groups before the two M32 epilogues
+
+Current best **15.145996 us / whole 48-CU dispatch MMAC15.036159%**, same1.8GHz/48TG/two outputs per TG scope. This is0.478591% lower elapsed time than commit bbac17c15.218832 us. Four full-N1024 FP8/INT8 equivalence cases and barrier/phase, active-work and consumer-VMEM audits pass; independent compilation repeats exact machine text, frozen inputs, GPU addresses, output and time. LDS remains99KiB, native WDRA actual VGPRs36/9/146/146; no spills. Evidence: [finish-mmac](finish-mmac/). The60% objective remains unachieved.
+
+Previously, C finished K3 for the first M32, scaled and wrote its mailbox, waited for LDS completion, then computed K3 for the second M32. Now both independent K3 MMAC groups run before either M32 epilogue. Output mailbox dimensions, producer drain order, barrier IDs/phases and scaling order ((acc*SA)*SB)*weight are unchanged. This removes one explicit epilogue/wait boundary between the final MMAC groups, without increasing LDS or changing the amount of MMAC work.
+
+CU0/SIMD0: first MMAC times are unchanged(C0 8.129276us,C1 8.789804us); last MMAC ends improve C0 13.871644->13.475772us and C1 14.532172->14.149644us. Full dispatch improves only0.072836us, because output draining remains on the critical path. Cross-M between-MMAC gaps grow C0 2112->2544 and C1 1660->2808 cycles. This is not a claim that all stalls are removed. A C1 ordinal57 gap600 cycles has no intervening instructions from that wave; per-wave issue gaps alone cannot distinguish scheduling competition from instruction/resource readiness. Next-A priority controls are being checked separately.
+
+Numeric-passing negative controls in this round: double A slots15.561884us; prefetch both SB halves after BL15.419548us; wider CN256 phase with native B MLS and metadata prefetch17.195968us; P0 route/expert register carriers15.646952us(extra256B shared conversion scratch); direct output-layout route loading15.378404us(removes that scratch but still slower); independent double SB slots15.927732us. None replaces the best. Completed negative traces were losslessly gzip-compressed to release space; original source, binaries, stats, perf and result JSON remain in the temporary case directories.

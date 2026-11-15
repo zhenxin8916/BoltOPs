@@ -371,6 +371,11 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
                 hi = gl.amd.cdna4.mfma(a_high[k_part], b_quarters[k_part], hi)
                 hcu.sched_barrier()
             b = b_quarters[3]
+            hcu.sched_barrier()
+            lo = gl.amd.cdna4.mfma(a_low[3], b, lo)
+            hcu.sched_barrier()
+            hi = gl.amd.cdna4.mfma(a_high[3], b, hi)
+            hcu.sched_barrier()
             accumulators = (lo, hi)
             a_panels = (a_low[3], a_high[3])
             sa_parts = _row_vectors(sa)
@@ -378,7 +383,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
             for panel in gl.static_range(2):
 
                 hcu.sched_barrier()
-                acc = gl.amd.cdna4.mfma(a_panels[panel], b, accumulators[panel])
+                acc = accumulators[panel]
                 hcu.sched_barrier()
 
                 panel_sa = gl.convert_layout(sa_parts[panel], gl.SliceLayout(1, result))

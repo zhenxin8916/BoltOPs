@@ -1,0 +1,5 @@
+{
+  "kernel_case": "/home/zhenx/temp/moe-gemm2-20261114/p0-scatter-two-resident-a-lds-one-m-details",
+  "kernel_source_sha256": "56450f5570e9ab6e6587d3ab7b81d94051f688c48fc1b367e1c87fcedceb64b8",
+  "finding": "SB compiler emitted fffff200+imm3840 where full i32 argument should be 256; independent probe preserves full-u32 and split forms as controls; no production instruction workaround"
+}

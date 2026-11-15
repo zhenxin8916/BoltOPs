@@ -1,0 +1,6 @@
+{
+  "independent_output_handshake": true,
+  "diagnostic_only": true,
+  "change": "Read-only UMC Packet address/size fields; offsets verified in Packet::getAddrRange (0x569330) and matchAddr; do not use audit timing as formal performance",
+  "sha256": "139abfdae976be558f85e784551fa9cb84c216579c730fa9595eb6c3b985a9cf"
+}

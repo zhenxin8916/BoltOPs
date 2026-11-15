@@ -1,0 +1,5 @@
+{
+  "base_commit": "4a3677e",
+  "change": "Mask padded A rows in buffer-LDS loads; P0 route decode before K; B and consumer unchanged",
+  "sha256": "ff9c635574c610a1da40987f56f826c4d6af62be13e3549c5cd6c8ec2ce22784"
+}

@@ -1,0 +1,5 @@
+{
+  "base_commit": "4a3677e",
+  "change": "2P2C: P0 prefetches next M A and scatters C from 16KiB/C LDS mailboxes; P1 B unchanged; joint 8-wave output READY0/13, EMPTY14/15, total 16 legal abarriers",
+  "sha256": "7d3fc928cc32ed6c25e4f27dde2fd664a6afd24eb80aa9ba6aee2ebf17d4ebc8"
+}

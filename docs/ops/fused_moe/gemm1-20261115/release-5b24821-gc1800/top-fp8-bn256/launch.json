@@ -1,0 +1,55 @@
+{
+  "case": {
+    "M": 4096,
+    "E": 256,
+    "N": 512,
+    "K": 2048,
+    "topk": 8
+  },
+  "actual_N": 1024,
+  "actual_K": 2048,
+  "grid": 48,
+  "physical_cus": 48,
+  "measured_logical_tiles": 192,
+  "persistent_outputs_per_tg": 4,
+  "measured_output_rows": 6144,
+  "diagnostic_only": true,
+  "input_sha256": {
+    "A": "904d9b082ed85e572d95fec99e70773054e2b7f170829394d7dee0af2b7279c8",
+    "B": "5f5647ecd80bfabe6c7e78edd5c3b87ad9dd321ab9de305b6ff0f63b23635847",
+    "SA": "0ec159ae321db0a90583ad45ac4777424586a7abd86118fcfe2e6c39ad7ec03b",
+    "SB": "74c964cd94f917078e4e4ff07d56e660348d903db4162b63d9fc6585f18f8fe9",
+    "Sorted": "afa4028a30cfa4dab3dfbc9b910c9191759204a156019b34732a1f7f26bf1c5a",
+    "Experts": "27df8ef3cf0fbc6ca1d4e88e667de79259329e6435c04136860241ee5f1dc6b6",
+    "WorkCount": "c6c7c3c6775538eeda4b3ebfd95e2bda17756ad04c6e76ae713b488e71732992",
+    "TopkIDs": "807ae2d7cf64254ce046ba25e707aed9062e535a14e0a175efe802d2335fbd4c"
+  },
+  "options": {
+    "num_warps": 4,
+    "num_stages": 2,
+    "use_async_copy": true,
+    "wasp_partition_warps": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "wasp_wdra": true,
+    "BLOCK_SIZE_M": 128,
+    "BLOCK_SIZE_N": 256,
+    "BLOCK_SIZE_K": 128,
+    "TOTAL_TILES": 192,
+    "USE_ADDR_OFFSET_INT64_A": false,
+    "USE_ADDR_OFFSET_INT64_B": false,
+    "USE_ADDR_OFFSET_INT64_C": false
+  },
+  "kernel_source": {
+    "path": "/zhenxin/BoltOPs/boltops/fused_moe/gluon/gemm_top_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128.py",
+    "sha256": "eb62a34b534026eb313dc52d8d2f26253907661fe204ea00acd1c2e28ad90a85",
+    "commit": "7db929e7a4fe6339c8dc60687506137c5921e2c7"
+  },
+  "frequency_ghz": 1.8,
+  "warmup": false,
+  "input_kind": "fp8",
+  "output_dtype": "torch.bfloat16"
+}

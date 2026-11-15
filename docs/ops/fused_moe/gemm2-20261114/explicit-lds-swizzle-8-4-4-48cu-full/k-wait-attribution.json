@@ -1,0 +1,28 @@
+{
+  "8": {
+    "k_window_cycles": 133876.0,
+    "attribution_cycles": {
+      "A_READY": 32.0,
+      "other_instructions_and_issue_gaps": 15948.0,
+      "LDS_waitcnt": 20388.0,
+      "VMEM_waitcnt": 2404.0,
+      "B_READY": 27020.0,
+      "MMAC_following_interval_le8": 65152.0,
+      "MMAC_issue_gap": 2932.0
+    },
+    "definition": "per-wave elapsed intervals within same logical K windows as analyze.py; instruction overlap means this is NOT hardware busy accounting and is NOT additive across waves"
+  },
+  "12": {
+    "k_window_cycles": 116812.0,
+    "attribution_cycles": {
+      "A_READY": 32.0,
+      "other_instructions_and_issue_gaps": 19456.0,
+      "LDS_waitcnt": 18840.0,
+      "VMEM_waitcnt": 8500.0,
+      "B_READY": 544.0,
+      "MMAC_following_interval_le8": 65536.0,
+      "MMAC_issue_gap": 3904.0
+    },
+    "definition": "per-wave elapsed intervals within same logical K windows as analyze.py; instruction overlap means this is NOT hardware busy accounting and is NOT additive across waves"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "triton": {
+    "path": "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton",
+    "head": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+    "branch": "HEAD",
+    "status": " M python/triton/experimental/gluon/language/amd/hcu/__init__.py\n M third_party/hcu/lib/TritonHCUToLLVM/MlsOpToLLVM.cpp\n",
+    "patch_sha256": "4f54ee4e4b97db1d9f0a253f95e60e93912b41bebc1ec917253bf431e5c8a5ec",
+    "patch_file": "triton-local.patch.gz"
+  },
+  "llvm": {
+    "path": "/zhenxin/llvm-project",
+    "head": "71fabc519b352fb7112d4089abace261e5e177fb",
+    "branch": "dtk-llvm-6.3.3",
+    "status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n",
+    "patch_sha256": "818dfc9e5d02d8c8531a7e48552c9747b3e18f97799b5fd834a799eec4ca776b",
+    "patch_file": "llvm-local.patch.gz"
+  },
+  "libtriton": {
+    "path": "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/_C/libtriton.so",
+    "sha256": "1db585029b903cc7f19a290518690ffe19901a6567261015006cefd41914762a"
+  },
+  "clang": {
+    "path": "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18",
+    "sha256": "e3f14dd98d1188838e9f39c825cb546aa20fb25f5b4a79821d743c454cfa2941"
+  },
+  "pmd": {
+    "path": "/opt/rocm/pmd/libgem5_opt.so",
+    "sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+  }
+}

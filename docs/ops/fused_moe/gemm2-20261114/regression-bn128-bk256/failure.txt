@@ -1,0 +1,35 @@
+[0mamdgpu_device_initialize: amdgpu_get_auth (1) failed (-1)
+eventq idx: 0
+./m5out/gpu/dev/dri/renderD128
+ioctl: AMDKFD_IOC_GET_PROCESS_APERTURES_NEW --- eventq---0
+[31m
+!!! Run on Perf Model[0m
+[31m!!! Perf Model chip config: deviceid:0x66b7(gfx946), dp4x:disable[0m
+Traceback (most recent call last):
+  File "/zhenxin/temp/moe-gemm2-20261114/run_frozen.py", line 10, in <module>
+    runpy.run_module("boltops.tools.gluon_moe_gemm2",run_name="__main__")
+  File "/usr/lib/python3.10/runpy.py", line 227, in run_module
+    return _run_code(code, {}, init_globals, run_name, mod_spec)
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/zhenxin/BoltOPs/boltops/tools/gluon_moe_gemm2.py", line 131, in <module>
+    main()
+  File "/zhenxin/BoltOPs/boltops/tools/gluon_moe_gemm2.py", line 100, in main
+    compiled = kernel.warmup(*arguments, grid=(args.grid,), **options)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/runtime/jit.py", line 391, in warmup
+    return self.run(grid=grid, warmup=True, *map(MockTensor.wrap_dtype, args), **kwargs)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/runtime/jit.py", line 753, in run
+    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/runtime/jit.py", line 883, in _do_compile
+    kernel = self.compile(src, target=target, options=options.__dict__)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/compiler/compiler.py", line 353, in compile
+    next_module = compile_ir(module, metadata)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/backends/hcu/compiler.py", line 1193, in <lambda>
+    stages["amdgcn"] = lambda src, metadata: self.make_amdgcn(src, metadata, options)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/backends/hcu/compiler.py", line 1117, in make_amdgcn
+    regs = wasp.check_and_adjust_wasp_wdra_regs(gcn, src, metadata, options)
+  File "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/backends/hcu/wasp.py", line 280, in check_and_adjust_wasp_wdra_regs
+    raise RuntimeError("HCU WDRA does not allow SGPR spills; changing VGPR quotas cannot repair them")
+RuntimeError: HCU WDRA does not allow SGPR spills; changing VGPR quotas cannot repair them
+
+=================close pmd-cxx======================

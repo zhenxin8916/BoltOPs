@@ -1,0 +1,34 @@
+{
+  "axis": "cycles from first CU0 wave start",
+  "period_ps": 455,
+  "simds": [
+    {
+      "simd": 0,
+      "M0_last_mmac_end": 15319.0,
+      "M1_first_mmac": 23483.0,
+      "gap_cycles": 8164.0,
+      "gap_us": 3.71462
+    },
+    {
+      "simd": 1,
+      "M0_last_mmac_end": 15305.0,
+      "M1_first_mmac": 23485.0,
+      "gap_cycles": 8180.0,
+      "gap_us": 3.7219
+    },
+    {
+      "simd": 2,
+      "M0_last_mmac_end": 14984.0,
+      "M1_first_mmac": 23484.0,
+      "gap_cycles": 8500.0,
+      "gap_us": 3.8675
+    },
+    {
+      "simd": 3,
+      "M0_last_mmac_end": 15314.0,
+      "M1_first_mmac": 23486.0,
+      "gap_cycles": 8172.0,
+      "gap_us": 3.71826
+    }
+  ]
+}

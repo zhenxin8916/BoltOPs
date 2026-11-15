@@ -1,0 +1,5 @@
+{
+  "independent_output_handshake": true,
+  "change": "Frequency-only full control at 1.75 GHz, same final2 source; report clock explicitly and keep 2.2 GHz table separate",
+  "sha256": "59bcf20688933835bfb58c5b74b22f593eb97b5f9a5af7cb88a19b2fe70bfc16"
+}

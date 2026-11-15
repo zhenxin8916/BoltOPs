@@ -1,0 +1,5 @@
+{
+  "base_commit": "4a3677e",
+  "change": "BN128/BK128 full-route configuration; current A reuse/full B preload/route hoist unchanged; native UMC+Perf logging",
+  "sha256": "2b2de70d7ca75b3ace5569f2b8b668e2e1826e43c8e9400090e90e6c2a27598e"
+}

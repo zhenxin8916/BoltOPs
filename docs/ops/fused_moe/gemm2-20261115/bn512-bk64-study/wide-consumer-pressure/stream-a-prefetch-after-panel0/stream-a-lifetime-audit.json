@@ -1,0 +1,98 @@
+{
+  "0001000a": [
+    {
+      "tick": 12500548,
+      "prior_lgkm0_tick": 12408252,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 22797668,
+      "prior_lgkm0_tick": 22705372,
+      "mmac_before_release": 448
+    }
+  ],
+  "0003000b": [
+    {
+      "tick": 12501104,
+      "prior_lgkm0_tick": 12408808,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 22800448,
+      "prior_lgkm0_tick": 22705928,
+      "mmac_before_release": 448
+    }
+  ],
+  "00000008": [
+    {
+      "tick": 12503884,
+      "prior_lgkm0_tick": 12409364,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 22801004,
+      "prior_lgkm0_tick": 22706484,
+      "mmac_before_release": 448
+    }
+  ],
+  "00020009": [
+    {
+      "tick": 12504440,
+      "prior_lgkm0_tick": 12409920,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 22797112,
+      "prior_lgkm0_tick": 22704816,
+      "mmac_before_release": 448
+    }
+  ],
+  "0001000e": [
+    {
+      "tick": 12751860,
+      "prior_lgkm0_tick": 12652892,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 23031188,
+      "prior_lgkm0_tick": 22938892,
+      "mmac_before_release": 448
+    }
+  ],
+  "0003000f": [
+    {
+      "tick": 12756864,
+      "prior_lgkm0_tick": 12651224,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 23033968,
+      "prior_lgkm0_tick": 22939448,
+      "mmac_before_release": 448
+    }
+  ],
+  "0002000d": [
+    {
+      "tick": 12760200,
+      "prior_lgkm0_tick": 12652336,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 23030632,
+      "prior_lgkm0_tick": 22938336,
+      "mmac_before_release": 448
+    }
+  ],
+  "0000000c": [
+    {
+      "tick": 12772988,
+      "prior_lgkm0_tick": 12658452,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 23034524,
+      "prior_lgkm0_tick": 22940004,
+      "mmac_before_release": 448
+    }
+  ]
+}

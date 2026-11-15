@@ -1,0 +1,77 @@
+--- stable/MlsOpToLLVM.cpp
++++ diagnostic/MlsOpToLLVM.cpp
+@@ -1595,6 +1595,14 @@
+     assert(mlsInsn->getElemBitWidth() == 16 || mlsInsn->getElemBitWidth() == 8);
+     unsigned dsRepPerWarpNonK = dsInsnAttr.instrsPerWarp[nonKDimIdx2D];
+     unsigned dsRepPerWarpK = dsInsnAttr.instrsPerWarp[kDimIdx2D];
++    // A unit-MMAC layout owns one non-K instruction row per repetition.
++    // A wider MLS non-K tile contains several such rows, shared between
++    // spatial warps/repetitions, not all belonging to each warp.
++    bool selectWideNonKRow = !matrixStorePath && opIdx == 0 &&
++        mlsTile[nonKDimIdx2D] > static_cast<unsigned>(mfmaInstrNonK) &&
++        dsInsnAttr.instrShape[nonKDimIdx2D] == static_cast<unsigned>(mfmaInstrNonK);
++    if (selectWideNonKRow)
++      dsRepPerWarpNonK = 1;
+     unsigned dsLoadsPerK = dsRepPerWarpNonK * dsRepPerWarpK;
+     unsigned numOfElemsPerDsInsn =
+         (dsInsnAttr.instrShape[kDimIdx2D] *
+@@ -1613,7 +1621,7 @@
+         unsigned offBase = offs.size() - 2;
+         int64_t viewNonK = shape[nonKDimIdx];
+         int64_t parentNonK = parentShape[nonKDimIdx];
+-        if (viewNonK > 0 && parentNonK > viewNonK &&
++        if (!selectWideNonKRow && viewNonK > 0 && parentNonK > viewNonK &&
+             parentNonK % viewNonK == 0 &&
+             (!matrixStorePath ||
+              viewNonK / warpsPerBlockNonK <
+@@ -1659,6 +1667,40 @@
+             unsigned loadKIdx = loadIdx % dsRepPerWarpK;
+             unsigned localByteOff = dsInsnAttr.dsByteOffsets[loadIdx];
+             Value gepElems = loadOffset;
++            if (selectWideNonKRow) {
++              auto viewOffsets = smemObj.getOffsets();
++              unsigned offsetBase = viewOffsets.size() - 2;
++              Value logicalRow = b.add(
++                  b.mul(b.add(spatialWarpId,
++                              b.i32_val(mlsNonK * warpsPerBlockNonK)),
++                        b.i32_val(mfmaInstrNonK)),
++                  viewOffsets[offsetBase + nonKDimIdx2D]);
++              Value logicalK = b.add(
++                  b.i32_val(mlsKIdx * mlsTile[kDimIdx2D]),
++                  viewOffsets[offsetBase + kDimIdx2D]);
++              Value tileRow = b.udiv(logicalRow,
++                                    b.i32_val(mlsTile[nonKDimIdx2D]));
++              Value tileK = b.udiv(logicalK,
++                                  b.i32_val(mlsTile[kDimIdx2D]));
++              SmallVector<unsigned> tileGrid{
++                  static_cast<unsigned>(parentShape[0]) / mlsTile[0],
++                  static_cast<unsigned>(parentShape[1]) / mlsTile[1]};
++              std::array<Value, 2> tileCoords{tileRow, tileK};
++              Value tileBase = b.mul(
++                  linearize(rewriter, loc, tileCoords, tileGrid,
++                            sharedLayout.getOrder()),
++                  b.i32_val(product(mlsTile)));
++              Value rowInTile = b.udiv(
++                  b.urem(logicalRow, b.i32_val(mlsTile[nonKDimIdx2D])),
++                  b.i32_val(dsInsnAttr.instrShape[nonKDimIdx2D]));
++              Value parentLoadIdx = b.add(
++                  b.mul(rowInTile, b.i32_val(dsRepPerWarpK)),
++                  b.i32_val(loadKIdx));
++              Value selected = selectDsByteOffsetUnit(parentLoadIdx);
++              gepElems = b.add(tileBase,
++                  b.sdiv(b.sub(selected, b.i32_val(localByteOff)),
++                         b.i32_val(elemByteWidth)));
++            }
+             if (withinTileHalfView) {
+               Value parentLoadIdxVal = b.add(
+                   b.mul(b.add(nonKLoadBaseVal, b.i32_val(loadNonKIdx)),
+@@ -1671,7 +1713,8 @@
+               gepElems = b.add(loadOffset, adjElems);
+             }
+             // Encode static tile displacements in the instruction when they fit.
+-            uint64_t byteOffset = tileOffset * elemByteWidth + localByteOff;
++            uint64_t byteOffset =
++                (selectWideNonKRow ? 0 : tileOffset * elemByteWidth) + localByteOff;
+             if (byteOffset > 0xffff) {
+               gepElems = b.add(gepElems, b.i32_val(tileOffset));
+               byteOffset = localByteOff;

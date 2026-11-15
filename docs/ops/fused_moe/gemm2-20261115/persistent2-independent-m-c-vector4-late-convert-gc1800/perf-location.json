@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-c-vector4-late-convert-gc1800/GEMM2_M4096_N2048_K256_BM128_BN256_BK256_GRID48_OUTPUT96_2M_PER_CU_C_VECTOR4_LATE_CONVERT_GC1800_CU0.perf",
+  "sha256": "1797abe3e2d2749a874db5c75f77d62cf1ceea806a1f17c7d6e104514a592a65"
+}

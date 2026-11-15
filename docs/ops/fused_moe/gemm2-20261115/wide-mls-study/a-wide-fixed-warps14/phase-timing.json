@@ -1,0 +1,124 @@
+{
+  "period_ps": 556,
+  "definition": "CU0 cycles, per consumer 128 MMAC instructions per independent M output. Own inter-M gap includes old postprocessing and next data preparation; postprocess-to-READY includes DS completion and scheduling, not pure VALU cycles.",
+  "consumers": [
+    {
+      "simd": 0,
+      "role": "C0",
+      "m0_first_mmac_tick": 9098940,
+      "m0_last_mmac_end_tick": 11785532,
+      "m1_first_mmac_tick": 12454956,
+      "inter_m_gap_cycles": 1204.0,
+      "m0_post_mmac_to_final_ready_cycles": 444.0,
+      "m1_post_mmac_to_final_ready_cycles": 396.0
+    },
+    {
+      "simd": 0,
+      "role": "C1",
+      "m0_first_mmac_tick": 9314668,
+      "m0_last_mmac_end_tick": 12079100,
+      "m1_first_mmac_tick": 12873068,
+      "inter_m_gap_cycles": 1428.0,
+      "m0_post_mmac_to_final_ready_cycles": 740.0,
+      "m1_post_mmac_to_final_ready_cycles": 372.0
+    },
+    {
+      "simd": 1,
+      "role": "C0",
+      "m0_first_mmac_tick": 9102276,
+      "m0_last_mmac_end_tick": 11757732,
+      "m1_first_mmac_tick": 12456068,
+      "inter_m_gap_cycles": 1256.0,
+      "m0_post_mmac_to_final_ready_cycles": 500.0,
+      "m1_post_mmac_to_final_ready_cycles": 404.0
+    },
+    {
+      "simd": 1,
+      "role": "C1",
+      "m0_first_mmac_tick": 9315780,
+      "m0_last_mmac_end_tick": 12082436,
+      "m1_first_mmac_tick": 12865284,
+      "inter_m_gap_cycles": 1408.0,
+      "m0_post_mmac_to_final_ready_cycles": 740.0,
+      "m1_post_mmac_to_final_ready_cycles": 364.0
+    },
+    {
+      "simd": 2,
+      "role": "C0",
+      "m0_first_mmac_tick": 9101720,
+      "m0_last_mmac_end_tick": 11757176,
+      "m1_first_mmac_tick": 12455512,
+      "inter_m_gap_cycles": 1256.0,
+      "m0_post_mmac_to_final_ready_cycles": 500.0,
+      "m1_post_mmac_to_final_ready_cycles": 420.0
+    },
+    {
+      "simd": 2,
+      "role": "C1",
+      "m0_first_mmac_tick": 9315224,
+      "m0_last_mmac_end_tick": 12079656,
+      "m1_first_mmac_tick": 12864728,
+      "inter_m_gap_cycles": 1412.0,
+      "m0_post_mmac_to_final_ready_cycles": 740.0,
+      "m1_post_mmac_to_final_ready_cycles": 372.0
+    },
+    {
+      "simd": 3,
+      "role": "C0",
+      "m0_first_mmac_tick": 9102832,
+      "m0_last_mmac_end_tick": 11762736,
+      "m1_first_mmac_tick": 12456624,
+      "inter_m_gap_cycles": 1248.0,
+      "m0_post_mmac_to_final_ready_cycles": 496.0,
+      "m1_post_mmac_to_final_ready_cycles": 392.0
+    },
+    {
+      "simd": 3,
+      "role": "C1",
+      "m0_first_mmac_tick": 9316336,
+      "m0_last_mmac_end_tick": 12085216,
+      "m1_first_mmac_tick": 12868064,
+      "inter_m_gap_cycles": 1408.0,
+      "m0_post_mmac_to_final_ready_cycles": 736.0,
+      "m1_post_mmac_to_final_ready_cycles": 380.0
+    }
+  ],
+  "stores": [
+    {
+      "simd": 0,
+      "store_instructions_per_M": 16,
+      "m0_first_store_tick": 11329612,
+      "m0_last_store_tick": 12699596,
+      "m1_first_store_tick": 13700396,
+      "m1_last_store_tick": 14903580,
+      "m0_last_to_m1_first_store_cycles": 1800.0
+    },
+    {
+      "simd": 1,
+      "store_instructions_per_M": 16,
+      "m0_first_store_tick": 11310708,
+      "m0_last_store_tick": 12671796,
+      "m1_first_store_tick": 13683716,
+      "m1_last_store_tick": 14922484,
+      "m0_last_to_m1_first_store_cycles": 1820.0
+    },
+    {
+      "simd": 2,
+      "store_instructions_per_M": 16,
+      "m0_first_store_tick": 11303480,
+      "m0_last_store_tick": 12682360,
+      "m1_first_store_tick": 13709848,
+      "m1_last_store_tick": 14913032,
+      "m0_last_to_m1_first_store_cycles": 1848.0
+    },
+    {
+      "simd": 3,
+      "store_instructions_per_M": 16,
+      "m0_first_store_tick": 11320160,
+      "m0_last_store_tick": 12690144,
+      "m1_first_store_tick": 13690944,
+      "m1_last_store_tick": 14896352,
+      "m0_last_to_m1_first_store_cycles": 1800.0
+    }
+  ]
+}

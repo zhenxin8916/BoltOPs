@@ -1,0 +1,14 @@
+{
+  "previous_best_commit": "48839e8",
+  "previous_time_us": 13.977145,
+  "new_time_us": 13.767845,
+  "new_mmac_percent": 13.536468488714101,
+  "repeat_identical_hsaco_inputs_addresses": true,
+  "cross_m_same_hsaco": true,
+  "cross_m_outputs_per_tg": 4,
+  "cross_m_checked_elements": 4380672,
+  "improvement_percent": 1.497444578274032,
+  "improvement_from_original_14_701505_percent": 6.350778372690414,
+  "target_time_us": 11.761204,
+  "target_met": false
+}

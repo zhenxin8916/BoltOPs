@@ -1,0 +1,142 @@
+{
+  "0": {
+    "role": "P0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "buffer_load_dwordx4": 6,
+      "buffer_load_dword": 2,
+      "ds_read_b32": 4,
+      "ds_read_b128": 32,
+      "buffer_store_dwordx4": 32
+    }
+  },
+  "1": {
+    "role": "P0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "buffer_load_dwordx4": 6,
+      "buffer_load_dword": 2,
+      "ds_read_b32": 4,
+      "ds_read_b128": 32,
+      "buffer_store_dwordx4": 32
+    }
+  },
+  "2": {
+    "role": "P0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "buffer_load_dwordx4": 6,
+      "buffer_load_dword": 2,
+      "ds_read_b32": 4,
+      "ds_read_b128": 32,
+      "buffer_store_dwordx4": 32
+    }
+  },
+  "3": {
+    "role": "P0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "buffer_load_dwordx4": 6,
+      "buffer_load_dword": 2,
+      "ds_read_b32": 4,
+      "ds_read_b128": 32,
+      "buffer_store_dwordx4": 32
+    }
+  },
+  "4": {
+    "role": "P1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "global_load_dword": 2,
+      "buffer_load_dwordx4": 4
+    }
+  },
+  "5": {
+    "role": "P1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "global_load_dword": 2,
+      "buffer_load_dwordx4": 4
+    }
+  },
+  "6": {
+    "role": "P1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "global_load_dword": 2,
+      "buffer_load_dwordx4": 4
+    }
+  },
+  "7": {
+    "role": "P1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "global_load_dword": 2,
+      "buffer_load_dwordx4": 4
+    }
+  },
+  "8": {
+    "role": "C0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "9": {
+    "role": "C0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "10": {
+    "role": "C0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "11": {
+    "role": "C0",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "12": {
+    "role": "C1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "13": {
+    "role": "C1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "14": {
+    "role": "C1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  },
+  "15": {
+    "role": "C1",
+    "instruction_counts": {
+      "ds_read_addtid_b32": 1,
+      "ds_read_matrix_trans_format": 88,
+      "ds_read_b128": 16
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "baseline_commit": "c8af677",
+  "baseline_us": 17.012488,
+  "candidate_us": 16.8746,
+  "repeat_us": 16.8746,
+  "time_reduction_percent": 0.8105104908817583,
+  "frequency_ghz": 1.8,
+  "same_binary_repeat": true,
+  "same_inputs_and_gpu_addresses": true,
+  "numerical_validation": "2190336 elements, zero torch.isclose mismatches; rtol .02 atol .002",
+  "formal_default_kernel_changed": false
+}

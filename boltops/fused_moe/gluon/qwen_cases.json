@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source": "/home/zhenx/obsidian-book/raw/ai-compiler/2026.11/1101-triton-moe-shaobo-support.html#models",
+  "priority": "gemm1",
+  "recipes": ["fp8_channel"],
+  "recipe_scope": "User-selected kernel recipes on Qwen shapes; not checkpoint recipe certification",
+  "cases": [
+    {"id": "qwen35-small-m64", "model": "Qwen3.5-35B-A3B", "size": "small", "M": 64, "E": 221, "E_global": 256, "N": 512, "K": 2048, "topk": 8, "source_M_expert": 3, "priority": 0},
+    {"id": "qwen35-large-m2560", "model": "Qwen3.5-35B-A3B", "size": "large", "M": 2560, "E": 256, "E_global": 256, "N": 512, "K": 2048, "topk": 8, "source_M_expert": 80, "priority": 0},
+    {"id": "qwen35-large-m4096", "model": "Qwen3.5-35B-A3B", "size": "large", "M": 4096, "E": 256, "E_global": 256, "N": 512, "K": 2048, "topk": 8, "source_M_expert": 128, "priority": 0},
+    {"id": "qwen35-large-m6656", "model": "Qwen3.5-35B-A3B", "size": "large", "M": 6656, "E": 256, "E_global": 256, "N": 512, "K": 2048, "topk": 8, "source_M_expert": 208, "priority": 1},
+    {"id": "qwen397-small-m48", "model": "Qwen3.5-397B-A17B", "size": "small", "M": 48, "E": 63, "E_global": 512, "N": 1024, "K": 4096, "topk": 10, "source_M_expert": 4, "priority": 1},
+    {"id": "qwen397-small-m192", "model": "Qwen3.5-397B-A17B", "size": "small", "M": 192, "E": 64, "E_global": 512, "N": 1024, "K": 4096, "topk": 10, "source_M_expert": 15, "priority": 1},
+    {"id": "qwen397-large-m3584", "model": "Qwen3.5-397B-A17B", "size": "large", "M": 3584, "E": 64, "E_global": 512, "N": 1024, "K": 4096, "topk": 10, "source_M_expert": 560, "priority": 1},
+    {"id": "qwen397-large-m6656", "model": "Qwen3.5-397B-A17B", "size": "large", "M": 6656, "E": 64, "E_global": 512, "N": 1024, "K": 4096, "topk": 10, "source_M_expert": 1040, "priority": 1}
+  ]
+}

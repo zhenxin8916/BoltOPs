@@ -1,0 +1,20 @@
+{
+  "audit_two_tg.py": "e40ae339a8d857eccdf5233338055ccab911e6f8303aa0c1bfff5b7b07321c00",
+  "compiled.json": "679add1c3d5c0becf78f373c85f7c4616e537c611951698a3edbc4f898e61631",
+  "frozen-kernel-two-independent-outputs.py": "3de5ecd55bdd5ac4f69b9d739e9a52873946f59bb3a7f80d78580bab2cf3ea09",
+  "kernel.amdgcn.gz": "702c57dcbfcd02b2c5c882d80e83b5026c527752eed89edbd268d12fb5afca0d",
+  "kernel.hsaco": "e74831e9b48bb556cfb568e7700acb2af5747ad593add5deae6c7a5c4a1c3339",
+  "launch.json": "0301d0e26af150a8624e624f51fb1ed80221ccdc688ead5e84104af1e80ec3e0",
+  "launch.py": "13c02bf4e4b09d80d4cf468ecf02d63abb259c5f75ac49781feaef9736052328",
+  "model-metrics.json": "2d8ce5c93702871e41dd2efcd48effc6a5c1e38091d361a75bcfd68d55d3fa77",
+  "model_metrics.py": "d4c09bef5fd61a5a264daf3d6c4ee183c0e7e213f6f802fbac5eed5c723fb63c",
+  "n-pipeline-waits.json": "bb821cc8d51b3b852438645c3406c735db80a34bcbfb56343ed78d18f82af424",
+  "n_pipeline_waits.py": "5cdd0127a6beb979f58071764ea4ad448f332268f0605e1d349318d08a073921",
+  "perf-location.json": "bc3887c34404aa49ffb7065900c6fb0e521cba78163339f2d7b93828d17798cb",
+  "perf_dispatch_span.py": "a39fd6e63193d96b42b243e301a0f0b1a59cbd43b3b7ecc62942a021bca8975d",
+  "probe_two_outputs_sorted_weights.py": "e3d78eda0b7266eb5581b29c5ce8bdc2cc385a7418c9e24af1273be3188e6ee2",
+  "provenance.json": "0842545bdf358f225db334f995616ea02341c92164c443e2337587cc94eae6a4",
+  "result.json": "e36e164ae355b4352c977b940cba981e286df11bbd92d4dbdffb802247bfd541",
+  "run_frozen_two_outputs_sorted_weights.py": "a2faa878887ad7d792c12cf8e586ee25357da6094872b1193416c520b3995485",
+  "two-tg-audit.json": "eb5fa708df4838f99653765390c6e305a4315e0888f5da48bc1aae930c13cacf"
+}

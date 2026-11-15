@@ -1,0 +1,29 @@
+{
+  "command": [
+    "setarch",
+    "x86_64",
+    "-R",
+    "/zhenxin/temp/moe-single-tg-handoff-tune-20261113/ab-shared8-prepared-copies-llvm-control-sync/clang-control-sync",
+    "-target",
+    "amdgcn-amd-amdhsa",
+    "-mcpu=gfx946:xnack-",
+    "-mllvm=-check-valu-data-forward-hazards=0",
+    "-mllvm=-disable-cluster-lds-memops=true",
+    "-mllvm=-hcu-pre-emit-load-store-opt=false",
+    "-mllvm=-vgpr-greedy-alloc-mode=local-wave",
+    "-mllvm=-turn-off-wdra-trap-handler=true",
+    "-mllvm=-support-512-vgprs=true",
+    "-mllvm=-amdgpu-disable-backoff-barrier=false",
+    "-mllvm=-hcu-update-wait-by-reverse-search=true",
+    "-mllvm=-fp-fuse=fast",
+    "-O3",
+    "-mllvm=-print-after=loop-reduce",
+    "-x",
+    "ir",
+    "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-two-resident-a-lds-two-m/gemm/kernel.llir",
+    "-S",
+    "-o",
+    "/zhenxin/temp/moe-gemm2-20261114/mubuf-wrapping-offset-rootcause/kernel.amdgcn"
+  ],
+  "input_sha256": "ff24f270c61fb91cb8b8d37c8b731c30c388db81dfa8423533a28cc5b02692a2"
+}

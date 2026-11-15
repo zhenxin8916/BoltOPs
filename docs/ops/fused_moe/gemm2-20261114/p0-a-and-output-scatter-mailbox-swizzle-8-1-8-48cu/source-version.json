@@ -1,0 +1,5 @@
+{
+  "independent_output_handshake": true,
+  "change": "Integrated BN256 mailbox swizzle only: (8,4,4) to (8,1,8)",
+  "sha256": "407f5a90b380ae15ed6207e745a1cb9b21b87d5bf542e9f0c3f3750247f92ad3"
+}

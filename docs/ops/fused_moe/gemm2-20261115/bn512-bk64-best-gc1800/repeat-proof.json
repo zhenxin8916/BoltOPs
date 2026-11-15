@@ -1,0 +1,13 @@
+{
+  "hsaco_identical": true,
+  "inputs_identical": true,
+  "gpu_buffers_identical": true,
+  "time_us": 21.98146,
+  "source_ast_identical": true,
+  "source_comment_only_correction": "AB mapping comment fixed in repository; executable Python AST unchanged",
+  "measured_source_sha256": "6d1dcd7d9fe2e3ecc4a23eb0e002693d2cb46432b00950addfc30eb14a61319a",
+  "repository_source_sha256": "23795385e5529661cd9454fb329237066cc8b846682f3a7425009d310c5869f6",
+  "archived_amdgcn_comment_whitespace_normalized": true,
+  "original_amdgcn_sha256": "4e68ac32058404e11f444896d66bbb71c39f618c0d77dd1addc4466f323f5dd2",
+  "archived_amdgcn_sha256": "1972c2cf320b057db2c9cbb38a840b2d4bc95d748289e48d4977d3a380159878"
+}

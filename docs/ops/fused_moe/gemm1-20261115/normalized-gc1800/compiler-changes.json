@@ -1,0 +1,14 @@
+{
+  "top": {
+    "triton_commit": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+    "triton_changes": "MLS 开启 BPS=1 绕过 L1，缓解未完成访存条目堵塞；补齐 Gluon abarrier 状态查询与 BufferLdsSharedLayout 行置换接口。",
+    "llvm_project_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+    "llvm_changes": "提交修复 buffer 32 位 offset 回绕语义；本地补丁折叠 LDS 地址常量并合并 DS 读取，减少地址指令；启用 hcu-control-only-ebarrier-sync，避免控制同步排空 LDS 读取；禁止 load 下沉跨越 barrier，避免槽位复用竞态。"
+  },
+  "bottom": {
+    "triton_commit": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+    "triton_changes": "MLS 开启 BPS=1 绕过 L1，缓解未完成访存条目堵塞；补齐 Gluon abarrier 状态查询与 BufferLdsSharedLayout 行置换接口。 MLS 分组改用 MapVector 保持稳定发射顺序，避免无序遍历扰乱流水。",
+    "llvm_project_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+    "llvm_changes": "提交修复 buffer 32 位 offset 回绕语义；本地补丁折叠 LDS 地址常量并合并 DS 读取，减少地址指令；启用 hcu-control-only-ebarrier-sync，避免控制同步排空 LDS 读取；禁止 load 下沉跨越 barrier，避免槽位复用竞态。"
+  }
+}

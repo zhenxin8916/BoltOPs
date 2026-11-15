@@ -1,0 +1,53 @@
+{
+  "baseline_commit": "264d7e7",
+  "scope": "1.8GHz,48CU,2 independent M outputs per persistent TG,96 outputs,N traversal truncated1",
+  "result": {
+    "mismatches": 0,
+    "checked_elements": 2190336,
+    "shared": 119808,
+    "scope": "persistent_two_independent_M_output_tiles_per_CU"
+  },
+  "baseline_time_us": 15.327252,
+  "candidate_time_us": 15.327252,
+  "native_instruction_counts": [
+    1503,
+    1503
+  ],
+  "native_changes": [
+    {
+      "before": "v_cmp_gt_i32_e32 vcc, s34, v26",
+      "after": "v_cmp_gt_u32_e32 vcc, s34, v26"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[0:1], s34, v27",
+      "after": "v_cmp_gt_u32_e64 s[0:1], s34, v27"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[2:3], s34, v24",
+      "after": "v_cmp_gt_u32_e64 s[2:3], s34, v24"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[4:5], s34, v25",
+      "after": "v_cmp_gt_u32_e64 s[4:5], s34, v25"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[16:17], s34, v12",
+      "after": "v_cmp_gt_u32_e64 s[16:17], s34, v12"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[18:19], s34, v13",
+      "after": "v_cmp_gt_u32_e64 s[18:19], s34, v13"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[20:21], s34, v28",
+      "after": "v_cmp_gt_u32_e64 s[20:21], s34, v28"
+    },
+    {
+      "before": "v_cmp_gt_i32_e64 s[22:23], s34, v29",
+      "after": "v_cmp_gt_u32_e64 s[22:23], s34, v29"
+    }
+  ],
+  "source_sha256": "92557a075da863e91dca307d2413a1fda09aaa6ea746327f312d821e8b88ed5b",
+  "candidate_directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-unsigned-route-mask-gc1800",
+  "decision": "No speedup; do not promote candidate implementation"
+}

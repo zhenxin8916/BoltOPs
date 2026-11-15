@@ -1,0 +1,56 @@
+[
+  {
+    "case": "persistent2-independent-m-bk128-pair-ebarrier-gc1800",
+    "promoted": false,
+    "terminal": "Stopped explicitly after deadlock",
+    "manual_ids": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "backend_reserved": "0..5; per-partition 6..9",
+    "collisions": [
+      8,
+      9
+    ],
+    "backend_collision_instructions": [
+      "s_ebarrier_sync  8, 4",
+      "s_ebarrier_sync  8, 4",
+      "s_ebarrier_sync  9, 4",
+      "s_ebarrier_sync  9, 4"
+    ],
+    "cause": "Manual EB8/9 count2 overlapped compiler output-layout EB8/9 count4; not PMD defect."
+  },
+  {
+    "case": "persistent2-independent-m-bk128-pair-ebarrier-late-credit-gc1800",
+    "promoted": false,
+    "terminal": "Stopped explicitly after deadlock",
+    "manual_ids": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "backend_reserved": "0..5; per-partition 6..9",
+    "collisions": [
+      8,
+      9
+    ],
+    "backend_collision_instructions": [
+      "s_ebarrier_sync  8, 4",
+      "s_ebarrier_sync  8, 4",
+      "s_ebarrier_sync  9, 4",
+      "s_ebarrier_sync  9, 4"
+    ],
+    "cause": "Manual EB8/9 count2 overlapped compiler output-layout EB8/9 count4; not PMD defect."
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "independent_output_handshake": true,
+  "change": "Only P0 wave priority1 during A and output scatter, restore0 on exit",
+  "sha256": "cfb2153e24d0e1fa00560fcc66773ecd8787210aafe6cf10ab671300f8226e66"
+}

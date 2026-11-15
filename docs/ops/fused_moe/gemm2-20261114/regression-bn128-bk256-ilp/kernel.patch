@@ -1,0 +1,11 @@
+--- a/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
++++ b/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
+@@ -20,7 +20,7 @@
+ DEFAULT_LAUNCH_OPTIONS = dict(
+     num_warps=4, num_stages=2, use_async_copy=True,
+     wasp_partition_warps=(4, 4, 4, 4), wasp_wdra=True,
+-    amdgpu_enable_max_ilp_scheduling_strategy=False,
++    amdgpu_enable_max_ilp_scheduling_strategy=True,
+ )
+ MMAC_LAYOUT = gl.constexpr(3)
+ ROW_PERSISTENT_A = True

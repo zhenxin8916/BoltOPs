@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18 -mllvm -hcu-control-only-ebarrier-sync -mllvm -unroll-max-count=1 -mllvm -unroll-full-max-count=1 "$@"

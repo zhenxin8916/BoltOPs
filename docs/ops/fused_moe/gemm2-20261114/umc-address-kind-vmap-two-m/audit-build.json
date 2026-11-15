@@ -1,0 +1,5 @@
+{
+  "command": "gcc -O2 -shared -fPIC -o audit.so audit.c",
+  "audit_so_sha256": "5e1c879a967ad1f96fc9f356410d8f61c8f9b151cf4e4f08874a2c694ec1e854",
+  "pmd_library_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+}

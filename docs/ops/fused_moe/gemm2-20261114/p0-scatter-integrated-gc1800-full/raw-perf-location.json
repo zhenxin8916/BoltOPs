@@ -1,0 +1,6 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/p0-scatter-integrated-gc1800-full/m5out/0/0/2274121_python3.10.perf",
+  "sha256": "2c21e7b4f8072468c2dfd4c801cf3fc147a64c68e6d68f8ca9074a24e2a56e41",
+  "bytes": 11878,
+  "trace_scope": "IT/TT not collected; complete dispatch counters and XCD timing only"
+}

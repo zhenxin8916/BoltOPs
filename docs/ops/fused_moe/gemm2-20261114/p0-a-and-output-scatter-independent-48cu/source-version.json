@@ -1,0 +1,6 @@
+{
+  "base_commit": "4a3677e",
+  "change": "P0 epilogue, independent C mailboxes. K=BK256 B uses single READY/EMPTY id per half; C mailbox waits separate identical B waits. Output IDs9..15,0; first waits stay nonzero. 16 abarriers total.",
+  "independent_output_handshake": true,
+  "sha256": "5915e0643689c591efda70f8ef8d8bccb36d93f3a1d7b1f5ee05811dea7cfeeb"
+}

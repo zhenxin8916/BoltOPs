@@ -1,0 +1,5 @@
+{
+  "independent_output_handshake": true,
+  "change": "Enable P0 scatter for MLS A BN256 BK256 only; other paths use verified direct scatter",
+  "sha256": "59bcf20688933835bfb58c5b74b22f593eb97b5f9a5af7cb88a19b2fe70bfc16"
+}

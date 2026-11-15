@@ -1,0 +1,6 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/umc-address-kind-vmap-full/m5out/0/0/2274477_python3.10.perf",
+  "sha256": "3c24f0eb46359731678c41a48c4dfb72585e672955f0e4aacb7d4f74f1f73f96",
+  "bytes": 11580,
+  "trace_scope": "IT/TT not collected; complete dispatch counters and XCD timing only"
+}

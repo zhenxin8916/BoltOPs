@@ -1,0 +1,9 @@
+{
+  "llvm_branch": "dtk-llvm-6.3.3",
+  "llvm_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n",
+  "triton_source_commit": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+  "runtime": "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton",
+  "local_changes": "BPS1 plus MapVector stable MLS grouping; Python HCU extensions; see prior mls-stable-groups evidence",
+  "pmd_commit": "b61a79c58e4f54d6d2920594d3af08582354db3e"
+}

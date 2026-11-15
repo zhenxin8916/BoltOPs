@@ -1,0 +1,6 @@
+{
+  "base": "4a3677e",
+  "validation": "regression-nonlocal-experts",
+  "source_sha256": "2b2de70d7ca75b3ace5569f2b8b668e2e1826e43c8e9400090e90e6c2a27598e",
+  "probe_sha256": "58e5e5cf99457ab335e1575c1bca786c9f07802ad71d2e2da28e49c6a85b816d"
+}

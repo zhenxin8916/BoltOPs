@@ -1,0 +1,18 @@
+{
+  "llvm_branch": "dtk-llvm-6.3.3",
+  "llvm_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n",
+  "clang_sha256": "709dc9e1924d8b5151b60f3a9c5fb87e0b33d862f9dfa1ec361b480cb0f46ea9",
+  "test_summary": {
+    "passed": 133,
+    "unsupported": 1,
+    "failed": 0
+  },
+  "kernel_source_unchanged": true,
+  "kernel_checked_elements": 1394688,
+  "kernel_mismatches_before": 65321,
+  "kernel_mismatches_after": 0,
+  "kernel_source_sha256": "56450f5570e9ab6e6587d3ab7b81d94051f688c48fc1b367e1c87fcedceb64b8",
+  "old_case": "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-two-resident-a-lds-two-m",
+  "fixed_case": "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-two-resident-a-lds-wrap-fixed-two-m"
+}

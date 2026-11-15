@@ -1,0 +1,20 @@
+[
+  {
+    "algorithm": "four-handoff-p0-prio1",
+    "time_us": 16.086748,
+    "whole_gpu_mmac_percent": 14.156845124943835,
+    "promoted": false
+  },
+  {
+    "algorithm": "four-handoff-p1-prio1",
+    "time_us": 16.034484,
+    "whole_gpu_mmac_percent": 14.202989007940635,
+    "promoted": false
+  },
+  {
+    "algorithm": "next-expert-prefetch",
+    "time_us": 16.195724,
+    "whole_gpu_mmac_percent": 14.061588108070994,
+    "promoted": false
+  }
+]

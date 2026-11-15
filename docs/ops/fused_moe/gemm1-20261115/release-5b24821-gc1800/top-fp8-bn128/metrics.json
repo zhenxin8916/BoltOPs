@@ -1,0 +1,15 @@
+{
+  "dispatch_span": {
+    "begin_tick": 0,
+    "end_tick": 72614712,
+    "duration_ticks": 72614712,
+    "duration_us": 72.614712,
+    "gui_duration_us": 72.614,
+    "section_offset": 7790,
+    "section_type": 15,
+    "source_perf": "/zhenxin/temp/moe-release-5b24821-fp8-20261115/top-fp8-bn128/m5out/0/0/2324909_python3.10.perf",
+    "source_perf_sha256": "a08cd9575bd77a330c2e5173fdce4126031e9425df4f8521c491b41c592f5f51"
+  },
+  "time_us": 72.614712,
+  "wave_span_time_us": 68.201184
+}

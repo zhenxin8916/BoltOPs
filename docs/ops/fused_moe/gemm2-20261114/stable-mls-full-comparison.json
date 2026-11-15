@@ -1,0 +1,344 @@
+[
+  {
+    "case": "p0-scatter-stable-base-full",
+    "metrics": {
+      "schema_version": 2,
+      "time_us": 176.57048,
+      "wave_span_time_us": 172.958695,
+      "wave_span_mmac_percent": 33.762573582476826,
+      "dispatch_span": {
+        "begin_tick": 0,
+        "end_tick": 176570480,
+        "duration_ticks": 176570480,
+        "duration_us": 176.57048,
+        "gui_duration_us": 176.57,
+        "section_offset": 10350,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-stable-base-full/m5out/0/0/2280303_python3.10.perf",
+        "source_perf_sha256": "8ebaa3b17571e7966b193d3856427a93a7e3be8d9c89779f38fdddfb01720d2d"
+      },
+      "whole_gpu_mmac_percent": 33.07195328837904,
+      "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+      "mmac_count_per_cu": {
+        "0": 65536,
+        "1": 65536,
+        "2": 65536,
+        "3": 65536,
+        "4": 65536,
+        "5": 65536,
+        "6": 65536,
+        "7": 65536,
+        "8": 65536,
+        "9": 65536,
+        "10": 57344,
+        "11": 57344,
+        "12": 65536,
+        "13": 65536,
+        "14": 65536,
+        "15": 65536,
+        "16": 65536,
+        "17": 65536,
+        "18": 65536,
+        "19": 65536,
+        "20": 65536,
+        "21": 65536,
+        "22": 57344,
+        "23": 57344,
+        "24": 65536,
+        "25": 65536,
+        "26": 65536,
+        "27": 65536,
+        "28": 65536,
+        "29": 65536,
+        "30": 65536,
+        "31": 65536,
+        "32": 65536,
+        "33": 65536,
+        "34": 57344,
+        "35": 57344,
+        "36": 65536,
+        "37": 65536,
+        "38": 65536,
+        "39": 65536,
+        "40": 65536,
+        "41": 65536,
+        "42": 65536,
+        "43": 65536,
+        "44": 65536,
+        "45": 65536,
+        "46": 57344,
+        "47": 57344
+      },
+      "expected_mmac_instructions": 3080192,
+      "padded_tflops": 285.81145459875285,
+      "useful_tflops": 194.59503291829984,
+      "cache": {
+        "TccSendRespBandwidth": 1.980936,
+        "TccRecvRespBandwidth": 1.623642,
+        "TCCHitRate": 0.793247,
+        "TCPCacheLineHitRate": 0.287695,
+        "SQCIHitRate": 0.999931,
+        "missSQCIRequests": 168.0,
+        "missDuplicatedSQCIRequests": 58906.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 32085.333333333332,
+          "maximum": 32768.0,
+          "sum": 1540096.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 31293.604166666668,
+          "maximum": 36184.0,
+          "sum": 1502093.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 6737.104166666667,
+          "maximum": 9054.0,
+          "sum": 323381.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 3631.4583333333335,
+          "maximum": 5103.0,
+          "sum": 174310.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 18955.4375,
+          "maximum": 22599.0,
+          "sum": 909861.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 5484.833333333333,
+          "maximum": 10351.0,
+          "sum": 263272.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 117189.625,
+          "maximum": 133876.0,
+          "sum": 5625102.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 25405.395833333332,
+          "maximum": 26132.0,
+          "sum": 1219459.0
+        }
+      }
+    },
+    "umc": {
+      "schema_version": 2,
+      "grid": 48,
+      "diagnostic_only": false,
+      "dispatch_span": {
+        "begin_tick": 0,
+        "end_tick": 176570480,
+        "duration_ticks": 176570480,
+        "duration_us": 176.57048,
+        "gui_duration_us": 176.57,
+        "section_offset": 10350,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-stable-base-full/m5out/0/0/2280303_python3.10.perf",
+        "source_perf_sha256": "8ebaa3b17571e7966b193d3856427a93a7e3be8d9c89779f38fdddfb01720d2d"
+      },
+      "wave_span_time_us": 172.958695,
+      "wave_span_mmac_percent": 33.762573582476826,
+      "time_us": 176.57048,
+      "whole_48cu_mmac_percent": 33.07195328837905,
+      "deadline_for_40_percent_us": 145.98826666666665,
+      "numerical_errors": 0,
+      "read_requests": 605667,
+      "write_requests": 514220,
+      "logged_umc_admissions": 1119887,
+      "admissions_before_dispatch": 0,
+      "admissions_during_dispatch": 1119887,
+      "admissions_after_dispatch": 0,
+      "last_admission_minus_dispatch_end_us": -0.474084,
+      "umc_period_ps": 2276,
+      "bank_groups": 16,
+      "response_ports": 32,
+      "max_admissions_per_tick": 32,
+      "umc_latency_cycles": 87,
+      "credit_per_group": 88,
+      "peak_admissions_in_residence_window": 1407,
+      "combined_credit_pool": 1408,
+      "credit_ceiling_transfers_per_us": 7110.680160798335,
+      "admission_phase_ps": [
+        0
+      ],
+      "admission_port_slot_utilization_percent": 45.110577303182275,
+      "combined_credit_residence_utilization_percent": 89.19591421311041,
+      "definition": "The native log says send response, but the verified UmcSimulate::sendResp control flow emits it when admitting a request into the latency queue, before actual sendResp at maturity. These are UMC admission timestamps, not completion or credit-return times. Dispatch uses the complete HYGPERF XCD time section, including startup; wave_span fields preserve the narrower historical interval. Counts match complete model R+W counters; all-CU MMOP geometry/work checked. Port-slot occupancy is not payload bandwidth.",
+      "traffic_at_256B_per_transaction_MiB": 273.409912109375
+    }
+  },
+  {
+    "case": "p0-scatter-stable-early-left-full",
+    "metrics": {
+      "schema_version": 2,
+      "time_us": 181.689696,
+      "wave_span_time_us": 178.0779,
+      "wave_span_mmac_percent": 32.792000953889655,
+      "dispatch_span": {
+        "begin_tick": 0,
+        "end_tick": 181689696,
+        "duration_ticks": 181689696,
+        "duration_us": 181.689696,
+        "gui_duration_us": 181.689,
+        "section_offset": 10358,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-stable-early-left-full/m5out/0/0/2280372_python3.10.perf",
+        "source_perf_sha256": "facbb3b0aa4b7b3be3f78548f42074aa1a946b24869b715ee7baf889e2be755b"
+      },
+      "whole_gpu_mmac_percent": 32.14013119746024,
+      "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+      "mmac_count_per_cu": {
+        "0": 65536,
+        "1": 65536,
+        "2": 65536,
+        "3": 65536,
+        "4": 65536,
+        "5": 65536,
+        "6": 65536,
+        "7": 65536,
+        "8": 65536,
+        "9": 65536,
+        "10": 57344,
+        "11": 57344,
+        "12": 65536,
+        "13": 65536,
+        "14": 65536,
+        "15": 65536,
+        "16": 65536,
+        "17": 65536,
+        "18": 65536,
+        "19": 65536,
+        "20": 65536,
+        "21": 65536,
+        "22": 57344,
+        "23": 57344,
+        "24": 65536,
+        "25": 65536,
+        "26": 65536,
+        "27": 65536,
+        "28": 65536,
+        "29": 65536,
+        "30": 65536,
+        "31": 65536,
+        "32": 65536,
+        "33": 65536,
+        "34": 57344,
+        "35": 57344,
+        "36": 65536,
+        "37": 65536,
+        "38": 65536,
+        "39": 65536,
+        "40": 65536,
+        "41": 65536,
+        "42": 65536,
+        "43": 65536,
+        "44": 65536,
+        "45": 65536,
+        "46": 57344,
+        "47": 57344
+      },
+      "expected_mmac_instructions": 3080192,
+      "padded_tflops": 277.75854569100056,
+      "useful_tflops": 189.11220132153227,
+      "cache": {
+        "TccSendRespBandwidth": 1.924631,
+        "TccRecvRespBandwidth": 1.641078,
+        "TCCHitRate": 0.785236,
+        "TCPCacheLineHitRate": 0.288148,
+        "SQCIHitRate": 0.999931,
+        "missSQCIRequests": 168.0,
+        "missDuplicatedSQCIRequests": 58953.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 32085.333333333332,
+          "maximum": 32768.0,
+          "sum": 1540096.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 33815.479166666664,
+          "maximum": 41035.0,
+          "sum": 1623143.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 7916.375,
+          "maximum": 10315.0,
+          "sum": 379986.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 11052.104166666666,
+          "maximum": 13284.0,
+          "sum": 530501.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 18697.375,
+          "maximum": 22107.0,
+          "sum": 897474.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 7866.541666666667,
+          "maximum": 11830.0,
+          "sum": 377594.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 133371.16666666666,
+          "maximum": 151650.0,
+          "sum": 6401816.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 25530.979166666668,
+          "maximum": 26239.0,
+          "sum": 1225487.0
+        }
+      }
+    },
+    "umc": {
+      "schema_version": 2,
+      "grid": 48,
+      "diagnostic_only": false,
+      "dispatch_span": {
+        "begin_tick": 0,
+        "end_tick": 181689696,
+        "duration_ticks": 181689696,
+        "duration_us": 181.689696,
+        "gui_duration_us": 181.689,
+        "section_offset": 10358,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-20261114/p0-scatter-stable-early-left-full/m5out/0/0/2280372_python3.10.perf",
+        "source_perf_sha256": "facbb3b0aa4b7b3be3f78548f42074aa1a946b24869b715ee7baf889e2be755b"
+      },
+      "wave_span_time_us": 178.0779,
+      "wave_span_mmac_percent": 32.792000953889655,
+      "time_us": 181.689696,
+      "whole_48cu_mmac_percent": 32.140131197460235,
+      "deadline_for_40_percent_us": 145.98826666666665,
+      "numerical_errors": 0,
+      "read_requests": 649147,
+      "write_requests": 515584,
+      "logged_umc_admissions": 1164731,
+      "admissions_before_dispatch": 0,
+      "admissions_during_dispatch": 1164731,
+      "admissions_after_dispatch": 0,
+      "last_admission_minus_dispatch_end_us": -0.194628,
+      "umc_period_ps": 2276,
+      "bank_groups": 16,
+      "response_ports": 32,
+      "max_admissions_per_tick": 29,
+      "umc_latency_cycles": 87,
+      "credit_per_group": 88,
+      "peak_admissions_in_residence_window": 1408,
+      "combined_credit_pool": 1408,
+      "credit_ceiling_transfers_per_us": 7110.680160798335,
+      "admission_phase_ps": [
+        0
+      ],
+      "admission_port_slot_utilization_percent": 45.59504154544901,
+      "combined_credit_residence_utilization_percent": 90.15383214668326,
+      "definition": "The native log says send response, but the verified UmcSimulate::sendResp control flow emits it when admitting a request into the latency queue, before actual sendResp at maturity. These are UMC admission timestamps, not completion or credit-return times. Dispatch uses the complete HYGPERF XCD time section, including startup; wave_span fields preserve the narrower historical interval. Counts match complete model R+W counters; all-CU MMOP geometry/work checked. Port-slot occupancy is not payload bandwidth.",
+      "traffic_at_256B_per_transaction_MiB": 284.358154296875
+    }
+  }
+]

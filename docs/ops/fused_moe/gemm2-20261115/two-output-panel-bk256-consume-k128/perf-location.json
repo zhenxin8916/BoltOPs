@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/two-output-panel-bk256-consume-k128-sched/GEMM2_M4096_N2048_K256_BM128_BN256_BK256_GRID48_OUTPUT96_2TILEperTG_CONSUME_K128_GC2200_CU0.perf",
+  "sha256": "d9e2e206305f78d666d33b02829aa22f6009cbf31e5c63351a4cd516fb95c876"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "algorithm": "k1-m32-panels",
+    "time_us": 16.21574,
+    "whole_gpu_mmac_percent": 14.044231098919939,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-k1-m32-panels-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "44343675809c7f3e71072615020a1c682e2e74ebb6075a0a589ef6adeedbee83"
+    }
+  },
+  {
+    "algorithm": "k1-m32-paired-publish",
+    "time_us": 15.783728,
+    "whole_gpu_mmac_percent": 14.428631816260392,
+    "promoted": true,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-k1-m32-paired-publish-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "f5f8cbbac4242cd9cafe904aba61e73323b6743c170a9f4ca985c635d8fb1295"
+    }
+  },
+  {
+    "algorithm": "consumer-a-prefetch",
+    "time_us": 16.756172,
+    "whole_gpu_mmac_percent": 13.591266549424295,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-consumer-a-prefetch-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "4a07710c9b3df81e4bbce0309b7d9614d0d9f3fc9c6e21e9863cb33d7cfdd27b"
+    }
+  }
+]

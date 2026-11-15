@@ -1,0 +1,338 @@
+{
+  "00000008": [
+    {
+      "tick": 9416972,
+      "prior_lgkm0_tick": 9306884,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12474972,
+      "prior_lgkm0_tick": 12380452,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13315644,
+      "prior_lgkm0_tick": 13189988,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14687852,
+      "prior_lgkm0_tick": 14515492,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20109964,
+      "prior_lgkm0_tick": 19946500,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24393388,
+      "prior_lgkm0_tick": 24256612,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25278540,
+      "prior_lgkm0_tick": 25152884,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 25925724,
+      "prior_lgkm0_tick": 25768932,
+      "mmac_before_release": 448
+    }
+  ],
+  "00020009": [
+    {
+      "tick": 9421976,
+      "prior_lgkm0_tick": 9309664,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12471080,
+      "prior_lgkm0_tick": 12378784,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13316200,
+      "prior_lgkm0_tick": 13190544,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14683960,
+      "prior_lgkm0_tick": 14511600,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20048248,
+      "prior_lgkm0_tick": 19875888,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24396168,
+      "prior_lgkm0_tick": 24257168,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25281320,
+      "prior_lgkm0_tick": 25153440,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 25926280,
+      "prior_lgkm0_tick": 25762816,
+      "mmac_before_release": 448
+    }
+  ],
+  "0001000a": [
+    {
+      "tick": 9424756,
+      "prior_lgkm0_tick": 9314668,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12471636,
+      "prior_lgkm0_tick": 12379340,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13316756,
+      "prior_lgkm0_tick": 13191100,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14684516,
+      "prior_lgkm0_tick": 14512156,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20044356,
+      "prior_lgkm0_tick": 19869772,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24390052,
+      "prior_lgkm0_tick": 24255500,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25275204,
+      "prior_lgkm0_tick": 25151772,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 25920164,
+      "prior_lgkm0_tick": 25758924,
+      "mmac_before_release": 448
+    }
+  ],
+  "0003000b": [
+    {
+      "tick": 9449776,
+      "prior_lgkm0_tick": 9301880,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12474416,
+      "prior_lgkm0_tick": 12379896,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13312864,
+      "prior_lgkm0_tick": 13189432,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14687296,
+      "prior_lgkm0_tick": 14514936,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20060480,
+      "prior_lgkm0_tick": 19872552,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24390608,
+      "prior_lgkm0_tick": 24256056,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25277984,
+      "prior_lgkm0_tick": 25152328,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 25922944,
+      "prior_lgkm0_tick": 25766152,
+      "mmac_before_release": 448
+    }
+  ],
+  "0003000f": [
+    {
+      "tick": 11044384,
+      "prior_lgkm0_tick": 10883144,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12034064,
+      "prior_lgkm0_tick": 11877272,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13441856,
+      "prior_lgkm0_tick": 13258376,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14794048,
+      "prior_lgkm0_tick": 14610568,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20440784,
+      "prior_lgkm0_tick": 20295112,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24510704,
+      "prior_lgkm0_tick": 24327224,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25409200,
+      "prior_lgkm0_tick": 25223496,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 26051936,
+      "prior_lgkm0_tick": 25886248,
+      "mmac_before_release": 448
+    }
+  ],
+  "0000000c": [
+    {
+      "tick": 11044940,
+      "prior_lgkm0_tick": 10881476,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12036844,
+      "prior_lgkm0_tick": 11877828,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13446860,
+      "prior_lgkm0_tick": 13261156,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14796828,
+      "prior_lgkm0_tick": 14611124,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20445788,
+      "prior_lgkm0_tick": 20297892,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24513484,
+      "prior_lgkm0_tick": 24327780,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25409756,
+      "prior_lgkm0_tick": 25224052,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 26054716,
+      "prior_lgkm0_tick": 25886804,
+      "mmac_before_release": 448
+    }
+  ],
+  "0002000d": [
+    {
+      "tick": 11049944,
+      "prior_lgkm0_tick": 10882032,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12039624,
+      "prior_lgkm0_tick": 11878384,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13447416,
+      "prior_lgkm0_tick": 13261712,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14792936,
+      "prior_lgkm0_tick": 14607232,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20437448,
+      "prior_lgkm0_tick": 20289552,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24514040,
+      "prior_lgkm0_tick": 24328336,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25410312,
+      "prior_lgkm0_tick": 25226832,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 26055272,
+      "prior_lgkm0_tick": 25889584,
+      "mmac_before_release": 448
+    }
+  ],
+  "0001000e": [
+    {
+      "tick": 11050500,
+      "prior_lgkm0_tick": 10887036,
+      "mmac_before_release": 0
+    },
+    {
+      "tick": 12040180,
+      "prior_lgkm0_tick": 11878940,
+      "mmac_before_release": 64
+    },
+    {
+      "tick": 13447972,
+      "prior_lgkm0_tick": 13262268,
+      "mmac_before_release": 128
+    },
+    {
+      "tick": 14793492,
+      "prior_lgkm0_tick": 14607788,
+      "mmac_before_release": 192
+    },
+    {
+      "tick": 20438004,
+      "prior_lgkm0_tick": 20294556,
+      "mmac_before_release": 256
+    },
+    {
+      "tick": 24510148,
+      "prior_lgkm0_tick": 24324444,
+      "mmac_before_release": 320
+    },
+    {
+      "tick": 25406420,
+      "prior_lgkm0_tick": 25220716,
+      "mmac_before_release": 384
+    },
+    {
+      "tick": 26051380,
+      "prior_lgkm0_tick": 25883468,
+      "mmac_before_release": 448
+    }
+  ]
+}

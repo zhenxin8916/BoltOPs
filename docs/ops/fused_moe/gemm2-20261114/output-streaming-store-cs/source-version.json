@@ -1,0 +1,5 @@
+{
+  "base_commit": "4a3677e",
+  "change": "Only output buffer_store cache=.cs, no producer/consumer algorithm changes",
+  "sha256": "ffeb6412df93aac9fb9b49530f4e66e343eeb9d4f3b8884d0db5c44a45ca1e21"
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "algorithm": "sb-after-first-pair",
+    "time_us": 16.845688,
+    "whole_gpu_mmac_percent": 13.51904416133078,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-sb-after-first-pair-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "b15bbc284f7efc614a72db30f789e6a7a1cba14baa00ee19ec7fb60510303b90"
+    }
+  },
+  {
+    "algorithm": "sb-after-four-b",
+    "time_us": 17.378892,
+    "whole_gpu_mmac_percent": 13.104264644719583,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-sb-after-four-b-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "12e3e0472aacc39e420edab39d7a959ab4898f653ed83483c1b4355806de9711"
+    }
+  },
+  {
+    "algorithm": "p1-scatter-lookahead",
+    "time_us": 17.441164,
+    "whole_gpu_mmac_percent": 13.057477127100004,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p1-scatter-lookahead-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "239e09d2d002913c094878f044643233f4b54a58475207ba17017d28872aa974"
+    }
+  },
+  {
+    "algorithm": "k1-panel-handoff",
+    "time_us": 16.134008,
+    "whole_gpu_mmac_percent": 14.115376662761046,
+    "promoted": true,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-k1-panel-handoff-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "0f8215b12b309252913036a86520677cafc10f158e9716301e75bc6ebc6225fa"
+    }
+  },
+  {
+    "algorithm": "k0k1-panel-handoff",
+    "time_us": 15.887144,
+    "whole_gpu_mmac_percent": 14.33470987611115,
+    "promoted": true,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-k0k1-panel-handoff-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "b6a8a6dc7fc4b04ce47b8db9746d74b51d971ba6afced0d6abff91889e4faaad"
+    }
+  }
+]

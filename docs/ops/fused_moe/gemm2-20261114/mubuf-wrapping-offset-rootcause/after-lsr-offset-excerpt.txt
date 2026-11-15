@@ -1,0 +1,15 @@
+  %1646 = add i32 %1502, 1, !dbg !157
+  %1647 = add i32 %1500, %lsr.iv66, !dbg !146
+  %1648 = add i32 %1647, 7936, !dbg !146
+  %1649 = tail call <2 x float> @llvm.amdgcn.raw.ptr.buffer.load.v2f32(ptr addrspace(8) %1324, i32 %1648, i32 0, i32 0), !dbg !146
+  %1650 = add i32 %1647, 8064, !dbg !146
+  %1651 = tail call <2 x float> @llvm.amdgcn.raw.ptr.buffer.load.v2f32(ptr addrspace(8) %1324, i32 %1650, i32 0, i32 0), !dbg !146
+  %1652 = shufflevector <4 x float> %1617, <4 x float> poison, <2 x i32> <i32 0, i32 1>, !dbg !147
+  %1653 = fmul <2 x float> %1487, %1652, !dbg !147
+  %1654 = shufflevector <4 x float> %1617, <4 x float> poison, <2 x i32> <i32 2, i32 3>, !dbg !147
+  %1655 = fmul <2 x float> %1488, %1654, !dbg !147
+  %1656 = shufflevector <4 x float> %1621, <4 x float> poison, <2 x i32> <i32 0, i32 1>, !dbg !147
+  %1657 = fmul <2 x float> %1487, %1656, !dbg !147
+  %1658 = shufflevector <4 x float> %1621, <4 x float> poison, <2 x i32> <i32 2, i32 3>, !dbg !147
+  %1659 = fmul <2 x float> %1488, %1658, !dbg !147
+  %1660 = shufflevector <4 x float> %1625, <4 x float> poison, <2 x i32>

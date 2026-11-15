@@ -1,0 +1,5 @@
+{
+  "base": "4a3677e",
+  "change": "explicit output LDS shared layout (8, 4, 4)",
+  "source_sha256": "e7592458b1028c8c22a4ae6dbd0196a392789e3272501035aa1e143e876bae32"
+}

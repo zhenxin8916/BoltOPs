@@ -1,0 +1,78 @@
+{
+  "wait_to_next_instruction_cycles": {
+    "0": {
+      "count": 32,
+      "sum_cycles": 5132.0,
+      "max_cycles": 948.0
+    },
+    "1": {
+      "count": 8,
+      "sum_cycles": 32.0,
+      "max_cycles": 4.0
+    },
+    "3": {
+      "count": 4,
+      "sum_cycles": 16.0,
+      "max_cycles": 4.0
+    },
+    "5": {
+      "count": 32,
+      "sum_cycles": 128.0,
+      "max_cycles": 4.0
+    },
+    "6": {
+      "count": 32,
+      "sum_cycles": 110464.0,
+      "max_cycles": 9392.0
+    },
+    "7": {
+      "count": 32,
+      "sum_cycles": 2652.0,
+      "max_cycles": 500.0
+    },
+    "8": {
+      "count": 32,
+      "sum_cycles": 17356.0,
+      "max_cycles": 1280.0
+    },
+    "9": {
+      "count": 32,
+      "sum_cycles": 52780.0,
+      "max_cycles": 10720.0
+    },
+    "10": {
+      "count": 32,
+      "sum_cycles": 4588.0,
+      "max_cycles": 1164.0
+    },
+    "11": {
+      "count": 32,
+      "sum_cycles": 4328.0,
+      "max_cycles": 544.0
+    },
+    "12": {
+      "count": 32,
+      "sum_cycles": 7216.0,
+      "max_cycles": 876.0
+    },
+    "13": {
+      "count": 32,
+      "sum_cycles": 38220.0,
+      "max_cycles": 3528.0
+    },
+    "14": {
+      "count": 32,
+      "sum_cycles": 11176.0,
+      "max_cycles": 1480.0
+    },
+    "15": {
+      "count": 32,
+      "sum_cycles": 132.0,
+      "max_cycles": 8.0
+    }
+  },
+  "stores": {
+    "buffer_store_dwordx4": 512
+  },
+  "definition": "CU0 all waves; wait issue to next instruction issue, includes execution overhead, not pure ready latency"
+}

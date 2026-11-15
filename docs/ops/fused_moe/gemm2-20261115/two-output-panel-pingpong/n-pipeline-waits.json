@@ -1,0 +1,148 @@
+{
+  "instruction_counts": {
+    "buffer_load_dword": 420,
+    "buffer_load_dwordx2": 32,
+    "buffer_store_dwordx4": 128,
+    "ds_read_addtid_b32": 16,
+    "ds_read_b128": 128,
+    "ds_read_matrix_trans_format": 384,
+    "ds_write2_b32": 256,
+    "ds_write_addtid_b32": 16,
+    "global_load_dword": 12,
+    "matrix_load_64x16_b8": 160,
+    "s_abarrier_arrive": 148,
+    "s_abarrier_init": 16,
+    "s_abarrier_seq": 20,
+    "s_abarrier_try_wait": 124,
+    "s_add_i32": 260,
+    "s_add_u32": 60,
+    "s_addc_u32": 60,
+    "s_addk_i32": 16,
+    "s_and_b32": 124,
+    "s_and_b64": 304,
+    "s_ashr_i32": 44,
+    "s_bfe_u32": 20,
+    "s_branch": 93,
+    "s_cbranch_scc0": 128,
+    "s_cbranch_scc1": 92,
+    "s_cbranch_vccnz": 56,
+    "s_cmp_eq_u32": 4,
+    "s_cmp_ge_i32": 24,
+    "s_cmp_gt_i32": 28,
+    "s_cmp_lg_u32": 24,
+    "s_cmp_lt_i32": 72,
+    "s_cselect_b64": 20,
+    "s_ebarrier_sync": 104,
+    "s_endpgm": 16,
+    "s_getreg_b32": 32,
+    "s_load_dword": 16,
+    "s_load_dwordx16": 16,
+    "s_load_dwordx2": 16,
+    "s_lshl_b32": 68,
+    "s_lshl_b64": 20,
+    "s_lshr_b32": 16,
+    "s_max_i32": 4,
+    "s_mov_b32": 288,
+    "s_mov_b64": 196,
+    "s_movk_i32": 28,
+    "s_mul_i32": 16,
+    "s_nop": 156,
+    "s_or_b32": 28,
+    "s_set_vgpr_size": 16,
+    "s_waitcnt": 436,
+    "v_add_u32": 140,
+    "v_add_u32_sdwa": 160,
+    "v_and_b32": 208,
+    "v_cmp_gt_i32": 160,
+    "v_cndmask_b32": 384,
+    "v_cvt_pk_bf16_f32": 512,
+    "v_lshl_or_b32": 40,
+    "v_lshlrev_b32": 360,
+    "v_lshrrev_b32": 32,
+    "v_max_i32": 8,
+    "v_mmac_f32_16x16x32_fp8_fp8": 2048,
+    "v_mov_b32": 16,
+    "v_mov_b64": 32,
+    "v_or3_b32": 12,
+    "v_or_b32": 280,
+    "v_pk_mul_f32": 1536,
+    "v_readfirstlane_b32": 32,
+    "v_xor_b32": 28
+  },
+  "wait_to_next_instruction_cycles": {
+    "0": {
+      "count": 8,
+      "sum_cycles": 40.0,
+      "max_cycles": 8.0
+    },
+    "1": {
+      "count": 8,
+      "sum_cycles": 32.0,
+      "max_cycles": 4.0
+    },
+    "3": {
+      "count": 4,
+      "sum_cycles": 44.0,
+      "max_cycles": 12.0
+    },
+    "5": {
+      "count": 8,
+      "sum_cycles": 48.0,
+      "max_cycles": 16.0
+    },
+    "6": {
+      "count": 8,
+      "sum_cycles": 22156.0,
+      "max_cycles": 5560.0
+    },
+    "7": {
+      "count": 8,
+      "sum_cycles": 36.0,
+      "max_cycles": 8.0
+    },
+    "8": {
+      "count": 8,
+      "sum_cycles": 2932.0,
+      "max_cycles": 756.0
+    },
+    "9": {
+      "count": 16,
+      "sum_cycles": 31256.0,
+      "max_cycles": 7808.0
+    },
+    "10": {
+      "count": 8,
+      "sum_cycles": 32.0,
+      "max_cycles": 4.0
+    },
+    "11": {
+      "count": 8,
+      "sum_cycles": 32.0,
+      "max_cycles": 4.0
+    },
+    "12": {
+      "count": 8,
+      "sum_cycles": 3396.0,
+      "max_cycles": 864.0
+    },
+    "13": {
+      "count": 16,
+      "sum_cycles": 19448.0,
+      "max_cycles": 2000.0
+    },
+    "14": {
+      "count": 8,
+      "sum_cycles": 6420.0,
+      "max_cycles": 1624.0
+    },
+    "15": {
+      "count": 8,
+      "sum_cycles": 32.0,
+      "max_cycles": 4.0
+    }
+  },
+  "stores": {
+    "buffer_store_dwordx4": 128
+  },
+  "definition": "CU0 all waves; wait issue to next instruction issue, includes execution overhead, not pure ready latency"
+}

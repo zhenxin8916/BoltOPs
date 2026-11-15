@@ -1,0 +1,14 @@
+{
+  "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18": {
+    "sha256": "2aecc815024cabed79d70ca5e14c4732cb878ed0a49005d5fed2a9d27cadd61d",
+    "bytes": 168184408
+  },
+  "/zhenxin/temp/boltops-shared-ring-port-20261114/optimized-perf/clang-control-sync": {
+    "sha256": "03e53ac705a0afe9040dfa76e8f11c925f5995d9e80dd9d7ffcc1381f57d86d3",
+    "bytes": 115
+  },
+  "/zhenxin/temp/moe-fullgrid-tune-20261112/mls-bps1/triton/python/triton/_C/libtriton.so": {
+    "sha256": "1db585029b903cc7f19a290518690ffe19901a6567261015006cefd41914762a",
+    "bytes": 907685432
+  }
+}

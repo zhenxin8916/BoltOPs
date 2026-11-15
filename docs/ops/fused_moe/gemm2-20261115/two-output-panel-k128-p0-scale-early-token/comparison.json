@@ -1,0 +1,12 @@
+{
+  "previous_best_commit": "d298073",
+  "previous_time_us": 13.767845,
+  "new_time_us": 13.57174,
+  "new_mmac_percent": 13.732063832640472,
+  "repeat_identical_hsaco_inputs_addresses": true,
+  "improvement_percent": 1.424369609041931,
+  "improvement_from_original_14_701505_percent": 7.684689424654135,
+  "target_time_us": 11.761204,
+  "target_met": false,
+  "cross_m_note": "d298073 cross-M correctness evidence is in parent archive; no cross-M timing or validation run for this changed token schedule is claimed"
+}

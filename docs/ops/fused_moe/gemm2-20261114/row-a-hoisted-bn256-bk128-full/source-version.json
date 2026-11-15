@@ -1,0 +1,6 @@
+{
+  "base_commit": "4a3677e",
+  "change": "Kernel unchanged; native UMC timestamped response logging; omit textual CU0 instruction trace to reduce output",
+  "sha256": "2b2de70d7ca75b3ace5569f2b8b668e2e1826e43c8e9400090e90e6c2a27598e",
+  "scope": "full route; native UMC admission audit"
+}

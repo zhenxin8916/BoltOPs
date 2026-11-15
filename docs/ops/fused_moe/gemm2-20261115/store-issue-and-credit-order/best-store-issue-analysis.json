@@ -1,0 +1,486 @@
+{
+  "definition": "IT issue-to-next-issue gaps include scheduling and dependencies, not isolated hardware instruction latency. GM credit counters are whole-CU across loads, MLS and stores, not store-only.",
+  "period_ps": 556,
+  "p0": [
+    {
+      "full_wave": 0,
+      "simd": 0,
+      "store_instructions": 32,
+      "ready_waits": [
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 2264.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 1272.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 88.0
+        },
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 1448.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 380.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 4.0
+        }
+      ],
+      "chunks": [
+        {
+          "index": 0,
+          "first_to_last_store_cycles": 196.0,
+          "ready_to_last_store_cycles": 2628.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 1,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 1596.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 2,
+          "first_to_last_store_cycles": 84.0,
+          "ready_to_last_store_cycles": 356.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 3,
+          "first_to_last_store_cycles": 160.0,
+          "ready_to_last_store_cycles": 384.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        },
+        {
+          "index": 4,
+          "first_to_last_store_cycles": 196.0,
+          "ready_to_last_store_cycles": 1812.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 5,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 708.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 6,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 484.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 7,
+          "first_to_last_store_cycles": 144.0,
+          "ready_to_last_store_cycles": 288.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        }
+      ]
+    },
+    {
+      "full_wave": 65538,
+      "simd": 1,
+      "store_instructions": 32,
+      "ready_waits": [
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 2272.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 1308.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 8.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 1440.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 416.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 4.0
+        }
+      ],
+      "chunks": [
+        {
+          "index": 0,
+          "first_to_last_store_cycles": 196.0,
+          "ready_to_last_store_cycles": 2604.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 1,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 1664.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 2,
+          "first_to_last_store_cycles": 80.0,
+          "ready_to_last_store_cycles": 416.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 3,
+          "first_to_last_store_cycles": 160.0,
+          "ready_to_last_store_cycles": 320.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        },
+        {
+          "index": 4,
+          "first_to_last_store_cycles": 196.0,
+          "ready_to_last_store_cycles": 1772.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 5,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 776.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 6,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 416.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 7,
+          "first_to_last_store_cycles": 160.0,
+          "ready_to_last_store_cycles": 272.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        }
+      ]
+    },
+    {
+      "full_wave": 131073,
+      "simd": 2,
+      "store_instructions": 32,
+      "ready_waits": [
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 2276.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 1324.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 28.0
+        },
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 1452.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 432.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 4.0
+        }
+      ],
+      "chunks": [
+        {
+          "index": 0,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 2592.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 1,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 1664.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 2,
+          "first_to_last_store_cycles": 112.0,
+          "ready_to_last_store_cycles": 400.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 3,
+          "first_to_last_store_cycles": 160.0,
+          "ready_to_last_store_cycles": 336.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        },
+        {
+          "index": 4,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 1768.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 5,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 776.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 6,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 420.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 7,
+          "first_to_last_store_cycles": 120.0,
+          "ready_to_last_store_cycles": 208.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        }
+      ]
+    },
+    {
+      "full_wave": 196611,
+      "simd": 3,
+      "store_instructions": 32,
+      "ready_waits": [
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 2268.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 1288.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 188.0
+        },
+        {
+          "op": "s_abarrier_try_wait s42, 9, 0",
+          "gap_cycles": 1616.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 0",
+          "gap_cycles": 396.0
+        },
+        {
+          "op": "s_abarrier_try_wait s0, 9, 1",
+          "gap_cycles": 4.0
+        },
+        {
+          "op": "s_abarrier_try_wait s8, 13, 1",
+          "gap_cycles": 4.0
+        }
+      ],
+      "chunks": [
+        {
+          "index": 0,
+          "first_to_last_store_cycles": 196.0,
+          "ready_to_last_store_cycles": 2616.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 1,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 1600.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 2,
+          "first_to_last_store_cycles": 48.0,
+          "ready_to_last_store_cycles": 272.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 3,
+          "first_to_last_store_cycles": 108.0,
+          "ready_to_last_store_cycles": 572.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        },
+        {
+          "index": 4,
+          "first_to_last_store_cycles": 196.0,
+          "ready_to_last_store_cycles": 1964.0,
+          "salu_instructions": 7,
+          "valu_instructions": 11,
+          "ds_instructions": 4
+        },
+        {
+          "index": 5,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 712.0,
+          "salu_instructions": 3,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 6,
+          "first_to_last_store_cycles": 192.0,
+          "ready_to_last_store_cycles": 480.0,
+          "salu_instructions": 7,
+          "valu_instructions": 10,
+          "ds_instructions": 4
+        },
+        {
+          "index": 7,
+          "first_to_last_store_cycles": 160.0,
+          "ready_to_last_store_cycles": 288.0,
+          "salu_instructions": 8,
+          "valu_instructions": 9,
+          "ds_instructions": 4
+        }
+      ]
+    }
+  ],
+  "all_simd_store_interval_histogram_cycles": {
+    "13.0": 25,
+    "17.0": 69,
+    "1395.0": 1,
+    "181.0": 1,
+    "16.0": 6,
+    "19.0": 3,
+    "14.0": 3,
+    "15.0": 7,
+    "134.0": 1,
+    "18.0": 5,
+    "28.0": 1,
+    "2298.0": 1,
+    "507.0": 1,
+    "215.0": 1,
+    "45.0": 1,
+    "24.0": 1
+  },
+  "whole_cu_metrics": {
+    "ldsBankConflict": {
+      "mean": 1280.0,
+      "maximum": 1280.0,
+      "sum": 61440.0
+    },
+    "GlobalMemPipeline.cmdCreditStall": {
+      "mean": 450.1041666666667,
+      "maximum": 518.0,
+      "sum": 21605.0
+    },
+    "GlobalMemPipeline.addrCreditStall": {
+      "mean": 29.270833333333332,
+      "maximum": 49.0,
+      "sum": 1405.0
+    },
+    "GlobalMemPipeline.dataCreditStall": {
+      "mean": 0.0,
+      "maximum": 0.0,
+      "sum": 0.0
+    },
+    "LocalMemPipeline.creditStall": {
+      "mean": 849.8333333333334,
+      "maximum": 1398.0,
+      "sum": 40792.0
+    },
+    "tatd.TATD.taSendStallBytcp": {
+      "mean": 512.8958333333334,
+      "maximum": 987.0,
+      "sum": 24619.0
+    },
+    "tatd.TATD.taSendStallByCredit": {
+      "mean": 0.0,
+      "maximum": 0.0,
+      "sum": 0.0
+    },
+    "numCyclesWaitIFetchAfterBranchTaken": {
+      "mean": 12252.1875,
+      "maximum": 12940.0,
+      "sum": 588105.0
+    }
+  }
+}

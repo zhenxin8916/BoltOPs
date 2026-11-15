@@ -1,0 +1,141 @@
+{
+  "peak_live_waves_cu0": 16,
+  "per_simd_at_peak": [
+    4,
+    4,
+    4,
+    4
+  ],
+  "starts": 16,
+  "ends": 16,
+  "cu0_mmac_count": 2048,
+  "exec0_mmac_count": 0,
+  "mmac_busy8_cycle_union_verified": true,
+  "simds": [
+    {
+      "simd": 0,
+      "mmac": 512,
+      "busy_cycles": 4096
+    },
+    {
+      "simd": 1,
+      "mmac": 512,
+      "busy_cycles": 4096
+    },
+    {
+      "simd": 2,
+      "mmac": 512,
+      "busy_cycles": 4096
+    },
+    {
+      "simd": 3,
+      "mmac": 512,
+      "busy_cycles": 4096
+    }
+  ],
+  "wait_id_audit": {
+    "7": {
+      "first_id": 6,
+      "waits": 10,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "5": {
+      "first_id": 6,
+      "waits": 10,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "4": {
+      "first_id": 6,
+      "waits": 10,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "6": {
+      "first_id": 6,
+      "waits": 10,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "9": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "10": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "8": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "13": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "14": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "12": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "11": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "15": {
+      "first_id": 1,
+      "waits": 24,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "3": {
+      "first_id": 3,
+      "waits": 11,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "0": {
+      "first_id": 3,
+      "waits": 11,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "1": {
+      "first_id": 3,
+      "waits": 11,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "2": {
+      "first_id": 3,
+      "waits": 11,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    }
+  },
+  "numerical": {
+    "mismatches": 0,
+    "checked_elements": 2190336,
+    "shared": 119808,
+    "scope": "persistent_two_independent_M_output_tiles_per_CU"
+  },
+  "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; metrics acceptance separately uses full 48-CU dispatch"
+}

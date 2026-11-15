@@ -1,0 +1,126 @@
+[
+  {
+    "test": "legalize-amdgcn.raw.buffer.load.format.f16.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.buffer.load.format.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.buffer.load.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.buffer.store.format.f16.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.buffer.store.format.f32.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.buffer.store.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.buffer.load.format.f16.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.buffer.load.format.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.buffer.load.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.buffer.store.format.f16.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.buffer.store.format.f32.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.buffer.store.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.ptr.tbuffer.store.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "legalize-amdgcn.raw.tbuffer.store.ll",
+    "run_exit_codes": [
+      0
+    ]
+  },
+  {
+    "test": "llvm.amdgcn.raw.ptr.tbuffer.load.ll",
+    "run_exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "test": "llvm.amdgcn.raw.tbuffer.load.ll",
+    "run_exit_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "test": "llvm.amdgcn.struct.ptr.tbuffer.load.ll",
+    "run_exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "test": "llvm.amdgcn.struct.tbuffer.load.ll",
+    "run_exit_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "version": "clean",
+    "time_us": 22.13158,
+    "whole_dispatch_mmac_percent": 20.58032910438387,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-clean-gc1800"
+  },
+  {
+    "version": "co64",
+    "time_us": 23.009504,
+    "whole_dispatch_mmac_percent": 19.795089889812488,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-co64-gc1800"
+  },
+  {
+    "version": "static-n",
+    "time_us": 23.033968,
+    "whole_dispatch_mmac_percent": 19.774065849184126,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-static-n-gc1800"
+  },
+  {
+    "version": "balanced-b",
+    "time_us": 21.997028,
+    "whole_dispatch_mmac_percent": 20.706215403280844,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-balanced-b-gc1800"
+  },
+  {
+    "version": "left-first-tail",
+    "time_us": 21.98146,
+    "whole_dispatch_mmac_percent": 20.7208802327052,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-left-first-tail-gc1800"
+  },
+  {
+    "version": "b-issue-prio1",
+    "time_us": 22.32896,
+    "whole_dispatch_mmac_percent": 20.39840637450199,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-b-issue-prio1-gc1800"
+  },
+  {
+    "version": "four-paired-b-slots",
+    "time_us": 24.382824,
+    "whole_dispatch_mmac_percent": 18.680166005381494,
+    "case": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-four-paired-b-slots-gc1800"
+  }
+]

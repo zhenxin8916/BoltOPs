@@ -1,0 +1,52 @@
+--- a/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
++++ b/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
+@@ -79,11 +79,11 @@
+ 
+ 
+ @gluon.jit
+-def _producer(A, B, Experts, am, b0, b1, pid, total, rows,
++def _producer(A, B, Experts, am, b0, b1, pid, total, rows, Sorted, valid_routes,
+               N: gl.constexpr, K: gl.constexpr, BM: gl.constexpr,
+               BN: gl.constexpr, BK: gl.constexpr, STAGES: gl.constexpr,
+               USE_MLS_LOAD_A: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
+-              PARTITION: gl.constexpr):
++              PARTITION: gl.constexpr, TOP_K: gl.constexpr, CK_SORTING: gl.constexpr):
+     epoch = 0
+     if USE_MLS_LOAD_A:
+         copy: gl.constexpr = gl.BlockedLayout([1, 16], [8, 8], [4, 1], [1, 0])
+@@ -93,6 +93,11 @@
+     rk = gl.arange(0, BK, gl.SliceLayout(0, copy))
+     for m in range(pid, total // (N // BN), gl.num_programs(0)):
+         if PARTITION == 0:
++            if not USE_MLS_LOAD_A:
++                copy_route = buffer_load(Sorted, (m * BM + rm).to(gl.uint32))
++                if CK_SORTING:
++                    copy_route = (copy_route & 0x00ffffff) * TOP_K + ((copy_route >> 24) & 255)
++                copy_valid = (copy_route >= 0) & (copy_route < valid_routes)
+             for k in gl.static_range(K // BK):
+                 ticket = epoch * (K // BK) + k
+                 slot = ticket & 1
+@@ -105,7 +110,7 @@
+                                     (m * BM, k * BK), warps=(4, 1))
+                 else:
+                     offsets = ((m * BM + rm[:, None]) * K + k * BK + rk[None, :]).to(gl.uint32)
+-                    async_copy.buffer_load_to_shared(am.index(physical), A, offsets)
++                    async_copy.buffer_load_to_shared(am.index(physical), A, offsets, copy_valid[:, None])
+                 hcu.abarrier_arrive(1 + slot)
+             epoch += 1
+         else:
+@@ -236,10 +241,10 @@
+     pid = gl.program_id(0)
+     gl.warp_specialize([
+         (_empty, ()),
+-        (_producer, (A, B, Experts, am, b0, b1, pid, TOTAL_TILES, num_sorted_rows,
+-            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 0)),
+-        (_producer, (A, B, Experts, am, b0, b1, pid, TOTAL_TILES, num_sorted_rows,
+-            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 1)),
++        (_producer, (A, B, Experts, am, b0, b1, pid, TOTAL_TILES, num_sorted_rows, Sorted, num_valid_routes,
++            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 0, top_k, CK_SORTING)),
++        (_producer, (A, B, Experts, am, b0, b1, pid, TOTAL_TILES, num_sorted_rows, Sorted, num_valid_routes,
++            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 1, top_k, CK_SORTING)),
+         (_consumer, (C, SA, SB, Weights, Sorted, Experts, am, b0, pid, TOTAL_TILES,
+             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
+             GROUP_SIZE_M, CK_SORTING, 0)),

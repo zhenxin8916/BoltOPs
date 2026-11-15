@@ -1,0 +1,5 @@
+{
+  "base_commit": "4a3677e",
+  "change": "BN128/BK256 compile/semantic regression, enable max ILP schedule only",
+  "sha256": "e29bcdd241ad36a05ce7df8bd58a222d71624571979b7496559245e50eccee60"
+}

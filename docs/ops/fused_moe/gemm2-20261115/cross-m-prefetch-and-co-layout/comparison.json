@@ -1,0 +1,547 @@
+{
+  "scope": "1.8GHz,48CU,48physicalTGs,2 independent M outputs each,N traversal1,96outputs; full dispatch metric, not hot loop",
+  "baseline_commit": "264d7e7",
+  "winner_changed": false,
+  "cases": [
+    {
+      "case": "a-issue-prio2",
+      "algorithm": "baseline264d7e7",
+      "time_us": 15.327252,
+      "whole48cu_dispatch_mmac_percent": 14.858345122791743,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        174,
+        174
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "0eebb0e48caf4b71b98618716f20eb5bf582bf616a0d8fd1f8394da641766081",
+      "hsaco_sha256": "291c9d9b6579728fe60dc835127b35ad0fdd1cb742f58628f5441513b841cb20",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-a-issue-prio2-gc1800",
+      "static_native_instruction_count": 1503,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 3,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 8816492,
+          "m0_last_mmac_end_tick": 11400780,
+          "m1_first_mmac_tick": 12288156,
+          "inter_m_gap_cycles": 1596.0,
+          "m0_post_mmac_to_final_ready_cycles": 644.0,
+          "m1_post_mmac_to_final_ready_cycles": 404.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9372492,
+          "m0_last_mmac_end_tick": 11905628,
+          "m1_first_mmac_tick": 13050988,
+          "inter_m_gap_cycles": 2060.0,
+          "m0_post_mmac_to_final_ready_cycles": 764.0,
+          "m1_post_mmac_to_final_ready_cycles": 372.0
+        }
+      ]
+    },
+    {
+      "case": "live-barrier-init",
+      "algorithm": "\u4ec5\u5220\u9664\u672a\u7528AB10/14\u521d\u59cb\u5316\u548c\u5931\u6548",
+      "time_us": 15.46792,
+      "whole48cu_dispatch_mmac_percent": 14.723220704529115,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        174,
+        174
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "eede2cc197f3394adf1c804c30790e0b364cefbe8aeb11a7542085015e88797f",
+      "hsaco_sha256": "09c695edd36779e5b18b3156c23c3de891c475cd0b15d7e7124d7c45c4074b87",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-live-barrier-init-gc1800",
+      "static_native_instruction_count": 1494,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 3,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2
+      }
+    },
+    {
+      "case": "postprocess-prio1",
+      "algorithm": "\u6d88\u8d39\u8005\u4ec5\u7f29\u653e\u8f6c\u6362\u7a97\u53e3priority1",
+      "time_us": 15.368396,
+      "whole48cu_dispatch_mmac_percent": 14.818566622046959,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        174,
+        174
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "1d6423269ab4cec8c65fa6cbbc188764a6adc69534e9ff05ea900536b4c6f723",
+      "hsaco_sha256": "b4a75898a9f0519aa27712cdf65908afe1e829948e21b9a73fa19e560fadbd27",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-postprocess-prio1-gc1800",
+      "static_native_instruction_count": 1519,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 3,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2
+      }
+    },
+    {
+      "case": "next-a-before-final-mmac",
+      "algorithm": "\u6700\u540eMMAC\u524d\u9884\u8bfb\u4e0bM A\uff0c\u96f6\u5360\u4f4dcarry",
+      "time_us": 15.916056,
+      "whole48cu_dispatch_mmac_percent": 14.30867043946063,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        173,
+        173
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "ad79429a6956af7e56b4403fc0c4528bc22b095d48eb9f64a16651ac0054f797",
+      "hsaco_sha256": "7edde3944c2e57b0d9972258c6f7ef9b44779b1e53df16ec192b910fe828a8c9",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-next-a-before-final-mmac-gc1800",
+      "static_native_instruction_count": 1847,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 291,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 9127852,
+          "m0_last_mmac_end_tick": 12354876,
+          "m1_first_mmac_tick": 12897532,
+          "inter_m_gap_cycles": 976.0,
+          "m0_post_mmac_to_final_ready_cycles": 584.0,
+          "m1_post_mmac_to_final_ready_cycles": 392.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9412524,
+          "m0_last_mmac_end_tick": 12552812,
+          "m1_first_mmac_tick": 13188876,
+          "inter_m_gap_cycles": 1144.0,
+          "m0_post_mmac_to_final_ready_cycles": 680.0,
+          "m1_post_mmac_to_final_ready_cycles": 356.0
+        }
+      ]
+    },
+    {
+      "case": "next-a-carried-prologue",
+      "algorithm": "A\u5b9e\u9645\u9884\u8bfbprologue\uff0c\u7701\u96f6\u5360\u4f4d",
+      "time_us": 15.761488,
+      "whole48cu_dispatch_mmac_percent": 14.448991110483984,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        173,
+        173
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "e3e98dece2e0bd2199a479bb70b99f940596366fe34ab1267dc1ed7de4bc1711",
+      "hsaco_sha256": "9473283339aef540abd66484d26d960734ed05f7e64e10ae8d1c23637f5bb5c3",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-next-a-carried-prologue-gc1800",
+      "static_native_instruction_count": 1581,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 35,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 9190124,
+          "m0_last_mmac_end_tick": 12294828,
+          "m1_first_mmac_tick": 12861948,
+          "inter_m_gap_cycles": 1020.0,
+          "m0_post_mmac_to_final_ready_cycles": 648.0,
+          "m1_post_mmac_to_final_ready_cycles": 404.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9283532,
+          "m0_last_mmac_end_tick": 12539468,
+          "m1_first_mmac_tick": 13153292,
+          "inter_m_gap_cycles": 1104.0,
+          "m0_post_mmac_to_final_ready_cycles": 680.0,
+          "m1_post_mmac_to_final_ready_cycles": 416.0
+        }
+      ]
+    },
+    {
+      "case": "next-ab-carried-prologue",
+      "algorithm": "A/B0/SB\u4e00\u5e76\u9884\u8bfb\uff0c\u5b9e\u9645prologue",
+      "time_us": 16.366972,
+      "whole48cu_dispatch_mmac_percent": 13.914461392125556,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        201,
+        201
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "2747ee6f6714e48388afbcacd637ceb876f54e9520c54d852eb008fdd3358217",
+      "hsaco_sha256": "d5441c537e02f99e956c9af10f6e26013d2d9aa63aae43899d4737ee329173eb",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-next-ab-carried-prologue-gc1800",
+      "static_native_instruction_count": 1617,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 39,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 4
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 9107836,
+          "m0_last_mmac_end_tick": 12352652,
+          "m1_first_mmac_tick": 12808572,
+          "inter_m_gap_cycles": 820.0,
+          "m0_post_mmac_to_final_ready_cycles": 724.0,
+          "m1_post_mmac_to_final_ready_cycles": 412.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9563756,
+          "m0_last_mmac_end_tick": 13171084,
+          "m1_first_mmac_tick": 13449084,
+          "inter_m_gap_cycles": 500.0,
+          "m0_post_mmac_to_final_ready_cycles": 388.0,
+          "m1_post_mmac_to_final_ready_cycles": 360.0
+        }
+      ]
+    },
+    {
+      "case": "co-native-vector8",
+      "algorithm": "Co\u539f\u751f\u5bc4\u5b58\u5668vector8\u5e03\u5c40",
+      "time_us": 18.40638,
+      "whole48cu_dispatch_mmac_percent": 12.372753360519559,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        167,
+        167
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 7424.0,
+      "source_sha256": "1e504799c532ced5cad85466ae837a3dad73cbbce026def988b6a953fba4af9e",
+      "hsaco_sha256": "a123595a7b240d3fc60891b098f4c1abc2c750977c61648584946996fd33b564",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-co-native-vector8-gc1800",
+      "static_native_instruction_count": 1493,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 3,
+        "ds_write2_b32": 10,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 38,
+        "ds_read_b32": 2,
+        "ds_write_b128": 18,
+        "ds_read2_b64": 2,
+        "ds_read_b128": 16
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 9061132,
+          "m0_last_mmac_end_tick": 11905628,
+          "m1_first_mmac_tick": 13464652,
+          "inter_m_gap_cycles": 2804.0,
+          "m0_post_mmac_to_final_ready_cycles": 1076.0,
+          "m1_post_mmac_to_final_ready_cycles": 320.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9481468,
+          "m0_last_mmac_end_tick": 12583948,
+          "m1_first_mmac_tick": 14670060,
+          "inter_m_gap_cycles": 3752.0,
+          "m0_post_mmac_to_final_ready_cycles": 1588.0,
+          "m1_post_mmac_to_final_ready_cycles": 992.0
+        }
+      ]
+    },
+    {
+      "case": "co-native-vector8-xor",
+      "algorithm": "Co vector8\uff0c\u884c\u4f4e\u4f4dXOR\u52172/4",
+      "time_us": 16.487624,
+      "whole48cu_dispatch_mmac_percent": 13.812639104336682,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        44,
+        9,
+        167,
+        167
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 3328.0,
+      "source_sha256": "425f97b2673e6bce919292c76607f3d5704393577acdbaf2411699d0f2ec88e2",
+      "hsaco_sha256": "280f63e83101097b16a683e370cc46443f33695a4d61ea7a5959bb0306257c10",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-co-native-vector8-xor-gc1800",
+      "static_native_instruction_count": 1552,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 51,
+        "ds_write2_b32": 10,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 33,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_write_b128": 18,
+        "ds_read2_b64": 2,
+        "ds_read_b128": 16
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 9058908,
+          "m0_last_mmac_end_tick": 11890060,
+          "m1_first_mmac_tick": 12879740,
+          "inter_m_gap_cycles": 1780.0,
+          "m0_post_mmac_to_final_ready_cycles": 596.0,
+          "m1_post_mmac_to_final_ready_cycles": 328.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9463676,
+          "m0_last_mmac_end_tick": 12268140,
+          "m1_first_mmac_tick": 13709292,
+          "inter_m_gap_cycles": 2592.0,
+          "m0_post_mmac_to_final_ready_cycles": 872.0,
+          "m1_post_mmac_to_final_ready_cycles": 556.0
+        }
+      ]
+    },
+    {
+      "case": "co-native-bank-balanced",
+      "algorithm": "Co\u884c\u548c\u5217\u9ad8\u4f4d\u8865\u5145XOR\uff1b\u5931\u53bb\u5bbd\u5199",
+      "time_us": 16.0406,
+      "whole48cu_dispatch_mmac_percent": 14.197573656845753,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        44,
+        9,
+        174,
+        174
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "b2129b563c1b4c3777c7dc18c2bd048ccdf227ac1eba04e14d771ded62248818",
+      "hsaco_sha256": "c3212739e092ef2ac3b11dbdc4730f178d866a6915b16f5118ba8fa6c9bbf28c",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-co-native-bank-balanced-gc1800",
+      "static_native_instruction_count": 1589,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 51,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 33,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2,
+        "ds_read_b128": 16
+      }
+    },
+    {
+      "case": "co-swizzle32-phase1",
+      "algorithm": "Co Swizzled(32,1,4)",
+      "time_us": 15.41232,
+      "whole48cu_dispatch_mmac_percent": 14.776334776334776,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        169,
+        169
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 768.0,
+      "source_sha256": "2324cab1a16fbf4b381735bd73ab02306fd143020cea6170c90ca32480397438",
+      "hsaco_sha256": "60bb24b16137a26fd87931299dd983a4b422457e839b6795e876abb4faab6097",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-co-swizzle32-phase1-gc1800",
+      "static_native_instruction_count": 1487,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 3,
+        "ds_write2_b32": 10,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 2,
+        "ds_write2st64_b32": 32
+      }
+    },
+    {
+      "case": "next-k0-before-old-scale",
+      "algorithm": "\u4e0bM K0\u4f4e64\u884c\u5728\u65e7M\u6700\u540e\u7f29\u653e\u524d\u8ba1\u7b97",
+      "time_us": 17.142592,
+      "whole48cu_dispatch_mmac_percent": 13.284898806434873,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "actual_vgpr": [
+        39,
+        9,
+        214,
+        214
+      ],
+      "shared": 119808,
+      "mean_lds_bank_conflict": 1280.0,
+      "source_sha256": "7228617d44d8a80b8987acddb9d7d41f9b6383c0ab4b265af116329c44f7e91d",
+      "hsaco_sha256": "6ee757fa2edf0e505ae22514f06154dafdbb3bd92cc1ed61b9c149626a9ef988",
+      "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-next-k0-before-old-scale-gc1800",
+      "static_native_instruction_count": 1878,
+      "static_native_output_relevant_ops": {
+        "v_mov_b32_e32": 167,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read2_b64": 4
+      },
+      "cu0_simd0_consumers": [
+        {
+          "simd": 0,
+          "role": "C0",
+          "m0_first_mmac_tick": 9428092,
+          "m0_last_mmac_end_tick": 12959804,
+          "m1_first_mmac_tick": 13146620,
+          "inter_m_gap_cycles": 336.0,
+          "m0_post_mmac_to_final_ready_cycles": 1564.0,
+          "m1_post_mmac_to_final_ready_cycles": 548.0
+        },
+        {
+          "simd": 0,
+          "role": "C1",
+          "m0_first_mmac_tick": 9855100,
+          "m0_last_mmac_end_tick": 13424620,
+          "m1_first_mmac_tick": 13473548,
+          "inter_m_gap_cycles": 88.0,
+          "m0_post_mmac_to_final_ready_cycles": 1772.0,
+          "m1_post_mmac_to_final_ready_cycles": 492.0
+        }
+      ]
+    }
+  ]
+}

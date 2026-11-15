@@ -1,0 +1,16 @@
+{
+  "bolt_kernel_base_commit": "5fde18e",
+  "bolt_record_commit_before_test": "8400996ec85e7ff5883f804715f0202cd03421ce",
+  "llvm_branch": "dtk-llvm-6.3.3",
+  "llvm_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n",
+  "triton_source_commit": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+  "triton_runtime": "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton",
+  "triton_local_changes": "BPS=1; MLS grouping uses MapVector; existing HCU Python changes; see mls-stable-groups evidence",
+  "pmd_commit": "b61a79c58e4f54d6d2920594d3af08582354db3e",
+  "clock": "2.2GHz",
+  "scope": "48 CU, 384 output diagnostic prefix, not full routed workload",
+  "clang_sha256": "b547297d968762bbcb017e1dd0a802e6b8b5e1afcef9b5072d8a5d0626b765c2",
+  "triton_lib_sha256": "ddfa0f4ab5d93ffdb99f4fbd367d6a1f42a2ffec0f8f44545846b2983dc95dd4",
+  "pmd_lib_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+}

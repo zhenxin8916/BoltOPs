@@ -1,0 +1,26 @@
+{
+  "llvm_branch": "dtk-llvm-6.3.3",
+  "llvm_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\n M llvm/lib/Target/AMDGPU/SIInstrInfo.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n?? llvm/test/HCU/GFX946/CodeGen/abarrier-memory-order.ll\n",
+  "triton_source_commit": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+  "runtime": "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton",
+  "local_changes": "BPS1 plus MapVector stable MLS grouping; Python HCU extensions; see prior mls-stable-groups evidence",
+  "pmd_commit": "b61a79c58e4f54d6d2920594d3af08582354db3e",
+  "weight_argument": "existing SortedWeights, not RouteWeights; caller binds gpu[SortedWeights], CPU golden remains unsorted RouteWeights",
+  "formal_kernel_unchanged": true,
+  "llvm_branch_current": "dtk-llvm-6.3.3",
+  "llvm_commit_current": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status_current": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\n M llvm/lib/Target/AMDGPU/SIInstrInfo.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n?? llvm/test/HCU/GFX946/CodeGen/abarrier-memory-order.ll",
+  "triton_branch_current": "sync/release-3.6-20261028",
+  "triton_commit_current": "82bd65168cf41d3374d0e7663985d3b09bbe52f8",
+  "triton_status_current": "M third_party/hcu/lib/TritonHCUToLLVM/ElementwiseOpToLLVM.cpp\n?? .clangd\n?? 0001-fix-hcu-fix-scaled-MLS-mixed-precision-and-multi-wav.patch\n?? diff_patch\n?? dist/\n?? gen-triton-whl.sh\n?? m5out/\n?? pmd.tar.gz\n?? python/tutorials/m5out/\n?? sync_clangd_host.sh\n?? test/TritonGPU/hcu/scale-buffer-optional-scales.mlir\n?? third_party/hcu/backend/_cy_utils.cpython-310-x86_64-linux-gnu.so\n?? third_party/hcu/backend/_cython_build/\n?? third_party/hcu/backend/_cython_build_temp/\n?? third_party/hcu/docs/\n?? third_party/hcu/test/m5out/\n?? third_party/hcu/test/smoke_min_add.py\n?? third_party/hcu/test/smoke_non_scale_fp8_setreg.py\n?? third_party/hcu/test/smoke_setreg_mode2.py\n?? third_party/hcu/test/test_toolchain_paths.py\n?? triton36_rebuild_cpp_zhenxin.sh\n?? triton36_setup_zhenx.log\n?? triton36_setup_zhenx.sh",
+  "compiler_patch_evidence": "Existing Triton stable MLS changes unchanged; full LLVM HEAD-to-worktree patch included as llvm-tracked-local-changes.patch.gz, plus untracked abarrier-memory-order.ll.",
+  "binary_sha256": {
+    "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18": "2aecc815024cabed79d70ca5e14c4732cb878ed0a49005d5fed2a9d27cadd61d",
+    "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton/python/triton/_C/libtriton.so": "ddfa0f4ab5d93ffdb99f4fbd367d6a1f42a2ffec0f8f44545846b2983dc95dd4",
+    "/opt/rocm/pmd/libgem5_opt.so": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+  },
+  "algorithm_parent_commit": "264d7e7",
+  "change": "Keep A/B0/SB DS reads in flight together, one explicit wait0 before both A EMPTY3 and first-B EMPTY. Original metadata timing and all layouts/slots/priorities retained.",
+  "llvm_machine_sink_fix": "../store-issue-and-credit-order/abarrier-memory-order.patch"
+}

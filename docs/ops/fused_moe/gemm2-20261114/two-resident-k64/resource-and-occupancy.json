@@ -1,0 +1,40 @@
+{
+  "source_sha256": "6efa635e2bacd9f40c4ae6f99a5d1c007456176103a796f2beff1464c10ed248",
+  "lds_bytes": 57344,
+  "vgpr_quota": [
+    64,
+    8,
+    92,
+    92
+  ],
+  "actual_vgpr": [
+    53,
+    2,
+    86,
+    86
+  ],
+  "sgpr_before": 98,
+  "sgpr_after": 78,
+  "sgpr_allocation_granule": 16,
+  "sgpr_capacity_per_simd": 800,
+  "sgpr_two_tg_rounded_requirement_per_simd": 640,
+  "scratch": 0,
+  "numerical_two_m": {
+    "mismatches": 0,
+    "checked_elements": 1394688,
+    "shared": 57344,
+    "scope": "diagnostic_prefix"
+  },
+  "trace_prefix_sha256": "6004d6b5da1825d8bb18a8bd73be456c31fee30062dc3a02d733e9b22fc88208",
+  "live_waves_cu0": 32,
+  "trace_ends_before_32nd_start": 0,
+  "grid96_numerical_status": "passed",
+  "scope": "experimental source, not a promoted kernel; no hardware/model limits modified",
+  "grid96_numerical": {
+    "mismatches": 0,
+    "checked_elements": 17522688,
+    "shared": 57344,
+    "scope": "diagnostic_prefix"
+  },
+  "complete_trace_audit": "../two-resident-k64-no-backend-unroll-grid96-prefix/two-tg-audit.json"
+}

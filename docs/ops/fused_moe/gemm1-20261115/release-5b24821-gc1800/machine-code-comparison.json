@@ -1,0 +1,14 @@
+[
+  {
+    "case": "top-fp8-bn128",
+    "old_text_sha256": "5c55ba8a4b57df34ed9d696b637b4399e0516511f1297770f3cd5d043a6d9cf3",
+    "new_text_sha256": "5c55ba8a4b57df34ed9d696b637b4399e0516511f1297770f3cd5d043a6d9cf3",
+    "identical": true
+  },
+  {
+    "case": "top-fp8-bn256",
+    "old_text_sha256": "3b32be89974d06b9c58d8901ab0d88fbe00ef87a7c0722d2226a650011ed6d8a",
+    "new_text_sha256": "3b32be89974d06b9c58d8901ab0d88fbe00ef87a7c0722d2226a650011ed6d8a",
+    "identical": true
+  }
+]

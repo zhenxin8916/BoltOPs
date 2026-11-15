@@ -1,0 +1,5 @@
+{
+  "base_commit": "4a3677e",
+  "change": "Read following B into registers after BF16 packing, before current output LDS/scatter; original B slot/phase order and credit wait preserved",
+  "sha256": "808479e65f34bc7f88ff87a21bc7795c0448ae0ea27e5c0418017d897d85a18e"
+}

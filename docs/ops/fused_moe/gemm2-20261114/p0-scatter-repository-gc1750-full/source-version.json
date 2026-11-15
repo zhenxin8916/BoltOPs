@@ -1,0 +1,6 @@
+{
+  "independent_output_handshake": true,
+  "change": "Authoritative repository import, no frozen-module override; source and tensor virtual addresses recorded in launch.json",
+  "kernel_sha256": "59bcf20688933835bfb58c5b74b22f593eb97b5f9a5af7cb88a19b2fe70bfc16",
+  "probe_sha256": "bc8d4359dae2a2e1086e99e9d47e91106f1bb71f2b4311f71db2343714091b7d"
+}

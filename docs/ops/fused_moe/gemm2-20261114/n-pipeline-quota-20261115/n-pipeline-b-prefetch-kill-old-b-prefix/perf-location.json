@@ -1,0 +1,4 @@
+{
+  "perf": "/home/zhenx/temp/moe-gemm2-20261114/n-pipeline-b-prefetch-kill-old-b-prefix/GEMM2_GRID48_OUTPUT384_GC2200_n-pipeline-b-prefetch-kill-old-b-prefix_CU0.perf",
+  "sha256": "17d833bafe87c9d8c43594c26676df791dc627437edfe4caa43d18864cd7742c"
+}

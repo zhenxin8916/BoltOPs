@@ -1,0 +1,25 @@
+{
+  "default_gc_ghz": 1.8,
+  "expected_model_period_ps": 556,
+  "bm": 128,
+  "outputs_per_tg": {
+    "128": 8,
+    "256": 4,
+    "512": 2
+  },
+  "cu_count": 48,
+  "output_elements_per_tg": 131072,
+  "time_scope": "full HYGPERF dispatch including startup",
+  "work_scope": "bounded equal padded output work, not a full MoE result",
+  "top_case": {
+    "M": 4096,
+    "E": 256,
+    "actual_N": 1024,
+    "K": 2048,
+    "topk": 8
+  },
+  "top_selected_output_rows": 6144,
+  "warmup": false,
+  "frozen_top_inputs": "/home/zhenx/temp/moe-chip-comparison-20261114/frozen-m4096",
+  "top_kernel_sha256": "eb62a34b534026eb313dc52d8d2f26253907661fe204ea00acd1c2e28ad90a85"
+}

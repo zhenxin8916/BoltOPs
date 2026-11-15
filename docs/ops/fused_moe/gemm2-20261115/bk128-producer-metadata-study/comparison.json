@@ -1,0 +1,638 @@
+{
+  "scope": "1.8GHz, 48 CU, one dispatch, two independent M outputs per persistent CU; 96 outputs; physical N2048 K256",
+  "historical_best_us": 16.8746,
+  "toolchain": "Same frozen LLVM/Triton/PMD as ../persistent2-independent-m-c-vector4-late-convert-gc1800/provenance.json; no compiler changes",
+  "cases": [
+    {
+      "case": "persistent2-independent-m-n64-mailbox-control-gc1800",
+      "time_us": 17.48064,
+      "whole_gpu_mmac_percent": 13.02798982188295,
+      "shared_bytes": 114688,
+      "vgpr_actual": [
+        37,
+        2,
+        200,
+        200
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 114688,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-n64-mailbox-control-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "8954338c0b22546d9b58158c3188db54d70b385a66eba57852d2602faf4b506c"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-n64-mailbox-control-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-producer-scale-lds-n64-mailbox-gc1800",
+      "time_us": 17.16094,
+      "whole_gpu_mmac_percent": 13.27069496193099,
+      "shared_bytes": 116736,
+      "vgpr_actual": [
+        41,
+        9,
+        199,
+        199
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 116736,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-producer-scale-lds-n64-mailbox-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "9178e0def0da05555a633d292e8eaa1ee92eaab5f4011b901c37956e23b10476"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-producer-scale-lds-n64-mailbox-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-producer-metadata-lds-gc1800",
+      "time_us": 20.146104,
+      "whole_gpu_mmac_percent": 11.304299828889993,
+      "shared_bytes": 84992,
+      "vgpr_actual": [
+        43,
+        9,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 84992,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-producer-metadata-lds-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "dfebb96983c81a0f0ea218c8c1c7bb86c103dcad65c545ddf5fa4e2cdc9975f8"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-producer-metadata-lds-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-full-a-producer-metadata-lds-gc1800",
+      "time_us": 17.287152,
+      "whole_gpu_mmac_percent": 13.173806767014023,
+      "shared_bytes": 101376,
+      "vgpr_actual": [
+        43,
+        9,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 101376,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-producer-metadata-lds-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "9f441fe7fb3b2e8e0e90d6f5cd77e128381335d7063576a33b98725a05423f63"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-producer-metadata-lds-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-full-a-sb-pair-prefetch-gc1800",
+      "time_us": 17.314396,
+      "whole_gpu_mmac_percent": 13.15307793584021,
+      "shared_bytes": 101376,
+      "vgpr_actual": [
+        43,
+        12,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 101376,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-sb-pair-prefetch-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "614311b5dc14058ec8a7cee6e6f60f49e0c46400ce9cb60237e67e9747bf9b5f"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-sb-pair-prefetch-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-full-a-double-bleft-gc1800",
+      "time_us": 17.247676,
+      "whole_gpu_mmac_percent": 13.20395860868444,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        43,
+        12,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-double-bleft-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "56b843e34fff4025c4051905138f22dfe1dc341f2a6926b8f5a9ae0daba95576"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-double-bleft-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-double-bleft-full-output-token-gc1800",
+      "time_us": 17.716384,
+      "whole_gpu_mmac_percent": 12.854632186793873,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        43,
+        12,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-full-output-token-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "7d2cc365c9a08e7fda20624f3d438870ba40b125a83ee9e2eaa149558c980ddb"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-full-output-token-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-double-bleft-metadata-lookahead-gc1800",
+      "time_us": 17.9588,
+      "whole_gpu_mmac_percent": 12.681114551083592,
+      "shared_bytes": 119808,
+      "vgpr_actual": [
+        44,
+        12,
+        190,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-metadata-lookahead-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "02b7a61c05113216139a4370164718d019a3c67ae493b1147c714cf0c2370650"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-metadata-lookahead-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-full-a-double-bright-gc1800",
+      "time_us": 17.242672,
+      "whole_gpu_mmac_percent": 13.20779053269702,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        43,
+        9,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-double-bright-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "51db5c5e97f07712a15e50a993e59c52cff7462356124b97bbfb4f0b2ec8b646"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-full-a-double-bright-gc1800",
+      "promoted": false,
+      "hardware_valid": false,
+      "reason": "Adjacent EMPTY6 waits across M boundary; numerical success is insufficient. Excluded from valid ranking; separate legal-waits case fixes ordering."
+    },
+    {
+      "case": "persistent2-independent-m-bk128-double-bright-legal-waits-gc1800",
+      "time_us": 17.062528,
+      "whole_gpu_mmac_percent": 13.347236704900938,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        43,
+        9,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bright-legal-waits-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "dc98bcf3c9fd50d546ff3c697b520e041200326374c1704b12b97526ffd4b92c"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bright-legal-waits-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-double-bleft-linear-metadata-gc1800",
+      "time_us": 17.112012,
+      "whole_gpu_mmac_percent": 13.308639568508951,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        40,
+        12,
+        191,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-linear-metadata-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "b5d62f17088cd4f351e98b328b981a7c441b54165331d0bf5936bb1aaea5f82d"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-linear-metadata-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-double-bleft-split-metadata-layout-gc1800",
+      "time_us": 17.300496,
+      "whole_gpu_mmac_percent": 13.163645712816557,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        43,
+        12,
+        191,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-split-metadata-layout-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "0ae91577ef50c60a43601328d43a2bb656558f12f56ad43019bdb3b5e1e82d44"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bleft-split-metadata-layout-gc1800",
+      "promoted": false,
+      "hardware_valid": null
+    },
+    {
+      "case": "persistent2-independent-m-bk128-double-bright-linear-metadata-gc1800",
+      "time_us": 17.0692,
+      "whole_gpu_mmac_percent": 13.342019543973942,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        40,
+        9,
+        191,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bright-linear-metadata-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "98f3ed98a8598d8ce21a58da2fb9271605dfecad1b43f23da729fb45f00e5015"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-double-bright-linear-metadata-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-p0-fp32-n64-mailbox-gc1800",
+      "time_us": 22.017044,
+      "whole_gpu_mmac_percent": 10.34369554786737,
+      "shared_bytes": 119040,
+      "vgpr_actual": [
+        112,
+        9,
+        140,
+        140
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119040,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-fp32-n64-mailbox-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "5f9a0bf4524102098f2510083b8863cf5a5558dd16675d17c5de415e7b34fc64"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-fp32-n64-mailbox-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-p0-fp32-n64-vector8-gc1800",
+      "time_us": 18.840616,
+      "whole_gpu_mmac_percent": 12.087587794369355,
+      "shared_bytes": 119040,
+      "vgpr_actual": [
+        80,
+        9,
+        140,
+        140
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119040,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-fp32-n64-vector8-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "166a1c625f8e8c0a7701911fe1908a78691b25298c0c234dcc8eb58df5e8df21"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-fp32-n64-vector8-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-direct-a-subtiles-gc1800",
+      "time_us": 17.314952,
+      "whole_gpu_mmac_percent": 13.15265557767645,
+      "shared_bytes": 117760,
+      "vgpr_actual": [
+        43,
+        9,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117760,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-direct-a-subtiles-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "7f9dd2c86b35271f0714c586b5d0202793c7737a811372bb6e1963087fe0f3f8"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-direct-a-subtiles-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-p0-route-vgpr-gc1800",
+      "time_us": 17.275476,
+      "whole_gpu_mmac_percent": 13.18271056612275,
+      "shared_bytes": 117248,
+      "vgpr_actual": [
+        42,
+        9,
+        183,
+        179
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 117248,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-route-vgpr-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "bc49f1a09deb55e7a108073e7f1edd5420053f0621a8bdae2c5dba5c5aaf3d27"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-route-vgpr-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    },
+    {
+      "case": "persistent2-independent-m-bk128-p0-route-direct-layout-gc1800",
+      "time_us": 17.241004,
+      "whole_gpu_mmac_percent": 13.209068334999516,
+      "shared_bytes": 116736,
+      "vgpr_actual": [
+        51,
+        9,
+        183,
+        183
+      ],
+      "numerical": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 116736,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      },
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      },
+      "source": {
+        "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-route-direct-layout-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+        "sha256": "e670c62469a9f4837db16acab64c02abd25dee2c7e37064911ee7fa4aa70f2a9"
+      },
+      "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-route-direct-layout-gc1800",
+      "promoted": false,
+      "hardware_valid": true
+    }
+  ]
+}

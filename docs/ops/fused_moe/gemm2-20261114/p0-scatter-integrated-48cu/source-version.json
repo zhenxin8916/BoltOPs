@@ -1,0 +1,5 @@
+{
+  "independent_output_handshake": true,
+  "change": "Restrict optimized mailbox path to verified BN256; retain BN128 generic path",
+  "sha256": "139abfdae976be558f85e784551fa9cb84c216579c730fa9595eb6c3b985a9cf"
+}

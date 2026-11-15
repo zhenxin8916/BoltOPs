@@ -1,0 +1,27 @@
+{
+  "diagnostic_only": true,
+  "numerical_errors": 0,
+  "constructor_calls": [
+    {
+      "kind": "TCC",
+      "args": [
+        48,
+        16,
+        0,
+        8
+      ],
+      "calls": 32
+    },
+    {
+      "kind": "TCP",
+      "args": [
+        4,
+        128,
+        0,
+        0
+      ],
+      "calls": 48
+    }
+  ],
+  "note": "Forwarded original constructors unchanged. TCP args are raw observed tuples, not an assertion of effective byte capacity from config num_ways."
+}

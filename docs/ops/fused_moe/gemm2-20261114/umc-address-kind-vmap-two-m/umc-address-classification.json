@@ -1,0 +1,194 @@
+{
+  "diagnostic_only": true,
+  "numerical_errors": 0,
+  "checked_elements": 1394688,
+  "mapping_source": "Native UTCL2_PAGETABLE PDE0 2MiB mappings; manifest GPU virtual tensor ranges",
+  "mapped_pages": 71,
+  "admissions": 16575,
+  "requests": [
+    {
+      "tensor": "A",
+      "cmd": 1,
+      "count": 1024,
+      "unique_256B_lines": 1024,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "B",
+      "cmd": 1,
+      "count": 10266,
+      "unique_256B_lines": 10240,
+      "repeat_256B_line_requests": 26
+    },
+    {
+      "tensor": "C",
+      "cmd": 72,
+      "count": 4627,
+      "unique_256B_lines": 4627,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "Experts",
+      "cmd": 1,
+      "count": 1,
+      "unique_256B_lines": 1,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "RouteWeights",
+      "cmd": 1,
+      "count": 394,
+      "unique_256B_lines": 394,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "SA",
+      "cmd": 1,
+      "count": 16,
+      "unique_256B_lines": 16,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "SB",
+      "cmd": 1,
+      "count": 160,
+      "unique_256B_lines": 160,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "Sorted",
+      "cmd": 1,
+      "count": 16,
+      "unique_256B_lines": 16,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "other",
+      "cmd": 1,
+      "count": 1,
+      "unique_256B_lines": 1,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "other",
+      "cmd": 2,
+      "count": 56,
+      "unique_256B_lines": 56,
+      "repeat_256B_line_requests": 0
+    },
+    {
+      "tensor": "page_tables",
+      "cmd": 1,
+      "count": 14,
+      "unique_256B_lines": 6,
+      "repeat_256B_line_requests": 8
+    }
+  ],
+  "packet_size_histogram": [
+    {
+      "tensor": "A",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 1024
+    },
+    {
+      "tensor": "B",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 10266
+    },
+    {
+      "tensor": "C",
+      "cmd": 72,
+      "size_bytes": 256,
+      "count": 4627
+    },
+    {
+      "tensor": "Experts",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 1
+    },
+    {
+      "tensor": "RouteWeights",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 394
+    },
+    {
+      "tensor": "SA",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 16
+    },
+    {
+      "tensor": "SB",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 160
+    },
+    {
+      "tensor": "Sorted",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 16
+    },
+    {
+      "tensor": "other",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 1
+    },
+    {
+      "tensor": "other",
+      "cmd": 2,
+      "size_bytes": 32,
+      "count": 7
+    },
+    {
+      "tensor": "other",
+      "cmd": 2,
+      "size_bytes": 64,
+      "count": 49
+    },
+    {
+      "tensor": "page_tables",
+      "cmd": 1,
+      "size_bytes": 64,
+      "count": 14
+    }
+  ],
+  "address_mod_256_histogram": [
+    {
+      "cmd": 1,
+      "offset": 0,
+      "count": 11882
+    },
+    {
+      "cmd": 1,
+      "offset": 64,
+      "count": 3
+    },
+    {
+      "cmd": 1,
+      "offset": 128,
+      "count": 3
+    },
+    {
+      "cmd": 1,
+      "offset": 192,
+      "count": 4
+    },
+    {
+      "cmd": 2,
+      "offset": 0,
+      "count": 56
+    },
+    {
+      "cmd": 72,
+      "offset": 0,
+      "count": 4627
+    }
+  ],
+  "scope_note": "Read-only audit changes allocation/packet IDs and is diagnostic, not a formal time comparison. Packet size is not asserted to be actual UMC bus payload. Unknown address ranges are retained explicitly."
+}

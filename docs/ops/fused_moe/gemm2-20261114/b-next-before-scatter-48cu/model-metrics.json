@@ -1,0 +1,111 @@
+{
+  "time_us": 28.42385,
+  "whole_gpu_mmac_percent": 26.226988954698257,
+  "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * whole dispatch cycles); FP8 16x16x32 geometry audited and total instruction count matches padded work",
+  "mmac_count_per_cu": {
+    "0": 8192,
+    "1": 8192,
+    "2": 8192,
+    "3": 8192,
+    "4": 8192,
+    "5": 8192,
+    "6": 8192,
+    "7": 8192,
+    "8": 8192,
+    "9": 8192,
+    "10": 8192,
+    "11": 8192,
+    "12": 8192,
+    "13": 8192,
+    "14": 8192,
+    "15": 8192,
+    "16": 8192,
+    "17": 8192,
+    "18": 8192,
+    "19": 8192,
+    "20": 8192,
+    "21": 8192,
+    "22": 8192,
+    "23": 8192,
+    "24": 8192,
+    "25": 8192,
+    "26": 8192,
+    "27": 8192,
+    "28": 8192,
+    "29": 8192,
+    "30": 8192,
+    "31": 8192,
+    "32": 8192,
+    "33": 8192,
+    "34": 8192,
+    "35": 8192,
+    "36": 8192,
+    "37": 8192,
+    "38": 8192,
+    "39": 8192,
+    "40": 8192,
+    "41": 8192,
+    "42": 8192,
+    "43": 8192,
+    "44": 8192,
+    "45": 8192,
+    "46": 8192,
+    "47": 8192
+  },
+  "expected_mmac_instructions": 393216,
+  "padded_tflops": 226.6565206332006,
+  "useful_tflops": 161.65509007400473,
+  "cache": {
+    "TccSendRespBandwidth": 1.428797,
+    "TccRecvRespBandwidth": 1.082758,
+    "TCCHitRate": 0.793403,
+    "TCPCacheLineHitRate": 0.289988,
+    "SQCIHitRate": 0.999498,
+    "missSQCIRequests": 168.0,
+    "missDuplicatedSQCIRequests": 68589.0
+  },
+  "cu_metrics": {
+    "ldsBankConflict": {
+      "mean": 6144.0,
+      "maximum": 6144.0,
+      "sum": 294912.0
+    },
+    "GlobalMemPipeline.cmdCreditStall": {
+      "mean": 2909.8125,
+      "maximum": 3584.0,
+      "sum": 139671.0
+    },
+    "GlobalMemPipeline.addrCreditStall": {
+      "mean": 1459.7708333333333,
+      "maximum": 2086.0,
+      "sum": 70069.0
+    },
+    "GlobalMemPipeline.dataCreditStall": {
+      "mean": 307.9375,
+      "maximum": 1499.0,
+      "sum": 14781.0
+    },
+    "LocalMemPipeline.creditStall": {
+      "mean": 3788.4375,
+      "maximum": 5085.0,
+      "sum": 181845.0
+    },
+    "tatd.TATD.taSendStallBytcp": {
+      "mean": 1808.25,
+      "maximum": 2713.0,
+      "sum": 86796.0
+    },
+    "tatd.TATD.taSendStallByCredit": {
+      "mean": 7489.9375,
+      "maximum": 9589.0,
+      "sum": 359517.0
+    },
+    "numCyclesWaitIFetchAfterBranchTaken": {
+      "mean": 14266.25,
+      "maximum": 14904.0,
+      "sum": 684780.0
+    }
+  },
+  "schema_version": 1,
+  "legacy_timing_note": "Historical first-wave to last-wave interval excludes dispatch startup; do not use as complete-dispatch acceptance. See schema-2 results and perf_dispatch_span.py."
+}

@@ -1,0 +1,16 @@
+{
+  "frozen_bn256_commit": "8836708",
+  "frozen_source_sha256": "32b3fc16349ab605b5fc06f7938f9f0e5cd53c66cc2438ea7e69b036fe0260a8",
+  "source_unchanged": true,
+  "machine_text_unchanged": true,
+  "machine_text_sha256": "a882f3059d20b3e9947f09f5d2dbe7588eac90045562e432f6437cbc9ca5ef1d",
+  "hsaco_debug_paths_differ": true,
+  "full_input_sha256_identical": true,
+  "padded_flops_each": 3221225472,
+  "reference_time_us": 23.49378,
+  "candidate_time_us": 21.98146,
+  "time_reduction_percent": 6.43710803455213,
+  "reference_checked_elements": 4330752,
+  "candidate_checked_elements": 4380672,
+  "scope": "same padded work, same full inputs but different row/column prefixes; not identical output subset or full N2048 acceptance"
+}

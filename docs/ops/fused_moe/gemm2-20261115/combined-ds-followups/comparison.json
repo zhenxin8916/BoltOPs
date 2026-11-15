@@ -1,0 +1,54 @@
+[
+  {
+    "case": "c1-b1-read-between-k0-panels",
+    "time_us": 15.561884,
+    "whole48cu_dispatch_mmac_percent": 14.634320625960198,
+    "source_sha256": "935dafc5ee2a331946d99f69c86001a63fd5843759af815fd231ca7f5bec600b",
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-c1-b1-read-between-k0-panels-gc1800"
+  },
+  {
+    "case": "c1-b1-prefetch-steady-m",
+    "time_us": 15.887144,
+    "whole48cu_dispatch_mmac_percent": 14.33470987611115,
+    "source_sha256": "952cef70b13250f718ec871989a53a795ecf5023d03a82b94d0c65666caebd1c",
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-c1-b1-prefetch-steady-m-gc1800"
+  },
+  {
+    "case": "p1-sb-prefetch-registers",
+    "time_us": 16.034484,
+    "whole48cu_dispatch_mmac_percent": 14.202989007940635,
+    "source_sha256": "50787e6f4f2aa52abf0201d83ca97dd9c345e533758bc49b08f0bb56a3329d85",
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p1-sb-prefetch-registers-gc1800"
+  },
+  {
+    "case": "p1-expert-buffer-load",
+    "time_us": 15.346156,
+    "whole48cu_dispatch_mmac_percent": 14.840042027462774,
+    "source_sha256": "d36af1ba3ea9c5a1d8f507ed5f9810ef04cade135fd0a9f75b6427e2d1ad8ccf",
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p1-expert-buffer-load-gc1800"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "source_case": "n-pipeline-row-panel-pingpong-ready-reuse-two-m",
+  "only_benchmark_change": "N-loop trip count 8->2; physical N/strides unchanged; validation selects first512 columns; total arg384 maps48 M blocks; measured96 output tiles",
+  "replaced_n_loops": 5
+}

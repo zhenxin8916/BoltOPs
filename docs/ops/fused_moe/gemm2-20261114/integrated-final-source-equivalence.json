@@ -1,0 +1,8 @@
+{
+  "scope": "BN256 BK256 full actual N2048 K256 topk8; .text identical, not just normalized assembly",
+  "running_case": "p0-scatter-integrated-full",
+  "final_compile_case": "p0-scatter-integrated-final-compile",
+  "hsaco_text_sha256": "7e7fef66606d67be0f23b12283a3e194a5a0d50b08adf4c6f3aed9a937c1b1c4",
+  "repository_source_sha256": "139abfdae976be558f85e784551fa9cb84c216579c730fa9595eb6c3b985a9cf",
+  "scope_note": "Historical stage1 only; current source has an additional MLS-A guard and different .text, with an independent full validation running."
+}

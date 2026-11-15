@@ -1,0 +1,16 @@
+{
+  "fp8": {
+    "inputs_identical": true,
+    "measured_output_region_identical": true,
+    "checked_elements_each": 6291456,
+    "both_numerical_checks_passed": true,
+    "output_bits_identical": true
+  },
+  "int8": {
+    "inputs_identical": true,
+    "measured_output_region_identical": true,
+    "checked_elements_each": 6291456,
+    "both_numerical_checks_passed": true,
+    "output_bits_identical": true
+  }
+}

@@ -1,0 +1,20 @@
+--- a/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
++++ b/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
+@@ -38,7 +38,7 @@
+ def _scatter_output(C, value, n, output_rows, output_valid,
+                     N: gl.constexpr, BN: gl.constexpr, PARTITION: gl.constexpr):
+     CN: gl.constexpr = BN // 2
+-    store: gl.constexpr = gl.BlockedLayout([1, 8], [4, 16], [4, 1], [1, 0])
++    store: gl.constexpr = gl.BlockedLayout([1, 8], [16, 4], [2, 2], [1, 0])
+     # Two 64-row panels use 16 KiB scratch per consumer at BN256. Only the
+     # result changes layout through LDS; route/mask never make that round trip.
+     # Pair adjacent columns before narrowing, so the LDS writer receives
+@@ -151,7 +151,7 @@
+         valid = (route >= 0) & (route < valid_routes) & (expert >= 0)
+         sa = buffer_load(SA, (m * BM + rm).to(gl.uint32))
+         weight = buffer_load(Weights, route.to(gl.uint32), valid, other=0)
+-        output_store: gl.constexpr = gl.BlockedLayout([1, 8], [4, 16], [4, 1], [1, 0])
++        output_store: gl.constexpr = gl.BlockedLayout([1, 8], [16, 4], [2, 2], [1, 0])
+         output_rm = gl.arange(0, 64, gl.SliceLayout(1, output_store))
+         output_rows = ()
+         output_valid = ()

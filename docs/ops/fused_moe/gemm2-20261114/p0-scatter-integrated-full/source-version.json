@@ -1,0 +1,6 @@
+{
+  "base_commit": "4a3677e",
+  "independent_output_handshake": true,
+  "change": "Integrated independent P0 scatter for K=BK256; retain direct-scatter fallback for other short K",
+  "sha256": "7f5967da799234dc52575db45f3d42ba30e69e3550385b4131fcddce5e6126f0"
+}

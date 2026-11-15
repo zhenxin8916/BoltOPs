@@ -1,0 +1,41 @@
+{
+  "llvm_file": "llvm/lib/CodeGen/RegAllocGreedyWDRA.cpp",
+  "function": "getWDRASuggestedVGPRLimit",
+  "feedback_256_is": "spill retry suggestion from maximum of configured quota, pre-RA pressure and free-tuple probes, aligned and capped by hardware; not a no-spill actual allocation",
+  "full_width_m32_configured_quotas": [
+    40,
+    12,
+    228,
+    228
+  ],
+  "consumer_pre_ra_peak": [
+    254,
+    254
+  ],
+  "consumer_spilled_origins": [
+    8,
+    8
+  ],
+  "consumer_spilled_vgpr_units": [
+    26,
+    26
+  ],
+  "suggested_limits": [
+    256,
+    256
+  ],
+  "k64_lds_stream_actual_vgpr": [
+    40,
+    9,
+    222,
+    222
+  ],
+  "pipeline_a_actual_vgpr": [
+    40,
+    9,
+    225,
+    225
+  ],
+  "library_unchanged": true,
+  "scope": "compile-time diagnosis and tested negative variants only; none promoted"
+}

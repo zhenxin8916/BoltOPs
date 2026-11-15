@@ -1,0 +1,5 @@
+{
+  "base": "0b2285e",
+  "source_sha256": "f23be7ba21f674a6a2ecaec26510b27e9da2dd0df9ec933338ef123801a50666",
+  "note": "Successful compile source reconstructed after broadcast_to API correction; kernel.amdgcn is authoritative ISA."
+}

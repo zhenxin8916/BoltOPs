@@ -1,0 +1,160 @@
+[
+  {
+    "case": "persistent2-independent-m-bk128-first-panel-early-publish-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-first-panel-early-publish-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "c0385f0bea0ddc081e669d1d2b0028d6c4f3cbb40d531f6943f6fb3e2fc8fe41"
+    },
+    "time_us": 17.537352,
+    "whole_gpu_mmac_percent": 12.985860123010589
+  },
+  {
+    "case": "persistent2-independent-m-bk128-output-swizzle818-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-output-swizzle818-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "97634b843cabf6fff3986c5c7c7943049905463da94a8696ea4900b610a290f9"
+    },
+    "time_us": 16.559904,
+    "whole_gpu_mmac_percent": 13.752350255170562
+  },
+  {
+    "case": "persistent2-independent-m-bk128-row-partition-consumers-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-row-partition-consumers-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "f5db23b577a3482cba648e96f34bac0a07193b9d6e3f7b18b48ea912287463f2"
+    },
+    "time_us": 17.667456,
+    "whole_gpu_mmac_percent": 12.890231621349447
+  },
+  {
+    "case": "persistent2-independent-m-bk128-store-offsets-early-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-store-offsets-early-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "cc6b405bbc53cb1110a0402912c8da5c7dd2a1e20c55a862d54684bc83255a54"
+    },
+    "time_us": 16.463716,
+    "whole_gpu_mmac_percent": 13.832697308432676
+  },
+  {
+    "case": "persistent2-independent-m-bk128-p0-uniform-expert-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-p0-uniform-expert-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "e67639cf36204c315db69dcab27236c8de679ac710d27e700b99f4e5d9a06578"
+    },
+    "time_us": 17.03584,
+    "whole_gpu_mmac_percent": 13.368146214099216
+  },
+  {
+    "case": "persistent2-independent-m-bk128-local-expert-constexpr-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-local-expert-constexpr-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "618722acea74b26cc31a92da761fc4ce5aa099c9d1e6ab03c24fb02bda80079a"
+    },
+    "time_us": 16.870152,
+    "whole_gpu_mmac_percent": 13.499439720519412
+  },
+  {
+    "case": "persistent2-independent-m-bk128-drain-c0-first-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-drain-c0-first-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "beef7592801a295756b0f7e20cc664838d7a41d1146eca16738cb4ca7d9fc4b7"
+    },
+    "time_us": 16.60494,
+    "whole_gpu_mmac_percent": 13.715051063117361
+  },
+  {
+    "case": "persistent2-independent-m-bk128-skip-empty-output-panels-gc1800",
+    "result": {
+      "mismatches": 187678,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-skip-empty-output-panels-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "405e9ad238b83004018751b5be90ff09a91703e3893e145fcf5ab108b2b7432e"
+    }
+  },
+  {
+    "case": "persistent2-independent-m-bk128-skip-panels-compiler-fence-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-skip-panels-compiler-fence-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "38bb0d502ea272bf3090923734bf5c6b57b22dcb0d276dc3d91dda9a23068486"
+    },
+    "time_us": 16.681112,
+    "whole_gpu_mmac_percent": 13.652423171788547
+  },
+  {
+    "case": "persistent2-independent-m-bk128-empty-panel-lds-headers-gc1800",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-empty-panel-lds-headers-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "dcc24b1ca4d6c9574aa0587a0c395681f94f24cdcc9405c5be7809f83b1df7ca"
+    },
+    "time_us": 16.542668,
+    "whole_gpu_mmac_percent": 13.766678990353913
+  }
+]

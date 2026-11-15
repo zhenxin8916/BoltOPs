@@ -1,0 +1,68 @@
+[
+  {
+    "case": "two-output-panel-sorted-sb-early-c0-scatter",
+    "time_us": 14.14049,
+    "mmac": 13.1797412960937,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    }
+  },
+  {
+    "case": "two-output-panel-bk256-consume-k128",
+    "time_us": 14.48174,
+    "mmac": 12.869171798416488,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    }
+  },
+  {
+    "case": "two-output-panel-bk256-consume-k128-sched",
+    "time_us": 14.110005,
+    "mmac": 13.20821643932798,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    }
+  },
+  {
+    "case": "two-output-panel-bk256-consume-k128-sched-repeat",
+    "time_us": 14.110005,
+    "mmac": 13.20821643932798,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    }
+  },
+  {
+    "case": "two-output-panel-bk256-consume-k128-overlap-ds",
+    "time_us": 14.62643,
+    "mmac": 12.741865239843216,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    }
+  },
+  {
+    "case": "two-output-panel-bk256-k128-late-a-high",
+    "time_us": 14.74746,
+    "mmac": 12.637294829075651,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    }
+  }
+]

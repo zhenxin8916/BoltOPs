@@ -1,0 +1,5 @@
+{
+  "base": "24cb205",
+  "change": "BK256 full short-K transport, one physical slot with alternating barrier IDs",
+  "source_sha256": "0c3aaade38936f265b6bc6f56d90a98ef1277664738f10edc4cc14cafa8fb07c"
+}

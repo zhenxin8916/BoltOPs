@@ -1,0 +1,14 @@
+{
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "triton_changes": "无本地改动",
+  "triton_status": "",
+  "llvm_project_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\n M llvm/lib/Target/AMDGPU/SIInstrInfo.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n?? llvm/test/HCU/GFX946/CodeGen/abarrier-memory-order.ll",
+  "binaries": {
+    "/zhenxin/worktrees/triton-feature-20261102/python/triton/_C/libtriton.so": "49ae398b737f663ebe5dd369b66edc453f6de5a1a1a22156f4faf48e4941efe4",
+    "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18": "2aecc815024cabed79d70ca5e14c4732cb878ed0a49005d5fed2a9d27cadd61d",
+    "/zhenxin/temp/boltops-shared-ring-port-20261114/optimized-perf/clang-control-sync": "03e53ac705a0afe9040dfa76e8f11c925f5995d9e80dd9d7ffcc1381f57d86d3"
+  },
+  "build_command": "cmake --build build/cmake.linux-x86_64-cpython-3.10 --target triton --parallel 8",
+  "source_checkout": "/zhenxin/worktrees/triton-feature-20261102"
+}

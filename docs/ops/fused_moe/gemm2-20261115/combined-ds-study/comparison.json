@@ -1,0 +1,41 @@
+[
+  {
+    "case": "output-right-srd-base",
+    "time_us": 16.247432,
+    "mmac_whole48cu_dispatch_percent": 14.01683662993635,
+    "source_sha256": "fe2a6aa745ff3a78b79365b9586c409e37f9da6a0a19560d270278a57e6e1872",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-output-right-srd-base-gc1800"
+  },
+  {
+    "case": "a-b0-combined-ds-wait",
+    "time_us": 15.282772,
+    "mmac_whole48cu_dispatch_percent": 14.901589842470987,
+    "source_sha256": "32b3fc16349ab605b5fc06f7938f9f0e5cd53c66cc2438ea7e69b036fe0260a8",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-a-b0-combined-ds-wait-gc1800"
+  },
+  {
+    "case": "a-b0-ma-combined-ds-wait",
+    "time_us": 15.574672,
+    "mmac_whole48cu_dispatch_percent": 14.622304726545766,
+    "source_sha256": "edf4227ac323fb0e54a2a4c3c190a815b19dac15eec452ebbbe83ca43540912d",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-a-b0-ma-combined-ds-wait-gc1800"
+  }
+]

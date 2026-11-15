@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-baseline-c8-gc1800/GEMM2_M4096_N2048_K256_BM128_BN256_BK256_GRID48_OUTPUT96_2M_PER_CU_COMMITc8af677_GC1800_CU0.perf",
+  "sha256": "108b79292bac52c4a345d3399cb2adcdd18b9bf1d135dd8021a63d7a1e7fd432"
+}

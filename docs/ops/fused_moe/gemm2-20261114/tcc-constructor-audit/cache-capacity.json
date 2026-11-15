@@ -1,0 +1,14 @@
+{
+  "model_library_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a",
+  "tcc_instances": 32,
+  "sets_per_instance": 48,
+  "ways_per_set": 16,
+  "cache_line_bytes": 256,
+  "tagstore_calls": 32,
+  "capacity_bytes": 6291456,
+  "capacity_MiB": 6,
+  "proof": "ELF audit intercepts each TCC constructor and its TagStore constructor without changing arguments/return; TagStore constructor loops first argument sets and passes second argument ways to BaseSet; verified against exact model config. num_banks is not an extra capacity multiplier.",
+  "numeric_check_elements": 262144,
+  "numeric_errors": 0,
+  "not_a_performance_comparison": true
+}

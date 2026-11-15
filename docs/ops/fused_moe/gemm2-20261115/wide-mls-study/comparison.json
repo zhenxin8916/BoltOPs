@@ -1,0 +1,51 @@
+{
+  "baseline_commit": "8836708",
+  "baseline_time_us": 15.282772,
+  "control_native_instructions_identical": true,
+  "records": [
+    {
+      "case": "persistent2-independent-m-bk128-a-wide-fixed-gc1800",
+      "time_us": 15.513512,
+      "whole_dispatch_mmac_percent": 14.67995125797434,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      }
+    },
+    {
+      "case": "persistent2-independent-m-bk128-a-wide-fixed-control-gc1800",
+      "time_us": 15.282772,
+      "whole_dispatch_mmac_percent": 14.901589842470987,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      }
+    },
+    {
+      "case": "persistent2-independent-m-bk128-a-wide-fixed-warps41-gc1800",
+      "time_us": 15.673084,
+      "whole_dispatch_mmac_percent": 14.530490616907304,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      }
+    },
+    {
+      "case": "persistent2-independent-m-bk128-a-wide-fixed-warps14-gc1800",
+      "time_us": 15.661408,
+      "whole_dispatch_mmac_percent": 14.541323487645554,
+      "result": {
+        "mismatches": 0,
+        "checked_elements": 2190336,
+        "shared": 119808,
+        "scope": "persistent_two_independent_M_output_tiles_per_CU"
+      }
+    }
+  ]
+}

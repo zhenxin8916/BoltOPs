@@ -1,0 +1,6 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/p0-scatter-repository-full/m5out/0/0/2275254_python3.10.perf",
+  "sha256": "5bf0e1c624ccc0853db2cc581b4474eb1fc2315142fe1ec7546fc877334b0e7b",
+  "bytes": 11895,
+  "trace_scope": "IT/TT not collected; complete dispatch counters and XCD timing only"
+}

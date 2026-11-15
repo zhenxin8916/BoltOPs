@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/two-output-panel-pingpong/GEMM2_M4096_N2048_K256_BM128_BN256_BK256_GRID48_OUTPUT96_2TILEperTG_PANEL_PINGPONG_GC2200_CU0.perf",
+  "sha256": "9e21039593634fe683b8901d9dccf8bcddeae89a8775ad6922a42830a9d825db"
+}

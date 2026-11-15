@@ -1,0 +1,81 @@
+{
+  "frequency_GHz": 2.2,
+  "scope": "48 CU, one dispatch, 2 distinct M blocks per CU, one N output per M; 96 independent output tiles",
+  "future_policy": "All future optimization and acceptance use 1.8GHz with this same two-independent-task scope. 2.2GHz is historical only.",
+  "rows": [
+    {
+      "case": "persistent2-independent-m-baseline-d7",
+      "algorithm_commit": "d7c54df",
+      "time_us": 17.362344,
+      "full_dispatch_mmac_percent": 10.734034528978345,
+      "checked_elements": 2190336,
+      "source_directory": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-baseline-d7",
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      }
+    },
+    {
+      "case": "persistent2-independent-m-baseline-c8",
+      "algorithm_commit": "c8af677",
+      "time_us": 15.44725,
+      "full_dispatch_mmac_percent": 12.06480117820324,
+      "checked_elements": 2190336,
+      "source_directory": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-baseline-c8",
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      }
+    },
+    {
+      "case": "persistent2-independent-m-candidate",
+      "algorithm_commit": "d298073 + staged early token",
+      "time_us": 16.80224,
+      "full_dispatch_mmac_percent": 11.091854419410746,
+      "checked_elements": 2190336,
+      "source_directory": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-candidate",
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      }
+    },
+    {
+      "case": "persistent2-independent-m-early-token",
+      "algorithm_commit": "48839e8",
+      "time_us": 15.436785,
+      "full_dispatch_mmac_percent": 12.072980222241872,
+      "checked_elements": 2190336,
+      "source_directory": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-early-token",
+      "input_sha256": {
+        "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+        "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+      }
+    }
+  ],
+  "all_inputs_identical": true,
+  "p0_candidate_vs_c8_slowdown_percent": 8.771723122238594
+}

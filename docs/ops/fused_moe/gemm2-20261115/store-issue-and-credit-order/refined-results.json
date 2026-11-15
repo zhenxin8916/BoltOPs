@@ -1,0 +1,20 @@
+[
+  {
+    "case": "persistent2-independent-m-bk128-llvm-sink-fix-control-gc1800",
+    "toolchain": "refined-toolchain.json",
+    "hsaco_sha256": "281556b5ff7001227653ab632e53b5acca332be7ef96ff12670c45564db41bc5",
+    "buffer_wbinvl1_count": 0,
+    "promoted_kernel": false,
+    "time_us": 16.3742,
+    "whole_gpu_mmac_percent": 13.908319185059423
+  },
+  {
+    "case": "persistent2-independent-m-bk128-llvm-sink-fix-skip-empty-gc1800",
+    "toolchain": "refined-toolchain.json",
+    "hsaco_sha256": "b7c597cd71d2df61a73d0f1f3bbedb3e5cc8178eaa611b109503ff8d628e17de",
+    "buffer_wbinvl1_count": 0,
+    "promoted_kernel": false,
+    "time_us": 16.537108,
+    "whole_gpu_mmac_percent": 13.771307534545944
+  }
+]

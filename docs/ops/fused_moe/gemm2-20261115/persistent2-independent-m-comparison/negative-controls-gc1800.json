@@ -1,0 +1,186 @@
+[
+  {
+    "case": "persistent2-independent-m-c-vector4-late-convert-early-token-gc1800",
+    "time_us": 17.023608,
+    "whole_gpu_mmac_percent": 13.377751649356588,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-c-vector4-late-convert-early-token-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-c-vector4-late-convert-p0-row4-gc1800",
+    "time_us": 16.900176,
+    "whole_gpu_mmac_percent": 13.475457297012765,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-c-vector4-late-convert-p0-row4-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-c-vector4-late-convert-sb-early-gc1800",
+    "time_us": 17.035284,
+    "whole_gpu_mmac_percent": 13.368582525539345,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-c-vector4-late-convert-sb-early-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-two-panels-before-scale-gc1800",
+    "time_us": 18.248476,
+    "whole_gpu_mmac_percent": 12.479814752749764,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-two-panels-before-scale-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-two-panels-original-token-gc1800",
+    "time_us": 17.531236,
+    "whole_gpu_mmac_percent": 12.99039040943833,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-two-panels-original-token-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-c-vector4-mmac-prio2-gc1800",
+    "time_us": 17.095888,
+    "whole_gpu_mmac_percent": 13.321191622219331,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-c-vector4-mmac-prio2-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-c-vector4-route-before-next-a-gc1800",
+    "time_us": 16.99136,
+    "whole_gpu_mmac_percent": 13.403141361256544,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-c-vector4-route-before-next-a-gc1800"
+  },
+  {
+    "case": "persistent2-independent-m-p0-scale-c1-alias-br-gc1800",
+    "time_us": 17.262688,
+    "whole_gpu_mmac_percent": 13.192476165936615,
+    "numerical": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 131072,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "input_sha256": {
+      "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+      "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+      "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+      "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+      "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+      "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+      "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+      "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89"
+    },
+    "promoted": false,
+    "evidence_path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-p0-scale-c1-alias-br-gc1800"
+  }
+]

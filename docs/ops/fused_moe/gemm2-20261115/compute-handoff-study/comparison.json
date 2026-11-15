@@ -1,0 +1,42 @@
+[
+  {
+    "algorithm": "a-k128-reads",
+    "time_us": 16.374756,
+    "whole_gpu_mmac_percent": 13.907846932192456,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-a-k128-reads-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "8f2c2a3785155d5c8a16ff7b3db5c3a40af597229e82d55aa13cfaf074c30a6b"
+    }
+  },
+  {
+    "algorithm": "group-ebarrier",
+    "time_us": 15.886588,
+    "whole_gpu_mmac_percent": 14.335211563364014,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-group-ebarrier-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "2a525c8fa55659104ad47220dd71d5de727f7daca69e8ec8bcf80ebddabbbf3b"
+    }
+  },
+  {
+    "algorithm": "two-group-ebarrier",
+    "time_us": 15.694212,
+    "whole_gpu_mmac_percent": 14.510929252134481,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-two-group-ebarrier-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "96e9b49d6b936596279e5f0cdeb54324c4dddf7d5c9dfb0a972d1b9bb13ec590"
+    }
+  },
+  {
+    "algorithm": "no-compute-token",
+    "time_us": 15.3873,
+    "whole_gpu_mmac_percent": 14.800361336946702,
+    "promoted": true,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-no-compute-token-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "b3dc83ad23b202f863b1137738e14e56d04ad7b720b71cdb08888e91f4d8d16a"
+    }
+  }
+]

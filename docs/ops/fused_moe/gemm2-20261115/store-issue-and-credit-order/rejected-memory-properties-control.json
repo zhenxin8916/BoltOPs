@@ -1,0 +1,28 @@
+[
+  {
+    "case": "persistent2-independent-m-bk128-llvm-fixed-control-gc1800",
+    "toolchain_candidate": "REJECTED mayLoad/mayStore first patch; cache ops introduced",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "time_us": 16.742272,
+    "whole_gpu_mmac_percent": 13.602550478214665,
+    "promoted": false
+  },
+  {
+    "case": "persistent2-independent-m-bk128-llvm-fixed-skip-empty-gc1800",
+    "toolchain_candidate": "REJECTED mayLoad/mayStore first patch; cache ops introduced",
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "shared": 119808,
+      "scope": "persistent_two_independent_M_output_tiles_per_CU"
+    },
+    "time_us": 17.426708,
+    "whole_gpu_mmac_percent": 13.06830871326931,
+    "promoted": false
+  }
+]

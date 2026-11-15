@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-left-first-tail-gc1800/GEMM2_M4096_N2048_K256_BM128_BN512_BK64_GRID48_OUTPUT96_2M_PER_CU_LEFT_FIRST_TAIL_GC1800_CU0.perf",
+  "sha256": "0726603c275872f10e3fdcb47cf6c296ed438102845d144e36f3bdc360f6a086"
+}

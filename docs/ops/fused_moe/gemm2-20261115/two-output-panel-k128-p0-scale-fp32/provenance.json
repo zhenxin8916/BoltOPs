@@ -1,0 +1,25 @@
+{
+  "llvm_branch": "dtk-llvm-6.3.3",
+  "llvm_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n",
+  "triton_source_commit": "a3f89b25306c382cb8b01d1bb7d604fffdf63f04",
+  "runtime": "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton",
+  "local_changes": "BPS1 plus MapVector stable MLS grouping; Python HCU extensions; see prior mls-stable-groups evidence",
+  "pmd_commit": "b61a79c58e4f54d6d2920594d3af08582354db3e",
+  "weight_argument": "existing SortedWeights, not RouteWeights; caller binds gpu[SortedWeights], CPU golden remains unsorted RouteWeights",
+  "formal_kernel_unchanged": true,
+  "llvm_branch_current": "dtk-llvm-6.3.3",
+  "llvm_commit_current": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_status_current": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir",
+  "triton_branch_current": "dev/gluon-scale-dot-moe-20261103",
+  "triton_commit_current": "85477a908a9f340f105c6fa621076f3397011ab3",
+  "triton_status_current": "M third_party/hcu/backend/compiler.py\n M third_party/hcu/lib/TritonHCUTransforms/BlockPingpong.cpp\n?? test/Conversion/hcu/pack-bit8-wasp-loop-carriers.mlir",
+  "compiler_patch_evidence": "../two-output-panel-sorted-sb-lookahead/{llvm,triton}-tracked-local-changes.patch.gz",
+  "binary_sha256": {
+    "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18": "b547297d968762bbcb017e1dd0a802e6b8b5e1afcef9b5072d8a5d0626b765c2",
+    "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton/python/triton/_C/libtriton.so": "ddfa0f4ab5d93ffdb99f4fbd367d6a1f42a2ffec0f8f44545846b2983dc95dd4",
+    "/opt/rocm/pmd/libgem5_opt.so": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+  },
+  "algorithm_parent_commit": "c8af677",
+  "change": "2P2C unchanged. C0/C1 publish FP32 accumulators. P0 performs exact ((acc*SA)*SB)*SortedWeights then BF16/x4 scatter. C1 aliases A LDS only after both A readers; P0 waits until draining C1 outputs before next-M A. MMAC token timing remains c8af677."
+}

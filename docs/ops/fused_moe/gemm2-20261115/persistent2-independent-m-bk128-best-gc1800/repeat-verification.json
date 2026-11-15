@@ -1,0 +1,8 @@
+{
+  "same_hsaco": true,
+  "same_source": true,
+  "same_inputs": true,
+  "same_gpu_addresses": true,
+  "time_us": 15.282772,
+  "repeat_time_us": 15.282772
+}

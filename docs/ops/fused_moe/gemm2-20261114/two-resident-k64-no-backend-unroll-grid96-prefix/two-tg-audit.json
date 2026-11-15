@@ -1,0 +1,237 @@
+{
+  "peak_live_waves_cu0": 32,
+  "per_simd_at_peak": [
+    8,
+    8,
+    8,
+    8
+  ],
+  "starts": 32,
+  "ends": 32,
+  "cu0_mmac_count": 16384,
+  "exec0_mmac_count": 0,
+  "mmac_busy8_cycle_union_verified": true,
+  "simds": [
+    {
+      "simd": 0,
+      "mmac": 4096,
+      "busy_cycles": 32768
+    },
+    {
+      "simd": 1,
+      "mmac": 4096,
+      "busy_cycles": 32768
+    },
+    {
+      "simd": 2,
+      "mmac": 4096,
+      "busy_cycles": 32768
+    },
+    {
+      "simd": 3,
+      "mmac": 4096,
+      "busy_cycles": 32768
+    }
+  ],
+  "wait_id_audit": {
+    "6": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "7": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "4": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "5": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "0": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "2": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "1": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "3": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "774": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "772": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "775": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "773": {
+      "first_id": 5,
+      "waits": 128,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "770": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "769": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "768": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "771": {
+      "first_id": 2,
+      "waits": 33,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "10": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "8": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "11": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "9": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "14": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "15": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "13": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "12": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "778": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "779": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "777": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "776": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "783": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "782": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "780": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "781": {
+      "first_id": 1,
+      "waits": 112,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    }
+  },
+  "numerical": {
+    "mismatches": 0,
+    "checked_elements": 17522688,
+    "shared": 57344,
+    "scope": "diagnostic_prefix"
+  },
+  "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; metrics acceptance separately uses full 48-CU dispatch"
+}

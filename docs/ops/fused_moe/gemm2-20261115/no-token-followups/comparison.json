@@ -1,0 +1,128 @@
+[
+  {
+    "algorithm": "double-both-m32",
+    "time_us": 15.81542,
+    "whole_gpu_mmac_percent": 14.399718755493057,
+    "promoted": false,
+    "partition_regs_requested": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "partition_regs_actual": [
+      39,
+      9,
+      170,
+      170
+    ]
+  },
+  {
+    "algorithm": "no-token-m32-single",
+    "time_us": 15.767604,
+    "whole_gpu_mmac_percent": 14.443386579216474,
+    "promoted": false,
+    "partition_regs_requested": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "partition_regs_actual": [
+      39,
+      9,
+      170,
+      170
+    ]
+  },
+  {
+    "algorithm": "p0-joint-readback",
+    "time_us": 15.62638,
+    "whole_gpu_mmac_percent": 14.573919231453479,
+    "promoted": false,
+    "partition_regs_requested": [
+      64,
+      16,
+      208,
+      224
+    ],
+    "partition_regs_actual": [
+      53,
+      9,
+      174,
+      174
+    ]
+  },
+  {
+    "algorithm": "p0-early-credit-batched-store",
+    "time_us": 15.459024,
+    "whole_gpu_mmac_percent": 14.731693281542224,
+    "promoted": false,
+    "partition_regs_requested": [
+      64,
+      16,
+      208,
+      224
+    ],
+    "partition_regs_actual": [
+      53,
+      9,
+      174,
+      174
+    ]
+  },
+  {
+    "algorithm": "p0-quota64-control",
+    "time_us": 15.3873,
+    "whole_gpu_mmac_percent": 14.800361336946702,
+    "promoted": false,
+    "partition_regs_requested": [
+      64,
+      16,
+      208,
+      224
+    ],
+    "partition_regs_actual": [
+      39,
+      9,
+      174,
+      174
+    ]
+  },
+  {
+    "algorithm": "consumer-cap192",
+    "time_us": 15.3873,
+    "whole_gpu_mmac_percent": 14.800361336946702,
+    "promoted": false,
+    "partition_regs_requested": [
+      48,
+      16,
+      192,
+      192
+    ],
+    "partition_regs_actual": [
+      39,
+      9,
+      174,
+      174
+    ]
+  },
+  {
+    "algorithm": "consumer-cap176",
+    "time_us": 15.3873,
+    "whole_gpu_mmac_percent": 14.800361336946702,
+    "promoted": false,
+    "partition_regs_requested": [
+      48,
+      16,
+      176,
+      176
+    ],
+    "partition_regs_actual": [
+      39,
+      9,
+      174,
+      174
+    ]
+  }
+]

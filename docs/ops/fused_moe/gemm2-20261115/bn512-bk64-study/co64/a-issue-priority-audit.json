@@ -1,0 +1,58 @@
+{
+  "00030003": [
+    {
+      "start_tick": 6430696,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 6457384
+    },
+    {
+      "start_tick": 8890440,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 9955736
+    }
+  ],
+  "00020001": [
+    {
+      "start_tick": 6456272,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 6596384
+    },
+    {
+      "start_tick": 8889328,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 9936832
+    }
+  ],
+  "00000000": [
+    {
+      "start_tick": 6457940,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 6711476
+    },
+    {
+      "start_tick": 8895444,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 9965188
+    }
+  ],
+  "00010002": [
+    {
+      "start_tick": 6459052,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 6721484
+    },
+    {
+      "start_tick": 8909900,
+      "mls": 8,
+      "other_global_memory": 0,
+      "end_tick": 9946284
+    }
+  ]
+}

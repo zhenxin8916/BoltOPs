@@ -1,0 +1,98 @@
+[
+  {
+    "case": "two-output-historical-best",
+    "time_us": 15.48365,
+    "whole_gpu_mmac_percent": 12.036438436673523,
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    },
+    "quota": [
+      80,
+      16,
+      208,
+      208
+    ],
+    "actual_vgpr": [
+      64,
+      2,
+      208,
+      208
+    ],
+    "source_sha256": "94ff655d307fc929091c603f7f076223702d867f01d8ddf223e006f610bccd39"
+  },
+  {
+    "case": "two-output-sb-lookahead",
+    "time_us": 15.208375,
+    "whole_gpu_mmac_percent": 12.25430067314884,
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    },
+    "quota": [
+      76,
+      4,
+      216,
+      216
+    ],
+    "actual_vgpr": [
+      64,
+      2,
+      216,
+      216
+    ],
+    "source_sha256": "4f731f68b352285873934ac835967bfba99abab11bde1a7701587bcaccb29fdf"
+  },
+  {
+    "case": "two-output-panel-pingpong",
+    "time_us": 14.701505,
+    "whole_gpu_mmac_percent": 12.676797375506794,
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    },
+    "quota": [
+      80,
+      8,
+      212,
+      212
+    ],
+    "actual_vgpr": [
+      64,
+      2,
+      208,
+      208
+    ],
+    "source_sha256": "9e3c9dea8ae4eafa5b9ed64614a2205e2ee4a34a2ee3082635c6831dcb24aa1f"
+  },
+  {
+    "case": "two-output-panel-notify-no-wait",
+    "time_us": 15.03502,
+    "whole_gpu_mmac_percent": 12.395593753782835,
+    "result": {
+      "mismatches": 0,
+      "checked_elements": 2243584,
+      "shared": 131072,
+      "scope": "diagnostic_two_outputs_per_tg"
+    },
+    "quota": [
+      80,
+      8,
+      212,
+      212
+    ],
+    "actual_vgpr": [
+      64,
+      2,
+      208,
+      208
+    ],
+    "source_sha256": "4bbae0d284f9be65374e02222fb2750e438b44e5f5a2ae6d33358e902dee9d46"
+  }
+]

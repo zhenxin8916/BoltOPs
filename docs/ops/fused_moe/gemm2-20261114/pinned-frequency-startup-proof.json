@@ -1,0 +1,14 @@
+[
+  {
+    "case": "p0-scatter-repository-pinned-gc1800-full",
+    "hsaco_sha256": "a19432c132bc6c28e7a5c5dc2e9b41ea92d8261c9f00139cedcba01ec028175f",
+    "input_sha256_equal": true,
+    "gpu_buffers_equal": true
+  },
+  {
+    "case": "p0-scatter-repository-pinned-gc1750-full",
+    "hsaco_sha256": "a19432c132bc6c28e7a5c5dc2e9b41ea92d8261c9f00139cedcba01ec028175f",
+    "input_sha256_equal": true,
+    "gpu_buffers_equal": true
+  }
+]

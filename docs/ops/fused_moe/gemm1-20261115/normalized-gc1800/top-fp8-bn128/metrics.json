@@ -1,0 +1,11 @@
+{
+  "begin_tick": 0,
+  "end_tick": 72614712,
+  "duration_ticks": 72614712,
+  "duration_us": 72.614712,
+  "gui_duration_us": 72.614,
+  "section_offset": 7818,
+  "section_type": 15,
+  "source_perf": "/zhenxin/temp/moe-gluon-normalized-gc1800-20261115/top-fp8-bn128/m5out/0/0/2320124_python3.10.perf",
+  "source_perf_sha256": "93d0834b4169cee9c0bd7fa05406aead9c315c555ac2487ac571cef8a4513087"
+}

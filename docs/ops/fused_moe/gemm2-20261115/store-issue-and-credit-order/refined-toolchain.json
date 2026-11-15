@@ -1,0 +1,11 @@
+{
+  "llvm_branch": "dtk-llvm-6.3.3",
+  "llvm_head": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "status": "M  llvm/lib/Target/AMDGPU/AMDGPUCodeGenPrepare.cpp\nM  llvm/lib/Target/AMDGPU/SIInsertWaitcnts.cpp\n M llvm/lib/Target/AMDGPU/SIInstrInfo.cpp\nA  llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir\nM  llvm/test/CodeGen/AMDGPU/lds-common-base.ll\nA  llvm/test/CodeGen/AMDGPU/lds-wrapped-constant-read2.ll\n?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir\n?? llvm/test/HCU/GFX946/CodeGen/abarrier-memory-order.ll\n",
+  "added_fix": [
+    "llvm/lib/Target/AMDGPU/SIInstrInfo.cpp",
+    "llvm/test/HCU/GFX946/CodeGen/abarrier-memory-order.ll"
+  ],
+  "clang_sha256": "2aecc815024cabed79d70ca5e14c4732cb878ed0a49005d5fed2a9d27cadd61d",
+  "note": "Uncommitted local target MachineSink fix, preserving unrelated pre-existing staged LLVM work. Triton and PMD unchanged; see previous winner toolchain provenance."
+}

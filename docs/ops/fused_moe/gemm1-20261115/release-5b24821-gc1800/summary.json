@@ -1,0 +1,26 @@
+[
+  {
+    "case": "top-fp8-bn128",
+    "bm": 128,
+    "bn": 128,
+    "bk": 128,
+    "previous_us": 72.614712,
+    "time_us": 72.614712,
+    "change_percent": 0.0,
+    "checked_elements": 6291456,
+    "mismatches": 0,
+    "frozen_inputs_identical": true
+  },
+  {
+    "case": "top-fp8-bn256",
+    "bm": 128,
+    "bn": 256,
+    "bk": 128,
+    "previous_us": 65.418404,
+    "time_us": 65.418404,
+    "change_percent": 0.0,
+    "checked_elements": 6291456,
+    "mismatches": 0,
+    "frozen_inputs_identical": true
+  }
+]

@@ -2843,6 +2843,76 @@ def moe_set_use_persistent_kernel(value: bool):
     global _USE_MOE_PERSISTENT_KERNEL
     _USE_MOE_PERSISTENT_KERNEL = value
 
+def _try_gluon_channel_gemm1(
+    A, B, C, A_scale, B_scale, sorted_token_ids, expert_ids,
+    num_tokens_post_padded, top_k, config, *, use_fp8_w8a8, use_int8_w8a8,
+    per_channel_quant, block_shape, c_sorted, a_sorted, ck_sorting,
+    ck_topk, naive_block_assignment, mul_routed_weight, B_bias, B_zp,
+):
+    """Try the Gluon GEMM1 candidate; False preserves the ordinary Triton path."""
+    if (not (use_fp8_w8a8 or use_int8_w8a8) or not per_channel_quant or block_shape is not None
+            or A_scale is None or B_scale is None or B_zp is not None
+            or naive_block_assignment or ck_topk != top_k):
+        return False
+    device = arch_info.get_device_info(A.device)
+    if device.arch != "gfx946":
+        return False
+    # Gluon is optional on the ordinary Triton installation.
+    import importlib.util
+    try:
+        gluon_available = importlib.util.find_spec("triton.experimental.gluon.language.amd.hcu") is not None
+    except ModuleNotFoundError:
+        gluon_available = False
+    if not gluon_available:
+        return False
+    from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
+        DEFAULT_LAUNCH_OPTIONS,
+        gemm_top_w8a8_channel_wasp_persistent,
+        is_persistent_channel_gemm1_supported,
+    )
+    # Only BM belongs to the sorting contract. BN/BK and launch options are
+    # this candidate's own settings, independent of ordinary Triton's tuning.
+    bn = 256 if B.shape[1] >= 256 and B.shape[1] % 128 == 0 else 128
+    candidate = dict(BLOCK_SIZE_M=config.get("BLOCK_SIZE_M"),
+                     BLOCK_SIZE_N=bn, BLOCK_SIZE_K=128,
+                     GROUP_SIZE_M=config.get("GROUP_SIZE_M", 1))
+    if not is_persistent_channel_gemm1_supported(
+        A, B, A_scale, B_scale, arch=device.arch, cu_count=device.cu_count,
+        top_k=top_k, config=candidate, c_sorted=c_sorted, a_sorted=a_sorted,
+        ck_sorting=ck_sorting, scale_recipe="int8_channel" if use_int8_w8a8 else "fp8_channel",
+        has_bias=B_bias is not None,
+        mul_routed_weight=mul_routed_weight, output_dtype=C.dtype,
+    ):
+        return False
+    if not C.is_contiguous() or C.ndim < 2 or C.shape[-1] != B.shape[1]:
+        return False
+    metadata = (sorted_token_ids, expert_ids, num_tokens_post_padded)
+    if any(t.dtype != torch.int32 or not t.is_contiguous() for t in metadata):
+        return False
+    if (sorted_token_ids.ndim != 1 or expert_ids.ndim != 1
+            or num_tokens_post_padded.numel() != 1):
+        return False
+    if any(t.device != A.device for t in (B, C, A_scale, B_scale, *metadata)):
+        return False
+    rows = min(sorted_token_ids.numel(), C.numel() // B.shape[1])
+    m_blocks = min(rows // 128, expert_ids.numel())
+    if m_blocks == 0:
+        return False
+    opts = dict(DEFAULT_LAUNCH_OPTIONS)
+    opts.update(candidate)
+    for name, tensor in (("A", A), ("B", B), ("C", C)):
+        opts["USE_ADDR_OFFSET_INT64_" + name] = tensor.numel() * tensor.element_size() >= 2**32 - 1
+    gemm_top_w8a8_channel_wasp_persistent[(device.cu_count,)](
+        A, B, A_scale, B_scale, C, sorted_token_ids, expert_ids,
+        A.shape[0], B.shape[0], B.shape[1], A.shape[1], top_k,
+        B_scale.stride(0), B_scale.stride(1), 0,
+        A_scale.stride(0), 0,
+        TOTAL_TILES=m_blocks * triton.cdiv(B.shape[1], bn),
+        num_tokens_post_padded_ptr=num_tokens_post_padded, **opts,
+    )
+    return True
+
+
 def fused_moe(
     A: torch.Tensor,
     B: torch.Tensor,
@@ -2954,6 +3024,18 @@ def fused_moe(
         config = selected[0] if isinstance(selected, tuple) else selected
 
     config = config.copy()
+    # Query the independent Gluon candidate before ordinary Triton-only tuning checks.
+    if _try_gluon_channel_gemm1(
+        A, B, C, A_scale, B_scale, sorted_token_ids, expert_ids,
+        num_tokens_post_padded, top_k, config, use_fp8_w8a8=use_fp8_w8a8,
+        use_int8_w8a8=use_int8_w8a8,
+        per_channel_quant=per_channel_quant, block_shape=block_shape,
+        c_sorted=c_sorted, a_sorted=a_sorted or bottom_a_use_mls_load, ck_sorting=ck_sorting,
+        ck_topk=ck_topk, naive_block_assignment=naive_block_assignment,
+        mul_routed_weight=mul_routed_weight, B_bias=B_bias, B_zp=B_zp,
+    ):
+        return
+
     n_tiles_per_cta = config.pop("N_TILES_PER_CTA", 1)
     if type(n_tiles_per_cta) is not int or n_tiles_per_cta not in (1, 2):
         raise ValueError("N_TILES_PER_CTA must be the integer 1 or 2")

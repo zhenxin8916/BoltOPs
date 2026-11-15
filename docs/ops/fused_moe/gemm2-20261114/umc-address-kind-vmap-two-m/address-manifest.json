@@ -1,0 +1,81 @@
+{
+  "A": {
+    "address": 140728101502976,
+    "bytes": 12320768,
+    "dtype": "torch.float8_e4m3fn",
+    "shape": [
+      48128,
+      256
+    ]
+  },
+  "B": {
+    "address": 140727422025728,
+    "bytes": 134217728,
+    "dtype": "torch.float8_e4m3fn",
+    "shape": [
+      256,
+      2048,
+      256
+    ]
+  },
+  "SA": {
+    "address": 140728065851392,
+    "bytes": 192512,
+    "dtype": "torch.float32",
+    "shape": [
+      48128,
+      1
+    ]
+  },
+  "SB": {
+    "address": 140728042782720,
+    "bytes": 2097152,
+    "dtype": "torch.float32",
+    "shape": [
+      256,
+      2048,
+      1
+    ]
+  },
+  "Sorted": {
+    "address": 140728066043904,
+    "bytes": 192512,
+    "dtype": "torch.int32",
+    "shape": [
+      48128
+    ]
+  },
+  "Experts": {
+    "address": 140728066236416,
+    "bytes": 1504,
+    "dtype": "torch.int32",
+    "shape": [
+      376
+    ]
+  },
+  "RouteWeights": {
+    "address": 140728066237952,
+    "bytes": 131072,
+    "dtype": "torch.float32",
+    "shape": [
+      32768
+    ]
+  },
+  "SortedWeights": {
+    "address": 140728066369024,
+    "bytes": 192512,
+    "dtype": "torch.float32",
+    "shape": [
+      48128
+    ]
+  },
+  "C": {
+    "address": 140727153590272,
+    "bytes": 134217728,
+    "dtype": "torch.bfloat16",
+    "shape": [
+      32768,
+      2048
+    ]
+  }
+}

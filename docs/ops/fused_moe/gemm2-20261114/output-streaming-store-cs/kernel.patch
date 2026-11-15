@@ -1,0 +1,11 @@
+--- a/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
++++ b/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
+@@ -52,7 +52,7 @@
+         offsets = output_rows[panel][:, None] + col[None, :].to(gl.uint32)
+         valid = output_valid[panel]
+         # N % BN == 0 is a constexpr assertion; only row validity is masked.
+-        buffer_store(output, C, offsets, valid[:, None])
++        buffer_store(output, C, offsets, valid[:, None], cache=".cs")
+ 
+ 
+ @gluon.jit

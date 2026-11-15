@@ -1,0 +1,32 @@
+[
+  {
+    "algorithm": "a-issue-prio2",
+    "time_us": 15.327252,
+    "whole_gpu_mmac_percent": 14.858345122791743,
+    "promoted": true,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-a-issue-prio2-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "0eebb0e48caf4b71b98618716f20eb5bf582bf616a0d8fd1f8394da641766081"
+    }
+  },
+  {
+    "algorithm": "ab-issue-prio21",
+    "time_us": 15.375624,
+    "whole_gpu_mmac_percent": 14.811600491791422,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-ab-issue-prio21-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "b98607cdc1f043cb4cae38b93df6c41e86ad66293e15e56b70c64936aec4011b"
+    }
+  },
+  {
+    "algorithm": "no-token-sb-after-four",
+    "time_us": 16.375312,
+    "whole_gpu_mmac_percent": 13.907374711394812,
+    "promoted": false,
+    "source": {
+      "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bk128-no-token-sb-after-four-gc1800/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py",
+      "sha256": "7c0637fafb1b05dfefaf1e3090419f186b9a538ab37d436d1eef90bbc9de34c4"
+    }
+  }
+]

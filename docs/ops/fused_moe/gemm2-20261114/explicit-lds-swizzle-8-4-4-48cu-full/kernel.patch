@@ -1,0 +1,16 @@
+--- a/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
++++ b/boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256.py
+@@ -47,8 +47,12 @@
+     value = gl.convert_layout(value, packing).to(C.dtype.element_ty)
+     halves = gl.split(value.reshape((2, 64, CN)).permute((1, 2, 0)))
+     col = n * BN + PARTITION * CN + gl.arange(0, CN, gl.SliceLayout(0, store))
++    shared: gl.constexpr = gl.SwizzledSharedLayout(8, 4, 4, [1, 0])
++    scratch = gl.allocate_shared_memory(C.dtype.element_ty, [64, CN], shared)
+     for panel in gl.static_range(2):
+-        output = gl.convert_layout(halves[panel], store)
++        scratch.store(halves[panel])
++        output = scratch.load(store)
++        gl.static_print("OUTPUT_LDS_CONFLICTS", gl.bank_conflicts(halves[panel].type, scratch.type), gl.bank_conflicts(output.type, scratch.type))
+         offsets = output_rows[panel][:, None] + col[None, :].to(gl.uint32)
+         valid = output_valid[panel]
+         # N % BN == 0 is a constexpr assertion; only row validity is masked.

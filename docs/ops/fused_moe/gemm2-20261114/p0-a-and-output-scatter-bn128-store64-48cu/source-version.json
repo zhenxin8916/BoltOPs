@@ -1,0 +1,6 @@
+{
+  "base_commit": "4a3677e",
+  "algorithm_base": "p0-a-and-output-scatter-bn128-two-m",
+  "change": "Only P0 store blocked layout threadsPerWarp [4,16] -> [8,8], matching CN64 with 8 contiguous BF16 values/thread; all lanes used, mailboxes and input copy unchanged",
+  "sha256": "8596a38caa448bd9cbb46a806fc689de74086c542accec0efee4e5127b13984b"
+}

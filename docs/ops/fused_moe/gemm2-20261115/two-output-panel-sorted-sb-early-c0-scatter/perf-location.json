@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-20261114/two-output-panel-sorted-sb-early-c0-scatter/GEMM2_M4096_N2048_K256_BM128_BN256_BK256_GRID48_OUTPUT96_2TILEperTG_EARLY_C0_SCATTER_GC2200_CU0.perf",
+  "sha256": "51020248ba11e553a4e359a02f964e3f9f172f4db88096a265f58dfb99e80fa3"
+}

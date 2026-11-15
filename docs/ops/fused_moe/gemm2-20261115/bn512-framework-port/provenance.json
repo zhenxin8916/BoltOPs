@@ -1,0 +1,13 @@
+{
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "triton_changes": "无本地改动",
+  "llvm_project_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_changes": "提交修复 buffer 32 位 offset 回绕并归一 LDS 地址、合并 DS 读取；本地补丁禁止 load 下沉跨 barrier，避免槽位复用竞态；启用 hcu-control-only-ebarrier-sync，避免控制同步排空 LDS 读取。",
+  "fp8_gpu_addresses_equal_across_clocks": true,
+  "int8_gpu_addresses_equal_across_clocks": true,
+  "kernel_sha256": "89db0327f3f946ad608eb3bafc78b8e500afc21a59feb5584ee4135cb032c7db",
+  "boltops_commit": "60c786507cd7b7abaaeb9cd8006f64032a72905f",
+  "raw_root": "/home/zhenx/temp/moe-gemm2-bn512-port-20261115",
+  "clang_wrapper": "/zhenxin/temp/boltops-shared-ring-port-20261114/optimized-perf/clang-control-sync",
+  "clang_sha256": "2aecc815024cabed79d70ca5e14c4732cb878ed0a49005d5fed2a9d27cadd61d"
+}

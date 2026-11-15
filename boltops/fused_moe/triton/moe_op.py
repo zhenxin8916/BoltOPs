@@ -2843,7 +2843,7 @@ def moe_set_use_persistent_kernel(value: bool):
     global _USE_MOE_PERSISTENT_KERNEL
     _USE_MOE_PERSISTENT_KERNEL = value
 
-def _gluon_channel_gemm2_module():
+def _gluon_channel_gemm2_module(block_n=256):
     """Load the optional HCU Gluon candidate without affecting Triton installs."""
     import importlib.util
     try:
@@ -2852,6 +2852,9 @@ def _gluon_channel_gemm2_module():
         available = False
     if not available:
         return None
+    if block_n == 512:
+        from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn512xbk64
+        return gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn512xbk64
     from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128
     return gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128
 
@@ -2866,7 +2869,8 @@ def _gluon_gemm2_prefers_sorted_layout(B, B_scale, *, top_k, config, output_dtyp
     device = arch_info.get_device_info(B.device)
     if device.arch != "gfx946":
         return False
-    mod = _gluon_channel_gemm2_module()
+    bn = 512 if B.ndim == 3 and B.shape[1] > 0 and B.shape[1] % 512 == 0 else 256
+    mod = _gluon_channel_gemm2_module(512) if bn == 512 else _gluon_channel_gemm2_module()
     if mod is None:
         return False
     # Only metadata is needed before the quantized activation exists.
@@ -2892,7 +2896,8 @@ def _try_gluon_channel_gemm2(
     device = arch_info.get_device_info(A.device)
     if device.arch != "gfx946":
         return False
-    mod = _gluon_channel_gemm2_module()
+    bn = 512 if B.ndim == 3 and B.shape[1] > 0 and B.shape[1] % 512 == 0 else 256
+    mod = _gluon_channel_gemm2_module(512) if bn == 512 else _gluon_channel_gemm2_module()
     if mod is None or not mod.is_persistent_channel_gemm2_supported(
         A, B, A_scale, B_scale, arch=device.arch, cu_count=device.cu_count,
         top_k=ck_topk, config=config, c_sorted=c_sorted, a_sorted=a_sorted,
@@ -2930,7 +2935,7 @@ def _try_gluon_channel_gemm2(
                 num_tokens_post_padded_ptr=num_tokens_post_padded)
     mod.gemm_bottom_w8a8_channel_wasp_persistent[(device.cu_count,)](
         A, B, A_scale, B_scale, C, sorted_weights, sorted_token_ids, expert_ids,
-        rows, C.numel() // B.shape[1], m_blocks * (B.shape[1] // 256),
+        rows, C.numel() // B.shape[1], m_blocks * (B.shape[1] // bn),
         N=B.shape[1], K=B.shape[2], top_k=ck_topk, **opts)
     return True
 

@@ -1,0 +1,126 @@
+{
+  "original_code_commit": "a8ebfb1",
+  "original_record_commit": "60c7865",
+  "original_source_sha256": "b961a88c07d3750a923e643acd8344bb01e40cd32f307c7427238bb3f9c65d44",
+  "kernel_sha256": "89db0327f3f946ad608eb3bafc78b8e500afc21a59feb5584ee4135cb032c7db",
+  "equivalence": [
+    {
+      "input_sha256": {
+        "A": "d96df9995bbcaa66a4b74179b9deba34cc1a2f84b9388f0381aa753598144ee9",
+        "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+        "SA": "dcc6f464b3462a921afc32501c14a80e9aad05ad548b0e0cf874a04c8840bbe2",
+        "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+        "Sorted": "5558b823e34bb77f1821d68b986dcbe1681de32a1c42ef41911fc5dad81a4c8d",
+        "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+        "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+        "SortedWeights": "e2b5051b3bef02a60e431270d3ded9612f1ddba347ba62da39c5d42a82153fff",
+        "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+      },
+      "kind": "fp8",
+      "output": "torch.bfloat16",
+      "mul_routed_weight": true,
+      "forced_int64": false,
+      "elements": 395264,
+      "differences": 0
+    },
+    {
+      "input_sha256": {
+        "A": "ca35b7ce382f5eddebcc2a80669519728b492928698cac70318c54e7210606f6",
+        "B": "cfb1868e302cd5e34488c253368d365bbce7d972720f461fb9f8e70b20e3ab2a",
+        "SA": "f5980120ff3a50aa2fd1e3e2825bbd139367aba32fef0262a9dae530f7ff4e99",
+        "SB": "644742af499ad4ed821f12502e4578c0f4e5ce72f3c29f77c08b5728edb1bbca",
+        "Sorted": "5558b823e34bb77f1821d68b986dcbe1681de32a1c42ef41911fc5dad81a4c8d",
+        "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+        "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+        "SortedWeights": "e2b5051b3bef02a60e431270d3ded9612f1ddba347ba62da39c5d42a82153fff",
+        "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+      },
+      "kind": "int8",
+      "output": "torch.bfloat16",
+      "mul_routed_weight": true,
+      "forced_int64": false,
+      "elements": 395264,
+      "differences": 0
+    },
+    {
+      "input_sha256": {
+        "A": "d96df9995bbcaa66a4b74179b9deba34cc1a2f84b9388f0381aa753598144ee9",
+        "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+        "SA": "dcc6f464b3462a921afc32501c14a80e9aad05ad548b0e0cf874a04c8840bbe2",
+        "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+        "Sorted": "5558b823e34bb77f1821d68b986dcbe1681de32a1c42ef41911fc5dad81a4c8d",
+        "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+        "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+        "SortedWeights": "e2b5051b3bef02a60e431270d3ded9612f1ddba347ba62da39c5d42a82153fff",
+        "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+      },
+      "kind": "fp8",
+      "output": "torch.float16",
+      "mul_routed_weight": false,
+      "forced_int64": true,
+      "elements": 395264,
+      "differences": 0
+    },
+    {
+      "input_sha256": {
+        "A": "ca35b7ce382f5eddebcc2a80669519728b492928698cac70318c54e7210606f6",
+        "B": "cfb1868e302cd5e34488c253368d365bbce7d972720f461fb9f8e70b20e3ab2a",
+        "SA": "f5980120ff3a50aa2fd1e3e2825bbd139367aba32fef0262a9dae530f7ff4e99",
+        "SB": "644742af499ad4ed821f12502e4578c0f4e5ce72f3c29f77c08b5728edb1bbca",
+        "Sorted": "5558b823e34bb77f1821d68b986dcbe1681de32a1c42ef41911fc5dad81a4c8d",
+        "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+        "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+        "SortedWeights": "e2b5051b3bef02a60e431270d3ded9612f1ddba347ba62da39c5d42a82153fff",
+        "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+      },
+      "kind": "int8",
+      "output": "torch.float16",
+      "mul_routed_weight": false,
+      "forced_int64": true,
+      "elements": 395264,
+      "differences": 0
+    }
+  ],
+  "compiled": {
+    "fp8": {
+      "shared": 119808,
+      "partition_regs": [
+        48,
+        16,
+        224,
+        224
+      ],
+      "actual_regs": [
+        40,
+        9,
+        203,
+        203
+      ],
+      "vgpr_spill_count": 0,
+      "scratch_bytes": 0
+    },
+    "int8": {
+      "shared": 119808,
+      "partition_regs": [
+        48,
+        16,
+        224,
+        224
+      ],
+      "actual_regs": [
+        40,
+        9,
+        203,
+        203
+      ],
+      "vgpr_spill_count": 0,
+      "scratch_bytes": 0
+    }
+  },
+  "dispatch_cpu_tests": 70,
+  "framework_cpu_tests": 134,
+  "all_functions_documented": true,
+  "inline_assembly_sites": 0,
+  "wide_address_validation": "Forced A/B/C 64-bit constexpr paths on small allocations, with non-unit SA/SB strides; multi-GiB device allocations were not required.",
+  "full_n_validation": "Four M blocks and complete N1024, one TG; ordinary Triton exact equality on the same frozen CK input."
+}

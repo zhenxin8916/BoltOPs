@@ -1,13 +1,27 @@
 # Copyright (c) 2026 Hygon Information Technology Co., Ltd.
 # SPDX-License-Identifier: MIT
-"""Experimental GEMM2 BM128 BN512 BK64, 2 producers and 2 consumers.
+"""Persistent FP8/INT8 channel GEMM2 for gfx946, BM128/BN512/BK64.
 
-P0 preloads sorted A once per M, publishes route/scale metadata and scatters C.
-P1 streams B in four K64 chunks, preserving each physical slot's generation.
-Each consumer owns 256 columns and computes two 128-column phases while
-retaining A in registers. Four M32 panels use independent output mailboxes.
-The diagnostic processes one BN512 N tile for each persistent M block.
-Output is BF16 [M * top_k, N]; top-k reduction remains separate.
+CK-sorted, contiguous byte A/B; FP32 channel scales; BF16/FP16 scatter output.
+K256 and N divisible by 512. Four waves per role; caller supplies the CU grid.
+
+    P0: full A + SA/weight/routes ---> C0 + C1; C mailboxes ---> scatter C
+    P1: B-left + SB-left -----------> C0 (left 256 columns)
+        B-right + SB-right --------> C1 (right 256 columns)
+
+    P0 each M: retain routes -> prefetch next-M A -> drain all N mailboxes.
+    P1 each N128 phase: BL(K0/K1) -> BR(K0/K1) -> BR(K2/K3) -> BL(K2/K3).
+    C0/C1: read A once -> retain in registers across N128 phases;
+           wait/read B(K0/K1) -> release A/B -> MMAC K0/K1;
+           wait/read B(K2/K3) -> release B -> MMAC K2;
+           four M32 panels: MMAC K3 -> scale -> publish C -> P0 scatter.
+
+One 32-KiB A slot, two 16-KiB B slots per consumer, two 8-KiB output
+mailboxes, 4-KiB metadata and 1-KiB SB: 117 KiB LDS, 16 abarriers.
+A/metadata epochs advance per M; B epochs advance per N128 phase. Each
+EMPTY return follows completed LDS reads. INT8 keeps INT32 accumulation
+through K, converting once before FP32 scale/weight multiplication.
+No instruction warmup. Full N is the default; clipping is diagnostic only.
 """
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
@@ -17,29 +31,47 @@ from triton.experimental.gluon.language.amd.cdna3 import buffer_load, buffer_sto
 DEFAULT_LAUNCH_OPTIONS = dict(
     num_warps=4, num_stages=2, use_async_copy=True,
     wasp_partition_warps=(4, 4, 4, 4), wasp_wdra=True,
-    amdgpu_enable_max_ilp_scheduling_strategy=False,
 )
 MMAC_LAYOUT = gl.constexpr(3)
 ROW_PERSISTENT_A = True
 
 @gluon.constexpr_function
 def _output_pack_layout(layout):
+    """Pair adjacent output halfwords before the LDS mailbox handoff."""
     regs = layout.reg_bases
     return gl.DistributedLinearLayout(
         [regs[2], regs[0], regs[1]] + regs[3:],
         layout.lane_bases, layout.warp_bases, layout.block_bases, layout.shape)
 
 
-
 @gluon.jit
-def _empty_mailbox():
+def _empty():
+    """Keep the default WASP partition empty; P0/P1/C0/C1 own all work."""
     pass
 
 
-
 @gluon.jit
-def _initialize_mailbox(STAGES: gl.constexpr):
+def _initialize(STAGES: gl.constexpr):
     # A READY1/EMPTY3; BL READY5/10 EMPTY6/14; BR READY7/2 EMPTY8/4.
+    """Initialize READY/EMPTY generations before splitting the four roles.
+
+        Buffer          Producer -> Reader     READY   EMPTY   Phase
+        A full K256      P0 -> C0 + C1             1       3    M epoch & 1
+        B-left K0/K1     P1 -> C0                  5       6    N epoch & 1
+        B-left K2/K3     P1 -> C0                 10      14    N epoch & 1
+        B-right K0/K1    P1 -> C1                  7       8    N epoch & 1
+        B-right K2/K3    P1 -> C1                  2       4    N epoch & 1
+        C-left/right     C0/C1 -> P0            9/13   11/15    M32 panel & 1
+        Metadata         P0 -> C0 + C1         12/0       -    (M epoch >> 1) & 1
+
+        writer: wait EMPTY -> load/store -> READY ---> reader: wait READY -> read
+                         ^                                               |
+                         +---------------- EMPTY <-----------------------+
+
+    A needs four credits from each consumer; B and C need four credits.
+    READY counts four writer waves. Metadata has two M slots; draining this
+    M's outputs bounds its reuse. IDs 0..15 are initialized; no ID exceeds 15.
+    """
     hcu.abarrier_init(1, 4)
     hcu.abarrier_init(3, 8)
     for i in gl.static_range(2, 16):
@@ -58,41 +90,73 @@ def _initialize_mailbox(STAGES: gl.constexpr):
     gl.thread_barrier()
 
 
-
 @gluon.jit
-def _copy_a_half(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch,
-                 HALF: gl.constexpr, K: gl.constexpr, BM: gl.constexpr, BK: gl.constexpr):
+def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch,
+                         K: gl.constexpr, BM: gl.constexpr, BK: gl.constexpr,
+                         USE_A64: gl.constexpr, STRIDE_SA: gl.constexpr,
+                         MUL_ROUTED_WEIGHT: gl.constexpr):
+    """P0 loads one full-A slot and publishes this M's metadata.
+
+        A slot: 0       READY=1, EMPTY=3       phase = epoch & 1
+        MA slot: epoch & 1, four [128] vectors: SA, weight, route, expert
+        MA READY: 12 for even epochs, 0 for odd; phase = (epoch >> 1) & 1
+
+    Both consumers must finish reading A before P0 reuses slot 0. Metadata
+    has two M slots, so P0 can prepare next M while this M is still computing.
+    """
     ticket = epoch
     slot = 0
     phase = ticket & 1
     hcu.set_priority(2)
     hcu.abarrier_try_wait(3 + slot, phase)
     hcu.abarrier_seq(1 + slot)
-    hcu.matrix_load(am.index(0), A, (rows, K), (K, 1),
-                    (m * BM, 0), warps=(4, 1))
+    if USE_A64:
+        # Fold the large row origin into the 64-bit descriptor base.
+        a_base = A + m.to(gl.int64) * BM * K
+        hcu.matrix_load(am.index(0), a_base, (BM, K), (K, 1), (0, 0), warps=(4, 1))
+    else:
+        hcu.matrix_load(am.index(0), A, (rows, K), (K, 1), (m * BM, 0), warps=(4, 1))
     hcu.abarrier_arrive(1 + slot)
     hcu.set_priority(0)
-    if HALF == 0:
-        hcu.sched_barrier()
-        ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
-        mr = gl.arange(0, BM, ml)
-        sa = buffer_load(SA, (m * BM + mr).to(gl.uint32))
-        weight = buffer_load(Weights, (m * BM + mr).to(gl.uint32))
+    hcu.sched_barrier()
+    ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
+    mr = gl.arange(0, BM, ml)
+    if USE_A64:
+        row = m.to(gl.int64) * BM + mr.to(gl.int64)
+        sa = gl.load(SA + row * STRIDE_SA)
+        if MUL_ROUTED_WEIGHT:
+            weight = gl.load(Weights + row)
+        else:
+            weight = gl.full((BM,), 1, gl.float32, ml)
+        route = gl.load(Sorted + row)
+        expert = gl.load(Experts + m.to(gl.int64) + 0 * mr)
+    else:
+        sa = buffer_load(SA, ((m * BM + mr) * STRIDE_SA).to(gl.uint32))
+        if MUL_ROUTED_WEIGHT:
+            weight = buffer_load(Weights, (m * BM + mr).to(gl.uint32))
+        else:
+            weight = gl.full((BM,), 1, gl.float32, ml)
         route = buffer_load(Sorted, (m * BM + mr).to(gl.uint32))
         expert = buffer_load(Experts, (m + 0 * mr).to(gl.uint32))
-        ma.index((epoch & 1) * 4 + 0).store(sa)
-        ma.index((epoch & 1) * 4 + 1).store(weight)
-        ma.index((epoch & 1) * 4 + 2).store(route.to(gl.float32, bitcast=True))
-        ma.index((epoch & 1) * 4 + 3).store(expert.to(gl.float32, bitcast=True))
-        hcu.wait_lgkmcnt(0)
+    ma.index((epoch & 1) * 4 + 0).store(sa)
+    ma.index((epoch & 1) * 4 + 1).store(weight)
+    ma.index((epoch & 1) * 4 + 2).store(route.to(gl.float32, bitcast=True))
+    ma.index((epoch & 1) * 4 + 3).store(expert.to(gl.float32, bitcast=True))
+    hcu.wait_lgkmcnt(0)
     hcu.abarrier_arrive(12 if (epoch & 1) == 0 else 0)
 
 
-
 @gluon.jit
-def _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch,
+def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
                 KH: gl.constexpr, HALF: gl.constexpr, N: gl.constexpr, K: gl.constexpr,
-                BN: gl.constexpr, BK: gl.constexpr):
+                BN: gl.constexpr, BK: gl.constexpr, USE_B64: gl.constexpr,
+                STRIDE_SBE: gl.constexpr, STRIDE_SBN: gl.constexpr):
+    """P1 publishes one [K128,N128] B panel and, for KH0, its channel scales.
+
+    KH0/KH1 select physical slots 0/1. HALF0 feeds C0; HALF1 feeds C1.
+    n selects an N128 phase: n0/n1 are the two phases of one BN512 tile.
+    Each slot is reused only after that reader returns its EMPTY generation.
+    """
     ready = (7 if KH % 2 == 0 else 2) if HALF == 1 else (5 if KH % 2 == 0 else 10)
     empty = (8 if KH % 2 == 0 else 4) if HALF == 1 else (6 if KH % 2 == 0 else 14)
     # Each physical K128 slot is used once per N128 phase.
@@ -101,35 +165,57 @@ def _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch,
     dest = b1 if HALF == 1 else b0
     hcu.abarrier_try_wait(empty, phase)
     hcu.abarrier_seq(ready)
-    hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
-                    (KH * (2 * BK), (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2)), warps=(2, 2))
+    col = (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2)
+    if USE_B64:
+        panel_base = b_base + col.to(gl.int64) * K + KH * (2 * BK)
+        hcu.matrix_load(dest.index(physical), panel_base, (2 * BK, BN // 4),
+                        (1, K), (0, 0), warps=(2, 2))
+    else:
+        hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
+                        (KH * (2 * BK), col), warps=(2, 2))
     if KH == 0:
         hcu.sched_barrier()
         ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
         mr = gl.arange(0, BN // 4, ml)
-        sb = buffer_load(SB, (gl.maximum(expert, 0) * N + (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2) + mr).to(gl.uint32))
+        if USE_B64:
+            sb = gl.load(SB + gl.maximum(expert, 0).to(gl.int64) * STRIDE_SBE
+                         + (col.to(gl.int64) + mr) * STRIDE_SBN)
+        else:
+            sb = buffer_load(SB, (gl.maximum(expert, 0) * STRIDE_SBE
+                                 + (col + mr) * STRIDE_SBN).to(gl.uint32))
         mb.index(HALF).store(sb)
         hcu.wait_lgkmcnt(0)
     hcu.abarrier_arrive(ready)
 
 
-
 @gluon.jit
 def _four_row_vectors(x):
+    """Register views: [128] -> two [64] -> four [32], matching C mailboxes."""
     halves = gl.split(x.reshape((2, 64)).permute((1, 0)))
     low = gl.split(halves[0].reshape((2, 32)).permute((1, 0)))
     high = gl.split(halves[1].reshape((2, 32)).permute((1, 0)))
     return low[0], low[1], high[0], high[1]
 
 
-
 @gluon.jit
-def _producer_mailbox(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
+def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
               SA, SB, Weights, ma, mb, pid, total, rows,
               N: gl.constexpr, K: gl.constexpr, BM: gl.constexpr,
               BN: gl.constexpr, BK: gl.constexpr, STAGES: gl.constexpr,
               USE_MLS_LOAD_A: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
-              PARTITION: gl.constexpr, TOP_K: gl.constexpr, CK_SORTING: gl.constexpr):
+              PARTITION: gl.constexpr, TOP_K: gl.constexpr, CK_SORTING: gl.constexpr,
+              N_PANELS: gl.constexpr, USE_A64: gl.constexpr, USE_B64: gl.constexpr,
+              USE_C64: gl.constexpr, STRIDE_SA: gl.constexpr,
+              STRIDE_SBE: gl.constexpr, STRIDE_SBN: gl.constexpr,
+              MUL_ROUTED_WEIGHT: gl.constexpr, num_tokens_post_padded_ptr):
+    """P0 prefetches next-M A/metadata and scatters C; P1 streams both B halves.
+
+    P0: current routes -> next-M A -> C0 M32 mailbox -> C1 M32 mailbox -> repeat.
+    P1: BL K0/K1 -> BR K0/K1 -> BR K2/K3 -> BL K2/K3 -> next N128 phase.
+    P0 epochs count M preloads; P1 epochs count N128 phases across all M.
+    """
+    if num_tokens_post_padded_ptr is not None:
+        total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     epoch = 0
     ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
     mr = gl.arange(0, BN // 4, ml)
@@ -139,7 +225,7 @@ def _producer_mailbox(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, c
     for m in range(pid, total // (N // BN), gl.num_programs(0)):
         if PARTITION == 0:
             if m == pid:
-                _copy_a_half(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch, 0, K, BM, BK)
+                _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch, K, BM, BK, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
                 epoch += 1
             # Capture this M's route metadata before the next M overwrites ma.
             routes = ma.index(((epoch - 1) & 1) * 4 + 2).load(gl.SliceLayout(1, output_store)).to(gl.int32, bitcast=True)
@@ -154,7 +240,10 @@ def _producer_mailbox(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, c
                 expert = gl.convert_layout(expert_parts[panel], gl.SliceLayout(1, output_store))
                 if CK_SORTING:
                     route = (route & 0x00ffffff) * TOP_K + ((route >> 24) & 255)
-                output_rows += (route.to(gl.uint32) * N,)
+                if USE_C64:
+                    output_rows += (route.to(gl.int64) * N,)
+                else:
+                    output_rows += (route.to(gl.uint32) * N,)
                 output_valid += ((route >= 0) & (route < valid_routes) & (expert >= 0),)
             next_m = m + gl.num_programs(0)
             if next_m < total // (N // BN):
@@ -162,9 +251,9 @@ def _producer_mailbox(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, c
                 # waits. Only P0 can publish the next READY1 generation.
                 hcu.abarrier_try_wait(1, (epoch - 1) & 1)
                 # Independent full-A slot preserves the original next-M prefetch.
-                _copy_a_half(A, SA, Weights, Sorted, Experts, am, ma, next_m, rows, epoch, 0, K, BM, BK)
+                _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, next_m, rows, epoch, K, BM, BK, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
                 epoch += 1
-            for n in range(0, 2):
+            for n in range(0, N_PANELS):
                 col = (n // 2) * BN + (n % 2) * (BN // 4) + output_rn
                 for panel in gl.static_range(4):
                     hcu.abarrier_try_wait(9, panel & 1)
@@ -173,32 +262,46 @@ def _producer_mailbox(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, c
                     hcu.abarrier_arrive(11)
                     offsets = output_rows[panel][:, None] + col[None, :].to(gl.uint32)
                     valid = output_valid[panel]
-                    buffer_store(x, C, offsets, valid[:, None])
+                    if USE_C64:
+                        gl.store(C + offsets, x, valid[:, None])
+                    else:
+                        buffer_store(x, C, offsets, valid[:, None])
                     hcu.abarrier_try_wait(13, panel & 1)
                     y = co1.load(output_store)
                     hcu.wait_lgkmcnt(0)
                     hcu.abarrier_arrive(15)
-                    buffer_store(y, C, offsets + BN // 2, valid[:, None])
+                    if USE_C64:
+                        gl.store(C + offsets + BN // 2, y, valid[:, None])
+                    else:
+                        buffer_store(y, C, offsets + BN // 2, valid[:, None])
         else:
             expert = gl.load(Experts + m)
             b_base = B + gl.maximum(expert, 0).to(gl.int64) * N * K
-            for n in range(0, 2):
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 0, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 1, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 1, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 0, N, K, BN, BK)
+            for n in range(0, N_PANELS):
+                _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 0, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
+                _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 1, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
+                _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 1, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
+                _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 0, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
                 hcu.abarrier_try_wait(10, epoch & 1)
                 epoch += 1
 
 
-
 @gluon.jit
-def _consumer_mailbox(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
+def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
               pid, total, rows, valid_routes,
               N: gl.constexpr, K: gl.constexpr, TOP_K: gl.constexpr,
               BM: gl.constexpr, BN: gl.constexpr, BK: gl.constexpr,
               STAGES: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
-              CK_SORTING: gl.constexpr, PARTITION: gl.constexpr):
+              CK_SORTING: gl.constexpr, PARTITION: gl.constexpr, N_PANELS: gl.constexpr, A_IS_INT8: gl.constexpr, num_tokens_post_padded_ptr):
+    """Retain full A in registers and compute one 256-column consumer half.
+
+    first N phase: wait/read A -> wait/read B0/SB -> LDS wait -> release A/B0
+    every phase:  MMAC K0/K1 -> wait/read B1 -> release B1 -> MMAC K2
+                  -> four M32 MMAC K3/scale/mailbox handoffs.
+    Metadata is read once per M; A remains in registers through all N phases.
+    """
+    if num_tokens_post_padded_ptr is not None:
+        total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     CN: gl.constexpr = BN // 4
     mma: gl.constexpr = gl.amd.AMDMFMALayout(4, [16, 16, 32], MMAC_LAYOUT, [2, 2], tiles_per_warp=[1, 2])
     result: gl.constexpr = hcu.MmacInterleave2Layout(mma)
@@ -222,9 +325,12 @@ def _consumer_mailbox(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
             a_low += (gl.convert_layout(lp[0], gl.DotOperandLayout(0, mma, 8)), gl.convert_layout(lp[1], gl.DotOperandLayout(0, mma, 8)))
             a_high += (gl.convert_layout(hp[0], gl.DotOperandLayout(0, mma, 8)), gl.convert_layout(hp[1], gl.DotOperandLayout(0, mma, 8)))
         a_epoch += 1
-        for n in range(0, 2):
-            lo = gl.full((BM // 2, CN), 0, gl.float32, result)
-            hi = gl.full((BM // 2, CN), 0, gl.float32, result)
+        sa = gl.full((BM,), 0, gl.float32, gl.SliceLayout(1, result))
+        weight = gl.full((BM,), 0, gl.float32, gl.SliceLayout(1, result))
+        for n in range(0, N_PANELS):
+            ACC_TYPE: gl.constexpr = gl.int32 if A_IS_INT8 else gl.float32
+            lo = gl.full((BM // 2, CN), 0, ACC_TYPE, result)
+            hi = gl.full((BM // 2, CN), 0, ACC_TYPE, result)
             for pair_k in gl.static_range(2):
                 ready = (7 if pair_k == 0 else 2) if PARTITION == 1 else (5 if pair_k == 0 else 10)
                 empty = (8 if pair_k == 0 else 4) if PARTITION == 1 else (6 if pair_k == 0 else 14)
@@ -245,9 +351,10 @@ def _consumer_mailbox(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
                 hi = gl.amd.cdna4.mfma(a_high[pair_k * 2], b_first, hi)
                 hcu.sched_barrier()
                 if pair_k == 0:
-                    hcu.abarrier_try_wait(12 if ((a_epoch - 1) & 1) == 0 else 0, ((a_epoch - 1) >> 1) & 1)
-                    sa = ma.index(((a_epoch - 1) & 1) * 4).load(gl.SliceLayout(1, result))
-                    weight = ma.index(((a_epoch - 1) & 1) * 4 + 1).load(gl.SliceLayout(1, result))
+                    if n == 0:
+                        hcu.abarrier_try_wait(12 if ((a_epoch - 1) & 1) == 0 else 0, ((a_epoch - 1) >> 1) & 1)
+                        sa = ma.index(((a_epoch - 1) & 1) * 4).load(gl.SliceLayout(1, result))
+                        weight = ma.index(((a_epoch - 1) & 1) * 4 + 1).load(gl.SliceLayout(1, result))
                     hcu.sched_barrier()
                     lo = gl.amd.cdna4.mfma(a_low[1], b_last, lo)
                     hcu.sched_barrier()
@@ -270,6 +377,8 @@ def _consumer_mailbox(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
 
                 panel_sa = gl.convert_layout(sa_parts[panel], gl.SliceLayout(1, result))
                 panel_weight = gl.convert_layout(weight_parts[panel], gl.SliceLayout(1, result))
+                if acc.dtype == gl.int32:
+                    acc = acc.to(gl.float32)
                 value = ((acc * panel_sa[:, None]) * current_sb[None, :]) * panel_weight[:, None]
                 packed = gl.convert_layout(value, packing).to(C.dtype.element_ty)
                 if panel > 0:
@@ -282,18 +391,37 @@ def _consumer_mailbox(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
             b_epoch += 1
 
 
-
 @gluon.jit
 def gemm_bottom_w8a8_channel_wasp_persistent(
     A, B, SA, SB, C, Weights, Sorted, Experts,
     num_sorted_rows, num_valid_routes, TOTAL_TILES,
     N: gl.constexpr, K: gl.constexpr, top_k: gl.constexpr,
     BLOCK_SIZE_M: gl.constexpr = 128, BLOCK_SIZE_N: gl.constexpr = 512,
-    BLOCK_SIZE_K: gl.constexpr = 64, USE_MLS_LOAD_A: gl.constexpr = True,
-    GROUP_SIZE_M: gl.constexpr = 1, CK_SORTING: gl.constexpr = False,
+    BLOCK_SIZE_K: gl.constexpr = 64,
+    GROUP_SIZE_M: gl.constexpr = 1, CK_SORTING: gl.constexpr = True,
+    MUL_ROUTED_WEIGHT: gl.constexpr = True,
     PARTITION_REGS: gl.constexpr = None,
+    USE_ADDR_OFFSET_INT64_A: gl.constexpr = False,
+    USE_ADDR_OFFSET_INT64_B: gl.constexpr = False,
+    USE_ADDR_OFFSET_INT64_C: gl.constexpr = False,
+    stride_asm: gl.constexpr = 1, stride_bse: gl.constexpr = None,
+    stride_bsn: gl.constexpr = 1, N_TILES_LIMIT: gl.constexpr = 0,
+    num_tokens_post_padded_ptr=None,
 ):
-    gl.static_assert(K == 256 and BLOCK_SIZE_M == 128 and BLOCK_SIZE_N == 512 and BLOCK_SIZE_K == 64 and USE_MLS_LOAD_A)
+    """Launch four roles with caller grid; TOTAL_TILES = M blocks * (N/BN).
+
+    A/SA and optional Weights are sorted. C is route-major before top-k sum.
+    Device padded-row count caps M work. N_TILES_LIMIT clips BN512 tiles
+    for equal-work diagnostics only; zero traverses every output N tile.
+    A/B/C each have an independent compile-time wide-address option.
+    """
+    gl.static_assert(K == 256 and BLOCK_SIZE_M == 128 and BLOCK_SIZE_N == 512 and BLOCK_SIZE_K == 64)
+    USE_MLS_LOAD_A: gl.constexpr = True
+    STRIDE_SA: gl.constexpr = stride_asm
+    STRIDE_SBE: gl.constexpr = N if stride_bse is None else stride_bse
+    STRIDE_SBN: gl.constexpr = stride_bsn
+    N_PANELS: gl.constexpr = N // 256 if N_TILES_LIMIT == 0 else 2 * N_TILES_LIMIT
+    gl.static_assert(N_PANELS > 0 and N_PANELS <= N // 256)
     regs: gl.constexpr = (48, 16, 224, 224) if PARTITION_REGS is None else PARTITION_REGS
     BM: gl.constexpr = BLOCK_SIZE_M
     BN: gl.constexpr = BLOCK_SIZE_N
@@ -317,20 +445,60 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     ma_layout: gl.constexpr = gl.SharedLinearLayout([[4], [8], [1], [2], [16], [32], [64]], [], 16)
     ma = gl.allocate_shared_memory(gl.float32, [8, BM], ma_layout)
     mb = gl.allocate_shared_memory(gl.float32, [2, BN // 4], meta_shared)
-    _initialize_mailbox(STAGES)
+    _initialize(STAGES)
     pid = gl.program_id(0)
     gl.warp_specialize([
-        (_empty_mailbox, ()),
-        (_producer_mailbox, (A, B, Experts, am, b0, b1, C, Sorted, num_valid_routes, co0, co1, SA, SB, Weights, ma, mb, pid, TOTAL_TILES, num_sorted_rows,
-            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 0, top_k, CK_SORTING)),
-        (_producer_mailbox, (A, B, Experts, am, b0, b1, C, Sorted, num_valid_routes, co0, co1, SA, SB, Weights, ma, mb, pid, TOTAL_TILES, num_sorted_rows,
-            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 1, top_k, CK_SORTING)),
-        (_consumer_mailbox, (C, SA, SB, Weights, Sorted, Experts, am, b0, co0, ma, mb, pid, TOTAL_TILES,
+        (_empty, ()),
+        (_producer, (A, B, Experts, am, b0, b1, C, Sorted, num_valid_routes, co0, co1, SA, SB, Weights, ma, mb, pid, TOTAL_TILES, num_sorted_rows,
+            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 0, top_k, CK_SORTING,
+            N_PANELS, USE_ADDR_OFFSET_INT64_A, USE_ADDR_OFFSET_INT64_B,
+            USE_ADDR_OFFSET_INT64_C, STRIDE_SA, STRIDE_SBE, STRIDE_SBN,
+            MUL_ROUTED_WEIGHT, num_tokens_post_padded_ptr)),
+        (_producer, (A, B, Experts, am, b0, b1, C, Sorted, num_valid_routes, co0, co1, SA, SB, Weights, ma, mb, pid, TOTAL_TILES, num_sorted_rows,
+            N, K, BM, BN, BK, STAGES, USE_MLS_LOAD_A, GROUP_SIZE_M, 1, top_k, CK_SORTING,
+            N_PANELS, USE_ADDR_OFFSET_INT64_A, USE_ADDR_OFFSET_INT64_B,
+            USE_ADDR_OFFSET_INT64_C, STRIDE_SA, STRIDE_SBE, STRIDE_SBN,
+            MUL_ROUTED_WEIGHT, num_tokens_post_padded_ptr)),
+        (_consumer, (C, SA, SB, Weights, Sorted, Experts, am, b0, co0, ma, mb, pid, TOTAL_TILES,
             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
-            GROUP_SIZE_M, CK_SORTING, 0)),
-        (_consumer_mailbox, (C, SA, SB, Weights, Sorted, Experts, am, b1, co1, ma, mb, pid, TOTAL_TILES,
+            GROUP_SIZE_M, CK_SORTING, 0, N_PANELS, A.dtype.element_ty == gl.int8, num_tokens_post_padded_ptr)),
+        (_consumer, (C, SA, SB, Weights, Sorted, Experts, am, b1, co1, ma, mb, pid, TOTAL_TILES,
             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
-            GROUP_SIZE_M, CK_SORTING, 1)),
+            GROUP_SIZE_M, CK_SORTING, 1, N_PANELS, A.dtype.element_ty == gl.int8, num_tokens_post_padded_ptr)),
     ], [4, 4, 4, 4], regs)
     for barrier in gl.static_range(16):
         hcu.abarrier_invalidate(barrier)
+
+
+def is_persistent_channel_gemm2_supported(a, b, a_scale, b_scale, *, arch, cu_count,
+                                        top_k, config, c_sorted=False, a_sorted=True,
+                                        ck_sorting=True, output_dtype=None,
+                                        scale_recipe="fp8_channel", has_bias=False,
+                                        mul_routed_weight=True):
+    """CPU metadata query for the BN512/K256 pipeline; otherwise use Triton.
+
+    Only BM is part of the sorting contract. This candidate selects its own
+    BN512/BK64, launch options and row-persistent traversal. The caller checks
+    tensor devices, CK metadata and sorted routed weights before dispatch.
+    """
+    import torch
+    if arch != "gfx946" or type(cu_count) is not int or cu_count <= 0:
+        return False
+    if c_sorted or not a_sorted or not ck_sorting or has_bias:
+        return False
+    fp8 = (torch.float8_e4m3fn, torch.float8_e5m2)
+    inputs = ((a.dtype in fp8 and b.dtype in fp8 and scale_recipe == "fp8_channel")
+              or (a.dtype == b.dtype == torch.int8 and scale_recipe == "int8_channel"))
+    if not inputs or a_scale.dtype != torch.float32 or b_scale.dtype != torch.float32:
+        return False
+    if output_dtype is not None and output_dtype not in (torch.bfloat16, torch.float16):
+        return False
+    if a.ndim != 2 or b.ndim != 3 or not a.is_contiguous() or not b.is_contiguous():
+        return False
+    rows, k = a.shape
+    experts, n, bk = b.shape
+    if min(rows, experts, n) <= 0 or k != 256 or bk != k or n % 512 or not 0 < top_k <= 256:
+        return False
+    if a_scale.shape not in ((rows,), (rows, 1)) or b_scale.shape not in ((experts, n), (experts, n, 1)):
+        return False
+    return config.get("BLOCK_SIZE_M") == 128

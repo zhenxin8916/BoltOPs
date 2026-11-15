@@ -34,8 +34,8 @@ def test_dispatch_uses_ck_topk_and_preserves_config(monkeypatch, mul):
             return run
     monkeypatch.setattr(mod, "gemm_bottom_w8a8_channel_wasp_persistent", Capture())
     def tensor(shape, dtype=torch.float32): return torch.empty(shape, dtype=dtype, device="meta")
-    a=tensor((256,256),torch.int8);b=tensor((2,512,256),torch.int8)
-    c=tensor((97,2,512),torch.float16);sa=tensor((256,1));sb=tensor((2,512,1))
+    a=tensor((256,256),torch.int8);b=tensor((2,768,256),torch.int8)
+    c=tensor((97,2,768),torch.float16);sa=tensor((256,1));sb=tensor((2,768,1))
     ids=tensor((256,),torch.int32);exp=tensor((2,),torch.int32);count=tensor((1,),torch.int32)
     weights=tensor((256,)) if mul else None
     config=dict(BLOCK_SIZE_M=128, BLOCK_SIZE_N=64, BLOCK_SIZE_K=64)
@@ -44,7 +44,7 @@ def test_dispatch_uses_ck_topk_and_preserves_config(monkeypatch, mul):
         c_sorted=False,a_sorted=True,ck_sorting=True,ck_topk=2,naive_block_assignment=False,
         mul_routed_weight=mul,B_bias=None,B_zp=None)
     grid,args,opts=launches[0]
-    assert grid==(96,) and args[5] is weights and args[-1]==4
+    assert grid==(96,) and args[5] is weights and args[-1]==6
     assert opts["top_k"]==2 and opts["MUL_ROUTED_WEIGHT"]==mul
     assert opts["num_tokens_post_padded_ptr"] is count
     assert "N_TILES_LIMIT" not in opts

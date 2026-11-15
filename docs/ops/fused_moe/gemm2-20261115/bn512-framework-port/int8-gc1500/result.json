@@ -1,0 +1,10 @@
+{
+  "verified": true,
+  "mismatches": 0,
+  "checked_elements": 4380672,
+  "untouched_tail": true,
+  "output_sha256": "7f4bcd0257b06245fa8d5bbec719dce3e185eeff82ada32711071e7571149d2f",
+  "shared": 119808,
+  "scope": "bounded_equal_padded_output_work",
+  "tiles_per_tg": 2
+}

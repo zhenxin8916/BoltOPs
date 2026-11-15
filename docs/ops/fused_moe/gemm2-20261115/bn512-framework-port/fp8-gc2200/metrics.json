@@ -1,0 +1,44 @@
+{
+  "time_us": 19.059496,
+  "wave_span_time_us": 15.447705,
+  "mmac_scope": "cu0_wave_lifetime",
+  "mmac_total_pct": 25.319116056250966,
+  "cu0_first_wave_start_tick": 3611790,
+  "cu0_last_wave_end_tick": 18333315,
+  "cu0_lifetime_us": 14.721525,
+  "simd_busy_ticks": [
+    3727360,
+    3727360,
+    3727360,
+    3727360
+  ],
+  "dispatch_window_mmac_pct": 19.556445773802203,
+  "clock_period_ps": 455,
+  "effective_gc_ghz": 2.197802,
+  "gc_ghz": 2.2,
+  "active_mmac_families": {
+    "v_mmac_f32_16x16x32_fp8_fp8": 4096
+  },
+  "active_wave_counts": {
+    "196619": 512,
+    "8": 512,
+    "131081": 512,
+    "65546": 512,
+    "131085": 512,
+    "12": 512,
+    "65550": 512,
+    "196623": 512
+  },
+  "dispatch": {
+    "begin_tick": 0,
+    "end_tick": 19059496,
+    "duration_ticks": 19059496,
+    "duration_us": 19.059496,
+    "gui_duration_us": 19.059,
+    "section_offset": 8302,
+    "section_type": 15,
+    "source_perf": "/zhenxin/temp/moe-gemm2-bn512-port-20261115/fp8-gc2200/m5out/0/0/2337450_python3.10.perf",
+    "source_perf_sha256": "5e103aee57a13dced62fdc064096815fc52f8221e5b4d45551a936d8c4ac5f59"
+  },
+  "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail"
+}

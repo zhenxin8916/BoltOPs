@@ -1,0 +1,803 @@
+{
+  "8": {
+    "role": "C0",
+    "mmac_first_tick": 8104812,
+    "mmac_last_end_tick": 17347756,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 127,
+        "gap_cycles": 4712.0,
+        "first_tick": 11585372,
+        "next_tick": 14205244,
+        "instruction_counts": {
+          "s_waitcnt": 14,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 28,
+          "v_and_b32": 12,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 44,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "v_add_u32": 5,
+          "ds_write2st64_b64": 4,
+          "ds_read2st64_b64": 4,
+          "s_ebarrier_sync": 5,
+          "ds_write_b128": 8,
+          "ds_read_b128": 2,
+          "s_and_b64": 9,
+          "v_cndmask_b32": 12,
+          "v_lshlrev_b16": 8,
+          "v_or_b32_sdwa": 8,
+          "ds_write2st64_b32": 4,
+          "ds_read_b32": 2,
+          "v_mov_b32": 48,
+          "v_cmp_eq_u32": 2,
+          "v_cmp_ne_u32": 2,
+          "buffer_store_dwordx4": 4,
+          "s_add_i32": 5,
+          "s_movk_i32": 1,
+          "s_cmp_lg_u32": 1,
+          "s_mov_b64": 2,
+          "s_cbranch_scc1": 2,
+          "s_cmp_lt_i32": 1,
+          "s_and_b32": 1,
+          "s_abarrier_try_wait": 2,
+          "ds_read_matrix_trans_format": 24,
+          "s_lshl_b32": 1,
+          "s_bfe_u32": 1,
+          "s_cmp_eq_u32": 1,
+          "s_mov_b32": 5,
+          "s_cselect_b32": 2,
+          "ds_read2_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_arrive": 2,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_waitcnt lgkmcnt(7)",
+          "v_pk_mul_f32 v[84:85], v[28:29], v[112:113] opsel: 0x38",
+          "v_pk_mul_f32 v[86:87], v[30:31], v[114:115] opsel: 0x38",
+          "v_pk_mul_f32 v[88:89], v[28:29], v[108:109] opsel: 0x38",
+          "v_pk_mul_f32 v[90:91], v[30:31], v[110:111] opsel: 0x38",
+          "v_pk_mul_f32 v[92:93], v[28:29], v[104:105] opsel: 0x38",
+          "v_pk_mul_f32 v[94:95], v[30:31], v[106:107] opsel: 0x38",
+          "v_pk_mul_f32 v[96:97], v[28:29], v[100:101] opsel: 0x38"
+        ],
+        "last_ops": [
+          "s_abarrier_arrive s2, 3, 1",
+          "s_abarrier_arrive s2, 6, 1",
+          "s_mov_b32 s22, s20",
+          "s_mov_b32 s23, s20",
+          "s_mov_b32 s21, s20",
+          "v_mov_b64 v70, s22",
+          "v_mov_b64 v68, s20",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 4560.0,
+        "first_tick": 8729756,
+        "next_tick": 11265116,
+        "instruction_counts": {
+          "s_waitcnt": 14,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 28,
+          "v_and_b32": 12,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 44,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "v_add_u32": 4,
+          "ds_write2st64_b64": 4,
+          "ds_read2st64_b64": 4,
+          "s_ebarrier_sync": 5,
+          "ds_write_b128": 8,
+          "ds_read_b128": 2,
+          "s_and_b64": 9,
+          "v_cndmask_b32": 12,
+          "v_lshlrev_b16": 8,
+          "v_or_b32_sdwa": 8,
+          "ds_write2st64_b32": 4,
+          "ds_read_b32": 2,
+          "v_mov_b32": 16,
+          "v_cmp_eq_u32": 2,
+          "v_cmp_ne_u32": 2,
+          "buffer_store_dwordx4": 4,
+          "s_add_i32": 1,
+          "s_movk_i32": 1,
+          "s_cmp_lg_u32": 1,
+          "s_mov_b64": 1,
+          "s_cbranch_scc1": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read2_b64": 1,
+          "ds_read_matrix_trans_format": 16,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_arrive": 1,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_waitcnt lgkmcnt(7)",
+          "v_pk_mul_f32 v[84:85], v[28:29], v[112:113] opsel: 0x38",
+          "v_pk_mul_f32 v[86:87], v[30:31], v[114:115] opsel: 0x38",
+          "v_pk_mul_f32 v[88:89], v[28:29], v[108:109] opsel: 0x38",
+          "v_pk_mul_f32 v[90:91], v[30:31], v[110:111] opsel: 0x38",
+          "v_pk_mul_f32 v[92:93], v[28:29], v[104:105] opsel: 0x38",
+          "v_pk_mul_f32 v[94:95], v[30:31], v[106:107] opsel: 0x38",
+          "v_pk_mul_f32 v[96:97], v[28:29], v[100:101] opsel: 0x38"
+        ],
+        "last_ops": [
+          "s_cbranch_scc0 label_8",
+          "s_abarrier_arrive s2, 6, 1",
+          "s_mov_b32 s22, s20",
+          "s_mov_b32 s23, s20",
+          "s_mov_b32 s21, s20",
+          "v_mov_b64 v70, s22",
+          "v_mov_b64 v68, s20",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 191,
+        "gap_cycles": 4472.0,
+        "first_tick": 14536620,
+        "next_tick": 17023052,
+        "instruction_counts": {
+          "s_waitcnt": 14,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 28,
+          "v_and_b32": 12,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 44,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "v_add_u32": 4,
+          "ds_write2st64_b64": 4,
+          "ds_read2st64_b64": 4,
+          "s_ebarrier_sync": 5,
+          "ds_write_b128": 8,
+          "ds_read_b128": 2,
+          "s_and_b64": 9,
+          "v_cndmask_b32": 12,
+          "v_lshlrev_b16": 8,
+          "v_or_b32_sdwa": 8,
+          "ds_write2st64_b32": 4,
+          "ds_read_b32": 2,
+          "v_mov_b32": 16,
+          "v_cmp_eq_u32": 2,
+          "v_cmp_ne_u32": 2,
+          "buffer_store_dwordx4": 4,
+          "s_add_i32": 1,
+          "s_movk_i32": 1,
+          "s_cmp_lg_u32": 1,
+          "s_mov_b64": 1,
+          "s_cbranch_scc1": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read2_b64": 1,
+          "ds_read_matrix_trans_format": 16,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_arrive": 1,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_waitcnt lgkmcnt(7)",
+          "v_pk_mul_f32 v[84:85], v[28:29], v[112:113] opsel: 0x38",
+          "v_pk_mul_f32 v[86:87], v[30:31], v[114:115] opsel: 0x38",
+          "v_pk_mul_f32 v[88:89], v[28:29], v[108:109] opsel: 0x38",
+          "v_pk_mul_f32 v[90:91], v[30:31], v[110:111] opsel: 0x38",
+          "v_pk_mul_f32 v[92:93], v[28:29], v[104:105] opsel: 0x38",
+          "v_pk_mul_f32 v[94:95], v[30:31], v[106:107] opsel: 0x38",
+          "v_pk_mul_f32 v[96:97], v[28:29], v[100:101] opsel: 0x38"
+        ],
+        "last_ops": [
+          "s_cbranch_scc0 label_8",
+          "s_abarrier_arrive s2, 6, 1",
+          "s_mov_b32 s22, s20",
+          "s_mov_b32 s23, s20",
+          "s_mov_b32 s21, s20",
+          "v_mov_b64 v70, s22",
+          "v_mov_b64 v68, s20",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 15,
+        "gap_cycles": 412.0,
+        "first_tick": 8175980,
+        "next_tick": 8405052,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48",
+          "s_abarrier_try_wait s2, s56, s54",
+          "ds_read_b128 v28, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v24, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v36, v173, offset:512"
+        ],
+        "last_ops": [
+          "ds_read_b128 v28, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v24, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v36, v173, offset:512",
+          "ds_read_b128 v52, v173, offset:640",
+          "ds_read_b128 v32, v173, offset:768",
+          "ds_read_b128 v60, v173, offset:896"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 46,
+        "gap_cycles": 180.0,
+        "first_tick": 8542940,
+        "next_tick": 8643020,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 143,
+        "gap_cycles": 64.0,
+        "first_tick": 14276412,
+        "next_tick": 14311996,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48",
+          "s_abarrier_try_wait s2, s56, s54",
+          "ds_read_b128 v28, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v24, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v36, v173, offset:512"
+        ],
+        "last_ops": [
+          "ds_read_b128 v28, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v24, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v36, v173, offset:512",
+          "ds_read_b128 v52, v173, offset:640",
+          "ds_read_b128 v32, v173, offset:768",
+          "ds_read_b128 v60, v173, offset:896"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 79,
+        "gap_cycles": 28.0,
+        "first_tick": 11336284,
+        "next_tick": 11351852,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ],
+        "last_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 111,
+        "gap_cycles": 28.0,
+        "first_tick": 11494188,
+        "next_tick": 11509756,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 207,
+        "gap_cycles": 28.0,
+        "first_tick": 17098668,
+        "next_tick": 17114236,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ],
+        "last_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 239,
+        "gap_cycles": 28.0,
+        "first_tick": 17256572,
+        "next_tick": 17272140,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 47,
+        "gap_cycles": 20.0,
+        "first_tick": 8647468,
+        "next_tick": 8658588,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 175,
+        "gap_cycles": 20.0,
+        "first_tick": 14454332,
+        "next_tick": 14465452,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ]
+      }
+    ],
+    "gaps_sum_cycles": 14576.0
+  },
+  "12": {
+    "role": "C1",
+    "mmac_first_tick": 8878764,
+    "mmac_last_end_tick": 19015756,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 5324.0,
+        "first_tick": 9452556,
+        "next_tick": 12412700,
+        "instruction_counts": {
+          "s_waitcnt": 14,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 28,
+          "v_and_b32": 12,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 44,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "v_add_u32": 4,
+          "ds_write2st64_b64": 4,
+          "ds_read2st64_b64": 4,
+          "s_ebarrier_sync": 5,
+          "ds_write_b128": 8,
+          "ds_read_b128": 2,
+          "s_and_b64": 9,
+          "v_cndmask_b32": 12,
+          "v_lshlrev_b16": 8,
+          "v_or_b32_sdwa": 8,
+          "ds_write2st64_b32": 4,
+          "ds_read_b32": 2,
+          "v_mov_b32": 16,
+          "v_cmp_eq_u32": 2,
+          "v_cmp_ne_u32": 2,
+          "buffer_store_dwordx4": 4,
+          "s_add_i32": 1,
+          "s_movk_i32": 1,
+          "s_cmp_lg_u32": 1,
+          "s_mov_b64": 1,
+          "s_cbranch_scc1": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read2_b64": 1,
+          "ds_read_matrix_trans_format": 16,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_arrive": 1,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_waitcnt lgkmcnt(7)",
+          "v_pk_mul_f32 v[84:85], v[36:37], v[112:113] opsel: 0x38",
+          "v_pk_mul_f32 v[86:87], v[38:39], v[114:115] opsel: 0x38",
+          "v_pk_mul_f32 v[88:89], v[36:37], v[108:109] opsel: 0x38",
+          "v_pk_mul_f32 v[90:91], v[38:39], v[110:111] opsel: 0x38",
+          "v_pk_mul_f32 v[92:93], v[36:37], v[104:105] opsel: 0x38",
+          "v_pk_mul_f32 v[94:95], v[38:39], v[106:107] opsel: 0x38",
+          "v_pk_mul_f32 v[96:97], v[36:37], v[100:101] opsel: 0x38"
+        ],
+        "last_ops": [
+          "s_cbranch_scc0 label_8",
+          "s_abarrier_arrive s2, 8, 1",
+          "s_mov_b32 s22, s20",
+          "s_mov_b32 s23, s20",
+          "s_mov_b32 s21, s20",
+          "v_mov_b64 v70, s22",
+          "v_mov_b64 v68, s20",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 191,
+        "gap_cycles": 5116.0,
+        "first_tick": 15848780,
+        "next_tick": 18693276,
+        "instruction_counts": {
+          "s_waitcnt": 14,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 28,
+          "v_and_b32": 12,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 44,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "v_add_u32": 4,
+          "ds_write2st64_b64": 4,
+          "ds_read2st64_b64": 4,
+          "s_ebarrier_sync": 5,
+          "ds_write_b128": 8,
+          "ds_read_b128": 2,
+          "s_and_b64": 9,
+          "v_cndmask_b32": 12,
+          "v_lshlrev_b16": 8,
+          "v_or_b32_sdwa": 8,
+          "ds_write2st64_b32": 4,
+          "ds_read_b32": 2,
+          "v_mov_b32": 16,
+          "v_cmp_eq_u32": 2,
+          "v_cmp_ne_u32": 2,
+          "buffer_store_dwordx4": 4,
+          "s_add_i32": 1,
+          "s_movk_i32": 1,
+          "s_cmp_lg_u32": 1,
+          "s_mov_b64": 1,
+          "s_cbranch_scc1": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read2_b64": 1,
+          "ds_read_matrix_trans_format": 16,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_arrive": 1,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_waitcnt lgkmcnt(7)",
+          "v_pk_mul_f32 v[84:85], v[36:37], v[112:113] opsel: 0x38",
+          "v_pk_mul_f32 v[86:87], v[38:39], v[114:115] opsel: 0x38",
+          "v_pk_mul_f32 v[88:89], v[36:37], v[108:109] opsel: 0x38",
+          "v_pk_mul_f32 v[90:91], v[38:39], v[110:111] opsel: 0x38",
+          "v_pk_mul_f32 v[92:93], v[36:37], v[104:105] opsel: 0x38",
+          "v_pk_mul_f32 v[94:95], v[38:39], v[106:107] opsel: 0x38",
+          "v_pk_mul_f32 v[96:97], v[36:37], v[100:101] opsel: 0x38"
+        ],
+        "last_ops": [
+          "s_cbranch_scc0 label_8",
+          "s_abarrier_arrive s2, 8, 1",
+          "s_mov_b32 s22, s20",
+          "s_mov_b32 s23, s20",
+          "s_mov_b32 s21, s20",
+          "v_mov_b64 v70, s22",
+          "v_mov_b64 v68, s20",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 127,
+        "gap_cycles": 5004.0,
+        "first_tick": 12732956,
+        "next_tick": 15515180,
+        "instruction_counts": {
+          "s_waitcnt": 14,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 28,
+          "v_and_b32": 12,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 44,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "v_add_u32": 5,
+          "ds_write2st64_b64": 4,
+          "ds_read2st64_b64": 4,
+          "s_ebarrier_sync": 5,
+          "ds_write_b128": 8,
+          "ds_read_b128": 2,
+          "s_and_b64": 9,
+          "v_cndmask_b32": 12,
+          "v_lshlrev_b16": 8,
+          "v_or_b32_sdwa": 8,
+          "ds_write2st64_b32": 4,
+          "ds_read_b32": 2,
+          "v_mov_b32": 48,
+          "v_cmp_eq_u32": 2,
+          "v_cmp_ne_u32": 2,
+          "buffer_store_dwordx4": 4,
+          "s_add_i32": 5,
+          "s_movk_i32": 2,
+          "s_cmp_lg_u32": 1,
+          "s_mov_b64": 2,
+          "s_cbranch_scc1": 2,
+          "s_cmp_lt_i32": 1,
+          "s_and_b32": 1,
+          "s_abarrier_try_wait": 2,
+          "ds_read_matrix_trans_format": 24,
+          "s_lshl_b32": 1,
+          "s_bfe_u32": 1,
+          "s_cmp_eq_u32": 1,
+          "s_mov_b32": 4,
+          "s_cselect_b32": 2,
+          "ds_read2_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_arrive": 2,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_waitcnt lgkmcnt(7)",
+          "v_pk_mul_f32 v[84:85], v[36:37], v[112:113] opsel: 0x38",
+          "v_pk_mul_f32 v[86:87], v[38:39], v[114:115] opsel: 0x38",
+          "v_pk_mul_f32 v[88:89], v[36:37], v[108:109] opsel: 0x38",
+          "v_pk_mul_f32 v[90:91], v[38:39], v[110:111] opsel: 0x38",
+          "v_pk_mul_f32 v[92:93], v[36:37], v[104:105] opsel: 0x38",
+          "v_pk_mul_f32 v[94:95], v[38:39], v[106:107] opsel: 0x38",
+          "v_pk_mul_f32 v[96:97], v[36:37], v[100:101] opsel: 0x38"
+        ],
+        "last_ops": [
+          "s_abarrier_arrive s2, 3, 1",
+          "s_abarrier_arrive s2, 8, 1",
+          "s_mov_b32 s22, s20",
+          "s_mov_b32 s23, s20",
+          "s_mov_b32 s21, s20",
+          "v_mov_b64 v70, s22",
+          "v_mov_b64 v68, s20",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 50,
+        "gap_cycles": 264.0,
+        "first_tick": 9247948,
+        "next_tick": 9394732,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 20,
+        "gap_cycles": 144.0,
+        "first_tick": 9016652,
+        "next_tick": 9096716,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 15,
+        "gap_cycles": 80.0,
+        "first_tick": 8949932,
+        "next_tick": 8994412,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48",
+          "s_abarrier_try_wait s2, s56, s54",
+          "ds_read_b128 v36, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v32, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v44, v173, offset:512"
+        ],
+        "last_ops": [
+          "ds_read_b128 v36, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v32, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v44, v173, offset:512",
+          "ds_read_b128 v52, v173, offset:640",
+          "ds_read_b128 v40, v173, offset:768",
+          "ds_read_b128 v60, v173, offset:896"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 143,
+        "gap_cycles": 56.0,
+        "first_tick": 15586348,
+        "next_tick": 15617484,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48",
+          "s_abarrier_try_wait s2, s56, s54",
+          "ds_read_b128 v36, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v32, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v44, v173, offset:512"
+        ],
+        "last_ops": [
+          "ds_read_b128 v36, v173",
+          "ds_read_b128 v48, v173, offset:128",
+          "ds_read_b128 v32, v173, offset:256",
+          "ds_read_b128 v56, v173, offset:384",
+          "ds_read_b128 v44, v173, offset:512",
+          "ds_read_b128 v52, v173, offset:640",
+          "ds_read_b128 v40, v173, offset:768",
+          "ds_read_b128 v60, v173, offset:896"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 47,
+        "gap_cycles": 32.0,
+        "first_tick": 9216812,
+        "next_tick": 9234604,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 175,
+        "gap_cycles": 32.0,
+        "first_tick": 15759820,
+        "next_tick": 15777612,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s0, s57, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 79,
+        "gap_cycles": 28.0,
+        "first_tick": 12483868,
+        "next_tick": 12499436,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ],
+        "last_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 111,
+        "gap_cycles": 28.0,
+        "first_tick": 12646220,
+        "next_tick": 12661788,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c"
+        ],
+        "last_ops": [
+          "s_and_b64 s0, s0, exec_lo",
+          "s_cbranch_scc0 label_c"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 207,
+        "gap_cycles": 28.0,
+        "first_tick": 18764444,
+        "next_tick": 18780012,
+        "instruction_counts": {
+          "s_and_b64": 1,
+          "s_cbranch_scc0": 1
+        },
+        "first_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ],
+        "last_ops": [
+          "s_and_b64 s2, s0, exec_lo",
+          "s_cbranch_scc0 label_48"
+        ]
+      }
+    ],
+    "gaps_sum_cycles": 16184.0
+  }
+}

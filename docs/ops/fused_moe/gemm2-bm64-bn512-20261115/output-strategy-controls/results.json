@@ -1,0 +1,132 @@
+[
+  {
+    "case": "split-output-drain-p0-p1",
+    "algorithm": "P0 drains C0; P1 prefetches next B and drains C1",
+    "time_us": 17.239336,
+    "whole_dispatch_mmac_percent": 13.210346384570729,
+    "shared_bytes": 101376,
+    "actual_vgprs": [
+      36,
+      29,
+      146,
+      146
+    ],
+    "numerics": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 2630144,
+      "untouched_tail": true,
+      "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+      "shared": 101376,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "3c491b39714030ca533ec89e3e8138ad8d227ce545465b2c3c943375184b0af9",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/split-output-drain-p0-p1",
+    "validation_scope": "Frozen FP8 prefix only; generic dynamic wait-ID/work audit passed. No promotion/full-N qualification."
+  },
+  {
+    "case": "combine-left-right-scatter",
+    "algorithm": "P0 frees both mailboxes then combines scatter",
+    "time_us": 15.333368,
+    "whole_dispatch_mmac_percent": 14.852418594531873,
+    "shared_bytes": 101376,
+    "actual_vgprs": [
+      50,
+      9,
+      146,
+      146
+    ],
+    "numerics": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 2630144,
+      "untouched_tail": true,
+      "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+      "shared": 101376,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "c8ed98b37609decc83a4d3091f4e48db7c764a3b9e7d42a382b3881de0ba39c6",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/combine-left-right-scatter",
+    "validation_scope": "Frozen FP8 prefix only; generic dynamic wait-ID/work audit passed. No promotion/full-N qualification."
+  },
+  {
+    "case": "consumer-native-direct-fixed",
+    "algorithm": "C stores with native packed MMAC distribution",
+    "time_us": 15.693656,
+    "whole_dispatch_mmac_percent": 14.511443350102741,
+    "shared_bytes": 84992,
+    "actual_vgprs": [
+      19,
+      9,
+      158,
+      158
+    ],
+    "numerics": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 2630144,
+      "untouched_tail": true,
+      "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+      "shared": 84992,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "7b8dc8023865afe5d6a136b627dd5b8dcb51f3b48585100141d4249aefa87134",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/consumer-native-direct-fixed",
+    "validation_scope": "Frozen FP8 prefix only; generic dynamic wait-ID/work audit passed. No promotion/full-N qualification."
+  },
+  {
+    "case": "consumer-row-split-shared-b",
+    "algorithm": "C0/C1 split M32 rows and share K128 B panels",
+    "time_us": 17.423928,
+    "whole_dispatch_mmac_percent": 13.070393771140468,
+    "shared_bytes": 117760,
+    "actual_vgprs": [
+      49,
+      8,
+      138,
+      138
+    ],
+    "numerics": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 2630144,
+      "untouched_tail": true,
+      "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+      "shared": 117760,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "5c67e1283734270594f41a604bd76c6924c0f6082f70389c17e92f32bfe816e9",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/consumer-row-split-shared-b",
+    "validation_scope": "Frozen FP8 prefix only; generic dynamic wait-ID/work audit passed. No promotion/full-N qualification."
+  },
+  {
+    "case": "consumer-direct-intrawarp-vec8",
+    "algorithm": "C direct store with custom vec8 distribution",
+    "time_us": 21.568908,
+    "whole_dispatch_mmac_percent": 10.55860593406027,
+    "shared_bytes": 117760,
+    "actual_vgprs": [
+      19,
+      9,
+      174,
+      174
+    ],
+    "numerics": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 2630144,
+      "untouched_tail": true,
+      "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+      "shared": 117760,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "b8e0e17143a069fb25c84b0893e986537bd765ba59cc8f3995608d93c0986de4",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/consumer-direct-intrawarp-vec8",
+    "validation_scope": "Frozen FP8 prefix only; generic dynamic wait-ID/work audit passed. No promotion/full-N qualification."
+  }
+]

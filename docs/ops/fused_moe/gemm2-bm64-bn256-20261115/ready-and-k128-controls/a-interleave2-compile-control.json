@@ -1,0 +1,9 @@
+{
+  "case": "a-interleave2-native64x32",
+  "status": "compile_failed_no_performance_result",
+  "source_sha256": "590f16747765c4deca7bd300f9292ce164b409c275a326298ebd48b390aa8c7d",
+  "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/a-interleave2-native64x32/kernel.py",
+  "change": "A MLS tile32x128 alt1, loader warps2x2; B and consumers otherwise canonical",
+  "error": "LLVM Translation failed for operation: builtin.unrealized_conversion_cast",
+  "note": "Native MLS table geometry alone does not establish end-to-end A/interleave2 MMAC support; no LLVM checks bypassed and no numerical run performed."
+}

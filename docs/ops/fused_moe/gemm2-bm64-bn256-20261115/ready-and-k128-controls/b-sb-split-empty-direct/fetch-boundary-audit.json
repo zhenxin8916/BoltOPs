@@ -1,0 +1,61 @@
+{
+  "long_consecutive_mmac_gaps": [
+    {
+      "wave": 12,
+      "after_ordinal": 49,
+      "cycles": 440,
+      "after_pc": "0x7ffde3c035b8",
+      "next_pc": "0x7ffde3c035c0",
+      "next_pc_mod256": 192,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 131085,
+      "after_ordinal": 49,
+      "cycles": 436,
+      "after_pc": "0x7ffde3c035b8",
+      "next_pc": "0x7ffde3c035c0",
+      "next_pc_mod256": 192,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 65550,
+      "after_ordinal": 25,
+      "cycles": 64,
+      "after_pc": "0x7ffde3c034f8",
+      "next_pc": "0x7ffde3c03500",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 65550,
+      "after_ordinal": 49,
+      "cycles": 440,
+      "after_pc": "0x7ffde3c035b8",
+      "next_pc": "0x7ffde3c035c0",
+      "next_pc_mod256": 192,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 196623,
+      "after_ordinal": 49,
+      "cycles": 436,
+      "after_pc": "0x7ffde3c035b8",
+      "next_pc": "0x7ffde3c035c0",
+      "next_pc_mod256": 192,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    }
+  ],
+  "cu0_frontend_counters": {
+    "numBranchTaken": 257.0,
+    "numCyclesWaitIFetchAfterBranchTaken": 11636.0,
+    "waitCyclesPerBranchTaken": 45.276265,
+    "numCyclesWaveOnCu": 222748.0
+  },
+  "interpretation": "PC boundary association plus prior PMD fetch probes supports an instruction-fetch hypothesis. This is not a direct fetch-miss trace or proof of a hardware/model defect. Wave-cycle counters must not be summed into elapsed dispatch time."
+}

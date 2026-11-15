@@ -1,0 +1,124 @@
+{
+  "C0": {
+    "first_mmac_tick": 8462876,
+    "initial_to_mmac_cycles": 7251.0,
+    "inter_output_gap_cycles": 3608.0,
+    "mmac_end_to_first_store_cycles": 1700.0,
+    "first_to_last_store_issue_cycles": 1204.0,
+    "last_store_to_next_mmac_cycles": 704.0,
+    "waits": [
+      {
+        "op": "s_abarrier_try_wait s1, 10, s0",
+        "tick": 8745324,
+        "next_issue_gap_cycles": 12.0,
+        "id": 10
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(8)",
+        "tick": 8753108,
+        "next_issue_gap_cycles": 6.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(7)",
+        "tick": 8788692,
+        "next_issue_gap_cycles": 350.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 9015540,
+        "next_issue_gap_cycles": 6.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 9364708,
+        "next_issue_gap_cycles": 14.0
+      },
+      {
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "tick": 10382188,
+        "next_issue_gap_cycles": 4.0,
+        "id": 2
+      },
+      {
+        "op": "s_abarrier_try_wait s1, 5, s0",
+        "tick": 10411100,
+        "next_issue_gap_cycles": 4.0,
+        "id": 5
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 10494500,
+        "next_issue_gap_cycles": 326.0
+      },
+      {
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "tick": 10682428,
+        "next_issue_gap_cycles": 4.0,
+        "id": 0
+      }
+    ],
+    "last_mmac_end_tick": 11038268,
+    "tail_after_mmac_cycles": 2068.0
+  },
+  "C1": {
+    "first_mmac_tick": 8747548,
+    "initial_to_mmac_cycles": 7747.0,
+    "inter_output_gap_cycles": 3668.0,
+    "mmac_end_to_first_store_cycles": 1492.0,
+    "first_to_last_store_issue_cycles": 1204.0,
+    "last_store_to_next_mmac_cycles": 972.0,
+    "waits": [
+      {
+        "op": "s_abarrier_try_wait s1, 10, s0",
+        "tick": 9212364,
+        "next_issue_gap_cycles": 20.0,
+        "id": 10
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(8)",
+        "tick": 9224596,
+        "next_issue_gap_cycles": 6.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(7)",
+        "tick": 9235716,
+        "next_issue_gap_cycles": 6.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 9251284,
+        "next_issue_gap_cycles": 6.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 9960740,
+        "next_issue_gap_cycles": 14.0
+      },
+      {
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "tick": 10740252,
+        "next_issue_gap_cycles": 4.0,
+        "id": 2
+      },
+      {
+        "op": "s_abarrier_try_wait s1, 7, s0",
+        "tick": 10769164,
+        "next_issue_gap_cycles": 4.0,
+        "id": 7
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 10892596,
+        "next_issue_gap_cycles": 334.0
+      },
+      {
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "tick": 11084972,
+        "next_issue_gap_cycles": 4.0,
+        "id": 0
+      }
+    ],
+    "last_mmac_end_tick": 11545340,
+    "tail_after_mmac_cycles": 1228.0
+  }
+}

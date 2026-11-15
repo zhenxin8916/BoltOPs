@@ -103,3 +103,31 @@ The older independent PMD fetch probe at `/home/zhenx/moe-gemm1-tuning/icache-ch
 A shared noinline K128 math body was also attempted to reduce duplicated MMAC code, but clean Gluon explicitly rejects **non-scalar arguments to noinline functions**. It has no performance result. No compiler checks or native WDRA requirements were bypassed. Native WDRA currently requires four waves per partition (`ConvertWarpSpecializeToLLVM.cpp`), so changing to two-wave roles was not used as a workaround.
 
 The retained code commit remains`973bc63` at12.168060μs with its verified full-N FP8/INT8 tests. Target9.602μs remains unmet. Further work should reduce static epilogue/fetch footprint or uncouple B publication from scale work **without** creating a costly FP32 mailbox pipeline or holding the current store behind a complete next-output read.
+
+
+## Continuation: independent B and scale lifetimes
+
+The retained source hash remains `0f1178d1c8d4ff2836d2f5bac17746b034b6e5a95d45960c62caf1273fc0852a` (code commit `973bc63`). Same frozen BM64 workload, GPU addresses, 48 CU, two independent output tiles per TG, 1.8 GHz, Triton `5b24821e` and LLVM `fd18eddb`; no compiler source changes. Every numerical PASS below checks 1,315,072 elements, zero mismatches, untouched output tail and the canonical output hash. These are bounded two-output validations, not new full-N protocol proofs.
+
+| Candidate | dispatch μs | whole 48-CU dispatch MMAC | decision |
+|---|---:|---:|---|
+| retained |12.168060|9.358%|keep|
+| B READY separate from SB READY; row metadata after MMAC |12.658452|8.995%|reject|
+| same, issue row metadata LDS reads before MMAC |12.533908|9.085%|reject|
+| separate B EMPTY and SB EMPTY credits |12.349872|9.220%|reject|
+| same, SB buffer-to-LDS copy |12.279260|9.273%|reject|
+| separate credits, complete metadata reads before MMAC |12.860836|8.854%|reject|
+| full-K loads, two static K128 descriptor slices |12.647888|9.003%|reject|
+| K128 tensor-phi loop |12.601740|9.036%|reject|
+| same with Triton range `loop_unroll_factor=1` |12.601740|9.036%|reject|
+| early route load and row-base/valid preparation in P0 |13.143284|8.664%|reject|
+
+Perf establishes a tradeoff rather than a retained improvement. Splitting B READY from SB READY and issuing row metadata before MMAC advances C1's first MMAC from **9.419196 to8.816492 μs**, but its inter-output MMAC gap grows from **2336 to3680 cycles**. That first candidate returns B EMPTY only after MMAC plus SB read, delaying the next B generation. A subsequent variant returns B EMPTY after A/B LDS completion, with a distinct eight-reader SB EMPTY barrier9 and SB READY10, so P1 can reuse B while the old SB remains protected. Initial SB EMPTY gets eight credits from four initializer waves arriving with count2. P1 waits that SB credit only after issuing both B halves. Both consumers return SB credit only after their SB read completes. This reduces dispatch12.533908→12.349872 μs; direct SB buffer-to-LDS further reduces it to12.279260 μs, still slower than retained.
+
+For the direct-SB candidate C1 starts MMAC at8.649692 μs, **0.769504 μs earlier** than retained, but its inter-output gap is3548 cycles; C0's is3652 cycles. In these inter-output intervals the A/B/metadata READY wait-to-next-issued-instruction intervals remain four cycles, while the final A/B LDS completion waits cost322–330 cycles. Therefore the remaining inter-output loss cannot be attributed to a long READY wait alone. Delayed scale reads/epilogue work and straight-line issued-instruction gaps remain relevant. The direct-SB trace still has436–440-cycle gaps between consecutive MMAC instructions with no intervening issued instructions, at PC mod256=192; this is evidence of an issue gap, **not proof of a fetch miss or model defect**.
+
+The K128 slicing experiment also uncovered two frontend constraints. Reinterpreting MLS storage as a new leading K-phase dimension loses its physical allocation geometry and produced1,302,985 mismatches; that invalid candidate has no accepted timing. Keeping original descriptors and using constant `.slice` views passes numerical validation. Selecting shared descriptors with a tensor ternary fails compilation because shared descriptors cannot be converted to tensors. Branching on the two tensor loads instead compiles and passes. The final assembly still contains128 static MMAC instructions across both consumer bodies, including with `loop_unroll_factor=1`; neither variant shrinks the math code or improves dispatch. No compiler checks were bypassed and no PMD issue is claimed.
+
+[Per-case metrics, phase evidence, hashes and raw-case paths](ready-and-k128-controls/summary.json) accompany this report. Rejected source remains only in the scratch experiment directories; the retained operator is unchanged. The original≤9.602 μs gate remains unmet.
+
+A separate larger-A MLS control used tile32×128/interleave2 and loader2×2, a geometry present in the native MLS table. End-to-end compilation failed at LLVM translation with `builtin.unrealized_conversion_cast` at the MMAC result; **no numerical or performance result exists**. Native table geometry alone does not prove support for this A-to-MMAC layout combination. The public `MmacInterleave2Layout` explicitly wraps B or the result and rejects operand A. This candidate did not change compiler checks or enter the retained source. [Compile-control record](ready-and-k128-controls/a-interleave2-compile-control.json).

@@ -1,0 +1,92 @@
+[
+  {
+    "case": "b-sb-independent-ready",
+    "time_us": 12.658452,
+    "whole_gpu_mmac_percent": 8.995475908112619,
+    "source_sha256": "9d0f199e549c1e916bbf4c7675f8ef030565ebbc1153d53e12efe2f89504c0fc",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/b-sb-independent-ready/kernel.py",
+    "assembly_sha256": "9112de55d8af90d96713a051394f6fbcfb80bf65f832e262046f65b20370150e",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "b-sb-independent-meta-overlap",
+    "time_us": 12.533908,
+    "whole_gpu_mmac_percent": 9.084860045246861,
+    "source_sha256": "6681252b4066248f1f6e11987a9e3d1a33464f3af6aabfcf7cbf3c76d0004a21",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/b-sb-independent-meta-overlap/kernel.py",
+    "assembly_sha256": "fa4fc7d93156c6543b3da66b5c3d37db07ffa7663283d8809427212d97c466bf",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "b-sb-split-empty-overlap",
+    "time_us": 12.349872,
+    "whole_gpu_mmac_percent": 9.220241311003061,
+    "source_sha256": "0cc4bde39f2d3a099a12c83020ea6e90eb2e19ab250ba9a4f4881e3487607ae2",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/b-sb-split-empty-overlap/kernel.py",
+    "assembly_sha256": "601885d98131b6f93edb69be8b4023220ebaee49072893b755296c90e78e0a7e",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "b-sb-split-empty-direct",
+    "time_us": 12.27926,
+    "whole_gpu_mmac_percent": 9.27326239529092,
+    "source_sha256": "fad5adee00bfdab1ff401d356dcba620ce1ce487be8df3b266e0e88ff39b9a07",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/b-sb-split-empty-direct/kernel.py",
+    "assembly_sha256": "945676292f168d5f4ce44675a87e4818e5260c5e162a28316fb3e45ddef39be1",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "b-sb-split-empty-before-mmac",
+    "time_us": 12.860836,
+    "whole_gpu_mmac_percent": 8.853918983182743,
+    "source_sha256": "71e42df584eb17e9398a93cb6be2976151d86d6d4170f360be2d69fbab9735c3",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/b-sb-split-empty-before-mmac/kernel.py",
+    "assembly_sha256": "ae1b5b772a3613acd7631743a3ef0631aec0ac9ad2785917ec1f5b070c450483",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "k128-lds-slice-static",
+    "time_us": 12.647888,
+    "whole_gpu_mmac_percent": 9.00298927378231,
+    "source_sha256": "69db41cb005e0f824def44f5b6823c037cf9ec1cba47ec426be04fbab6d8f920",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/k128-lds-slice-static/kernel.py",
+    "assembly_sha256": "57bb22087b9322a062dc1be584657cc6b304b8df404272c32258e5a86170ec95",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "k128-lds-loop-tensor-phi",
+    "time_us": 12.60174,
+    "whole_gpu_mmac_percent": 9.035958526362233,
+    "source_sha256": "d949c5f411d35cdadc75c29c7bb71ca0c1e69d820c95744559b1bae79de2d29b",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/k128-lds-loop-tensor-phi/kernel.py",
+    "assembly_sha256": "ac459921c20df5830518468000a818f8665ed699f7d7021dad90978416b60cd6",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "k128-lds-unroll-factor1",
+    "time_us": 12.60174,
+    "whole_gpu_mmac_percent": 9.035958526362233,
+    "source_sha256": "a5fb99ca756990fdb8f329255d6e45c55f55d2fee92656b8c6c64c3cf3392c8c",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/k128-lds-unroll-factor1/kernel.py",
+    "assembly_sha256": "75fafcc4c6362fdc33c7a345464471422719ed995e968a9b31edeb1de7ce9bc1",
+    "static_mmac_count": 128,
+    "promoted": false
+  },
+  {
+    "case": "early-route-precompute",
+    "time_us": 13.143284,
+    "whole_gpu_mmac_percent": 8.663649054528534,
+    "source_sha256": "24494ccb8a633e09e017040d9d80a76e0c746a63e8a97fff62668e6aface36df",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/early-route-precompute/kernel.py",
+    "assembly_sha256": "e89ce6beb2d7c673d1384a0cfd8284d3ced1802681f9fa23a4e7c1eb4c2db174",
+    "static_mmac_count": 128,
+    "promoted": false
+  }
+]

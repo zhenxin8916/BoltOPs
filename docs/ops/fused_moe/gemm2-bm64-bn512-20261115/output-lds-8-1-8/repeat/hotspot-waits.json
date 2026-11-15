@@ -1,0 +1,402 @@
+{
+  "0": {
+    "longest_wait_issue_gaps": [
+      {
+        "tick": 6980580,
+        "op": "s_waitcnt vmcnt(3)",
+        "next_instruction_tick": 7873516,
+        "issue_gap_cycles": 1606.0
+      },
+      {
+        "tick": 10682428,
+        "op": "s_abarrier_try_wait s6, 13, 0",
+        "next_instruction_tick": 11454156,
+        "issue_gap_cycles": 1388.0
+      },
+      {
+        "tick": 12200308,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 12492764,
+        "issue_gap_cycles": 526.0
+      },
+      {
+        "tick": 9606012,
+        "op": "s_abarrier_try_wait s2, 13, 0",
+        "next_instruction_tick": 9868444,
+        "issue_gap_cycles": 472.0
+      },
+      {
+        "tick": 13987292,
+        "op": "s_abarrier_try_wait s6, 9, 0",
+        "next_instruction_tick": 14229708,
+        "issue_gap_cycles": 436.0
+      },
+      {
+        "tick": 13059884,
+        "op": "s_abarrier_try_wait s19, 9, 0",
+        "next_instruction_tick": 13293404,
+        "issue_gap_cycles": 420.0
+      },
+      {
+        "tick": 10351052,
+        "op": "s_abarrier_try_wait s6, 9, 0",
+        "next_instruction_tick": 10571228,
+        "issue_gap_cycles": 396.0
+      },
+      {
+        "tick": 8177092,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 8391708,
+        "issue_gap_cycles": 386.0
+      },
+      {
+        "tick": 14329788,
+        "op": "s_abarrier_try_wait s6, 13, 0",
+        "next_instruction_tick": 14532172,
+        "issue_gap_cycles": 364.0
+      },
+      {
+        "tick": 13579188,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13773788,
+        "issue_gap_cycles": 350.0
+      },
+      {
+        "tick": 10064156,
+        "op": "s_abarrier_try_wait s6, 13, 1",
+        "next_instruction_tick": 10255420,
+        "issue_gap_cycles": 344.0
+      },
+      {
+        "tick": 7887972,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 8078124,
+        "issue_gap_cycles": 342.0
+      },
+      {
+        "tick": 8620780,
+        "op": "s_abarrier_try_wait s0, 3, s18",
+        "next_instruction_tick": 8809820,
+        "issue_gap_cycles": 340.0
+      },
+      {
+        "tick": 12037956,
+        "op": "s_waitcnt vmcnt(19)",
+        "next_instruction_tick": 12190300,
+        "issue_gap_cycles": 274.0
+      },
+      {
+        "tick": 11721036,
+        "op": "s_abarrier_try_wait s0, 13, 1",
+        "next_instruction_tick": 11867820,
+        "issue_gap_cycles": 264.0
+      },
+      {
+        "tick": 13832724,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13965052,
+        "issue_gap_cycles": 238.0
+      }
+    ]
+  },
+  "4": {
+    "longest_wait_issue_gaps": [
+      {
+        "tick": 6388996,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 7355324,
+        "issue_gap_cycles": 1738.0
+      },
+      {
+        "tick": 8430628,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 9043340,
+        "issue_gap_cycles": 1102.0
+      },
+      {
+        "tick": 10496724,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 11098316,
+        "issue_gap_cycles": 1082.0
+      },
+      {
+        "tick": 12698484,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 13213340,
+        "issue_gap_cycles": 926.0
+      },
+      {
+        "tick": 7429828,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 7933564,
+        "issue_gap_cycles": 906.0
+      },
+      {
+        "tick": 9644932,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 10144220,
+        "issue_gap_cycles": 898.0
+      },
+      {
+        "tick": 11499748,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 11943436,
+        "issue_gap_cycles": 798.0
+      },
+      {
+        "tick": 12248124,
+        "op": "s_abarrier_try_wait s9, 8, 1",
+        "next_instruction_tick": 12568380,
+        "issue_gap_cycles": 576.0
+      },
+      {
+        "tick": 9044452,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 9359148,
+        "issue_gap_cycles": 566.0
+      },
+      {
+        "tick": 8095916,
+        "op": "s_abarrier_try_wait s9, 6, 1",
+        "next_instruction_tick": 8398380,
+        "issue_gap_cycles": 544.0
+      },
+      {
+        "tick": 11944548,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 12245900,
+        "issue_gap_cycles": 542.0
+      },
+      {
+        "tick": 6059844,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 6338956,
+        "issue_gap_cycles": 502.0
+      },
+      {
+        "tick": 11175044,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 11425244,
+        "issue_gap_cycles": 450.0
+      },
+      {
+        "tick": 7934676,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 8093692,
+        "issue_gap_cycles": 286.0
+      },
+      {
+        "tick": 10220948,
+        "op": "s_waitcnt vmcnt(0)",
+        "next_instruction_tick": 10324364,
+        "issue_gap_cycles": 186.0
+      },
+      {
+        "tick": 13214452,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13293404,
+        "issue_gap_cycles": 142.0
+      }
+    ]
+  },
+  "8": {
+    "longest_wait_issue_gaps": [
+      {
+        "tick": 6078748,
+        "op": "s_abarrier_try_wait s2, 1, s1",
+        "next_instruction_tick": 7748972,
+        "issue_gap_cycles": 3004.0
+      },
+      {
+        "tick": 11458604,
+        "op": "s_abarrier_try_wait s1, s16, s17",
+        "next_instruction_tick": 12735180,
+        "issue_gap_cycles": 2296.0
+      },
+      {
+        "tick": 10749148,
+        "op": "s_abarrier_try_wait s2, 5, 0",
+        "next_instruction_tick": 11162812,
+        "issue_gap_cycles": 744.0
+      },
+      {
+        "tick": 8844292,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 9234604,
+        "issue_gap_cycles": 702.0
+      },
+      {
+        "tick": 7766764,
+        "op": "s_abarrier_try_wait s2, 5, 0",
+        "next_instruction_tick": 8098140,
+        "issue_gap_cycles": 596.0
+      },
+      {
+        "tick": 8157076,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 8329436,
+        "issue_gap_cycles": 310.0
+      },
+      {
+        "tick": 9527060,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 9694972,
+        "issue_gap_cycles": 302.0
+      },
+      {
+        "tick": 13548052,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13711516,
+        "issue_gap_cycles": 294.0
+      },
+      {
+        "tick": 11212852,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 11358524,
+        "issue_gap_cycles": 262.0
+      },
+      {
+        "tick": 13167748,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13275612,
+        "issue_gap_cycles": 194.0
+      },
+      {
+        "tick": 8431740,
+        "op": "s_abarrier_try_wait s1, s16, s17",
+        "next_instruction_tick": 8511804,
+        "issue_gap_cycles": 144.0
+      },
+      {
+        "tick": 9409188,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 9485916,
+        "issue_gap_cycles": 138.0
+      },
+      {
+        "tick": 13439076,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13506908,
+        "issue_gap_cycles": 122.0
+      },
+      {
+        "tick": 10652404,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 10709116,
+        "issue_gap_cycles": 102.0
+      },
+      {
+        "tick": 14124068,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 14180780,
+        "issue_gap_cycles": 102.0
+      },
+      {
+        "tick": 10303236,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 10346604,
+        "issue_gap_cycles": 78.0
+      }
+    ]
+  },
+  "12": {
+    "longest_wait_issue_gaps": [
+      {
+        "tick": 6310044,
+        "op": "s_abarrier_try_wait s2, 1, s1",
+        "next_instruction_tick": 7766764,
+        "issue_gap_cycles": 2620.0
+      },
+      {
+        "tick": 7784556,
+        "op": "s_abarrier_try_wait s2, 7, 0",
+        "next_instruction_tick": 8560732,
+        "issue_gap_cycles": 1396.0
+      },
+      {
+        "tick": 12280372,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 12561708,
+        "issue_gap_cycles": 506.0
+      },
+      {
+        "tick": 13590308,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13784908,
+        "issue_gap_cycles": 350.0
+      },
+      {
+        "tick": 8619668,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 8789804,
+        "issue_gap_cycles": 306.0
+      },
+      {
+        "tick": 13830500,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13996188,
+        "issue_gap_cycles": 298.0
+      },
+      {
+        "tick": 10401092,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 10555660,
+        "issue_gap_cycles": 278.0
+      },
+      {
+        "tick": 9747236,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 9852876,
+        "issue_gap_cycles": 190.0
+      },
+      {
+        "tick": 5434900,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 5531644,
+        "issue_gap_cycles": 174.0
+      },
+      {
+        "tick": 11766628,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 11858924,
+        "issue_gap_cycles": 166.0
+      },
+      {
+        "tick": 13283396,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 13371244,
+        "issue_gap_cycles": 158.0
+      },
+      {
+        "tick": 11901180,
+        "op": "s_abarrier_try_wait s2, 7, 0",
+        "next_instruction_tick": 11987916,
+        "issue_gap_cycles": 156.0
+      },
+      {
+        "tick": 12670684,
+        "op": "s_abarrier_try_wait s1, s16, s17",
+        "next_instruction_tick": 12746300,
+        "issue_gap_cycles": 136.0
+      },
+      {
+        "tick": 11278460,
+        "op": "s_abarrier_try_wait s1, 15, 0",
+        "next_instruction_tick": 11351852,
+        "issue_gap_cycles": 132.0
+      },
+      {
+        "tick": 11372980,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 11443036,
+        "issue_gap_cycles": 126.0
+      },
+      {
+        "tick": 14651156,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_instruction_tick": 14712316,
+        "issue_gap_cycles": 110.0
+      }
+    ]
+  }
+}

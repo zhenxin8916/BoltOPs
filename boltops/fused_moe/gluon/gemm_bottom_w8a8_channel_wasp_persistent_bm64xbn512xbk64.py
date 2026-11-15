@@ -445,7 +445,7 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     am = gl.allocate_shared_memory(A.dtype.element_ty, [STAGES, BM, K], al)
     b0 = gl.allocate_shared_memory(B.dtype.element_ty, [1, K, BN // 4], bl)
     b1 = gl.allocate_shared_memory(B.dtype.element_ty, [1, K, BN // 4], bl)
-    output_shared: gl.constexpr = gl.SwizzledSharedLayout(8, 4, 4, [1, 0])
+    output_shared: gl.constexpr = gl.SwizzledSharedLayout(8, 1, 8, [1, 0])
     co0 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)
     co1 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)
     meta_shared: gl.constexpr = gl.SwizzledSharedLayout(1, 1, 1, [0])

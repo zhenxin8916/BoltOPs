@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.538532 us / whole-dispatch MMAC14.656314%, metadata register prefetch. The 60% target remains open.**
+**Current best: 15.423440 us / whole-dispatch MMAC14.765681%, output-lds-8-1-8. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -70,3 +70,13 @@ Solution: preserve next-A MLS prefetch, load next-M scale/weight/route/expert in
 CU0/SIMD0 diagnostics: C0 gap after ordinal63 falls2488->1688 cycles; C1 cross-M gap after127 falls2320->1308 cycles. Other intervals grow: C0 cross-M960->1640 cycles; hence only0.074us total gain, not a wholesale removal of stalls. Full dispatch is the acceptance metric.
 
 Negative controls: deferring next metadata loads until the first output pair drains15.658628 us, or until all output drains15.899376 us, both worse; they move stalls rather than hide memory latency. Draining C0's two panels before C1 gives15.550208 us, slower than the new best. A two-output-slot prototype sharing one READY missed a generation after two back-to-back phase flips and was stopped; it has no timing result. Distinct READY IDs are required for that design. No backend or model workaround is used.
+
+## Output LDS mapping update
+
+Current best: **15.423440 us / whole 48-CU dispatch MMAC14.765681%** at1.8GHz, two output tiles per persistent TG. This is **0.740688%** lower time than commit b38e42315.538532 us. The 60% target remains unmet.
+
+Only output mailbox shared layout changes: SwizzledSharedLayout(vec8,perPhase4,maxPhase4) -> (vec8,perPhase1,maxPhase8). The two-role producer/consumer assignment, single M32 mailbox per consumer, barrier phases, metadata schedule, arithmetic and scatter mapping remain intact. LDS stays99KiB and actual VGPRs36/9/146/146; no spills. Four FP8/INT8 full-N equivalence cases pass, as do active-work, barrier/phase and consumer-VMEM audits; independent recompilation matches machine text, input/address hashes, output and exact elapsed time. Evidence: [output-lds-8-1-8](output-lds-8-1-8/).
+
+Perf evidence: mean LocalMemPipeline.creditStall falls960.729->723.063 cycles/CU. ldsBankConflict remains1024/CU; this is not evidence of eliminated bank conflicts. Static DS write opcode counts are unchanged, so this is not an instruction-count reduction. CU0/SIMD0 C0 gap after MMAC63 falls1688->764 cycles, while cross-M gap127 grows1640->1800 and metadata gap143 grows1556->2312. The remaining metadata READY issue interval is2296 cycles (11.458604->12.735180 us). These are issue gaps, including scheduling effects, not pure memory/instruction latency. Next action is earlier publication of already-prefetched next-M metadata after the first N phase drains.
+
+Negative controls: output layout(vec4,perPhase1,maxPhase8)15.593020 us; two M32 slots with distinct READY IDs15.561328 us; those slots plus metadata prefetch15.571336 us; separate B-data READY before scale publication16.539888 us. All bounded numerics pass, but none exceeds current best, so their implementations remain temporary.

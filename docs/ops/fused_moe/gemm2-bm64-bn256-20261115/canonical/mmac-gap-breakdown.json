@@ -1,0 +1,223 @@
+{
+  "8": {
+    "role": "C0",
+    "mmac_first_tick": 8222684,
+    "mmac_last_end_tick": 10786956,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 3488.0,
+        "first_tick": 8558508,
+        "next_tick": 10497836,
+        "instruction_counts": {
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 32,
+          "v_and_b32": 8,
+          "v_add_u32_sdwa": 8,
+          "v_or_b32": 16,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "s_and_b64": 8,
+          "v_cndmask_b32": 16,
+          "buffer_store_dword": 16,
+          "s_add_i32": 9,
+          "s_cmp_lt_i32": 1,
+          "s_cbranch_scc1": 1,
+          "s_and_b32": 1,
+          "s_bfe_u32": 1,
+          "s_abarrier_try_wait": 3,
+          "s_lshl_b32": 2,
+          "s_nop": 2,
+          "ds_read_matrix_trans_format": 24,
+          "ds_read2_b64": 1,
+          "s_cmp_eq_u32": 1,
+          "s_cselect_b32": 1,
+          "v_add_u32": 5,
+          "ds_read_b128": 8,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 2,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2
+        },
+        "first_ops": [
+          "v_pk_mul_f32 v[32:33], v[124:125], v[32:33] opsel: 0x38",
+          "v_pk_mul_f32 v[36:37], v[124:125], v[36:37] opsel: 0x38",
+          "v_pk_mul_f32 v[32:33], v[0:1], v[32:33] opsel: 0x28",
+          "v_pk_mul_f32 v[36:37], v[0:1], v[36:37] opsel: 0x39",
+          "v_pk_mul_f32 v[32:33], v[132:133], v[32:33] opsel: 0x38",
+          "v_pk_mul_f32 v[36:37], v[132:133], v[36:37] opsel: 0x38",
+          "v_cvt_pk_bf16_f32 v32, v32, v36, s0, opsel4:0",
+          "v_lshlrev_b32 v36, 3, v16"
+        ],
+        "last_ops": [
+          "s_abarrier_arrive s0, s0, 1",
+          "s_abarrier_arrive s0, 6, 1",
+          "s_mov_b32 s54, s52",
+          "s_mov_b32 s55, s52",
+          "s_mov_b32 s53, s52",
+          "v_mov_b64 v138, s54",
+          "v_mov_b64 v136, s52",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 42,
+        "gap_cycles": 92.0,
+        "first_tick": 8413948,
+        "next_tick": 8465100,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 65,
+        "gap_cycles": 4.0,
+        "first_tick": 10506732,
+        "next_tick": 10508956,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 68,
+        "gap_cycles": 4.0,
+        "first_tick": 10522300,
+        "next_tick": 10524524,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      }
+    ],
+    "gaps_sum_cycles": 3588.0
+  },
+  "12": {
+    "role": "C1",
+    "mmac_first_tick": 9419196,
+    "mmac_last_end_tick": 11302924,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 2336.0,
+        "first_tick": 9710540,
+        "next_tick": 11009356,
+        "instruction_counts": {
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "v_lshlrev_b32": 24,
+          "v_and_b32": 8,
+          "v_add_u32_sdwa": 8,
+          "v_lshl_or_b32": 8,
+          "v_or_b32": 16,
+          "v_cmp_gt_i32": 8,
+          "v_cmp_lt_i32": 8,
+          "s_and_b64": 8,
+          "v_cndmask_b32": 16,
+          "buffer_store_dword": 16,
+          "s_add_i32": 9,
+          "s_cmp_lt_i32": 1,
+          "s_cbranch_scc1": 1,
+          "s_and_b32": 1,
+          "s_bfe_u32": 1,
+          "s_abarrier_try_wait": 3,
+          "s_lshl_b32": 2,
+          "s_nop": 2,
+          "ds_read_matrix_trans_format": 24,
+          "ds_read2_b64": 1,
+          "s_cmp_eq_u32": 1,
+          "s_cselect_b32": 1,
+          "v_add_u32": 5,
+          "ds_read_b128": 8,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 2,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2
+        },
+        "first_ops": [
+          "v_pk_mul_f32 v[5:6], v[109:110], v[5:6] opsel: 0x38",
+          "v_pk_mul_f32 v[9:10], v[109:110], v[9:10] opsel: 0x38",
+          "v_pk_mul_f32 v[13:14], v[109:110], v[13:14] opsel: 0x38",
+          "v_pk_mul_f32 v[35:36], v[109:110], v[137:138] opsel: 0x38",
+          "v_pk_mul_f32 v[5:6], v[37:38], v[5:6] opsel: 0x28",
+          "v_pk_mul_f32 v[9:10], v[37:38], v[9:10] opsel: 0x39",
+          "v_pk_mul_f32 v[13:14], v[39:40], v[13:14] opsel: 0x28",
+          "v_pk_mul_f32 v[35:36], v[39:40], v[35:36] opsel: 0x39"
+        ],
+        "last_ops": [
+          "s_abarrier_arrive s0, s0, 1",
+          "s_abarrier_arrive s0, 8, 1",
+          "s_mov_b32 s54, s52",
+          "s_mov_b32 s55, s52",
+          "s_mov_b32 s53, s52",
+          "v_mov_b64 v139, s54",
+          "v_mov_b64 v137, s52",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 13,
+        "gap_cycles": 4.0,
+        "first_tick": 9481468,
+        "next_tick": 9483692,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 26,
+        "gap_cycles": 4.0,
+        "first_tick": 9541516,
+        "next_tick": 9543740,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 47,
+        "gap_cycles": 4.0,
+        "first_tick": 9637148,
+        "next_tick": 9639372,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 81,
+        "gap_cycles": 4.0,
+        "first_tick": 11089420,
+        "next_tick": 11091644,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 87,
+        "gap_cycles": 4.0,
+        "first_tick": 11118332,
+        "next_tick": 11120556,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 95,
+        "gap_cycles": 4.0,
+        "first_tick": 11156140,
+        "next_tick": 11158364,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 121,
+        "gap_cycles": 4.0,
+        "first_tick": 11274012,
+        "next_tick": 11276236,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      }
+    ],
+    "gaps_sum_cycles": 2364.0
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "raw_perf": "/home/zhenx/temp/moe-gemm2-bm64bn256-20261115/canonical-repeat-sqtt/m5out/0/0/2357033_python3.10.perf",
+  "sha256": "6842c03938cedfff2ca1d27b88f562c89b93d4469a85fad3e49247c2d72bd1a0",
+  "raw_trace": "/home/zhenx/temp/moe-gemm2-bm64bn256-20261115/canonical-repeat-sqtt/m5out/0/0/itrace_cu0_se0_xcd0.txt"
+}

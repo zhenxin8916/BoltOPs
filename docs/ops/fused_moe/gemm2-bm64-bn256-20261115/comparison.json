@@ -1,0 +1,178 @@
+[
+  {
+    "case": "reference-bm128",
+    "algorithm": "BM128 reference; two independent M tiles",
+    "time_us": 15.363948,
+    "whole_gpu_mmac_percent": 14.82285672927297,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 2190336,
+      "untouched_tail": true,
+      "output_sha256": "4c5b8b81ed5dfafb73c18b2a39e64e1f1b854dc116907e2b512bbe98241c724c",
+      "shared": 119808,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "baseline",
+    "algorithm": "BM64: paired M32 mailbox; P0 scatter; B64x16 MLS",
+    "time_us": 12.761312,
+    "whole_gpu_mmac_percent": 8.922969675845243,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "canonical",
+    "algorithm": "BM64: native B64x32 MLS; two A slots; consumer scatter",
+    "time_us": 12.16806,
+    "whole_gpu_mmac_percent": 9.358007767877542,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "early-sb-native64x32",
+    "algorithm": "SB global read hoisted before B MLS",
+    "time_us": 12.267028,
+    "whole_gpu_mmac_percent": 9.282509178262249,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "sb-publish-before-mls",
+    "algorithm": "SB LDS publication before B MLS",
+    "time_us": 12.337084,
+    "whole_gpu_mmac_percent": 9.229798548830502,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dual-producer-scatter",
+    "algorithm": "P0/P1 each drain one consumer mailbox",
+    "time_us": 13.078788,
+    "whole_gpu_mmac_percent": 8.706372486502572,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 117760,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dual-scatter-early-sb",
+    "algorithm": "dual scatter plus SB prefetch",
+    "time_us": 13.020964,
+    "whole_gpu_mmac_percent": 8.745036081813911,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 117760,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "p0-route-precompute",
+    "algorithm": "P0 computes routed C row offsets and validity",
+    "time_us": 13.407384,
+    "whole_gpu_mmac_percent": 8.492991623123496,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "a-prefetch-after-consume",
+    "algorithm": "next-M A prefetch waits current A consumption",
+    "time_us": 12.591176,
+    "whole_gpu_mmac_percent": 9.043539697959904,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "native64x32-k128-stream",
+    "algorithm": "B split into two K128 stages; native64x32 MLS",
+    "time_us": 12.710716,
+    "whole_gpu_mmac_percent": 8.958488255106952,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "bounded_equal_padded_output_work",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "b-priority1",
+    "algorithm": "P1 B send window uses priority1",
+    "time_us": 12.252016,
+    "whole_gpu_mmac_percent": 9.2938827373389,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  }
+]

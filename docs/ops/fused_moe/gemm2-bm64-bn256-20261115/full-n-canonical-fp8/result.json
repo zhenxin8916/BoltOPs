@@ -1,0 +1,11 @@
+{
+  "kind": "fp8",
+  "mismatches": 0,
+  "checked_elements": 197632,
+  "rows": 640,
+  "m_blocks": 10,
+  "grid": 2,
+  "n_tiles_per_m": 2,
+  "full_N": true,
+  "shared": 101376
+}

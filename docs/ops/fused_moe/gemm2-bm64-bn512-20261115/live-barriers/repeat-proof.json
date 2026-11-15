@@ -1,0 +1,13 @@
+{
+  "same_machine_text": true,
+  "same_inputs": true,
+  "same_gpu_addresses": true,
+  "same_time_us": true,
+  "same_output": true,
+  "production_matches_tested_source": false,
+  "time_us": 15.218832,
+  "text_sha256": "4eb87670afbb31d8792d2046c3d05f56aef18ad6f723d1843aac1f6c5c1fe0b2",
+  "source_sha256": "ad6cb447ffd6998ed0fe438a4cd592992dc9af3c49ddba83c039e3125058430f",
+  "production_changes_after_test": "Docstrings/comments only; non-string AST identical. Tested kernel.py retained unchanged.",
+  "production_source_sha256": "7f9421bc23571e3f2d40a288a46d76c3722e2661b15b473f39b1d48fb1ed0df9"
+}

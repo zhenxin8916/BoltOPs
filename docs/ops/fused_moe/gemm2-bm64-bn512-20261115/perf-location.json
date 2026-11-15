@@ -1,4 +1,4 @@
 {
-  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/ma-first-n-repeat/GEMM2_BM64_BN512_GRID48_OUTPUT96_2M_PER_CU_MA_AFTER_FIRST_N_GC1800_CU0.perf",
-  "sha256": "698fff2b2b8caac95779996ee889977d650f2bd3bcde321bc499c958a2c3f517"
+  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/live-barriers-repeat/GEMM2_BM64_BN512_GRID48_OUTPUT96_2M_PER_CU_LIVE_BARRIERS_GC1800_CU0.perf",
+  "sha256": "3d43db736a357eb09e41b869cd4b57c729c02ed314591aaa12ecbffd03b561f1"
 }

@@ -10,7 +10,7 @@ its two M32 output panels after applying ((acc * SA) * SB) * weight.
 
 LDS: A 16 KiB; one K256xN128 B slot per consumer, 64 KiB total;
 two M32xN128 BF16/FP16 output mailboxes, 16 KiB; double metadata 2 KiB;
-SB 1 KiB. Total 99 KiB. All 16 abarriers remain within IDs 0..15.
+SB 1 KiB. Total 99 KiB. Twelve live abarriers remain within IDs 0..15.
 
 A epochs advance per M, B epochs per N128 phase. EMPTY credits follow
 completed reads. Full N traversal is the default; N_TILES_LIMIT is only
@@ -61,23 +61,21 @@ def _initialize(STAGES: gl.constexpr):
 
     A needs four credits from each consumer; B and C need four credits.
     READY counts four writer waves. Metadata has two M slots; draining this
-    M's outputs bounds its reuse. IDs 0..15 are initialized; no ID exceeds 15.
+    M's outputs bounds its reuse. Only live IDs are initialized; no ID exceeds 15.
     """
     hcu.abarrier_init(1, 4)
     hcu.abarrier_init(3, 8)
     for i in gl.static_range(2, 16):
-        if i != 3:
+        if i != 3 and i != 2 and i != 4 and i != 10 and i != 14:
             hcu.abarrier_init(i, 4)
     hcu.abarrier_init(0, 4)
     gl.thread_barrier()
     hcu.abarrier_arrive(3, 2)
     hcu.abarrier_arrive(6)
-    hcu.abarrier_arrive(4)
     hcu.abarrier_arrive(8)
     hcu.abarrier_arrive(11)
     hcu.abarrier_arrive(15)
     # AB10/14 are the second Bleft READY/EMPTY, not compute tokens.
-    hcu.abarrier_arrive(14)
     gl.thread_barrier()
 
 
@@ -219,8 +217,9 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
               MUL_ROUTED_WEIGHT: gl.constexpr, num_tokens_post_padded_ptr):
     """P0 prefetches next-M A/metadata and scatters C; P1 streams both B halves.
 
-    P0: current routes -> next-M A -> C0 M32 mailbox -> C1 M32 mailbox -> repeat.
-    P1: BL K0/K1 -> BR K0/K1 -> BR K2/K3 -> BL K2/K3 -> next N128 phase.
+    P0: current routes -> next-M A and metadata prefetch -> drain outputs;
+    publish next-M metadata after the first N phase drains.
+    P1: full-K BL -> full-K BR -> next N128 phase.
     P0 epochs count M preloads; P1 epochs count N128 phases across all M.
     """
     if num_tokens_post_padded_ptr is not None:
@@ -310,7 +309,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
     """Retain full A in registers and compute one 256-column consumer half.
 
     first N phase: wait/read A -> wait/read B0/SB -> LDS wait -> release A/B0
-    every phase:  MMAC K0/K1 -> wait/read B1 -> release B1 -> MMAC K2
+    every phase: read full-K B -> MMAC K0/K1/K2
                   -> two M32 MMAC K3/scale/mailbox handoffs.
     Metadata is read once per M; A remains in registers through all N phases.
     """
@@ -474,7 +473,8 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
             GROUP_SIZE_M, CK_SORTING, 1, N_PANELS, A.dtype.element_ty == gl.int8, num_tokens_post_padded_ptr)),
     ], [4, 4, 4, 4], regs)
     for barrier in gl.static_range(16):
-        hcu.abarrier_invalidate(barrier)
+        if barrier != 2 and barrier != 4 and barrier != 10 and barrier != 14:
+            hcu.abarrier_invalidate(barrier)
 
 
 def is_persistent_channel_gemm2_supported(a, b, a_scale, b_scale, *, arch, cu_count,

@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.322804 us / whole-dispatch MMAC14.862658%, ma-after-first-n. The 60% target remains open.**
+**Current best: 15.218832 us / whole-dispatch MMAC14.964197%, live-barriers. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -88,3 +88,14 @@ Current best **15.322804 us / whole-dispatch MMAC14.862658%**, same1.8GHz/48CU/t
 Perf hypothesis: output-layout optimization moved the bottleneck to next-M metadata publication. C0's metadata READY issue interval reached2296 cycles after the first K64 chunk of the second M. Metadata was prefetched into registers but published only after all current N phases drained. Publish it after n==0/panel==1 instead: this avoids blocking the first pair of current output mailboxes, while allowing later N phases to overlap metadata LDS publication. READY12/0 and its M-generation phase remain unchanged. Each metadata slot is still reused only after every output of the older M has been drained. The condition is independent of the diagnostic N limit and works for full N traversal.
 
 After this change, ordinal143's former2312-cycle between-MMAC gap is no longer among C0's twelve largest gaps; C1 cross-M gap127 falls1988->1172 cycles. Other waits remain: C0 cross-M gap1816 cycles, C1 gap1912116 cycles. Startup A READY wait is2440 cycles on C0/SIMD0; first B-right READY wait1564 cycles on C1. The 60% reduction target is still unachieved; these are small pipeline improvements, not completion of the objective.
+
+## Initialize only live pipeline barriers
+
+Current best **15.218832 us / whole 48-CU dispatch MMAC14.964197%**, same1.8GHz/two-output-per-persistent-TG scope. Improvement from commit efb1279 is0.678544%; versus the start-of-turn3208d1d15.612480 us it is2.521368%. The historical BM12820.680420 us elapsed reduction is26.409464% with half the padded work, not equal-work throughput. The60% objective remains open.
+
+Removing the former second-K128 B stages left AB2/4/10/14 unused. They no longer receive an initializer or invalidation, and obsolete initial EMPTY4/14 credits are removed. Actual static AB init count16->12; WASP initializer EB4 joins fall by four. Active IDs are0/1/3/5/6/7/8/9/11/12/13/15. No live synchronization or wait is removed. The dedicated real-trace audit asserts no wait accesses an obsolete ID; four complete-N1024 FP8/INT8 equivalence cases pass, covering later N phases and persistent transitions. Generic phase/work/consumer-VMEM audits also pass. Independent compilation repeats exact text, inputs, addresses, output and time. LDS99KiB and the same WDRA register quotas are retained, without spills. Evidence: [live-barriers](live-barriers/).
+
+This reduces startup/teardown instructions left over from the earlier two-slot B protocol, not the fixed PMD launch startup. The remaining largest first-round A/B and output/mailbox waits still need optimization. No hardware barrier ID or phase restrictions are relaxed.
+
+
+Production documentation was refreshed after testing to describe the full-K B protocol and twelve live barrier IDs. The tested source is retained unchanged; repeat-proof.json records the tested and production hashes and the documentation-only AST comparison.

@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/native-b-repeat/GEMM2_M4096_N2048_K256_BM64_BN512_BK64_GRID48_OUTPUT96_2M_PER_CU_NATIVE_B64x32_GC1800_CU0.perf",
+  "sha256": "18642b424a02e1ad0b8522d237788c0b4208cd74d2e7b22ed241a55e1b5d31dd"
+}

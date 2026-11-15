@@ -162,10 +162,10 @@ def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
     if USE_B64:
         panel_base = b_base + col.to(gl.int64) * K + KH * (2 * BK)
         hcu.matrix_load(dest.index(physical), panel_base, (2 * BK, BN // 4),
-                        (1, K), (0, 0), warps=(2, 2))
+                        (1, K), (0, 0), warps=(1, 4))
     else:
         hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
-                        (KH * (2 * BK), col), warps=(2, 2))
+                        (KH * (2 * BK), col), warps=(1, 4))
     if KH == 0:
         hcu.sched_barrier()
         ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
@@ -421,7 +421,7 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     gl.static_assert(STAGES == 1, "A halves are read and credited before overwrite")
     gl.static_assert(GROUP_SIZE_M == 1, "A reuse uses row-persistent ownership")
     al: gl.constexpr = hcu.MlsSharedLayout(0, (16, 64), order=(1, 0))
-    bl: gl.constexpr = hcu.MlsSharedLayout(1, (64, 32), alt=1, order=(0, 1))
+    bl: gl.constexpr = hcu.MlsSharedLayout(1, (128, 32), alt=1, order=(0, 1))
     am = gl.allocate_shared_memory(A.dtype.element_ty, [STAGES, BM, K], al)
     b0 = gl.allocate_shared_memory(B.dtype.element_ty, [2, 2 * BK, BN // 4], bl)
     b1 = gl.allocate_shared_memory(B.dtype.element_ty, [2, 2 * BK, BN // 4], bl)

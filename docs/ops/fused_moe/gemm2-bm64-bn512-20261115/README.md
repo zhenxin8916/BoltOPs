@@ -113,3 +113,7 @@ Numeric-passing negative controls in this round: double A slots15.561884us; pref
 ## Output strategy counterexamples and next reuse direction
 
 The latest output-strategy controls did not beat commit7820cab15.145996us. Exact results, trace evidence and the unimplemented runtime-gated adjacent-M B-reuse protocol are recorded in [output-strategy-controls](output-strategy-controls/README.md). Production source remains unchanged. Reorder-only18.044980us is a negative control, not evidence of a speedup. The60% target is still active and unachieved.
+
+## BN256 conversation comparison
+
+The retained BN256 12.168060 us approach was transplanted to the original BN512 two-output workload: **16.098424 us**, zero numerical errors, whole-dispatch MMAC14.146577%. It does not replace BN512 best15.145996 us. See [algorithm and trace comparison](bn256-algorithm-control/README.md).

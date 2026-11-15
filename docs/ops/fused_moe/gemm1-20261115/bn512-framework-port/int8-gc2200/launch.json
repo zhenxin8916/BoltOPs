@@ -1,0 +1,88 @@
+{
+  "case": {
+    "M": 4096,
+    "E": 256,
+    "N": 512,
+    "K": 2048,
+    "topk": 8
+  },
+  "kind": "int8",
+  "warmup": 0,
+  "grid": 48,
+  "bm": 128,
+  "bn": 512,
+  "bk": 128,
+  "actual_n": 1024,
+  "actual_k": 2048,
+  "cu_count": 48,
+  "tiles_per_tg": 2,
+  "total_tiles": 96,
+  "output_elements_per_tg": 131072,
+  "input_sha256": {
+    "A": "48761999a27af802dd21ba4ba64b6c73dd85a8405c0c9d1079b141d1c1976448",
+    "B": "4e3802b3a731aa0f66999f821f215d847bc9e3d943c4143948544e316296860a",
+    "SA": "fea24e46ad585e290a19c495d1474c4a6f08b08d86eef0085834c217a08ed70c",
+    "SB": "2c8c7d97e59f7037cdba9531055e43ef51399658a3c948b2dc047da5f446d4e3",
+    "Sorted": "8adc203633ea8ada4cb04adfccc0b1347c9b4f2d3e4d5fe24186c7302d3042f3",
+    "Experts": "78b2fd24d7182f7e72859f4659016c5dc67a7e8d480aab2641e0dea5492d28c6",
+    "RouteWeights": "aca8410f160cfcf0530fb1c74fdd7cdf97eb707c047e5452e831a26de047a397",
+    "SortedWeights": "4424c0ad8fbb20cee5cdd8959214cc9502dc747c80a92672c038f9e713caa365",
+    "golden": "9c0e738686ce67af343a884aa73b0f6e908170a9966c536d1df0f3a76026db0e"
+  },
+  "options": {
+    "num_warps": 4,
+    "num_stages": 2,
+    "use_async_copy": true,
+    "wasp_partition_warps": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "wasp_wdra": true,
+    "TOTAL_TILES": 96,
+    "BLOCK_SIZE_M": 128,
+    "BLOCK_SIZE_N": 512,
+    "BLOCK_SIZE_K": 128,
+    "INSN_WARMUP": false
+  },
+  "source_sha256": "8f5f433539b95f67f159e33c9bd32e87452646f7932bc52b8fda51cf70c1de48",
+  "gpu_buffers": {
+    "A": {
+      "address": 140728059559936,
+      "bytes": 8388608
+    },
+    "B": {
+      "address": 140721382227968,
+      "bytes": 536870912
+    },
+    "SA": {
+      "address": 140728034394112,
+      "bytes": 16384
+    },
+    "SB": {
+      "address": 140728034410496,
+      "bytes": 1048576
+    },
+    "Sorted": {
+      "address": 140728035459072,
+      "bytes": 191488
+    },
+    "Experts": {
+      "address": 140728035650560,
+      "bytes": 1496
+    },
+    "RouteWeights": {
+      "address": 140728035652096,
+      "bytes": 131072
+    },
+    "SortedWeights": {
+      "address": 140728035783168,
+      "bytes": 191488
+    },
+    "C": {
+      "address": 140727489134592,
+      "bytes": 98041856
+    }
+  }
+}

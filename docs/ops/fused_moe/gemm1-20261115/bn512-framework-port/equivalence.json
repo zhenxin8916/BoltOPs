@@ -1,0 +1,56 @@
+[
+  {
+    "kind": "fp8",
+    "output": "bf16",
+    "forced_int64": false,
+    "group_size_m": 1,
+    "elements": 393216,
+    "differing_elements": 0,
+    "shared_bytes": 131072
+  },
+  {
+    "kind": "int8",
+    "output": "bf16",
+    "forced_int64": false,
+    "group_size_m": 1,
+    "elements": 393216,
+    "differing_elements": 0,
+    "shared_bytes": 131072
+  },
+  {
+    "kind": "fp8",
+    "output": "fp16",
+    "forced_int64": true,
+    "group_size_m": 1,
+    "elements": 393216,
+    "differing_elements": 0,
+    "shared_bytes": 131072
+  },
+  {
+    "kind": "int8",
+    "output": "fp16",
+    "forced_int64": true,
+    "group_size_m": 1,
+    "elements": 393216,
+    "differing_elements": 0,
+    "shared_bytes": 131072
+  },
+  {
+    "kind": "fp8e5",
+    "output": "bf16",
+    "forced_int64": false,
+    "group_size_m": 2,
+    "elements": 393216,
+    "differing_elements": 0,
+    "shared_bytes": 131072
+  },
+  {
+    "kind": "fp8mixed",
+    "output": "bf16",
+    "forced_int64": false,
+    "group_size_m": 1,
+    "elements": 393216,
+    "differing_elements": 0,
+    "shared_bytes": 131072
+  }
+]

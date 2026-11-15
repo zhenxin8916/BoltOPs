@@ -1,0 +1,21 @@
+{
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "triton_changes": "无本地改动",
+  "llvm_project_commit": "691f31662d6a25c9826a2bb58bf0d9fb3a733581",
+  "llvm_changes": "提交修复 buffer 32 位 offset 回绕并归一 LDS 地址、合并 DS 读取；本地补丁禁止 load 下沉跨 barrier，避免槽位复用竞态；启用 hcu-control-only-ebarrier-sync，避免控制同步排空 LDS 读取。",
+  "kernel_sha256": "8f5f433539b95f67f159e33c9bd32e87452646f7932bc52b8fda51cf70c1de48",
+  "boltops_parent": "05d3df56ec3538fa548c3bcfedff5622f34fc30e",
+  "original_commit": "5f9c36da40670718df4013418ab59bd0e0a14920",
+  "original_sources": {
+    "kernel_bn512_retained_a_native_fragment.py": "cce4641ac98fcf0490c25df0ff3be16febd048cb418ef2d7b59af33e85347969",
+    "bn512_retained_a_producers.py": "f841ca70cbed6fe24deae16c9b13107991a054958ab1b76b30df58b97aec6c21",
+    "bn512_epilogue_native_fragment.py": "749667211851247659ec79d8058d2a74cfc249c611643a3be4776d40727c92e0",
+    "bn512_epilogue.py": "43b7f6963534be1b9578984c9f939665c0e8531078ecbff886a8f3df1cd921c4"
+  },
+  "clang_sha256": "2aecc815024cabed79d70ca5e14c4732cb878ed0a49005d5fed2a9d27cadd61d",
+  "gpu_addresses_equal_across_clocks": {
+    "fp8": true,
+    "int8": true
+  },
+  "raw_root": "/home/zhenx/temp/moe-gemm1-bn512-port-20261115"
+}

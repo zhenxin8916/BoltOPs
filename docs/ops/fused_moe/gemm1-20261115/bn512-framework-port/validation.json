@@ -1,0 +1,13 @@
+{
+  "cpu_passed": 216,
+  "opt_in_skipped": 6,
+  "model_equivalence_passed": 6,
+  "model_elements_per_case": 393216,
+  "model_differing_elements": 0,
+  "cpu_files": [
+    "test_gluon_fused_experts.py",
+    "test_channel_gemm1_bn512_equivalence.py",
+    "test_channel_gemm2_dispatch.py",
+    "test_channel_gemm2_bn512_dispatch.py"
+  ]
+}

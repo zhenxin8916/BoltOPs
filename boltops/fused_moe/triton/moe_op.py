@@ -2962,14 +2962,21 @@ def _try_gluon_channel_gemm1(
         gluon_available = False
     if not gluon_available:
         return False
-    from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
-        DEFAULT_LAUNCH_OPTIONS,
-        gemm_top_w8a8_channel_wasp_persistent,
-        is_persistent_channel_gemm1_supported,
-    )
-    # Only BM belongs to the sorting contract. BN/BK and launch options are
-    # this candidate's own settings, independent of ordinary Triton's tuning.
-    bn = 256 if B.shape[1] >= 256 and B.shape[1] % 128 == 0 else 128
+    # BN512 retains each A pair across two N panels; complete K512 cycles
+    # preserve its cross-output slot phases. Other shapes keep BN128/256.
+    if B.shape[1] > 0 and B.shape[1] % 512 == 0 and A.shape[1] % 512 == 0:
+        from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn512xbk128 import (
+            DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
+            is_persistent_channel_gemm1_supported,
+        )
+        bn = 512
+    else:
+        from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
+            DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
+            is_persistent_channel_gemm1_supported,
+        )
+        bn = 256 if B.shape[1] >= 256 and B.shape[1] % 128 == 0 else 128
+    # Only BM belongs to sorting; each candidate selects its own BN/BK.
     candidate = dict(BLOCK_SIZE_M=config.get("BLOCK_SIZE_M"),
                      BLOCK_SIZE_N=bn, BLOCK_SIZE_K=128,
                      GROUP_SIZE_M=config.get("GROUP_SIZE_M", 1))
@@ -2997,8 +3004,13 @@ def _try_gluon_channel_gemm1(
         return False
     opts = dict(DEFAULT_LAUNCH_OPTIONS)
     opts.update(candidate)
+    def byte_span(tensor):
+        return (1 + sum((size - 1) * stride for size, stride in zip(tensor.shape, tensor.stride()))) * tensor.element_size()
     for name, tensor in (("A", A), ("B", B), ("C", C)):
-        opts["USE_ADDR_OFFSET_INT64_" + name] = tensor.numel() * tensor.element_size() >= 2**32 - 1
+        opts["USE_ADDR_OFFSET_INT64_" + name] = tensor.numel() * tensor.element_size() >= 4 * 1024**3 - 1
+    if bn == 512:
+        opts["USE_ADDR_OFFSET_INT64_A"] = max(byte_span(t) for t in (A, A_scale, *metadata)) >= 4 * 1024**3 - 1
+        opts["USE_ADDR_OFFSET_INT64_B"] = max(byte_span(B), byte_span(B_scale)) >= 4 * 1024**3 - 1
     gemm_top_w8a8_channel_wasp_persistent[(device.cu_count,)](
         A, B, A_scale, B_scale, C, sorted_token_ids, expert_ids,
         A.shape[0], B.shape[0], B.shape[1], A.shape[1], top_k,

@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.145996 us / whole-dispatch MMAC15.036159%, finish-mmac. The 60% target remains open.**
+**Current best: 15.032016 us / whole-dispatch MMAC15.150170%, sb-before-b-empty. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -117,3 +117,44 @@ The latest output-strategy controls did not beat commit7820cab15.145996us. Exact
 ## BN256 conversation comparison
 
 The retained BN256 12.168060 us approach was transplanted to the original BN512 two-output workload: **16.098424 us**, zero numerical errors, whole-dispatch MMAC14.146577%. It does not replace BN512 best15.145996 us. See [algorithm and trace comparison](bn256-algorithm-control/README.md).
+
+## SB global read before B EMPTY wait
+
+Current best **15.032016 us / 15.150170% whole 48-CU dispatch MMAC**, the unchanged
+1.8GHz / two M64xN512 output tiles per persistent TG scope. Previous best7820cab
+was15.145996us: **0.752542% less elapsed time** (0.113980us). The60% target is not met.
+
+P1 now computes the channel-scale address and issues its register buffer load
+before waiting for the B slot EMPTY. B MLS remains after EMPTY and READY seq;
+SB LDS store, LDS completion wait and READY arrive remain after MLS. Register
+prefetch cannot overwrite a shared SB generation; completed B/SB reads still
+return the shared slot credit. No extra barrier, LDS slot or metadata/global load
+is added. A, consumer MMAC, strict scale order, output and persistent protocols
+are unchanged. Default native WDRA requests48/16/224/224; LDS remains99KiB.
+
+Independent compilation repeats machine.text, frozen inputs, GPU addresses,
+output hash and elapsed time exactly. Four full-N FP8/INT8 x BF16/FP16 equivalence
+cases pass, including independent wide A/B/C modes; bounded timing checks2630144
+selected outputs with zero mismatches and untouched tail. Actual CU0 A/B generation,
+no repeated adjacent wait ID, live-wave/work and no-consumer-VMEM audits pass.
+Toolchains remain Triton5b24821ee57eeb7560074cc7979ce7b59604079f and
+LLVMfd18eddbaf4a662ae5ce86c516d28e5b16952513; no tracked local changes to either.
+LLVM has two unrelated untracked patch/test files, not compilation inputs.
+
+Perf diagnosis is deliberately bounded: CU0 SIMD0 C1 first MMAC advances
+8.789804->8.609660us, while C0 moves8.129276->8.171532us. C1 last MMAC ends
+14.149644->14.167436us, slightly later; therefore neither earlier C1 startup nor
+an individual wait alone explains the whole-dispatch gain. The largest sampled
+P1 VMEM wait-to-next-issued-instruction interval grows1578->1934cycles. The change
+improves total scheduling/tail behavior without removing every wait. All such
+intervals include scheduling effects, not pure memory latency.
+
+Negative controls from the same round: full-M64 direct scatter plus next-B
+lookahead17.759752us; batching all four SB panel loads15.418992us; next-M metadata
+read before A-credit15.244964us; output LDS swizzle(8,2,8)15.373400us. Numerics pass;
+none is promoted. The direct-scatter lookahead added68+ vector register moves in
+some inter-MMAC gaps and places a future B readiness dependency before current
+output stores. Its lower LDS pipeline count did not imply faster dispatch.
+
+Evidence: [SB-prefetch proof and trace metrics](sb-before-b-empty/).
+

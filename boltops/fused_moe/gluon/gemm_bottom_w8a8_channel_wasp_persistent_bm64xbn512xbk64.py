@@ -172,16 +172,7 @@ def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
     phase = epoch & 1
     physical = 0
     dest = b1 if HALF == 1 else b0
-    hcu.abarrier_try_wait(empty, phase)
-    hcu.abarrier_seq(ready)
     col = (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2)
-    if USE_B64:
-        panel_base = b_base + col.to(gl.int64) * K + KH * (2 * BK)
-        hcu.matrix_load(dest.index(physical), panel_base, (K, BN // 4),
-                        (1, K), (0, 0), warps=(1, 4))
-    else:
-        hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
-                        (KH * (2 * BK), col), warps=(1, 4))
     if KH == 0:
         hcu.sched_barrier()
         ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
@@ -192,6 +183,16 @@ def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
         else:
             sb = buffer_load(SB, (gl.maximum(expert, 0) * STRIDE_SBE
                                  + (col + mr) * STRIDE_SBN).to(gl.uint32))
+    hcu.abarrier_try_wait(empty, phase)
+    hcu.abarrier_seq(ready)
+    if USE_B64:
+        panel_base = b_base + col.to(gl.int64) * K + KH * (2 * BK)
+        hcu.matrix_load(dest.index(physical), panel_base, (K, BN // 4),
+                        (1, K), (0, 0), warps=(1, 4))
+    else:
+        hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
+                        (KH * (2 * BK), col), warps=(1, 4))
+    if KH == 0:
         mb.index(HALF).store(sb)
         hcu.wait_lgkmcnt(0)
     hcu.abarrier_arrive(ready)

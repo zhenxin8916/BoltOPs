@@ -158,3 +158,34 @@ output stores. Its lower LDS pipeline count did not imply faster dispatch.
 
 Evidence: [SB-prefetch proof and trace metrics](sb-before-b-empty/).
 
+
+## Startup and B-order controls after bf26fa0
+
+Retained code remains **bf26fa0,15.032016us**. Moving initial A immediately after
+READY1 initialization (before the other independent barrier initializations)
+passes bounded numerics and generic A/B wait audits but measures15.103184us.
+Prefetching the first expert before initialization and explicitly passing it
+through an existing metadata LDS word measures15.425108us, bounded numerics pass.
+Directly capturing a new loaded scalar across WASP fails current clean Triton
+shared allocation lowering; rank-zero memdescs are also rejected. These are
+compile failures, not performance results, and no compiler workaround was used.
+
+Alternating BL/BR phase order with a completed own-READY separator measures
+15.899376us and passes generic wait-ID audit, so it is rejected. Without that
+separator, actual P1 wait IDs are6,8,8,6,6,8,8,6: **invalid** repeated adjacent IDs.
+That initial diagnostic is not an acceptable kernel even though numerics passed.
+
+The runtime adjacent-M B-reuse candidate now has a completed-READY separator
+before member1 output handoffs; bounded numerics and generic wait-ID/work audits
+pass at15.988336us (14.243984% whole-dispatch MMAC). This supersedes the older
+“not yet implemented” opportunity note. It saves B traffic on28 of48 same-expert
+pairs in this frozen prefix, but its two retained A tensors and N-major/member
+loop ordering increase register/VALU and frontend work, and it loses to bf26fa0.
+No paired implementation is promoted. A possible next algorithm is to retain
+both B phase tensors across adjacent M members, consume A/metadata one M at a
+time, and traverse one BN512 N tile per pair; this would require full-N, odd-M,
+different-expert and generation proofs before promotion. It is not a claimed win.
+
+Completed negative raw IT traces were losslessly gzip-compressed (1.083GB freed)
+without dropping sources, compiler outputs, perf, stats or results. Exact list:
+`/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/compressed-followup-traces.json`.

@@ -1,0 +1,216 @@
+{
+  "8": {
+    "first_mmac_tick": 8961052,
+    "last_mmac_end_tick": 11156140,
+    "first_wave_to_mmac_cycles": 8147.0,
+    "k128_boundary_gap_cycles": 2028.0,
+    "first_to_last_store_issue_cycles": 1844.0,
+    "last_mmac_end_to_first_store_cycles": 1832.0,
+    "tail_after_last_mmac_cycles": 4888.0,
+    "boundary_ops": [
+      {
+        "op": "s_abarrier_try_wait s1, 3, 1",
+        "next_issue_cycles": 1584.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[73:76], s[57], row:3, col:1, alt:0, elem:1",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[77:80], s[57], row:3, col:1, alt:0, elem:1, offset:1024",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[81:84], s[57], row:3, col:1, alt:0, elem:1, offset:8192",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[85:88], s[57], row:3, col:1, alt:0, elem:1, offset:9216",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[89:92], s[56], row:2, col:2, alt:1, elem:1",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[93:96], s[56], row:2, col:2, alt:1, elem:1, offset:32",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[97:100], s[56], row:2, col:2, alt:1, elem:1, offset:2048",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[101:104], s[56], row:2, col:2, alt:1, elem:1, offset:2080",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[105:108], s[56], row:2, col:2, alt:1, elem:1, offset:8192",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[109:112], s[56], row:2, col:2, alt:1, elem:1, offset:8224",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[113:116], s[56], row:2, col:2, alt:1, elem:1, offset:10240",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[117:120], s[56], row:2, col:2, alt:1, elem:1, offset:10272",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[121:124], s[56], row:2, col:2, alt:1, elem:1, offset:16384",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[125:128], s[56], row:2, col:2, alt:1, elem:1, offset:16416",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[129:132], s[56], row:2, col:2, alt:1, elem:1, offset:18432",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[133:136], s[56], row:2, col:2, alt:1, elem:1, offset:18464",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[137:140], s[56], row:2, col:2, alt:1, elem:1, offset:24576",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[141:144], s[56], row:2, col:2, alt:1, elem:1, offset:24608",
+        "next_issue_cycles": 12.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[145:148], s[56], row:2, col:2, alt:1, elem:1, offset:26624",
+        "next_issue_cycles": 20.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[149:152], s[56], row:2, col:2, alt:1, elem:1, offset:26656",
+        "next_issue_cycles": 2.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_issue_cycles": 334.0
+      },
+      {
+        "op": "s_abarrier_arrive s1, 4, 1",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "s_abarrier_arrive s1, 2, 1",
+        "next_issue_cycles": 8.0
+      }
+    ]
+  },
+  "12": {
+    "first_mmac_tick": 9539292,
+    "last_mmac_end_tick": 11465276,
+    "first_wave_to_mmac_cycles": 9171.0,
+    "k128_boundary_gap_cycles": 1952.0,
+    "first_to_last_store_issue_cycles": 2260.0,
+    "last_mmac_end_to_first_store_cycles": 1872.0,
+    "tail_after_last_mmac_cycles": 4404.0,
+    "boundary_ops": [
+      {
+        "op": "s_abarrier_try_wait s1, 11, 1",
+        "next_issue_cycles": 1356.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[73:76], s[68], row:3, col:1, alt:0, elem:1",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[77:80], s[68], row:3, col:1, alt:0, elem:1, offset:1024",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[81:84], s[68], row:3, col:1, alt:0, elem:1, offset:8192",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[85:88], s[68], row:3, col:1, alt:0, elem:1, offset:9216",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[89:92], s[67], row:2, col:2, alt:1, elem:1",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[93:96], s[67], row:2, col:2, alt:1, elem:1, offset:32",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[97:100], s[67], row:2, col:2, alt:1, elem:1, offset:2048",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[101:104], s[67], row:2, col:2, alt:1, elem:1, offset:2080",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[105:108], s[67], row:2, col:2, alt:1, elem:1, offset:8192",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[109:112], s[67], row:2, col:2, alt:1, elem:1, offset:8224",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[113:116], s[67], row:2, col:2, alt:1, elem:1, offset:10240",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[117:120], s[67], row:2, col:2, alt:1, elem:1, offset:10272",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[121:124], s[67], row:2, col:2, alt:1, elem:1, offset:16384",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[125:128], s[67], row:2, col:2, alt:1, elem:1, offset:16416",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[129:132], s[67], row:2, col:2, alt:1, elem:1, offset:18432",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[133:136], s[67], row:2, col:2, alt:1, elem:1, offset:18464",
+        "next_issue_cycles": 8.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[137:140], s[67], row:2, col:2, alt:1, elem:1, offset:24576",
+        "next_issue_cycles": 20.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[141:144], s[67], row:2, col:2, alt:1, elem:1, offset:24608",
+        "next_issue_cycles": 20.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[145:148], s[67], row:2, col:2, alt:1, elem:1, offset:26624",
+        "next_issue_cycles": 16.0
+      },
+      {
+        "op": "ds_read_matrix_trans_format v[149:152], s[67], row:2, col:2, alt:1, elem:1, offset:26656",
+        "next_issue_cycles": 2.0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "next_issue_cycles": 334.0
+      },
+      {
+        "op": "s_abarrier_arrive s1, 12, 1",
+        "next_issue_cycles": 4.0
+      },
+      {
+        "op": "s_abarrier_arrive s1, 10, 1",
+        "next_issue_cycles": 124.0
+      }
+    ]
+  }
+}

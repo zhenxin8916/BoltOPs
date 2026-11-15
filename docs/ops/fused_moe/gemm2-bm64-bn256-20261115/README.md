@@ -131,3 +131,29 @@ The K128 slicing experiment also uncovered two frontend constraints. Reinterpret
 [Per-case metrics, phase evidence, hashes and raw-case paths](ready-and-k128-controls/summary.json) accompany this report. Rejected source remains only in the scratch experiment directories; the retained operator is unchanged. The original≤9.602 μs gate remains unmet.
 
 A separate larger-A MLS control used tile32×128/interleave2 and loader2×2, a geometry present in the native MLS table. End-to-end compilation failed at LLVM translation with `builtin.unrealized_conversion_cast` at the MMAC result; **no numerical or performance result exists**. Native table geometry alone does not prove support for this A-to-MMAC layout combination. The public `MmacInterleave2Layout` explicitly wraps B or the result and rejects operand A. This candidate did not change compiler checks or enter the retained source. [Compile-control record](ready-and-k128-controls/a-interleave2-compile-control.json).
+
+
+## Continuation: independent M pairs and pending FP32 output
+
+These controls preserve BM64/BN256/K256, the same frozen 96-output set and GPU addresses, grid48, native four-wave-per-role 2P2C, and1.8GHz. Each run has1024 active MMAC instructions per CU, matching all48 CUs; numerical checks pass with1,315,072 elements, zero mismatches, untouched tail and the canonical output hash. No control is promoted.
+
+| Work distribution / output scheduling | dispatch μs | whole48-CU dispatch MMAC |
+|---|---:|---:|
+| retained split-N consumers |12.168060|9.358%|
+| two independent producer/consumer M pairs, K128×2 |13.970056|8.151%|
+| pairs, global metadata prefetch before first B, LDS publish after second B |13.632564|8.353%|
+| same, issue metadata LDS reads before second MMAC phase |13.778236|8.264%|
+| retained split-N roles, one pending FP32 result per consumer |13.963940|8.155%|
+| same, remove unnecessary current-accumulator loop carry |13.866640|8.212%|
+
+The independent-pair control changes which data the roles own, while retaining2P2C: P0/C0 process M=pid, pid+2×grid,…; P1/C1 process M=pid+grid, pid+3×grid,… . Each consumer computes the complete64×256 output in two K128 phases. A is one full64×256 slot per pair and is retained in LDS across all N; B is one128×256 slot per pair. LDS is100KiB:32KiB A,64KiB B,2KiB row metadata,2KiB column scale. Requested/final quotas32/32/224/224; actual producer22 (prefetch25) registers and consumer153 (metadata-overlap193), no spills.
+
+Each pair uses six barrier IDs: A READY/EMPTY, B READY/EMPTY and metadata READY/EMPTY (IDs1–6 and9–14, four waves each). A EMPTY is returned only after the final N's second-half A read completes. B EMPTY is returned after each K128 A/B LDS completion. Metadata EMPTY is returned after metadata read completion. Consequently producers may prefetch future B/A during compute/store without overwriting data still being read. Both the N loop and persistent M progression remain supported: FP8 and INT8 full-N checks use10 M blocks, grid2, two N tiles per M and unequal per-role M counts (three versus two). Each checks197,632 elements with zero mismatches. This validates this control's baseline protocol, not the other candidates' full-N behavior.
+
+The baseline pair control has K128 boundary gaps C0/C1=2028/1952 cycles. The phase2 B READY wait-to-next-issued-instruction in that gap costs1584/1356 cycles. Moving row metadata global loads outside N and prefetching SB before the two B issues, while publishing LDS metadata after both issues, reduces those READY intervals to36/208 cycles and total K-boundary gaps to956/1048 cycles. This confirms that metadata publication between B phases was delaying phase2. Remaining gaps contain20 matrix LDS reads plus completion waits; first MMAC also starts later (C0 8.961052→9.165660 μs). Consumer tails remain4992/4428 cycles. Thus removing most of that READY wait does not beat the retained dispatch.
+
+The pending-FP32 control loads and computes the next output before applying the previous output's strict `((acc*SA)*SB)*weight` epilogue. One extra drain iteration emits the final output; one common store body handles both outputs. It passes the bounded two-output test and truly places the first store after the final MMAC. However, the original control adds68/69 `v_mov_b32` instructions at the M boundary and extends final tails to6084/5356 cycles. Resetting the temporary current accumulator/SB each iteration eliminates those spurious accumulator loop-carrier copies (zero/one such moves in that boundary), but dispatch only improves13.963940→13.866640 μs. Final native WDRA quotas are28/20/232/232, adjusted by the compiler from requested48/16/224/224; actual consumer225/226 registers fit those final quotas, sum512, scratch0. There is no quota bypass.
+
+The evidence rejects these specific alternatives: concurrent independent-M pairs add a K-boundary and longer single-output epilogues, while moving all stores after both MMAC bodies shifts work into a longer drain. It does not prove that all compute/store overlap is ineffective. Further work should preserve the retained split-N roles and avoid delaying the entire epilogue until the end.
+
+[Metrics, launch records, phase analyses, source hashes and full-N results](persistent-output-controls/summary.json) accompany this report. Rejected sources remain scratch-only. Completed full-N pair IT traces are gzip-compressed with decompressed SHA verification to recover space; their `.gz` paths and hashes are recorded in the accompanying compression manifest. The best source remains code commit973bc63,12.168060 μs;≤9.602 μs is still unmet.

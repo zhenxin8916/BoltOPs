@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/pair-fulln-fp8/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/pair-fulln-fp8/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "91d957ee5d7713ca36edb514d6df1dabf87a7d63529563004b4fe2941cc21126",
+    "uncompressed_bytes": 398855790,
+    "compressed_bytes": 62646244
+  },
+  {
+    "path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/pair-fulln-int8/m5out/0/0/itrace_cu0_se0_xcd0.txt",
+    "compressed_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/pair-fulln-int8/m5out/0/0/itrace_cu0_se0_xcd0.txt.gz",
+    "sha256": "e406563f6dcd3109ebf504dab414a05aa3bf19894d1f9c32538f965c9e54c164",
+    "uncompressed_bytes": 424579307,
+    "compressed_bytes": 57035130
+  }
+]

@@ -1,0 +1,154 @@
+{
+  "8": {
+    "role": "C0",
+    "mmac_first_tick": 8961052,
+    "mmac_last_end_tick": 11156140,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 2028.0,
+        "first_tick": 9703868,
+        "next_tick": 10831436,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 1,
+          "ds_read_matrix_trans_format": 20,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 2
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 3, 1",
+          "ds_read_matrix_trans_format v[73:76], s[57], row:3, col:1, alt:0, elem:1",
+          "ds_read_matrix_trans_format v[77:80], s[57], row:3, col:1, alt:0, elem:1, offset:1024",
+          "ds_read_matrix_trans_format v[81:84], s[57], row:3, col:1, alt:0, elem:1, offset:8192",
+          "ds_read_matrix_trans_format v[85:88], s[57], row:3, col:1, alt:0, elem:1, offset:9216",
+          "ds_read_matrix_trans_format v[89:92], s[56], row:2, col:2, alt:1, elem:1",
+          "ds_read_matrix_trans_format v[93:96], s[56], row:2, col:2, alt:1, elem:1, offset:32",
+          "ds_read_matrix_trans_format v[97:100], s[56], row:2, col:2, alt:1, elem:1, offset:2048"
+        ],
+        "last_ops": [
+          "ds_read_matrix_trans_format v[133:136], s[56], row:2, col:2, alt:1, elem:1, offset:18464",
+          "ds_read_matrix_trans_format v[137:140], s[56], row:2, col:2, alt:1, elem:1, offset:24576",
+          "ds_read_matrix_trans_format v[141:144], s[56], row:2, col:2, alt:1, elem:1, offset:24608",
+          "ds_read_matrix_trans_format v[145:148], s[56], row:2, col:2, alt:1, elem:1, offset:26624",
+          "ds_read_matrix_trans_format v[149:152], s[56], row:2, col:2, alt:1, elem:1, offset:26656",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s1, 4, 1",
+          "s_abarrier_arrive s1, 2, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 0,
+        "gap_cycles": 648.0,
+        "first_tick": 8965500,
+        "next_tick": 9325788,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 48,
+        "gap_cycles": 176.0,
+        "first_tick": 9539292,
+        "next_tick": 9637148,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 122,
+        "gap_cycles": 40.0,
+        "first_tick": 11111660,
+        "next_tick": 11133900,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 90,
+        "gap_cycles": 32.0,
+        "first_tick": 10951532,
+        "next_tick": 10969324,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      }
+    ],
+    "gaps_sum_cycles": 2924.0
+  },
+  "12": {
+    "role": "C1",
+    "mmac_first_tick": 9539292,
+    "mmac_last_end_tick": 11465276,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 1952.0,
+        "first_tick": 10026348,
+        "next_tick": 11111660,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 1,
+          "ds_read_matrix_trans_format": 20,
+          "s_waitcnt": 1,
+          "s_abarrier_arrive": 2
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 11, 1",
+          "ds_read_matrix_trans_format v[73:76], s[68], row:3, col:1, alt:0, elem:1",
+          "ds_read_matrix_trans_format v[77:80], s[68], row:3, col:1, alt:0, elem:1, offset:1024",
+          "ds_read_matrix_trans_format v[81:84], s[68], row:3, col:1, alt:0, elem:1, offset:8192",
+          "ds_read_matrix_trans_format v[85:88], s[68], row:3, col:1, alt:0, elem:1, offset:9216",
+          "ds_read_matrix_trans_format v[89:92], s[67], row:2, col:2, alt:1, elem:1",
+          "ds_read_matrix_trans_format v[93:96], s[67], row:2, col:2, alt:1, elem:1, offset:32",
+          "ds_read_matrix_trans_format v[97:100], s[67], row:2, col:2, alt:1, elem:1, offset:2048"
+        ],
+        "last_ops": [
+          "ds_read_matrix_trans_format v[133:136], s[67], row:2, col:2, alt:1, elem:1, offset:18464",
+          "ds_read_matrix_trans_format v[137:140], s[67], row:2, col:2, alt:1, elem:1, offset:24576",
+          "ds_read_matrix_trans_format v[141:144], s[67], row:2, col:2, alt:1, elem:1, offset:24608",
+          "ds_read_matrix_trans_format v[145:148], s[67], row:2, col:2, alt:1, elem:1, offset:26624",
+          "ds_read_matrix_trans_format v[149:152], s[67], row:2, col:2, alt:1, elem:1, offset:26656",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s1, 12, 1",
+          "s_abarrier_arrive s1, 10, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 35,
+        "gap_cycles": 244.0,
+        "first_tick": 9766140,
+        "next_tick": 9901804,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 21,
+        "gap_cycles": 120.0,
+        "first_tick": 9637148,
+        "next_tick": 9703868,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 109,
+        "gap_cycles": 84.0,
+        "first_tick": 11338508,
+        "next_tick": 11385212,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 68,
+        "gap_cycles": 40.0,
+        "first_tick": 11133900,
+        "next_tick": 11156140,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      }
+    ],
+    "gaps_sum_cycles": 2440.0
+  }
+}

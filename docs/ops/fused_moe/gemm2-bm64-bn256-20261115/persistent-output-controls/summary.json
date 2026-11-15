@@ -1,0 +1,147 @@
+[
+  {
+    "case": "independent-m-pairs-k128",
+    "time_us": 13.970056,
+    "whole_gpu_mmac_percent": 8.150919366393378,
+    "source_sha256": "5b158a71b9e786ed489493c08bd68cf48d755f908a5d44563033967876408f41",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-k128/kernel.py",
+    "assembly_sha256": "2cbb209bc0fffa02d3cd6becd347ecfab2b43263cd58bba5023e1d4db915bc59",
+    "shared": 102400,
+    "requested_quotas": [
+      32,
+      32,
+      224,
+      224
+    ],
+    "final_quotas": [
+      32,
+      32,
+      224,
+      224
+    ],
+    "actual_registers": [
+      22,
+      22,
+      153,
+      153
+    ],
+    "scratch_size": 0,
+    "promoted": false
+  },
+  {
+    "case": "independent-m-pairs-meta-prefetch",
+    "time_us": 13.632564,
+    "whole_gpu_mmac_percent": 8.352706064684531,
+    "source_sha256": "01872f1f30d3e3d8cc3972dd8c6d29d2aec88a8be1d3fb5601305a3cbc964950",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-meta-prefetch/kernel.py",
+    "assembly_sha256": "9da56f103967abdddc42b27feb2fde94af5e815e3195d64dbaae5372aa77721a",
+    "shared": 102400,
+    "requested_quotas": [
+      32,
+      32,
+      224,
+      224
+    ],
+    "final_quotas": [
+      32,
+      32,
+      224,
+      224
+    ],
+    "actual_registers": [
+      25,
+      25,
+      153,
+      153
+    ],
+    "scratch_size": 0,
+    "promoted": false
+  },
+  {
+    "case": "independent-m-pairs-meta-overlap",
+    "time_us": 13.778236,
+    "whole_gpu_mmac_percent": 8.264396109922926,
+    "source_sha256": "ec3749e1dfe748489769d917c339bd0be2a6da8de1fdc0a5d5d32dd184fe8839",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/independent-m-pairs-meta-overlap/kernel.py",
+    "assembly_sha256": "f9b7492811f6f8e418c6bd3db0e86a5e1ed50c99a7f967392886460a2ec395fc",
+    "shared": 102400,
+    "requested_quotas": [
+      32,
+      32,
+      224,
+      224
+    ],
+    "final_quotas": [
+      32,
+      32,
+      224,
+      224
+    ],
+    "actual_registers": [
+      25,
+      25,
+      193,
+      193
+    ],
+    "scratch_size": 0,
+    "promoted": false
+  },
+  {
+    "case": "consumer-pending-fp32",
+    "time_us": 13.96394,
+    "whole_gpu_mmac_percent": 8.154489348994625,
+    "source_sha256": "934df6fb3fb5b1933769af8cda4675304b3dd71fa7e142d5fa76f19a2f40267b",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-pending-fp32/kernel.py",
+    "assembly_sha256": "607fc176d3cb65417649be5856daa2c1ef028ede916b6ac2cd8a0458bd2570d7",
+    "shared": 101376,
+    "requested_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "final_quotas": [
+      28,
+      20,
+      232,
+      232
+    ],
+    "actual_registers": [
+      19,
+      9,
+      225,
+      226
+    ],
+    "scratch_size": 0,
+    "promoted": false
+  },
+  {
+    "case": "consumer-pending-single-current",
+    "time_us": 13.86664,
+    "whole_gpu_mmac_percent": 8.211708099438653,
+    "source_sha256": "eb3748f5a508ec7ca194a920ac740abf4d791da980eb0dffe17a925292021320",
+    "source_path": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/consumer-pending-single-current/kernel.py",
+    "assembly_sha256": "3167e85ac3fa968363e9757135c38e8a5bb554aab5591a1842b24f5feefdcc9b",
+    "shared": 101376,
+    "requested_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "final_quotas": [
+      28,
+      20,
+      232,
+      232
+    ],
+    "actual_registers": [
+      19,
+      9,
+      225,
+      226
+    ],
+    "scratch_size": 0,
+    "promoted": false
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "8": {
+    "first_mmac_tick": 8402828,
+    "last_mmac_end_tick": 10486716,
+    "inter_output_mmac_gap_cycles": 2416.0,
+    "first_store_tick": 11145020,
+    "last_store_tick": 12684028,
+    "store_instruction_count": 32,
+    "tail_after_last_mmac_cycles": 6084.0,
+    "first_store_after_final_mmac": true
+  },
+  "12": {
+    "first_mmac_tick": 9045564,
+    "last_mmac_end_tick": 10947084,
+    "inter_output_mmac_gap_cycles": 2120.0,
+    "first_store_tick": 11560908,
+    "last_store_tick": 13618108,
+    "store_instruction_count": 32,
+    "tail_after_last_mmac_cycles": 5356.0,
+    "first_store_after_final_mmac": true
+  }
+}

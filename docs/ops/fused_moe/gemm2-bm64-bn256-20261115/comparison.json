@@ -174,5 +174,85 @@
       "scope": "two_independent_logical_M_tiles_per_persistent_TG",
       "tiles_per_tg": 2
     }
+  },
+  {
+    "case": "consumer-meta-address-before-b",
+    "algorithm": "Consumer metadata/address preparation before B wait",
+    "time_us": 12.670684,
+    "whole_gpu_mmac_percent": 8.986791873272193,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "schedule-epilogue-with-mmac",
+    "algorithm": "Remove scheduling barrier after MMAC",
+    "time_us": 12.372668,
+    "whole_gpu_mmac_percent": 9.203253493910934,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dpp-vector4",
+    "algorithm": "Register/lane DPP transpose; buffer_store_dwordx2",
+    "time_us": 13.232244,
+    "whole_gpu_mmac_percent": 8.605403588386066,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dpp-vector8",
+    "algorithm": "Two DPP swaps without canonical register ordering; scalar stores",
+    "time_us": 15.787064,
+    "whole_gpu_mmac_percent": 7.212791434810171,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101888,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dpp-vector8-canonical",
+    "algorithm": "Two DPP swaps with canonical registers; buffer_store_dwordx4",
+    "time_us": 13.378472,
+    "whole_gpu_mmac_percent": 8.511345690300057,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101888,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
   }
 ]

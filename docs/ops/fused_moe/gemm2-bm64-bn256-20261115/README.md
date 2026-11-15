@@ -63,3 +63,15 @@ Bounded timing checks1,315,072 selected BF16 elements: zero mismatches at rtol0.
 [Best SQTT perf](canonical-repeat-sqtt/GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_GC1800_CU0.perf), [metrics](canonical/metrics.json), [phase split](canonical/phase-analysis.json), [repeat proof](repeat-proof.json), [toolchain provenance](provenance.json), and archived assembly/HSACO accompany the source. Raw IT0 traces and frozen tensor payloads are retained at `/home/zhenx/temp/moe-gemm2-bm64bn256-20261115`; perf SHA/path is recorded beside the exported perf.
 
 Use container `zx-perf-node60`, Python `/zhenxin/temp/hcu-gluon-upstream-venv-20261103/bin/python`. Launch harness sets clean Triton source PYTHONPATH and clang wrapper with `-mllvm -hcu-control-only-ebarrier-sync`. Reproduce by copying retained operator to a case directory as `kernel.py`, setting `BENCH_BK=256`, and running `launch.py <case> 64 --kind fp8`; frozen input root is resolved relative to the harness. `--freeze` regenerates frozen inputs at seed3101 if needed. Set `BENCH_DFLAGS='["StatLog","IT0","TT0","Perf"]'` for SQTT. Analyze with `analyze.py`, `phase_analysis.py`, `audit_barriers.py`, `audit_protocol.py`; full-N checks use `launch_check.py <case> <source> fp8` or `int8`, with BENCH_BK256. Toolchain commits/diff states and actual clang/PMD binary hashes are recorded in provenance; LLVM's two untracked files are not compiler inputs. No compiler source changes were introduced for this operator.
+
+## Follow-up after retained-code commit `973bc63`
+
+| Perf-guided candidate | whole dispatch μs | result |
+|---|---:|---|
+| Consumer metadata/address preparation before B wait | 12.670684 | zero numeric errors; rejected (slower) |
+| Remove scheduling barrier after MMAC | 12.372668 | zero numeric errors; rejected (slower) |
+| Register/lane DPP transpose; buffer_store_dwordx2 | 13.232244 | zero numeric errors; rejected (slower) |
+| Two DPP swaps without canonical register ordering; scalar stores | 15.787064 | zero numeric errors; rejected (slower) |
+| Two DPP swaps with canonical registers; buffer_store_dwordx4 | 13.378472 | zero numeric errors; rejected (slower) |
+
+Consumer address preparation reduced M0 store-issue spans C0/C1 from1644/1056 to1100/700 cycles, but last-store→next-MMAC intervals rose792/752→1140/1832 cycles. It added a separate metadata LDS completion wait and delayed the next B read. Thus a shorter store segment did not imply shorter dispatch. The DPP variants truly produced dwordx2/x4 in assembly after register ordering was canonicalized, but the extra cross-lane selection and data rearrangement cost more overall. Removing the post-MMAC scheduling barrier also did not beat the retained code. None of these candidate source changes were promoted; **code commit973bc63 remains the BM64×BN256 best**. Measurements use the identical frozen BM64 workload, GPU addresses and1.8GHz setting.

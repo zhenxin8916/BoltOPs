@@ -254,5 +254,229 @@
       "scope": "two_independent_logical_M_tiles_per_persistent_TG",
       "tiles_per_tg": 2
     }
+  },
+  {
+    "case": "consumer-lookahead",
+    "algorithm": "Read complete next output before current epilogue",
+    "time_us": 13.39126,
+    "whole_gpu_mmac_percent": 8.503217770396512,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "consumer-a-lookahead",
+    "algorithm": "Read only next A before current epilogue",
+    "time_us": 12.39602,
+    "whole_gpu_mmac_percent": 9.185916124691635,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "adjacent-simple",
+    "algorithm": "Map two adjacent M tiles to a persistent TG",
+    "time_us": 13.63868,
+    "whole_gpu_mmac_percent": 8.348960456583775,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "adjacent-simple-reuse-b",
+    "algorithm": "Adjacent M; reuse B/SB for same expert in one-N case",
+    "time_us": 13.81382,
+    "whole_gpu_mmac_percent": 8.243107265043268,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "a-priority0",
+    "algorithm": "A priority0",
+    "time_us": 12.16806,
+    "whole_gpu_mmac_percent": 9.358007767877542,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "a-priority1",
+    "algorithm": "A priority1",
+    "time_us": 12.16806,
+    "whole_gpu_mmac_percent": 9.358007767877542,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "early-sb-balanced-p-regs",
+    "algorithm": "SB prefetch with producer quotas32/32",
+    "time_us": 12.267028,
+    "whole_gpu_mmac_percent": 9.282509178262249,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "sb-direct-lds",
+    "algorithm": "SB buffer-to-LDS, scalar dword",
+    "time_us": 12.306504,
+    "whole_gpu_mmac_percent": 9.252733351405078,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "sb-direct-lds-v4",
+    "algorithm": "SB buffer-to-LDS, dwordx4",
+    "time_us": 12.216988,
+    "whole_gpu_mmac_percent": 9.32052974104583,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "row-metadata-direct-lds",
+    "algorithm": "SA/weight/route/expert buffer-to-LDS",
+    "time_us": 12.537244,
+    "whole_gpu_mmac_percent": 9.08244268038494,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "metadata-lds-over-mmac",
+    "algorithm": "Read metadata LDS before MMAC; return A credit after MMAC",
+    "time_us": 12.452732,
+    "whole_gpu_mmac_percent": 9.144081796669196,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "metadata-over-mmac-sb-lds",
+    "algorithm": "Metadata LDS overlap plus SB direct-LDS x4",
+    "time_us": 12.164724,
+    "whole_gpu_mmac_percent": 9.360574066456419,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 101376,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dual-producer-fp32-epilogue",
+    "algorithm": "M32 FP32 mailboxes, each producer scales/scatters one side",
+    "time_us": 23.434288,
+    "whole_gpu_mmac_percent": 4.859068045933378,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 117760,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "case": "dual-fp32-decoupled-b-scale",
+    "algorithm": "FP32 mailboxes plus separate B-data and SB readiness",
+    "time_us": 23.039528,
+    "whole_gpu_mmac_percent": 4.942323471210001,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 117760,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    }
   }
 ]

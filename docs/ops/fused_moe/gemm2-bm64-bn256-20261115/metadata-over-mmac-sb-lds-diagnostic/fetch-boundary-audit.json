@@ -1,0 +1,131 @@
+{
+  "long_consecutive_mmac_gaps": [
+    {
+      "wave": 8,
+      "after_ordinal": 8,
+      "cycles": 508,
+      "after_pc": "0x7ffde3c02af8",
+      "next_pc": "0x7ffde3c02b00",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 8,
+      "after_ordinal": 40,
+      "cycles": 472,
+      "after_pc": "0x7ffde3c02bf8",
+      "next_pc": "0x7ffde3c02c00",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 131081,
+      "after_ordinal": 8,
+      "cycles": 448,
+      "after_pc": "0x7ffde3c02af8",
+      "next_pc": "0x7ffde3c02b00",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 131081,
+      "after_ordinal": 32,
+      "cycles": 596,
+      "after_pc": "0x7ffde3c02bb8",
+      "next_pc": "0x7ffde3c02bc0",
+      "next_pc_mod256": 192,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 65546,
+      "after_ordinal": 8,
+      "cycles": 448,
+      "after_pc": "0x7ffde3c02af8",
+      "next_pc": "0x7ffde3c02b00",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 65546,
+      "after_ordinal": 32,
+      "cycles": 600,
+      "after_pc": "0x7ffde3c02bb8",
+      "next_pc": "0x7ffde3c02bc0",
+      "next_pc_mod256": 192,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 196619,
+      "after_ordinal": 8,
+      "cycles": 504,
+      "after_pc": "0x7ffde3c02af8",
+      "next_pc": "0x7ffde3c02b00",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 196619,
+      "after_ordinal": 40,
+      "cycles": 468,
+      "after_pc": "0x7ffde3c02bf8",
+      "next_pc": "0x7ffde3c02c00",
+      "next_pc_mod256": 0,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 12,
+      "after_ordinal": 57,
+      "cycles": 364,
+      "after_pc": "0x7ffde3c035f4",
+      "next_pc": "0x7ffde3c035fc",
+      "next_pc_mod256": 252,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 131085,
+      "after_ordinal": 57,
+      "cycles": 316,
+      "after_pc": "0x7ffde3c035f4",
+      "next_pc": "0x7ffde3c035fc",
+      "next_pc_mod256": 252,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 65550,
+      "after_ordinal": 57,
+      "cycles": 360,
+      "after_pc": "0x7ffde3c035f4",
+      "next_pc": "0x7ffde3c035fc",
+      "next_pc_mod256": 252,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    },
+    {
+      "wave": 196623,
+      "after_ordinal": 57,
+      "cycles": 360,
+      "after_pc": "0x7ffde3c035f4",
+      "next_pc": "0x7ffde3c035fc",
+      "next_pc_mod256": 252,
+      "instruction_bytes": 8,
+      "no_intervening_issued_instructions": true
+    }
+  ],
+  "cu0_frontend_counters": {
+    "numBranchTaken": 257.0,
+    "numCyclesWaitIFetchAfterBranchTaken": 11327.0,
+    "waitCyclesPerBranchTaken": 44.07393,
+    "numCyclesWaveOnCu": 218760.0
+  },
+  "interpretation": "PC boundary association plus prior PMD fetch probes supports an instruction-fetch hypothesis. This is not a direct fetch-miss trace or proof of a hardware/model defect. Wave-cycle counters must not be summed into elapsed dispatch time."
+}

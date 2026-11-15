@@ -75,3 +75,31 @@ Use container `zx-perf-node60`, Python `/zhenxin/temp/hcu-gluon-upstream-venv-20
 | Two DPP swaps with canonical registers; buffer_store_dwordx4 | 13.378472 | zero numeric errors; rejected (slower) |
 
 Consumer address preparation reduced M0 store-issue spans C0/C1 from1644/1056 to1100/700 cycles, but last-store→next-MMAC intervals rose792/752→1140/1832 cycles. It added a separate metadata LDS completion wait and delayed the next B read. Thus a shorter store segment did not imply shorter dispatch. The DPP variants truly produced dwordx2/x4 in assembly after register ordering was canonicalized, but the extra cross-lane selection and data rearrangement cost more overall. Removing the post-MMAC scheduling barrier also did not beat the retained code. None of these candidate source changes were promoted; **code commit973bc63 remains the BM64×BN256 best**. Measurements use the identical frozen BM64 workload, GPU addresses and1.8GHz setting.
+
+## Continuation: LDS overlap, epilogue distribution and fetch evidence
+
+All following passing numerical runs use the same48-CU/1.8GHz/two-output workload and frozen input/output hashes. None was promoted into the retained operator.
+
+| Candidate | dispatch μs | observation |
+|---|---:|---|
+| complete consumer lookahead |13.391260|last-store→next-MMAC is shorter, but pre-store work and total inter-output gap grow|
+| A-only lookahead |12.396020|still slower|
+| adjacent M mapping |13.638680|same first96 M output set, different TG assignment|
+| adjacent M plus same-expert B reuse |13.813820|correct but slower; reuse condition applies to single-N traversal|
+| A priority0 or1 |12.168060|elapsed time and outputs exactly equal canonical; no observed scheduling benefit|
+| SB prefetch, producer quotas32/32 |12.267028|same time as original SB-prefetch variant|
+| SB direct LDS, dword |12.306504|native copy removes the explicit register-to-LDS store but is slower|
+| SB direct LDS, dwordx4 |12.216988|close, but slower|
+| row metadata direct LDS |12.537244|valid permuted row layout, no numeric errors, slower|
+| metadata LDS read overlaps MMAC |12.452732|safe delayed A/metadata credit return, but not faster overall|
+| metadata overlap plus SB direct LDS x4 |12.164724|only6 cycles below retained code; not treated as a material/generic gain, no full-N promotion validation|
+| two-producer FP32 epilogues |23.434288|correct115KiB pipeline, substantial extra mailbox/handshake and producer work|
+| FP32 epilogues, separate B and SB readiness |23.039528|slightly improves that pipeline but far behind retained consumer-scatter algorithm|
+
+For the combined metadata-overlap/direct-SB diagnostic, CU0 SIMD0 C0 first MMAC moves8.222684→8.002508μs and C1 moves9.419196→8.938812μs. However, C0 has two new **consecutive-MMAC** issue gaps508/472 cycles at next-PC `0x…2b00`/`0x…2c00`, exactly256B boundaries; retained C0 has one92-cycle gap at `0x…2c00`. No intervening instructions are issued by that wave in these gaps. Other waves also exhibit some long gaps away from an exact boundary, so this is not sufficient to classify every stall as fetch.
+
+The older independent PMD fetch probe at `/home/zhenx/moe-gemm1-tuning/icache-characterization-20261110/README.html` measured256B frontend requests and300-cycle cold boundary gaps. Together these support an **instruction-fetch hypothesis** for part of the regression, not proof of a model/hardware defect. `fetch_boundary_audit.py` records the current raw PCs and issued-instruction intervals. `numCyclesWaitIFetchAfterBranchTaken` is11330 wave-cycles for canonical CU0, average46.245 per taken branch; these are summed wave-cycles, not a dispatch-time component. The metadata-overlap variant has11327 such wave-cycles, so this branch-only statistic does not explain its additional straight-line MMAC gaps.
+
+A shared noinline K128 math body was also attempted to reduce duplicated MMAC code, but clean Gluon explicitly rejects **non-scalar arguments to noinline functions**. It has no performance result. No compiler checks or native WDRA requirements were bypassed. Native WDRA currently requires four waves per partition (`ConvertWarpSpecializeToLLVM.cpp`), so changing to two-wave roles was not used as a workaround.
+
+The retained code commit remains`973bc63` at12.168060μs with its verified full-N FP8/INT8 tests. Target9.602μs remains unmet. Further work should reduce static epilogue/fetch footprint or uncouple B publication from scale work **without** creating a costly FP32 mailbox pipeline or holding the current store behind a complete next-output read.

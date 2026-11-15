@@ -70,3 +70,36 @@ def test_sorted_bridge_selection_precedes_activation(monkeypatch, arch, expected
         b, sb, top_k=2, config=dict(BLOCK_SIZE_M=128), output_dtype=torch.bfloat16,
         use_fp8_w8a8=False, use_int8_w8a8=True, per_channel_quant=True,
         block_shape=None, ck_sorting=True, has_bias=False) == expected
+
+
+@pytest.mark.parametrize("input_dtype", [torch.float8_e4m3fn, torch.int8, torch.bfloat16])
+@pytest.mark.parametrize("output_dtype", [torch.bfloat16, torch.float16, torch.float32])
+def test_fused_experts_bridge_queries_actual_output_dtype(monkeypatch, input_dtype, output_dtype):
+    """Prequantized input dtype must not decide the sorted activation bridge."""
+    core = importlib.import_module("boltops.fused_moe.triton.fused_moe")
+    from boltops.fused_moe.triton import moe_op
+    from boltops.utility.arch_info import DeviceInfo
+    monkeypatch.setattr(moe_op.arch_info, "get_device_info",
+                        lambda *_: DeviceInfo(0, "gfx946", 48))
+    def config_query(*args, is_bottom=False, **kwargs):
+        config = dict(BLOCK_SIZE_M=128, BLOCK_SIZE_N=256, BLOCK_SIZE_K=128)
+        return lambda m: (config, 128) if is_bottom else config
+    monkeypatch.setattr(core, "get_optimal_moe_config_func", config_query)
+    query = core._gluon_gemm2_prefers_sorted_layout
+    class QueryComplete(Exception):
+        pass
+    def capture(*args, **kwargs):
+        assert kwargs["output_dtype"] == output_dtype
+        assert query(*args, **kwargs) == (output_dtype != torch.float32)
+        raise QueryComplete
+    monkeypatch.setattr(core, "_gluon_gemm2_prefers_sorted_layout", capture)
+    quant_dtype = torch.int8 if input_dtype == torch.int8 else torch.float8_e4m3fn
+    with pytest.raises(QueryComplete):
+        core.fused_experts_impl(
+            torch.empty((2, 512), dtype=input_dtype),
+            torch.empty((2, 512, 512), dtype=quant_dtype),
+            torch.empty((2, 512, 256), dtype=quant_dtype),
+            torch.ones((2, 2)), torch.zeros((2, 2), dtype=torch.int32),
+            output_dtype=output_dtype, use_int8_w8a8=quant_dtype == torch.int8,
+            use_fp8_w8a8=quant_dtype != torch.int8, per_channel_quant=True,
+            w1_scale=torch.ones((2, 512)), w2_scale=torch.ones((2, 512)))

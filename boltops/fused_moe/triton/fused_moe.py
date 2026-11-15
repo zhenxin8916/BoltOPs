@@ -1358,7 +1358,7 @@ def fused_experts_impl(hidden_states: torch.Tensor,
         )
 
     gluon_bottom_sorted = _gluon_gemm2_prefers_sorted_layout(
-        w2, w2_scale, top_k=topk, config=config2, output_dtype=hidden_states.dtype,
+        w2, w2_scale, top_k=topk, config=config2, output_dtype=output_dtype,
         use_fp8_w8a8=use_fp8_w8a8, use_int8_w8a8=use_int8_w8a8,
         per_channel_quant=per_channel_quant, block_shape=block_shape,
         ck_sorting=True, has_bias=b2 is not None)
@@ -1423,7 +1423,7 @@ def fused_experts_impl(hidden_states: torch.Tensor,
                     f"top={config['BLOCK_SIZE_M']}, bottom={config2['BLOCK_SIZE_M']}"
                 )
             bottom_moe_a_sorted = _gluon_gemm2_prefers_sorted_layout(
-                w2, w2_scale, top_k=topk, config=config2, output_dtype=hidden_states.dtype,
+                w2, w2_scale, top_k=topk, config=config2, output_dtype=output_dtype,
                 use_fp8_w8a8=use_fp8_w8a8, use_int8_w8a8=use_int8_w8a8,
                 per_channel_quant=per_channel_quant, block_shape=block_shape,
                 ck_sorting=True, has_bias=b2 is not None) or _bottom_a_uses_sorted_layout(

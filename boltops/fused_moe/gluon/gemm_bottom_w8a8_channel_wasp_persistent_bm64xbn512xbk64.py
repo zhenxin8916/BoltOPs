@@ -288,7 +288,7 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
                         gl.store(C + offsets + BN // 2, y, valid[:, None])
                     else:
                         buffer_store(y, C, offsets + BN // 2, valid[:, None])
-                    if n == N_PANELS - 1 and panel == 1:
+                    if n == 0 and panel == 1:
                         if next_m < total // (N // BN):
                             _publish_metadata(ma, epoch - 1, next_sa, next_weight, next_route, next_expert)
         else:

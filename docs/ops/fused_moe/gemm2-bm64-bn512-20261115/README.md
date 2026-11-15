@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.423440 us / whole-dispatch MMAC14.765681%, output-lds-8-1-8. The 60% target remains open.**
+**Current best: 15.322804 us / whole-dispatch MMAC14.862658%, ma-after-first-n. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -80,3 +80,11 @@ Only output mailbox shared layout changes: SwizzledSharedLayout(vec8,perPhase4,m
 Perf evidence: mean LocalMemPipeline.creditStall falls960.729->723.063 cycles/CU. ldsBankConflict remains1024/CU; this is not evidence of eliminated bank conflicts. Static DS write opcode counts are unchanged, so this is not an instruction-count reduction. CU0/SIMD0 C0 gap after MMAC63 falls1688->764 cycles, while cross-M gap127 grows1640->1800 and metadata gap143 grows1556->2312. The remaining metadata READY issue interval is2296 cycles (11.458604->12.735180 us). These are issue gaps, including scheduling effects, not pure memory/instruction latency. Next action is earlier publication of already-prefetched next-M metadata after the first N phase drains.
 
 Negative controls: output layout(vec4,perPhase1,maxPhase8)15.593020 us; two M32 slots with distinct READY IDs15.561328 us; those slots plus metadata prefetch15.571336 us; separate B-data READY before scale publication16.539888 us. All bounded numerics pass, but none exceeds current best, so their implementations remain temporary.
+
+## Publish next-M metadata after the first N phase drains
+
+Current best **15.322804 us / whole-dispatch MMAC14.862658%**, same1.8GHz/48CU/two-output-per-TG scope. This improves commit aca19e5 by 0.652487%. Four complete-N1024 FP8/INT8 equivalence cases and all dynamic barrier/phase, active-work and consumer-VMEM audits pass; independent recompilation repeats the exact machine text, inputs, addresses, output and elapsed time. LDS99KiB, actual role VGPRs36/9/146/146, no spills. Evidence: [ma-after-first-n](ma-after-first-n/).
+
+Perf hypothesis: output-layout optimization moved the bottleneck to next-M metadata publication. C0's metadata READY issue interval reached2296 cycles after the first K64 chunk of the second M. Metadata was prefetched into registers but published only after all current N phases drained. Publish it after n==0/panel==1 instead: this avoids blocking the first pair of current output mailboxes, while allowing later N phases to overlap metadata LDS publication. READY12/0 and its M-generation phase remain unchanged. Each metadata slot is still reused only after every output of the older M has been drained. The condition is independent of the diagnostic N limit and works for full N traversal.
+
+After this change, ordinal143's former2312-cycle between-MMAC gap is no longer among C0's twelve largest gaps; C1 cross-M gap127 falls1988->1172 cycles. Other waits remain: C0 cross-M gap1816 cycles, C1 gap1912116 cycles. Startup A READY wait is2440 cycles on C0/SIMD0; first B-right READY wait1564 cycles on C1. The 60% reduction target is still unachieved; these are small pipeline improvements, not completion of the objective.

@@ -1,0 +1,39 @@
+# GEMM2 BM64 / BN512 / BK64 tuning
+
+2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
+
+## Acceptance and current results
+
+User explicitly chose elapsed time for **two output tiles of each geometry**, at 1.8 GHz and 48 CUs, rather than equal-work throughput. Thus BM64 does half the padded MMAC work of BM128. Neither the speedup below nor this bounded diagnostic is an equal-work/full-MoE throughput claim. The target was subsequently raised to **60% lower elapsed time**, requiring **<=8.272168 us** against historical BM128 best 20.680420 us. **Not achieved yet.**
+
+| Algorithm | Full 48-CU dispatch us | Whole 48-CU dispatch MMAC | LDS KiB | Actual role VGPRs |
+|---|---:|---:|---:|---|
+| Historical BM128/BN512 best (older frozen toolchain) |20.680420|22.024466%|117|40/9/203/203|
+| BM64, K128 B publication / K64 consumption / two M32 output panels |**16.051164**|**14.188230%**|99|33/9/126/126|
+| BM64, K128 consumption |16.096756|14.148043%|99|33/9/126/126|
+
+Current elapsed-time reduction is **22.384729%**. The stricter 60% target remains active. Historical comparator source, HSACO and toolchain are under `../gemm2-20261115/bn512-b-batch-k128-best-gc1800/`. Current compiler is LLVM fd18eddb plus clean Triton 5b24821; provenance records exact binary hashes. This is a cross-toolchain historical comparison, not an isolated single-factor experiment.
+
+The BM64 best checks 2,630,144 valid elements with zero mismatches; unselected columns and rows remain NaN. The repeated run matches inputs, GPU addresses, machine `.text` bytes, output hash and elapsed time exactly. See `repeat-proof.json`. Raw traces and frozen tensor payloads remain in the raw root recorded by `provenance.json`; perf path/SHA are in `perf-location.json`. The promoted source matches repeat/kernel.py exactly.
+
+## Pipeline and resource layout
+
+2P2C, four waves per role, native WDRA, requested registers 48/16/224/224. P0 loads one full K256 A tile, two metadata generations, prefetches next M and drains/scatters output mailboxes using buffer_store_dwordx4. P1 sends BL01 -> BR01 -> BR23 -> BL23 for each N128 phase and supplies SB. C0/C1 each own 256 columns in two N128 phases. They read A once per M, perform K64 MMACs, scale strictly ((acc*SA)*SB)*weight, convert to BF16/FP16 and publish two M32 output panels per phase. INT8 keeps INT32 accumulation until all K contributions are complete.
+
+LDS is A16 + B64 + C16 + double MA2 + SB1 = **99 KiB**. A is 64x256 bytes. Each consumer has two K128xN128 physical B slots (16 KiB each). Each C mailbox is M32xN128x2 bytes (8 KiB). Metadata is two generations x four 64-element FP32 vectors (2 KiB); SB is two 128-element FP32 vectors (1 KiB).
+
+48 CUs each complete one physical TG processing two M outputs. Each CU issues exactly 2048 active FP8 MMACs; CU0 has 16 live waves (four per SIMD), no exec-zero MMAC, no adjacent same-ID waits and IDs remain 0..15. A/B READY generations match both M iterations. Consumer VMEM loads and permlane instructions are absent; scratch spills are absent. `model_metrics.py` derives expected work from actual BM/BN/K/tile counts and uses the full HYGPERF dispatch window, not the shorter CU0 wave lifetime.
+
+## Correctness
+
+`test/fused_moe/test_channel_gemm2_bm64_bn512_equivalence.py`: four opt-in tests passed. Each covers complete N1024/K256 over multiple sorted M64 blocks on one persistent TG, against both CPU and ordinary non-Gluon Triton. FP8 and INT8, BF16 with routed weights, FP16 without weights, forced independent 64-bit A/B/C addressing and non-unit scale strides are included. All 395,264 elements per case match the reference kernel bit for bit; CPU tolerance is rtol=.02/atol=.002. Forced wide paths use small physical allocations and do not validate physical allocations above 4 GiB. This test invokes the dedicated operator directly, not framework dispatch selection.
+
+```bash
+RUN_GLUON_GEMM2_BM64_BN512_EQUIVALENCE=1 python -m pytest -s -q test/fused_moe/test_channel_gemm2_bm64_bn512_equivalence.py
+```
+
+## Reproduce the bounded performance case
+
+Run in zx-perf-node60 with the paired Python environment. Create a case directory with the production source copied as kernel.py, then use launch.py <case-directory> 64 --freeze once and launch.py <case-directory> 64 --kind fp8. Both launcher and harness are archived here; the launcher configures the toolchain, 1.8 GHz and separate per-case cache. Run model_metrics.py and the three audit scripts against the case directory afterward. There is no warmup dispatch.
+
+All times in this report are PMD model measurements, not physical-device measurements.

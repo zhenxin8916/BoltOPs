@@ -1,0 +1,29 @@
+{
+  "llvm": {
+    "path": "/home/zhenx/llvm-project",
+    "branch": "dtk-llvm-6.3.3",
+    "commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+    "tracked_diff": "",
+    "compiler_sha256": "0dabcb21b8420844154fb8e313e5ab1e07a7f98df6ccf0e4d07354428f8cc6da",
+    "wrapper": "/home/zhenx/temp/boltops-shared-ring-port-20261114/optimized-perf/clang-control-sync",
+    "flags": [
+      "-mllvm",
+      "-hcu-control-only-ebarrier-sync"
+    ]
+  },
+  "triton": {
+    "path": "/home/zhenx/worktrees/triton-feature-20261102",
+    "branch": "release/3.6.x",
+    "commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+    "tracked_diff": "",
+    "libtriton_sha256": "49ae398b737f663ebe5dd369b66edc453f6de5a1a1a22156f4faf48e4941efe4"
+  },
+  "pmd": {
+    "commit": "b61a79c58e4f54d6d2920594d3af08582354db3e",
+    "libgem5_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+  },
+  "boltops_parent": "ee1743126b5df69ecd4a0dadb5692bbbb7907bed",
+  "raw_root": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115",
+  "performance_scope": "48 physical persistent TGs, two independent M64xN512 output tiles per TG; actual N2048/K256, first N panel only; clock 1.8 GHz",
+  "comparison_acceptance": "User explicitly selected elapsed time for two outputs of each geometry; padded work differs by 2x. Current goal is 60% elapsed-time reduction from historical BM128 BN512 20.680420us."
+}

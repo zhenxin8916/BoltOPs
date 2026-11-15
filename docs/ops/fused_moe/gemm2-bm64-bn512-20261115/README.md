@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.612480 us / whole-dispatch MMAC14.586895%, full-K256 B slots. The 60% target remains open.**
+**Current best: 15.538532 us / whole-dispatch MMAC14.656314%, metadata register prefetch. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -58,3 +58,15 @@ Each consumer now owns one K256xN128 B slot instead of two K128xN128 slots. P1 p
 At 1.8 GHz, 48 persistent TGs process two outputs each: **15.612480 us / whole-dispatch MMAC14.586895%**. Independent recompilation repeats exactly the same machine .text, inputs, addresses, output and elapsed time. Improvement versus commit338a785 is **0.188391%** (0.029468 us); versus historical BM12820.680420 us it is **24.505982%**, with half the padded work as stated above. The 60% target is still not achieved.
 
 2,630,144 bounded-output elements match, untouched output remains NaN. Four full-N1024 FP8/INT8 equivalence cases pass; real-trace barrier/phase, active-work and no-consumer-VMEM audits pass. Evidence, tested source, production documentation-only edit proof, HSACO and perf location are under [full-k256-b-slot](full-k256-b-slot/). All measurements use the same clean toolchain and PMD configuration as the prior best.
+
+## Perf-driven metadata scheduling update
+
+Current best **15.538532 us / 14.656314%** whole 48-CU dispatch MMAC, same two-output-per-TG/1.8GHz scope. Relative to commit3208d1d15.612480 us, elapsed time falls **0.473647%**. Native WDRA actual VGPRs are36/9/146/146, LDS99 KiB, no spills. Four full-N FP8/INT8 equivalence cases and all trace audits pass; independent compilation repeats text, frozen inputs, GPU addresses, output and elapsed time exactly. Evidence is in [ma-register-prefetch](ma-register-prefetch/).
+
+Root-cause evidence from prior best CU0/SIMD0: C0's EMPTY11 issue gap9.477020->10.471148 us is1788 cycles. During it, P0 is writing next-M metadata to LDS and issuing its VMEM/LGKM waits; first output drain starts10.422220 us. The whole between-MMAC gap after ordinal63 is2488 cycles, including scaling, handoff, next B reads and waits. These issue intervals include scheduling/resource effects and are not pure instruction latency.
+
+Solution: preserve next-A MLS prefetch, load next-M scale/weight/route/expert into registers early, drain every current output mailbox, then publish next-M metadata to LDS before advancing M. Consumers still use READY12/0 before reading metadata; metadata generations remain double-buffered and bound by completed current output drain. Source separates `_read_metadata` from `_publish_metadata`. Arithmetic order and scatter mapping are unchanged.
+
+CU0/SIMD0 diagnostics: C0 gap after ordinal63 falls2488->1688 cycles; C1 cross-M gap after127 falls2320->1308 cycles. Other intervals grow: C0 cross-M960->1640 cycles; hence only0.074us total gain, not a wholesale removal of stalls. Full dispatch is the acceptance metric.
+
+Negative controls: deferring next metadata loads until the first output pair drains15.658628 us, or until all output drains15.899376 us, both worse; they move stalls rather than hide memory latency. Draining C0's two panels before C1 gives15.550208 us, slower than the new best. A two-output-slot prototype sharing one READY missed a generation after two back-to-back phase flips and was stopped; it has no timing result. Distinct READY IDs are required for that design. No backend or model workaround is used.

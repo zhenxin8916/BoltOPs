@@ -1,0 +1,11 @@
+{
+  "same_machine_text": true,
+  "same_inputs": true,
+  "same_gpu_addresses": true,
+  "same_time_us": true,
+  "same_output": true,
+  "production_matches_tested_source": true,
+  "time_us": 15.538532,
+  "text_sha256": "1b32276f5c4753f6fce2984bc911ceaafbe987f048e399cb93bd88368bfe9087",
+  "source_sha256": "75b8651f9623999f9d4ed20b2ed4e741ddd141ecea3ed3f88b926f86cbf39376"
+}

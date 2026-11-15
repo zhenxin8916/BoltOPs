@@ -1,0 +1,4 @@
+{
+  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/prefetch-ma-registers-repeat/GEMM2_BM64_BN512_BK64_GRID48_OUTPUT96_2M_PER_CU_MA_REGISTER_PREFETCH_GC1800_CU0.perf",
+  "sha256": "e41a7ccb0d20f347d3d33b24748be218672501cb76db59e7469dbaa96777fbea"
+}

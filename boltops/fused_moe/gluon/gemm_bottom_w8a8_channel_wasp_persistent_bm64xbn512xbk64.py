@@ -85,7 +85,7 @@ def _initialize(STAGES: gl.constexpr):
 def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch,
                          K: gl.constexpr, BM: gl.constexpr, BK: gl.constexpr,
                          USE_A64: gl.constexpr, STRIDE_SA: gl.constexpr,
-                         MUL_ROUTED_WEIGHT: gl.constexpr):
+                         MUL_ROUTED_WEIGHT: gl.constexpr, WITH_METADATA: gl.constexpr = True):
     """P0 loads one full-A slot and publishes this M's metadata.
 
         A slot: 0       READY=1, EMPTY=3       phase = epoch & 1
@@ -110,6 +110,21 @@ def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch
     hcu.abarrier_arrive(1 + slot)
     hcu.set_priority(0)
     hcu.sched_barrier()
+    if WITH_METADATA:
+        _load_metadata_only(SA, Weights, Sorted, Experts, ma, m, epoch, BM, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
+
+
+@gluon.jit
+def _load_metadata_only(SA, Weights, Sorted, Experts, ma, m, epoch,
+                        BM: gl.constexpr, USE_A64: gl.constexpr,
+                        STRIDE_SA: gl.constexpr, MUL_ROUTED_WEIGHT: gl.constexpr):
+    sa, weight, route, expert = _read_metadata(SA, Weights, Sorted, Experts, m, BM, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
+    _publish_metadata(ma, epoch, sa, weight, route, expert)
+
+
+@gluon.jit
+def _read_metadata(SA, Weights, Sorted, Experts, m, BM: gl.constexpr,
+                   USE_A64: gl.constexpr, STRIDE_SA: gl.constexpr, MUL_ROUTED_WEIGHT: gl.constexpr):
     ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
     mr = gl.arange(0, BM, ml)
     if USE_A64:
@@ -129,6 +144,11 @@ def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch
             weight = gl.full((BM,), 1, gl.float32, ml)
         route = buffer_load(Sorted, (m * BM + mr).to(gl.uint32))
         expert = buffer_load(Experts, (m + 0 * mr).to(gl.uint32))
+    return sa, weight, route, expert
+
+
+@gluon.jit
+def _publish_metadata(ma, epoch, sa, weight, route, expert):
     ma.index((epoch & 1) * 4 + 0).store(sa)
     ma.index((epoch & 1) * 4 + 1).store(weight)
     ma.index((epoch & 1) * 4 + 2).store(route.to(gl.float32, bitcast=True))
@@ -234,13 +254,18 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
                 else:
                     output_rows += (route.to(gl.uint32) * N,)
                 output_valid += ((route >= 0) & (route < valid_routes) & (expert >= 0),)
+            next_sa = gl.full((BM,), 0, gl.float32, ml)
+            next_weight = gl.full((BM,), 0, gl.float32, ml)
+            next_route = gl.full((BM,), 0, gl.int32, ml)
+            next_expert = gl.full((BM,), 0, gl.int32, ml)
             next_m = m + gl.num_programs(0)
             if next_m < total // (N // BN):
                 # This completed current-A READY separates consecutive A EMPTY3
                 # waits. Only P0 can publish the next READY1 generation.
                 hcu.abarrier_try_wait(1, (epoch - 1) & 1)
                 # Independent full-A slot preserves the original next-M prefetch.
-                _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, next_m, rows, epoch, K, BM, BK, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
+                _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, next_m, rows, epoch, K, BM, BK, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT, False)
+                next_sa, next_weight, next_route, next_expert = _read_metadata(SA, Weights, Sorted, Experts, next_m, BM, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
                 epoch += 1
             for n in range(0, N_PANELS):
                 col = (n // 2) * BN + (n % 2) * (BN // 4) + output_rn
@@ -263,6 +288,9 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
                         gl.store(C + offsets + BN // 2, y, valid[:, None])
                     else:
                         buffer_store(y, C, offsets + BN // 2, valid[:, None])
+                    if n == N_PANELS - 1 and panel == 1:
+                        if next_m < total // (N // BN):
+                            _publish_metadata(ma, epoch - 1, next_sa, next_weight, next_route, next_expert)
         else:
             expert = gl.load(Experts + m)
             b_base = B + gl.maximum(expert, 0).to(gl.int64) * N * K

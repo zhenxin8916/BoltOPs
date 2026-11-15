@@ -1,0 +1,116 @@
+{
+  "kernel_hash": "fee75c4de3276c7dd94133a6cb0647e147f075a98cdffacf2acbda1efce7f28f",
+  "kernel_metadata": {
+    "allow_flush_denorm": false,
+    "allow_flush_denorm_explicitly_set": false,
+    "allowed_dot_input_precisions": [
+      "ieee",
+      "tf32"
+    ],
+    "amdgpu_enable_max_ilp_scheduling_strategy": false,
+    "arch": "gfx946",
+    "assume_no_nans": false,
+    "backend_name": "hip",
+    "block_pingpong_async_global_prefetch": null,
+    "block_pingpong_async_local_prefetch": 1,
+    "buffer_cache_swizzle": false,
+    "cluster_dims": [
+      1,
+      1,
+      1
+    ],
+    "debug": false,
+    "default_dot_input_precision": "ieee",
+    "deprecated_fp8_dot_operand_dtypes": [],
+    "empty_arrive_after_mmac": false,
+    "enable_fp_fusion": true,
+    "enable_v_mmac_cluster": 0,
+    "extern_libs": [
+      [
+        "ocml",
+        "/opt/rocm/amdgcn/bitcode/ocml.bc"
+      ],
+      [
+        "ockl",
+        "/opt/rocm/amdgcn/bitcode/ockl.bc"
+      ],
+      [
+        "hip",
+        "/opt/rocm/amdgcn/bitcode/hip.bc"
+      ],
+      [
+        "opencl",
+        "/opt/rocm/amdgcn/bitcode/opencl.bc"
+      ]
+    ],
+    "hash": "fee75c4de3276c7dd94133a6cb0647e147f075a98cdffacf2acbda1efce7f28f",
+    "hcu_use_gfx946_sched_model_v2": true,
+    "instrumentation_mode": "",
+    "kpack": 1,
+    "launch_cooperative_grid": false,
+    "matrix_instr_nonkdim": 0,
+    "max_memory_cluster_dwords": null,
+    "max_num_imprecise_acc_default": 0,
+    "misched_regpressure": true,
+    "mmac_layout_force": -1,
+    "name": "gemm_bottom_w8a8_channel_wasp_persistent",
+    "num_ctas": 1,
+    "num_stages": 2,
+    "num_warps": 16,
+    "optimize_epilogue": false,
+    "profile_scratch_align": 1,
+    "profile_scratch_size": 0,
+    "sanitize_overflow": true,
+    "sched_latency": "none",
+    "schedule_hint": "none",
+    "shared": 101376,
+    "supported_fp8_dtypes": [
+      "fp8e4nv",
+      "fp8e5"
+    ],
+    "target": "GPUTarget(backend='hip', arch='gfx946', warp_size=64)",
+    "tensordesc_meta": [],
+    "triton_version": "3.6.0",
+    "use_async_copy": true,
+    "use_block_pingpong": false,
+    "use_nvshmem": false,
+    "use_rocshmem": false,
+    "utc_warmup": false,
+    "warp_size": 64,
+    "wasp_enabled": true,
+    "wasp_partition_regs": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "wasp_partition_regs_actual": [
+      36,
+      9,
+      146,
+      146
+    ],
+    "wasp_partition_regs_requested": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "wasp_partition_regs_source": "warp_specialize",
+    "wasp_partition_warps": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "wasp_wdra": true,
+    "waves_per_eu": 1
+  },
+  "artifact_sha256": {
+    "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/prefetch-ma-registers-publish-after-drain/gemm/kernel.amdgcn": "6c02de26009972a7bd0a565fd1fb36c0f220b9f300474b7594ae37ebc96be0b5",
+    "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/prefetch-ma-registers-publish-after-drain/gemm/kernel.hsaco": "1f7c5d7b3312eac97992bcc4c2e7e4d700eee734bbdd93c9f2fcca5f42fc8d36",
+    "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/prefetch-ma-registers-publish-after-drain/gemm/kernel.llir": "dd0c69b204295b044e3fb6208883e84b57d621ef538312d43168ea37a81921a4",
+    "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/prefetch-ma-registers-publish-after-drain/gemm/kernel.source": "b3f208cf3cf510576ba91379e8370989322eb7fc63e0408e399ae7e620ef563f",
+    "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/prefetch-ma-registers-publish-after-drain/gemm/kernel.ttgir": "6fc732e77317780a8ce948ceb4290f8e6fe36f1fef90bec7c417004fb0a1e372"
+  }
+}

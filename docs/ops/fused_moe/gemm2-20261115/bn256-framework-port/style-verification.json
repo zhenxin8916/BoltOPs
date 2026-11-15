@@ -1,0 +1,13 @@
+{
+  "ast_equal_ignoring_docstrings_and_helper_names": true,
+  "hsaco_text_identical": true,
+  "text_bytes": 9680,
+  "text_sha256": "7e371c091c531cb6c8f3b98f0bcf699fb8e84490a3c9fbe56339f00f5c4f9795",
+  "source_sha256": "1a125457b352883170efe9c7847450e64866e2682649710d47c2d83e254e08e5",
+  "renamed_helpers": {
+    "_empty": "_empty_mailbox",
+    "_initialize": "_initialize_mailbox",
+    "_producer": "_producer_mailbox",
+    "_consumer": "_consumer_mailbox"
+  }
+}

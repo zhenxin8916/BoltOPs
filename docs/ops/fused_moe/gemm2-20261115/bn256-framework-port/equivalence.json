@@ -1,0 +1,78 @@
+[
+  {
+    "input_sha256": {
+      "A": "18e9a31eb201fae8a97406c52dfd256c34cea24943c631b714b9f9921f0846aa",
+      "B": "368fa7d2f9a07f34de32306db059baf3e6ce9a27a089401ffad2692397425d4c",
+      "SA": "67b775602ee9053405e7abb36de0e3878f728c9d24e4b81aa04b4e30d0ffd304",
+      "SB": "4644646d80e9c600b6b959e37d258c32f183ad4eedbe2409d2195bbb6ff70915",
+      "Sorted": "8781c0507cf2ea90bbf068d15ed2eaf541742aca00cf826ef2c744a6a80f4205",
+      "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+      "RouteWeights": "e7c6d9144fb664dec453f314e0cc6671eef198f722feac67781fe8671ab25c7e",
+      "SortedWeights": "fe02dd2f2ab2ce575dbe980329a1df5e632a78c504c72d2665f4f6d32be4b63e",
+      "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+    },
+    "kind": "fp8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 197632,
+    "differences": 0
+  },
+  {
+    "input_sha256": {
+      "A": "fdc1a7bbc2a72bff4653402ed2299f1223b107944d50c6792f55cce6aff53aa6",
+      "B": "685c2861a4bf20b438b4a9e8cd88bccde117c4ee9a1a3ccff692b7b0778d3c53",
+      "SA": "f5980120ff3a50aa2fd1e3e2825bbd139367aba32fef0262a9dae530f7ff4e99",
+      "SB": "623373d4b8868ad691f082e0066a1eb094966195ddf001b97b6c44b6d50d8245",
+      "Sorted": "8781c0507cf2ea90bbf068d15ed2eaf541742aca00cf826ef2c744a6a80f4205",
+      "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+      "RouteWeights": "e7c6d9144fb664dec453f314e0cc6671eef198f722feac67781fe8671ab25c7e",
+      "SortedWeights": "fe02dd2f2ab2ce575dbe980329a1df5e632a78c504c72d2665f4f6d32be4b63e",
+      "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+    },
+    "kind": "int8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 197632,
+    "differences": 0
+  },
+  {
+    "input_sha256": {
+      "A": "18e9a31eb201fae8a97406c52dfd256c34cea24943c631b714b9f9921f0846aa",
+      "B": "368fa7d2f9a07f34de32306db059baf3e6ce9a27a089401ffad2692397425d4c",
+      "SA": "67b775602ee9053405e7abb36de0e3878f728c9d24e4b81aa04b4e30d0ffd304",
+      "SB": "4644646d80e9c600b6b959e37d258c32f183ad4eedbe2409d2195bbb6ff70915",
+      "Sorted": "8781c0507cf2ea90bbf068d15ed2eaf541742aca00cf826ef2c744a6a80f4205",
+      "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+      "RouteWeights": "e7c6d9144fb664dec453f314e0cc6671eef198f722feac67781fe8671ab25c7e",
+      "SortedWeights": "fe02dd2f2ab2ce575dbe980329a1df5e632a78c504c72d2665f4f6d32be4b63e",
+      "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+    },
+    "kind": "fp8",
+    "output": "torch.float16",
+    "mul_routed_weight": false,
+    "forced_int64": true,
+    "elements": 197632,
+    "differences": 0
+  },
+  {
+    "input_sha256": {
+      "A": "fdc1a7bbc2a72bff4653402ed2299f1223b107944d50c6792f55cce6aff53aa6",
+      "B": "685c2861a4bf20b438b4a9e8cd88bccde117c4ee9a1a3ccff692b7b0778d3c53",
+      "SA": "f5980120ff3a50aa2fd1e3e2825bbd139367aba32fef0262a9dae530f7ff4e99",
+      "SB": "623373d4b8868ad691f082e0066a1eb094966195ddf001b97b6c44b6d50d8245",
+      "Sorted": "8781c0507cf2ea90bbf068d15ed2eaf541742aca00cf826ef2c744a6a80f4205",
+      "Experts": "b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d",
+      "RouteWeights": "e7c6d9144fb664dec453f314e0cc6671eef198f722feac67781fe8671ab25c7e",
+      "SortedWeights": "fe02dd2f2ab2ce575dbe980329a1df5e632a78c504c72d2665f4f6d32be4b63e",
+      "WorkCount": "bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409"
+    },
+    "kind": "int8",
+    "output": "torch.float16",
+    "mul_routed_weight": false,
+    "forced_int64": true,
+    "elements": 197632,
+    "differences": 0
+  }
+]

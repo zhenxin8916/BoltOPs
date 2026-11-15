@@ -24,7 +24,7 @@ def main():
     p = argparse.ArgumentParser(__doc__)
     p.add_argument('--mode', choices=('gluon', 'triton'), default='gluon')
     p.add_argument('--bn', type=int, choices=(128, 256), default=256)
-    p.add_argument('--bk', type=int, choices=(128, 256), default=256)
+    p.add_argument('--bk', type=int, choices=(128, 256), default=128)
     p.add_argument('--a-buffer', action='store_true')
     p.add_argument('--tiles', type=int, default=384)
     p.add_argument('--grid', type=int, default=48)
@@ -54,12 +54,21 @@ def main():
     gpu = {n: v.cuda() for n, v in t.items()}
     c = torch.full((M * TOPK, N), float('nan'), dtype=torch.bfloat16).cuda()
     if args.mode == 'gluon':
+        if args.bn == 256 and args.bk == 128 and not args.a_buffer:
+            from boltops.fused_moe.gluon.gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128 import (
+                gemm_bottom_w8a8_channel_wasp_persistent as optimized,
+            )
+        else:
+            optimized = None
         kernel = gemm_bottom_w8a8_channel_wasp_persistent
         options = dict(DEFAULT_LAUNCH_OPTIONS, N=N, K=K, top_k=TOPK,
                        BLOCK_SIZE_M=BM, BLOCK_SIZE_N=args.bn, BLOCK_SIZE_K=args.bk,
                        USE_MLS_LOAD_A=not args.a_buffer, CK_SORTING=True)
+        if optimized is not None:
+            kernel = optimized
+            options.pop('USE_MLS_LOAD_A')
         arguments = (gpu['A'], gpu['B'], gpu['SA'], gpu['SB'], c,
-                     gpu['RouteWeights'], gpu['Sorted'], gpu['Experts'], rows, M * TOPK, total)
+                     gpu['SortedWeights'], gpu['Sorted'], gpu['Experts'], rows, M * TOPK, total)
     else:
         from boltops.fused_moe.triton.moe_op import fused_moe_persistent_kernel
         kernel = fused_moe_persistent_kernel

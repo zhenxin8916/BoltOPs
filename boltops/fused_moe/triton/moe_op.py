@@ -2843,6 +2843,98 @@ def moe_set_use_persistent_kernel(value: bool):
     global _USE_MOE_PERSISTENT_KERNEL
     _USE_MOE_PERSISTENT_KERNEL = value
 
+def _gluon_channel_gemm2_module():
+    """Load the optional HCU Gluon candidate without affecting Triton installs."""
+    import importlib.util
+    try:
+        available = importlib.util.find_spec("triton.experimental.gluon.language.amd.hcu") is not None
+    except ModuleNotFoundError:
+        available = False
+    if not available:
+        return None
+    from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128
+    return gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn256xbk128
+
+
+def _gluon_gemm2_prefers_sorted_layout(B, B_scale, *, top_k, config, output_dtype,
+                                      use_fp8_w8a8, use_int8_w8a8, per_channel_quant,
+                                      block_shape, ck_sorting, has_bias):
+    """Choose the GEMM1/activation sorted bridge before allocating its buffers."""
+    if (not (use_fp8_w8a8 or use_int8_w8a8) or not per_channel_quant or block_shape is not None
+            or B_scale is None or not ck_sorting or B.ndim != 3):
+        return False
+    device = arch_info.get_device_info(B.device)
+    if device.arch != "gfx946":
+        return False
+    mod = _gluon_channel_gemm2_module()
+    if mod is None:
+        return False
+    # Only metadata is needed before the quantized activation exists.
+    dtype = torch.int8 if use_int8_w8a8 else torch.float8_e4m3fn
+    a = torch.empty((1, B.shape[2]), dtype=dtype, device="meta")
+    sa = torch.empty((1, 1), dtype=torch.float32, device="meta")
+    return mod.is_persistent_channel_gemm2_supported(
+        a, B, sa, B_scale, arch=device.arch, cu_count=device.cu_count,
+        top_k=top_k, config=config, output_dtype=output_dtype,
+        scale_recipe="int8_channel" if use_int8_w8a8 else "fp8_channel", has_bias=has_bias)
+
+
+def _try_gluon_channel_gemm2(
+    A, B, C, A_scale, B_scale, sorted_weights, sorted_token_ids, expert_ids,
+    num_tokens_post_padded, top_k, config, *, use_fp8_w8a8, use_int8_w8a8,
+    per_channel_quant, block_shape, c_sorted, a_sorted, ck_sorting,
+    ck_topk, naive_block_assignment, mul_routed_weight, B_bias, B_zp,
+):
+    """Try sorted channel GEMM2; unsupported metadata keeps ordinary Triton."""
+    if (not (use_fp8_w8a8 or use_int8_w8a8) or not per_channel_quant or block_shape is not None
+            or A_scale is None or B_scale is None or B_zp is not None or naive_block_assignment):
+        return False
+    device = arch_info.get_device_info(A.device)
+    if device.arch != "gfx946":
+        return False
+    mod = _gluon_channel_gemm2_module()
+    if mod is None or not mod.is_persistent_channel_gemm2_supported(
+        A, B, A_scale, B_scale, arch=device.arch, cu_count=device.cu_count,
+        top_k=ck_topk, config=config, c_sorted=c_sorted, a_sorted=a_sorted,
+        ck_sorting=ck_sorting, output_dtype=C.dtype, has_bias=B_bias is not None,
+        mul_routed_weight=mul_routed_weight,
+        scale_recipe="int8_channel" if use_int8_w8a8 else "fp8_channel"):
+        return False
+    if not C.is_contiguous() or C.ndim < 2 or C.shape[-1] != B.shape[1]:
+        return False
+    metadata = (sorted_token_ids, expert_ids, num_tokens_post_padded)
+    if any(t.dtype != torch.int32 or not t.is_contiguous() for t in metadata):
+        return False
+    if sorted_token_ids.ndim != 1 or expert_ids.ndim != 1 or num_tokens_post_padded.numel() != 1:
+        return False
+    if mul_routed_weight and (sorted_weights is None or sorted_weights.dtype != torch.float32
+                              or not sorted_weights.is_contiguous() or sorted_weights.ndim != 1):
+        return False
+    weights = (sorted_weights,) if mul_routed_weight else ()
+    if any(t.device != A.device for t in (B, C, A_scale, B_scale, *metadata, *weights)):
+        return False
+    rows = min(A.shape[0], sorted_token_ids.numel())
+    if mul_routed_weight:
+        rows = min(rows, sorted_weights.numel())
+    m_blocks = min(rows // 128, expert_ids.numel())
+    if not m_blocks:
+        return False
+    def byte_span(t):
+        return (1 + sum((size - 1) * stride for size, stride in zip(t.shape, t.stride()))) * t.element_size()
+    opts = dict(mod.DEFAULT_LAUNCH_OPTIONS)
+    opts.update(USE_ADDR_OFFSET_INT64_A=max(byte_span(t) for t in (A, A_scale, *metadata, *weights)) >= 4 * 1024**3 - 1,
+                USE_ADDR_OFFSET_INT64_B=max(byte_span(B), byte_span(B_scale)) >= 4 * 1024**3 - 1,
+                USE_ADDR_OFFSET_INT64_C=byte_span(C) >= 4 * 1024**3 - 1,
+                stride_asm=A_scale.stride(0), stride_bse=B_scale.stride(0), stride_bsn=B_scale.stride(1),
+                MUL_ROUTED_WEIGHT=mul_routed_weight,
+                num_tokens_post_padded_ptr=num_tokens_post_padded)
+    mod.gemm_bottom_w8a8_channel_wasp_persistent[(device.cu_count,)](
+        A, B, A_scale, B_scale, C, sorted_weights, sorted_token_ids, expert_ids,
+        rows, C.numel() // B.shape[1], m_blocks * (B.shape[1] // 256),
+        N=B.shape[1], K=B.shape[2], top_k=ck_topk, **opts)
+    return True
+
+
 def _try_gluon_channel_gemm1(
     A, B, C, A_scale, B_scale, sorted_token_ids, expert_ids,
     num_tokens_post_padded, top_k, config, *, use_fp8_w8a8, use_int8_w8a8,
@@ -3024,7 +3116,16 @@ def fused_moe(
         config = selected[0] if isinstance(selected, tuple) else selected
 
     config = config.copy()
-    # Query the independent Gluon candidate before ordinary Triton-only tuning checks.
+    # Query independent Gluon candidates before ordinary Triton-only tuning checks.
+    if _try_gluon_channel_gemm2(
+        A, B, C, A_scale, B_scale, sorted_weights, sorted_token_ids, expert_ids,
+        num_tokens_post_padded, top_k, config, use_fp8_w8a8=use_fp8_w8a8,
+        use_int8_w8a8=use_int8_w8a8, per_channel_quant=per_channel_quant,
+        block_shape=block_shape, c_sorted=c_sorted,
+        a_sorted=a_sorted or bottom_a_use_mls_load, ck_sorting=ck_sorting,
+        ck_topk=ck_topk, naive_block_assignment=naive_block_assignment,
+        mul_routed_weight=mul_routed_weight, B_bias=B_bias, B_zp=B_zp):
+        return
     if _try_gluon_channel_gemm1(
         A, B, C, A_scale, B_scale, sorted_token_ids, expert_ids,
         num_tokens_post_padded, top_k, config, use_fp8_w8a8=use_fp8_w8a8,

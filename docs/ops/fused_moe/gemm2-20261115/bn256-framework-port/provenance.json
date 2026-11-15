@@ -1,0 +1,12 @@
+{
+  "source_archived_commit": "88e09f4",
+  "original_optimization": "8836708",
+  "source_sha256": "1a125457b352883170efe9c7847450e64866e2682649710d47c2d83e254e08e5",
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "triton_changes": "",
+  "llvm_project_commit": "9021260a00b402df73ad3d280c0aec274d654f6e",
+  "llvm_changes": "llvm/lib/Target/AMDGPU/SIInstrInfo.cpp | 12 ++++++++++++\n 1 file changed, 12 insertions(+)",
+  "clang_wrapper": "/zhenxin/temp/boltops-shared-ring-port-20261114/optimized-perf/clang-control-sync",
+  "raw_artifacts": "/home/zhenx/temp/moe-gemm2-bn256-port-20261115",
+  "scope": "48 CU; diagnostic N_TILES_LIMIT=1; 2 independent M tiles per TG; full N validated separately"
+}

@@ -1,0 +1,11 @@
+{
+  "begin_tick": 0,
+  "end_tick": 15393416,
+  "duration_ticks": 15393416,
+  "duration_us": 15.393416,
+  "gui_duration_us": 15.393,
+  "section_offset": 7229,
+  "section_type": 15,
+  "source_perf": "/zhenxin/temp/moe-gemm2-bn256-port-20261115/perf-final/m5out/0/0/2333098_python3.10.perf",
+  "source_perf_sha256": "796bde715169c69402c9cef78a08a1d7d36c8b8ae52e7220bca4568da7d0b722"
+}

@@ -28,3 +28,7 @@
 [等工作量证明](gemm2-20261115/bn512-bk64-study/equal-work-proof.json)、[全部对照](gemm2-20261115/bn512-bk64-study/comparison.json)、[最好版及复测/源码/HSACO/工具链](gemm2-20261115/bn512-bk64-best-gc1800/README.md)、[初始有效基线指标](gemm2-20261115/bn512-bk64-study/clean/model-metrics.json)。
 
 P0负责A/SA/weight/route/expert、下一M的A预发和BF16散写；P1负责B及SB；两个消费者各256列，分两个N128阶段计算，保持A寄存器复用。缩放顺序((acc*SA)*SB)*weight，转BF16后P0 buffer_store_dwordx4。最佳发射顺序BL0 BR0 BR1 BL1 BL2 BR2 BL3 BR3。
+
+## 大 A MLS 对照（隔离诊断，未替换正式版）
+
+将A的global→LDS从64×16 b8换为128×16 b8，配合2×2 producer发射，实测及同HSACO复测均21.883048μs / 全dispatch MMAC20.814066%，比21.981460μs减少0.447705%；4×1版本22.589724μs。每CU两个M的A MLS发射64→32，消费者A DS仍256条，红框的DS段没有消除。4380672有效元素零超差，LDS85KiB、实际VGPR40/9/187/187不变。依赖已有隔离宽A lowering修正，通用后端回归尚未建立，故正式kernel/冻结工具链不替换。详见[对照、复现与审计](gemm2-20261115/bn512-a-mls128-study/README.md)。

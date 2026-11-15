@@ -1,0 +1,53 @@
+{
+  "left-first-tail": {
+    "P0_dynamic_MLS_counts_CU0_two_M": {
+      "matrix_load_64x16_b8_active_True": 64
+    },
+    "consumer_A_DS_count_CU0_two_M": 256,
+    "per_wave_A_DS_per_M": 16,
+    "first_M_A_DS_issue_span_cycles": {
+      "0x1000a": 64.0,
+      "0x3000b": 64.0,
+      "0x8": 64.0,
+      "0x20009": 64.0,
+      "0x1000e": 276.0,
+      "0x3000f": 276.0,
+      "0xc": 276.0,
+      "0x2000d": 276.0
+    }
+  },
+  "a-mls128-w41": {
+    "P0_dynamic_MLS_counts_CU0_two_M": {
+      "matrix_load_128x16_b8_active_True": 64
+    },
+    "consumer_A_DS_count_CU0_two_M": 256,
+    "per_wave_A_DS_per_M": 16,
+    "first_M_A_DS_issue_span_cycles": {
+      "0x3000b": 64.0,
+      "0x8": 64.0,
+      "0x20009": 64.0,
+      "0x1000a": 64.0,
+      "0x3000f": 272.0,
+      "0xc": 276.0,
+      "0x2000d": 276.0,
+      "0x1000e": 276.0
+    }
+  },
+  "a-mls128-w22": {
+    "P0_dynamic_MLS_counts_CU0_two_M": {
+      "matrix_load_128x16_b8_active_True": 32
+    },
+    "consumer_A_DS_count_CU0_two_M": 256,
+    "per_wave_A_DS_per_M": 16,
+    "first_M_A_DS_issue_span_cycles": {
+      "0x8": 88.0,
+      "0x20009": 88.0,
+      "0x1000a": 64.0,
+      "0x3000b": 88.0,
+      "0x1000e": 352.0,
+      "0xc": 324.0,
+      "0x2000d": 324.0,
+      "0x3000f": 328.0
+    }
+  }
+}

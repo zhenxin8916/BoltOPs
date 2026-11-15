@@ -1,0 +1,12 @@
+{
+  "wide-w22/kernel.amdgcn": {
+    "original_sha256": "84703a6b90fb624f28f4ea1a3bed265f0e893b0c09e857158d3b190ac716ddb0",
+    "archived_sha256": "9430726b0d8f6d10efe2a59f1b2b42ff2e088ceecab41562cdf3757d813eedbd",
+    "change": "trailing whitespace in textual assembly only; HSACO byte-identical"
+  },
+  "repeat/kernel.amdgcn": {
+    "original_sha256": "84703a6b90fb624f28f4ea1a3bed265f0e893b0c09e857158d3b190ac716ddb0",
+    "archived_sha256": "9430726b0d8f6d10efe2a59f1b2b42ff2e088ceecab41562cdf3757d813eedbd",
+    "change": "trailing whitespace in textual assembly only; HSACO byte-identical"
+  }
+}

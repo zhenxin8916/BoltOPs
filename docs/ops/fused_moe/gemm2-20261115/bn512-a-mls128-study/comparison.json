@@ -1,0 +1,49 @@
+{
+  "baseline": {
+    "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-left-first-tail-gc1800",
+    "time_us": 21.98146,
+    "whole_gpu_mmac_percent": 20.7208802327052,
+    "hsaco_sha256": "0ed07098e8441f1c6bcb93dc0221120675914f7435e22d500ebbc7a232b57bf3",
+    "text_sha256": "bea6f46a9f148de384806b567aaabe2f952121c202b5fae855d83528f94e5d45"
+  },
+  "wide-w41": {
+    "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-a-mls128-w41-gc1800",
+    "time_us": 22.589724,
+    "whole_gpu_mmac_percent": 20.162937803047086,
+    "hsaco_sha256": "2c3f28544cc5b67565074f581bf1cd4b9b2aa4cfd14c2436fdb13a16dbf06ac9",
+    "text_sha256": "58ff67c36a50dc35596873c9a091afc8c6f203cbf054244438d3b323f226045c"
+  },
+  "wide-w22": {
+    "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-a-mls128-w22-gc1800",
+    "time_us": 21.883048,
+    "whole_gpu_mmac_percent": 20.814065755373747,
+    "hsaco_sha256": "09bb6c382c956e02ac32dc5b2f0e76b9070d5f5033abf39dd01adc3b3c22e9fb",
+    "text_sha256": "cfb4f7553c6a9fce2691ac72ecf24e0dce1fc2f033a137c9673fa2eba26d45a8",
+    "perf": [
+      "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-a-mls128-w22-gc1800/GEMM2_M4096_N2048_K256_BM128_BN512_BK64_GRID48_OUTPUT96_2M_PER_CU_A_MLS128_W22_GC1800_CU0.perf"
+    ]
+  },
+  "repeat": {
+    "path": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-a-mls128-w22-repeat-gc1800",
+    "time_us": 21.883048,
+    "whole_gpu_mmac_percent": 20.814065755373747,
+    "hsaco_sha256": "09bb6c382c956e02ac32dc5b2f0e76b9070d5f5033abf39dd01adc3b3c22e9fb",
+    "text_sha256": "cfb4f7553c6a9fce2691ac72ecf24e0dce1fc2f033a137c9673fa2eba26d45a8",
+    "perf": [
+      "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-a-mls128-w22-repeat-gc1800/GEMM2_M4096_N2048_K256_BM128_BN512_BK64_GRID48_OUTPUT96_2M_PER_CU_A_MLS128_W22_GC1800_CU0.perf"
+    ]
+  },
+  "proof": {
+    "control_text_identical_to_original": true,
+    "repeat_same_hsaco": true,
+    "repeat_same_input_sha_and_gpu_addresses": true,
+    "repeat_same_time": true,
+    "production_kernel_unchanged": true,
+    "runtime": "/zhenxin/temp/moe-gemm2-20261114/wide-a-unit-consumer-fix/triton",
+    "libtriton_sha256": "1dea26387888ef7f12f4f0e85757e3e20851cf7d084868e5f1eba4835d6e5eb3",
+    "toolchain_base": "../bn512-bk64-best-gc1800/inherited-toolchain-provenance.json",
+    "diagnostic_patch": "../wide-mls-study/diagnostic.patch",
+    "diagnostic_source": "../wide-mls-study/diagnostic-MlsOpToLLVM.cpp",
+    "source_coverage": "isolated GEMM2 FP8 diagnostic; generic backend regression not established; not promoted"
+  }
+}

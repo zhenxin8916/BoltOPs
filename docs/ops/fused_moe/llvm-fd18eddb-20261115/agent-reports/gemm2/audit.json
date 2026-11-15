@@ -1,0 +1,360 @@
+{
+  "llvm_commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "scope": "FP8 only; existing correctness artifacts inspected; no new launches or source mutations",
+  "kernels": {
+    "256": {
+      "bk": 128,
+      "all_input_hashes_equal": true,
+      "all_output_hashes_equal": true,
+      "new_vs_previous_time_change_pct": 0.12318480089072992,
+      "rows": [
+        {
+          "version": "new",
+          "requested_gc_mhz": 1800,
+          "time_us": 23.49934,
+          "mmac_total_pct": 24.78893696855993,
+          "hot_loop_mmac_pct": 38.415539811159164,
+          "cu0_lifetime_us": 18.374132,
+          "clock_period_ps": 556,
+          "hsaco_sha256": "252342dc87d183edc18787513acdf374e5c16b6b9dcc46fcbbe1453e9a851786",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4330752,
+            "untouched_tail": true,
+            "output_sha256": "e3e51b96278efcf40073ff502d35dee1f7ed4722fa8d9f567b80fb305f199382",
+            "shared": 119808
+          },
+          "text_sha256": "82a669d7fff7175d9a1065dffabe7ce906260cc025fa5ad65739a4fb062e7e22",
+          "source_sha256": "1a125457b352883170efe9c7847450e64866e2682649710d47c2d83e254e08e5",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "b0bc10a86da80e368b029721f991102b79e89f82fec1e4eff8514f724195d81d",
+            "selected_rows": "adf5b20bb0c3aefef48d67cba1949ec022f7d47fd5f91c4b39585ddf5cf36df3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/new-bottom-bn256-fp8-gc1800/m5out/0/0/2344384_python3.10.perf",
+          "ttgir_sha256": "86ca62dc6328ad5190bdb30cd0bc8cd372ee44c621ba5477efaa9d7c5774404f",
+          "llir_sha256": "2771def7e83ddae33166fab0c8d96d4b87dd6766b30dbdc996b8c196e43e98df",
+          "amdgcn_sha256": "08938fd1a8030fb8740fa7c824146e7d90ef6970ca8f79bcc280100a1bf26f54"
+        },
+        {
+          "version": "new",
+          "requested_gc_mhz": 2200,
+          "time_us": 21.18753,
+          "mmac_total_pct": 21.64561644559531,
+          "hot_loop_mmac_pct": 33.415003633012496,
+          "cu0_lifetime_us": 17.21993,
+          "clock_period_ps": 455,
+          "hsaco_sha256": "a3a9b38ae332a4892091012d0a512f0fe7da4c5b041758105ef5b61c10eb46bc",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4330752,
+            "untouched_tail": true,
+            "output_sha256": "e3e51b96278efcf40073ff502d35dee1f7ed4722fa8d9f567b80fb305f199382",
+            "shared": 119808
+          },
+          "text_sha256": "1038417df6a96e874615994e19e5ba63affafa30589384c5071b69d898d72a19",
+          "source_sha256": "1a125457b352883170efe9c7847450e64866e2682649710d47c2d83e254e08e5",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "b0bc10a86da80e368b029721f991102b79e89f82fec1e4eff8514f724195d81d",
+            "selected_rows": "adf5b20bb0c3aefef48d67cba1949ec022f7d47fd5f91c4b39585ddf5cf36df3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/new-bottom-bn256-fp8-gc2200/m5out/0/0/2344385_python3.10.perf",
+          "ttgir_sha256": "86ca62dc6328ad5190bdb30cd0bc8cd372ee44c621ba5477efaa9d7c5774404f",
+          "llir_sha256": "e3939393515b773b7a2e06119cdeb6b0d8479d26d5e11c580403347a02dc6a7b",
+          "amdgcn_sha256": "bf30f459515dee3f54e61d897bcc840e77780ebaad2756d07dc05ede57a1eb0d"
+        },
+        {
+          "version": "new",
+          "requested_gc_mhz": 1500,
+          "time_us": 25.987654,
+          "mmac_total_pct": 28.485986508102094,
+          "hot_loop_mmac_pct": 45.03252047832712,
+          "cu0_lifetime_us": 19.181586,
+          "clock_period_ps": 667,
+          "hsaco_sha256": "00526d8a54449ed5e8870a4e07ca8a2c3749538d70ed2ed19bd83fe65900faa4",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4330752,
+            "untouched_tail": true,
+            "output_sha256": "e3e51b96278efcf40073ff502d35dee1f7ed4722fa8d9f567b80fb305f199382",
+            "shared": 119808
+          },
+          "text_sha256": "82a669d7fff7175d9a1065dffabe7ce906260cc025fa5ad65739a4fb062e7e22",
+          "source_sha256": "1a125457b352883170efe9c7847450e64866e2682649710d47c2d83e254e08e5",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "b0bc10a86da80e368b029721f991102b79e89f82fec1e4eff8514f724195d81d",
+            "selected_rows": "adf5b20bb0c3aefef48d67cba1949ec022f7d47fd5f91c4b39585ddf5cf36df3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/new-bottom-bn256-fp8-gc1500/m5out/0/0/2344386_python3.10.perf",
+          "ttgir_sha256": "86ca62dc6328ad5190bdb30cd0bc8cd372ee44c621ba5477efaa9d7c5774404f",
+          "llir_sha256": "2771def7e83ddae33166fab0c8d96d4b87dd6766b30dbdc996b8c196e43e98df",
+          "amdgcn_sha256": "08938fd1a8030fb8740fa7c824146e7d90ef6970ca8f79bcc280100a1bf26f54"
+        },
+        {
+          "version": "previous",
+          "requested_gc_mhz": 1800,
+          "time_us": 23.470428,
+          "mmac_total_pct": 24.269716181785864,
+          "hot_loop_mmac_pct": 38.87776361220233,
+          "cu0_lifetime_us": 18.767224,
+          "clock_period_ps": 556,
+          "hsaco_sha256": "6b59af22720e1046581d9aefcf95a17195eec5ce23b39cdb370d7c29b3b8a10b",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4330752,
+            "untouched_tail": true,
+            "output_sha256": "e3e51b96278efcf40073ff502d35dee1f7ed4722fa8d9f567b80fb305f199382",
+            "shared": 119808
+          },
+          "text_sha256": "1038417df6a96e874615994e19e5ba63affafa30589384c5071b69d898d72a19",
+          "source_sha256": "1a125457b352883170efe9c7847450e64866e2682649710d47c2d83e254e08e5",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "b0bc10a86da80e368b029721f991102b79e89f82fec1e4eff8514f724195d81d",
+            "selected_rows": "adf5b20bb0c3aefef48d67cba1949ec022f7d47fd5f91c4b39585ddf5cf36df3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/previous-bottom-bn256-fp8-gc1800/m5out/0/0/2346733_python3.10.perf",
+          "ttgir_sha256": "86ca62dc6328ad5190bdb30cd0bc8cd372ee44c621ba5477efaa9d7c5774404f",
+          "llir_sha256": "e3939393515b773b7a2e06119cdeb6b0d8479d26d5e11c580403347a02dc6a7b",
+          "amdgcn_sha256": "bf30f459515dee3f54e61d897bcc840e77780ebaad2756d07dc05ede57a1eb0d"
+        }
+      ],
+      "fp8_equivalence_tests": [
+        {
+          "name": "test_gluon_gemm2_matches_triton[fp8-out0-True-False]",
+          "failed": false,
+          "properties": {
+            "equivalence": "{\"input_sha256\": {\"A\": \"18e9a31eb201fae8a97406c52dfd256c34cea24943c631b714b9f9921f0846aa\", \"B\": \"368fa7d2f9a07f34de32306db059baf3e6ce9a27a089401ffad2692397425d4c\", \"SA\": \"67b775602ee9053405e7abb36de0e3878f728c9d24e4b81aa04b4e30d0ffd304\", \"SB\": \"4644646d80e9c600b6b959e37d258c32f183ad4eedbe2409d2195bbb6ff70915\", \"Sorted\": \"8781c0507cf2ea90bbf068d15ed2eaf541742aca00cf826ef2c744a6a80f4205\", \"Experts\": \"b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d\", \"RouteWeights\": \"e7c6d9144fb664dec453f314e0cc6671eef198f722feac67781fe8671ab25c7e\", \"SortedWeights\": \"fe02dd2f2ab2ce575dbe980329a1df5e632a78c504c72d2665f4f6d32be4b63e\", \"WorkCount\": \"bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409\"}, \"kind\": \"fp8\", \"output\": \"torch.bfloat16\", \"mul_routed_weight\": true, \"forced_int64\": false, \"elements\": 197632, \"differences\": 0}"
+          }
+        },
+        {
+          "name": "test_gluon_gemm2_matches_triton[fp8-out2-False-True]",
+          "failed": false,
+          "properties": {
+            "equivalence": "{\"input_sha256\": {\"A\": \"18e9a31eb201fae8a97406c52dfd256c34cea24943c631b714b9f9921f0846aa\", \"B\": \"368fa7d2f9a07f34de32306db059baf3e6ce9a27a089401ffad2692397425d4c\", \"SA\": \"67b775602ee9053405e7abb36de0e3878f728c9d24e4b81aa04b4e30d0ffd304\", \"SB\": \"4644646d80e9c600b6b959e37d258c32f183ad4eedbe2409d2195bbb6ff70915\", \"Sorted\": \"8781c0507cf2ea90bbf068d15ed2eaf541742aca00cf826ef2c744a6a80f4205\", \"Experts\": \"b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d\", \"RouteWeights\": \"e7c6d9144fb664dec453f314e0cc6671eef198f722feac67781fe8671ab25c7e\", \"SortedWeights\": \"fe02dd2f2ab2ce575dbe980329a1df5e632a78c504c72d2665f4f6d32be4b63e\", \"WorkCount\": \"bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409\"}, \"kind\": \"fp8\", \"output\": \"torch.float16\", \"mul_routed_weight\": false, \"forced_int64\": true, \"elements\": 197632, \"differences\": 0}"
+          }
+        }
+      ],
+      "three_clock_same_machine_code": false
+    },
+    "512": {
+      "bk": 64,
+      "all_input_hashes_equal": true,
+      "all_output_hashes_equal": true,
+      "new_vs_previous_time_change_pct": 0.7150613098863889,
+      "rows": [
+        {
+          "version": "new",
+          "requested_gc_mhz": 1800,
+          "time_us": 21.144124,
+          "mmac_total_pct": 28.324458889426733,
+          "hot_loop_mmac_pct": 45.30562553950275,
+          "cu0_lifetime_us": 16.080632,
+          "clock_period_ps": 556,
+          "hsaco_sha256": "33c162dae03438f6cefb46986769cfe95eafa9d1eee4c1b88d0f976867c66c80",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4380672,
+            "untouched_tail": true,
+            "output_sha256": "f0255ea67340c26e187d688640ea8d0e1ce9784161e3dd52c270d2c1f75713d9",
+            "shared": 119808
+          },
+          "text_sha256": "1c04a0a9b4ebc53ba96b8e74d4af26a27b927c5b1e848bb64978d5c0b24b8645",
+          "source_sha256": "89db0327f3f946ad608eb3bafc78b8e500afc21a59feb5584ee4135cb032c7db",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "a2007de3aaadcc680b98bce1444b8a30ea6bb2773d9ac56c1855518c586230ca",
+            "selected_rows": "11182eff7cc6d86415e07232fd9c8a3b5b5665238ba8d9852836a4038e1219d3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/new-bottom-bn512-fp8-gc1800/m5out/0/0/2345065_python3.10.perf",
+          "ttgir_sha256": "1745fb5d94bebf248394ce7cb8a8cbdfb872141082e3b5d26f75dc9c1f70efc8",
+          "llir_sha256": "678f42cc81dba7514cbf20d9a9cab0947bf82f36ac9a2b747009e6fd5133192b",
+          "amdgcn_sha256": "996cd20ba834ac4fa34e6f7c327d38ce7b48466334d8a4a17b1f90cf8a11ea57"
+        },
+        {
+          "version": "new",
+          "requested_gc_mhz": 2200,
+          "time_us": 19.03447,
+          "mmac_total_pct": 24.92848883208569,
+          "hot_loop_mmac_pct": 38.02652887903257,
+          "cu0_lifetime_us": 14.95221,
+          "clock_period_ps": 455,
+          "hsaco_sha256": "2eed9ad30b9a46e9d70a23e5ca65069a58f9454db773bda887f5def1ac157dbc",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4380672,
+            "untouched_tail": true,
+            "output_sha256": "f0255ea67340c26e187d688640ea8d0e1ce9784161e3dd52c270d2c1f75713d9",
+            "shared": 119808
+          },
+          "text_sha256": "1c04a0a9b4ebc53ba96b8e74d4af26a27b927c5b1e848bb64978d5c0b24b8645",
+          "source_sha256": "89db0327f3f946ad608eb3bafc78b8e500afc21a59feb5584ee4135cb032c7db",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "a2007de3aaadcc680b98bce1444b8a30ea6bb2773d9ac56c1855518c586230ca",
+            "selected_rows": "11182eff7cc6d86415e07232fd9c8a3b5b5665238ba8d9852836a4038e1219d3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/new-bottom-bn512-fp8-gc2200/m5out/0/0/2345088_python3.10.perf",
+          "ttgir_sha256": "1745fb5d94bebf248394ce7cb8a8cbdfb872141082e3b5d26f75dc9c1f70efc8",
+          "llir_sha256": "678f42cc81dba7514cbf20d9a9cab0947bf82f36ac9a2b747009e6fd5133192b",
+          "amdgcn_sha256": "996cd20ba834ac4fa34e6f7c327d38ce7b48466334d8a4a17b1f90cf8a11ea57"
+        },
+        {
+          "version": "new",
+          "requested_gc_mhz": 1500,
+          "time_us": 24.004664,
+          "mmac_total_pct": 30.75075075075075,
+          "hot_loop_mmac_pct": 46.575705909012804,
+          "cu0_lifetime_us": 17.76888,
+          "clock_period_ps": 667,
+          "hsaco_sha256": "d55f5d6c0015960debfc9ab77f735abad7e0cc04730bc174a9fcc30302126f8c",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4380672,
+            "untouched_tail": true,
+            "output_sha256": "f0255ea67340c26e187d688640ea8d0e1ce9784161e3dd52c270d2c1f75713d9",
+            "shared": 119808
+          },
+          "text_sha256": "1c04a0a9b4ebc53ba96b8e74d4af26a27b927c5b1e848bb64978d5c0b24b8645",
+          "source_sha256": "89db0327f3f946ad608eb3bafc78b8e500afc21a59feb5584ee4135cb032c7db",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "a2007de3aaadcc680b98bce1444b8a30ea6bb2773d9ac56c1855518c586230ca",
+            "selected_rows": "11182eff7cc6d86415e07232fd9c8a3b5b5665238ba8d9852836a4038e1219d3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/new-bottom-bn512-fp8-gc1500/m5out/0/0/2345504_python3.10.perf",
+          "ttgir_sha256": "1745fb5d94bebf248394ce7cb8a8cbdfb872141082e3b5d26f75dc9c1f70efc8",
+          "llir_sha256": "678f42cc81dba7514cbf20d9a9cab0947bf82f36ac9a2b747009e6fd5133192b",
+          "amdgcn_sha256": "996cd20ba834ac4fa34e6f7c327d38ce7b48466334d8a4a17b1f90cf8a11ea57"
+        },
+        {
+          "version": "previous",
+          "requested_gc_mhz": 1800,
+          "time_us": 20.994004,
+          "mmac_total_pct": 28.574418361296175,
+          "hot_loop_mmac_pct": 43.76969231211747,
+          "cu0_lifetime_us": 15.939964,
+          "clock_period_ps": 556,
+          "hsaco_sha256": "25e8bc88b54e1bcc90a1ab3adc6082ea8a051e0eab64161841105c19869dd6b9",
+          "result": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 4380672,
+            "untouched_tail": true,
+            "output_sha256": "f0255ea67340c26e187d688640ea8d0e1ce9784161e3dd52c270d2c1f75713d9",
+            "shared": 119808
+          },
+          "text_sha256": "6b4cb1ea056b78457a7501f777f34c067d413c6d67cc11e09473807fd1f215c0",
+          "source_sha256": "89db0327f3f946ad608eb3bafc78b8e500afc21a59feb5584ee4135cb032c7db",
+          "input_sha256": {
+            "A": "035e24874ccfb7a0bff94237500c9fa919c4bbde2976849ac7937b70124e9028",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "c887979d180d60c39c893f7b9dce0e26a7258b4c0f46b014ff0fa98ccf120a97",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "a15d00afb0f0d140648955208bdb9289fcbbd0cefbd473c048d5c2e2db258937",
+            "Experts": "dd007e5b5b6f27f00eead1af42801c93560203cc40c65b4f27c3da86a078d9d2",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "efb5cee41705dad3cfa8448fd819ab6f475b3991fb5bf0c769021c99745d8e89",
+            "golden": "a2007de3aaadcc680b98bce1444b8a30ea6bb2773d9ac56c1855518c586230ca",
+            "selected_rows": "11182eff7cc6d86415e07232fd9c8a3b5b5665238ba8d9852836a4038e1219d3"
+          },
+          "no_spill": true,
+          "hardware_wait_rules_passed": true,
+          "perf_path": "/home/zhenx/temp/llvm-fd18eddbaf4a-retest-20261115/perf/previous-bottom-bn512-fp8-gc1800/m5out/0/0/2346893_python3.10.perf",
+          "ttgir_sha256": "1745fb5d94bebf248394ce7cb8a8cbdfb872141082e3b5d26f75dc9c1f70efc8",
+          "llir_sha256": "aeacfc71f15201be5b17440ca48f7bc180dc377ef4aa65b218fc0f40c4f4dac7",
+          "amdgcn_sha256": "e3c22eac9f93c4af943904ed6db43023d552bd63238cf0d857cbf59f35852504"
+        }
+      ],
+      "fp8_equivalence_tests": [
+        {
+          "name": "test_gluon_gemm2_matches_triton[fp8-out0-True-False]",
+          "failed": false,
+          "properties": {
+            "equivalence": "{\"input_sha256\": {\"A\": \"d96df9995bbcaa66a4b74179b9deba34cc1a2f84b9388f0381aa753598144ee9\", \"B\": \"e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a\", \"SA\": \"dcc6f464b3462a921afc32501c14a80e9aad05ad548b0e0cf874a04c8840bbe2\", \"SB\": \"cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8\", \"Sorted\": \"5558b823e34bb77f1821d68b986dcbe1681de32a1c42ef41911fc5dad81a4c8d\", \"Experts\": \"b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d\", \"RouteWeights\": \"549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923\", \"SortedWeights\": \"e2b5051b3bef02a60e431270d3ded9612f1ddba347ba62da39c5d42a82153fff\", \"WorkCount\": \"bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409\"}, \"kind\": \"fp8\", \"output\": \"torch.bfloat16\", \"mul_routed_weight\": true, \"forced_int64\": false, \"elements\": 395264, \"differences\": 0}"
+          }
+        },
+        {
+          "name": "test_gluon_gemm2_matches_triton[fp8-out2-False-True]",
+          "failed": false,
+          "properties": {
+            "equivalence": "{\"input_sha256\": {\"A\": \"d96df9995bbcaa66a4b74179b9deba34cc1a2f84b9388f0381aa753598144ee9\", \"B\": \"e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a\", \"SA\": \"dcc6f464b3462a921afc32501c14a80e9aad05ad548b0e0cf874a04c8840bbe2\", \"SB\": \"cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8\", \"Sorted\": \"5558b823e34bb77f1821d68b986dcbe1681de32a1c42ef41911fc5dad81a4c8d\", \"Experts\": \"b342c83d7060c5852f741e8e009d375103df2e1f7c76fbc512e575cd86d7b03d\", \"RouteWeights\": \"549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923\", \"SortedWeights\": \"e2b5051b3bef02a60e431270d3ded9612f1ddba347ba62da39c5d42a82153fff\", \"WorkCount\": \"bc3817c13bc4e6f192a840895fa937d252db153efb89bb14a6c2ddf1f9c55409\"}, \"kind\": \"fp8\", \"output\": \"torch.float16\", \"mul_routed_weight\": false, \"forced_int64\": true, \"elements\": 395264, \"differences\": 0}"
+          }
+        }
+      ],
+      "three_clock_same_machine_code": true
+    }
+  }
+}

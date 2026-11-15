@@ -1,0 +1,122 @@
+[
+  {
+    "stage": "top",
+    "bn": 128,
+    "gc_mhz": 2200,
+    "time_us": 66.43,
+    "mmac_total_pct": 48.160613765634416,
+    "hot_loop_mmac_pct": 59.362214037617505
+  },
+  {
+    "stage": "top",
+    "bn": 128,
+    "gc_mhz": 1800,
+    "time_us": 72.42456,
+    "mmac_total_pct": 54.39349296592937,
+    "hot_loop_mmac_pct": 66.57982706632139
+  },
+  {
+    "stage": "top",
+    "bn": 128,
+    "gc_mhz": 1500,
+    "time_us": 82.678656,
+    "mmac_total_pct": 57.409662301257065,
+    "hot_loop_mmac_pct": 68.74502577288833
+  },
+  {
+    "stage": "top",
+    "bn": 256,
+    "gc_mhz": 2200,
+    "time_us": 65.986832,
+    "mmac_total_pct": 49.99504138536064,
+    "hot_loop_mmac_pct": 58.81992677056792
+  },
+  {
+    "stage": "top",
+    "bn": 256,
+    "gc_mhz": 1800,
+    "time_us": 65.973848,
+    "mmac_total_pct": 60.98981889924991,
+    "hot_loop_mmac_pct": 70.75284707791442
+  },
+  {
+    "stage": "top",
+    "bn": 256,
+    "gc_mhz": 1500,
+    "time_us": 70.35116,
+    "mmac_total_pct": 69.76293631108888,
+    "hot_loop_mmac_pct": 81.3932909729847
+  },
+  {
+    "stage": "top",
+    "bn": 512,
+    "gc_mhz": 2200,
+    "time_us": 59.522192,
+    "mmac_total_pct": 54.9531268342585,
+    "hot_loop_mmac_pct": 66.4503603671537
+  },
+  {
+    "stage": "top",
+    "bn": 512,
+    "gc_mhz": 1800,
+    "time_us": 61.429104,
+    "mmac_total_pct": 66.02391674474366,
+    "hot_loop_mmac_pct": 80.36085320950775
+  },
+  {
+    "stage": "top",
+    "bn": 512,
+    "gc_mhz": 1500,
+    "time_us": 65.405352,
+    "mmac_total_pct": 74.26259787646319,
+    "hot_loop_mmac_pct": 88.91480352973429
+  },
+  {
+    "stage": "bottom",
+    "bn": 256,
+    "gc_mhz": 2200,
+    "time_us": 21.222564,
+    "mmac_total_pct": 21.38735869253061,
+    "hot_loop_mmac_pct": 34.38421819200417
+  },
+  {
+    "stage": "bottom",
+    "bn": 256,
+    "gc_mhz": 1800,
+    "time_us": 23.49934,
+    "mmac_total_pct": 24.78893696855993,
+    "hot_loop_mmac_pct": 38.415539811159164
+  },
+  {
+    "stage": "bottom",
+    "bn": 256,
+    "gc_mhz": 1500,
+    "time_us": 25.987654,
+    "mmac_total_pct": 28.485986508102094,
+    "hot_loop_mmac_pct": 45.03252047832712
+  },
+  {
+    "stage": "bottom",
+    "bn": 512,
+    "gc_mhz": 2200,
+    "time_us": 19.03447,
+    "mmac_total_pct": 24.92848883208569,
+    "hot_loop_mmac_pct": 38.02652887903257
+  },
+  {
+    "stage": "bottom",
+    "bn": 512,
+    "gc_mhz": 1800,
+    "time_us": 21.144124,
+    "mmac_total_pct": 28.324458889426733,
+    "hot_loop_mmac_pct": 45.30562553950275
+  },
+  {
+    "stage": "bottom",
+    "bn": 512,
+    "gc_mhz": 1500,
+    "time_us": 24.004664,
+    "mmac_total_pct": 30.75075075075075,
+    "hot_loop_mmac_pct": 46.575705909012804
+  }
+]

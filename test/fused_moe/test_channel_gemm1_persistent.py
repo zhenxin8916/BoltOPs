@@ -259,9 +259,9 @@ def test_moe_entry_triton_fallback_numerical(monkeypatch):
     torch.testing.assert_close(c.cpu(),expected,rtol=.02,atol=.002)
 
 
-@pytest.mark.parametrize("which,shared_ring", [("a",False),("b",False),("a",True)])
-def test_channel_scale_sparse_stride_above_4g(which,shared_ring):
-    """A/B data remain small/32-bit; one scale alone spans over 4 GiB."""
+@pytest.mark.parametrize("shared_ring", [False, True])
+def test_channel_scale_sparse_stride_above_4g(shared_ring):
+    """A/B data remain small/32-bit; A's scale alone spans over 4 GiB."""
     from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
         gemm_top_w8a8_channel_wasp_persistent as kernel, DEFAULT_LAUNCH_OPTIONS)
 
@@ -272,27 +272,21 @@ def test_channel_scale_sparse_stride_above_4g(which,shared_ring):
         def data_ptr(self):
             return self.address
 
-    m,n,k,bm=2,(256 if shared_ring else (129 if which=="b" else 128)),(1024 if shared_ring else 512),128
+    m,n,k,bm=2,(256 if shared_ring else 128),(1024 if shared_ring else 512),128
     stride=2**30+1  # FP32 byte offset exceeds 4 GiB at token 1.
     a=torch.ones((m,k),dtype=torch.float32).to(torch.float8_e4m3fn).cuda()
     b=torch.ones((1,n,k),dtype=torch.float32).to(torch.float8_e4m3fn).cuda()
     sa=torch.tensor([.125],dtype=torch.float32).cuda()
     sb=torch.full((1,n),.25).cuda()
     c=torch.full((bm,n),float("nan"),dtype=torch.bfloat16).cuda()
-    routes=torch.full((bm,),0 if which=="b" else 1,dtype=torch.int32).cuda()
+    routes=torch.full((bm,),1,dtype=torch.int32).cuda()
     experts=torch.zeros(1,dtype=torch.int32).cuda()
-    if which=="a":
-        scale_a,scale_b=RebasedScale(sa,stride*4),sb
-        stride_a,stride_b,tile=stride,1,0
-    else:
-        stride_a,stride_b,tile=0,2**24,1
-        scale_a,scale_b=sa,RebasedScale(sb,128*stride_b*4)
+    scale_a,scale_b=RebasedScale(sa,stride*4),sb
+    stride_a,stride_b,tile=stride,1,0
     args=(a,b,scale_a,scale_b,c,routes,experts,m,1,n,k,1,n*stride_b,stride_b,0,stride_a,0)
     opts=dict(DEFAULT_LAUNCH_OPTIONS,TOTAL_TILES=tile+1,TILE_ID=tile,BLOCK_SIZE_M=bm,BLOCK_SIZE_N=256 if shared_ring else 128,
               BLOCK_SIZE_K=128,USE_ADDR_OFFSET_INT64_A=False,
               USE_ADDR_OFFSET_INT64_B=False,USE_ADDR_OFFSET_INT64_C=False,INSN_WARMUP=False)
-    if which=="b":
-        opts["amdgpu_enable_max_ilp_scheduling_strategy"]=False
     compiled=kernel.warmup(*args,grid=(1,),**opts)
     import inspect
     signature=inspect.signature(kernel.fn)

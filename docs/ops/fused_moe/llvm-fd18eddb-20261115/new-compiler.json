@@ -1,0 +1,5 @@
+{
+  "llvm_commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "clang_sha256": "0dabcb21b8420844154fb8e313e5ab1e07a7f98df6ccf0e4d07354428f8cc6da",
+  "version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git fd18eddbaf4a662ae5ce86c516d28e5b16952513)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/temp/llvm-fd18eddbaf4a-retest-20261115/new/bin\n"
+}

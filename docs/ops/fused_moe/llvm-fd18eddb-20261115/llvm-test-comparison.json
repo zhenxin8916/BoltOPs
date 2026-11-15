@@ -1,0 +1,26 @@
+[
+  {
+    "version": "previous",
+    "test": "abarrier-memory-order",
+    "llc_returncode": 0,
+    "filecheck_returncode": 0
+  },
+  {
+    "version": "previous",
+    "test": "matrix-store-lds-waitcnt",
+    "llc_returncode": 0,
+    "filecheck_returncode": 1
+  },
+  {
+    "version": "new",
+    "test": "abarrier-memory-order",
+    "llc_returncode": 0,
+    "filecheck_returncode": 1
+  },
+  {
+    "version": "new",
+    "test": "matrix-store-lds-waitcnt",
+    "llc_returncode": 0,
+    "filecheck_returncode": 1
+  }
+]

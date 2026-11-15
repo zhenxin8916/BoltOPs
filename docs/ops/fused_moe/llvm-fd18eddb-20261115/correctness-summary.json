@@ -1,0 +1,62 @@
+{
+  "g1-core": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "1",
+    "skipped": "0",
+    "tests": "108",
+    "time": "939.327",
+    "timestamp": "2026-11-15T14:47:32.962017+00:00",
+    "hostname": "bd01"
+  },
+  "g1-bn512": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "18",
+    "time": "111.381",
+    "timestamp": "2026-11-15T14:47:32.964250+00:00",
+    "hostname": "bd01"
+  },
+  "g2-bn256": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "4",
+    "time": "50.135",
+    "timestamp": "2026-11-15T14:47:32.976273+00:00",
+    "hostname": "bd01"
+  },
+  "g2-bn512": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "4",
+    "time": "79.172",
+    "timestamp": "2026-11-15T14:47:32.968437+00:00",
+    "hostname": "bd01"
+  },
+  "metadata": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "205",
+    "time": "1.007",
+    "timestamp": "2026-11-15T15:00:27.413433+00:00",
+    "hostname": "bd01"
+  },
+  "current-scale-tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "2",
+    "time": "11.128",
+    "timestamp": "2026-11-15T15:01:30.039763+00:00",
+    "hostname": "bd01"
+  }
+}

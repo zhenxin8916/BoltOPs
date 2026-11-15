@@ -1,0 +1,50 @@
+{
+  "left-first-tail": {
+    "time_us": 21.98146,
+    "whole_gpu_mmac_percent": 20.7208802327052,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-left-first-tail-gc1800"
+  },
+  "a-mls128-w22": {
+    "time_us": 21.883048,
+    "whole_gpu_mmac_percent": 20.814065755373747,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-a-mls128-w22-gc1800"
+  },
+  "row-late-meta-w14": {
+    "time_us": 23.156844,
+    "whole_gpu_mmac_percent": 19.66913971523926,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-row-late-meta-w14-gc1800"
+  },
+  "row-late-meta-w22": {
+    "time_us": 23.534368,
+    "whole_gpu_mmac_percent": 19.353619353619354,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-row-late-meta-w22-gc1800"
+  },
+  "batch-b-k128": {
+    "time_us": 21.189716,
+    "whole_gpu_mmac_percent": 21.495106399727113,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-batch-b-k128-gc1800"
+  },
+  "batch-b-k128-right-tail": {
+    "time_us": 20.68042,
+    "whole_gpu_mmac_percent": 22.02446565398575,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-batch-b-k128-right-tail-gc1800"
+  },
+  "split-a-eager": {
+    "time_us": 22.667564,
+    "whole_gpu_mmac_percent": 20.093698643577227,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-split-a-eager-gc1800"
+  },
+  "split-a-after-k0": {
+    "time_us": 22.650328,
+    "whole_gpu_mmac_percent": 20.108989150179195,
+    "mismatches": 0,
+    "directory": "/zhenxin/temp/moe-gemm2-20261114/persistent2-independent-m-bn512-bk64-split-a-after-k0-gc1800"
+  }
+}

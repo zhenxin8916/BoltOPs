@@ -1,0 +1,17 @@
+{
+  "hsaco_sha256": "dfb357ce45f382cc648db98bc8bc1eb152ae15e42ef32c8e7a0b2cc308bc60fe",
+  "repeat_hsaco_sha256": "dfb357ce45f382cc648db98bc8bc1eb152ae15e42ef32c8e7a0b2cc308bc60fe",
+  "measured_source_sha256": "ee502249d7b7027c19bc3e7b43e4089cbf35c8f11ea658080ae0100c61916503",
+  "promoted_source_sha256": "b961a88c07d3750a923e643acd8344bb01e40cd32f307c7427238bb3f9c65d44",
+  "promoted_AST_identical": true,
+  "source_difference": "comments only",
+  "repeat_time_us": 20.68042,
+  "same_input_sha256": true,
+  "same_gpu_buffer_addresses": true,
+  "runtime": "/zhenxin/temp/moe-gemm2-20261114/mls-stable-groups/triton",
+  "libtriton_sha256": "ddfa0f4ab5d93ffdb99f4fbd367d6a1f42a2ffec0f8f44545846b2983dc95dd4",
+  "toolchain_base": "../bn512-bk64-best-gc1800/inherited-toolchain-provenance.json",
+  "patch_entities_base": "../persistent2-independent-m-bk128-best-gc1800/",
+  "uses_wide_A_diagnostic": false,
+  "commit_base": "563c3e6"
+}

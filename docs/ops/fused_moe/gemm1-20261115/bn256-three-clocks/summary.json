@@ -1,0 +1,38 @@
+[
+  {
+    "gc_ghz": 2.2,
+    "bm": 128,
+    "bn": 256,
+    "bk": 128,
+    "time_us": 64.792456,
+    "mmac_total_pct": 51.47426129848097,
+    "mmac_scope": "cu0_wave_lifetime",
+    "checked_elements": 6291456,
+    "mismatches": 0,
+    "cu0_lifetime_us": 57.92969
+  },
+  {
+    "gc_ghz": 1.8,
+    "bm": 128,
+    "bn": 256,
+    "bk": 128,
+    "time_us": 65.418404,
+    "mmac_total_pct": 62.55464559112689,
+    "mmac_scope": "cu0_wave_lifetime",
+    "checked_elements": 6291456,
+    "mismatches": 0,
+    "cu0_lifetime_us": 58.249896
+  },
+  {
+    "gc_ghz": 1.5,
+    "bm": 128,
+    "bn": 256,
+    "bk": 128,
+    "time_us": 71.118872,
+    "mmac_total_pct": 71.13503891282875,
+    "mmac_scope": "cu0_wave_lifetime",
+    "checked_elements": 6291456,
+    "mismatches": 0,
+    "cu0_lifetime_us": 61.450043
+  }
+]

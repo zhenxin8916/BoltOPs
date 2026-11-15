@@ -1,0 +1,17 @@
+[
+  {
+    "case": "baseline-gc1500",
+    "text_sha256": "3b32be89974d06b9c58d8901ab0d88fbe00ef87a7c0722d2226a650011ed6d8a",
+    "matches_previous_bn256": true
+  },
+  {
+    "case": "baseline-gc1800",
+    "text_sha256": "3b32be89974d06b9c58d8901ab0d88fbe00ef87a7c0722d2226a650011ed6d8a",
+    "matches_previous_bn256": true
+  },
+  {
+    "case": "baseline-gc2200",
+    "text_sha256": "3b32be89974d06b9c58d8901ab0d88fbe00ef87a7c0722d2226a650011ed6d8a",
+    "matches_previous_bn256": true
+  }
+]

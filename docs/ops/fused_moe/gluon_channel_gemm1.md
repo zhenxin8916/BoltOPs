@@ -387,11 +387,17 @@ These tables contain FP8 results. INT8 results use separate `_top_int8.csv` /
 `_bottom_int8.csv` files, created when validated results are available.
 
 These are bounded kernel diagnostics, **not full-MoE or full-routing times**.
-`time_us` is the complete HYGPERF dispatch, including startup;
+`time_us_<frequency>` columns use the complete HYGPERF dispatch, including startup;
 the detailed JSON records preserve wave-span timing, frequency, work counts and
-input/source hashes. The CSV keeps BM/BN/BK immediately before `time_us`,
-followed only by the Triton/LLVM source commits and Chinese local-change notes.
-These rows use nominal 1.8 GHz, 48 CUs and warmup disabled.
+input/source hashes. The CSV keeps BM/BN/BK together, then one time/efficiency pair for each of
+2.2, 1.8 and 1.5 GHz, followed by Triton/LLVM commits and local-change notes.
+MMAC efficiency is the CU0 four-SIMD average over its own wave lifetime,
+including startup and tail: union of active FP8 MMAC 8-cycle intervals divided
+by four times the interval from CU0 first WAVE_START through last s_endpgm
+plus one cycle. The time columns separately retain full 48-CU dispatch time. BF16 accumulator clears and EXEC0 warmup
+are excluded. These are CU0 measurements, not an all-CU efficiency claim.
+Unmeasured cells remain empty; historical timings are kept in their 1.8-GHz
+columns. Tests use 48 CUs and warmup disabled.
 The bottom table records prior verified BN256/512 FP8 experiments; their
 prefixes have equal padded work but different selected output subsets.
 No `E=...` tuning JSON files are generated at this stage.
@@ -423,3 +429,40 @@ runs. Both dispatch times are unchanged. BN128 had completed before the stop
 request was handled; no additional run was started. GEMM2 and INT8 tables keep
 their previous measurements and toolchain provenance.
 Evidence: `gemm1-20261115/release-5b24821-gc1800/`.
+
+## BN256 frequency comparison (2026-11-15)
+
+The source experiment is back at `650d405`; its temporary route/expert
+`buffer_load` change was withdrawn. The existing port already contains that
+committed algorithm, so no new BN256 kernel change or speedup is claimed.
+The three runs use the same machine code, frozen inputs, output hashes,
+BM128/BN256/BK128, 48 CUs and four outputs per TG; warmup is disabled.
+Triton is clean `5b24821`; LLVM and its recorded changes are unchanged.
+
+| GC (GHz) | Full dispatch (us) | CU0 whole-kernel MMAC (%) |
+|---:|---:|---:|
+|2.2|64.792456|51.474261|
+|1.8|65.418404|62.554646|
+|1.5|71.118872|71.135039|
+
+Each run checks 6,291,456 CPU-reference elements with zero mismatches and an
+untouched output tail. CU0 has 32,768 active FP8 MMAC instructions; their
+8-cycle intervals are unioned per SIMD. All three traces show no overlap in
+these intervals. The denominator is four times CU0 first WAVE_START to last s_endpgm plus
+one cycle, including CU0 startup and tail; BF16 clears are excluded. The
+full HYGPERF dispatch time remains the time column, not this denominator. Only CU0 is
+traced. This percentage is not the hot-loop metric or the 48-CU average.
+
+The CSV puts each frequency's time and percentage together. BN128, INT8 and
+GEMM2 were not rerun for this comparison; their previous 1.8-GHz timings remain,
+and unmeasured cells are empty. Numerical results, toolchain fingerprints,
+source equivalence, the analyzer and repeat commands are archived in
+`gemm1-20261115/bn256-three-clocks/`.
+
+Metric correction: the initial frequency export incorrectly divided CU0 busy
+time by the entire dispatch window. At 1.5 GHz that gives 61.464012%, whereas
+CU0 itself lives for 61.450043 us with 43.712512 us busy per SIMD, giving
+71.135039%. The full dispatch remains 71.118872 us. Per-wave starts/ends and
+both percentages are retained in `gc1500/lifetime-check.json`. Historical
+650d405 eight-output measurements use a different output count; the current
+BN256 comparison processes four outputs per TG.

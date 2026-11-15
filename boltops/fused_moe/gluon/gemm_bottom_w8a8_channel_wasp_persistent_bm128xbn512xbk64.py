@@ -95,13 +95,14 @@ def _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch,
                 BN: gl.constexpr, BK: gl.constexpr):
     ready = (7 if KH % 2 == 0 else 2) if HALF == 1 else (5 if KH % 2 == 0 else 10)
     empty = (8 if KH % 2 == 0 else 4) if HALF == 1 else (6 if KH % 2 == 0 else 14)
-    phase = (epoch * 2 + KH // 2) & 1
+    # Each physical K128 slot is used once per N128 phase.
+    phase = epoch & 1
     physical = KH % 2
     dest = b1 if HALF == 1 else b0
     hcu.abarrier_try_wait(empty, phase)
     hcu.abarrier_seq(ready)
     hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
-                    (KH * BK, (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2)), warps=(2, 2))
+                    (KH * (2 * BK), (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2)), warps=(2, 2))
     if KH == 0:
         hcu.sched_barrier()
         ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
@@ -186,12 +187,7 @@ def _producer_mailbox(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, c
                 _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 1, N, K, BN, BK)
                 _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 1, N, K, BN, BK)
                 _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 0, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 2, 0, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 2, 1, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 3, 0, N, K, BN, BK)
-                _copy_b_right_buffered(B, SB, b_base, expert, b0, b1, mb, n, epoch, 3, 1, N, K, BN, BK)
-                # Finish the final left-slot publication before advancing phases.
-                hcu.abarrier_try_wait(10, 1)
+                hcu.abarrier_try_wait(10, epoch & 1)
                 epoch += 1
 
 
@@ -229,38 +225,35 @@ def _consumer_mailbox(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
         for n in range(0, 2):
             lo = gl.full((BM // 2, CN), 0, gl.float32, result)
             hi = gl.full((BM // 2, CN), 0, gl.float32, result)
-            for k in gl.static_range(3):
-                ticket = b_epoch * 4 + k
-                ready = (7 if k % 2 == 0 else 2) if PARTITION == 1 else (5 if k % 2 == 0 else 10)
-                empty = (8 if k % 2 == 0 else 4) if PARTITION == 1 else (6 if k % 2 == 0 else 14)
-                physical = k % 2
-                phase = (b_epoch * 2 + k // 2) & 1
-                hcu.abarrier_try_wait(ready, phase)
-                if k == 0:
+            for pair_k in gl.static_range(2):
+                ready = (7 if pair_k == 0 else 2) if PARTITION == 1 else (5 if pair_k == 0 else 10)
+                empty = (8 if pair_k == 0 else 4) if PARTITION == 1 else (6 if pair_k == 0 else 14)
+                hcu.abarrier_try_wait(ready, b_epoch & 1)
+                if pair_k == 0:
                     current_sb = mb.index(PARTITION).load(gl.SliceLayout(0, result))
-                b = bm.index(physical).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
+                b = bm.index(pair_k).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
                 hcu.wait_lgkmcnt(0)
-                if k == 0 and n == 0:
+                if pair_k == 0 and n == 0:
                     hcu.abarrier_arrive(3)
                 hcu.abarrier_arrive(empty)
-
+                pair_b = gl.split(b.reshape((2, BK, CN)).permute((1, 2, 0)))
+                b_first = gl.convert_layout(pair_b[0], hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
+                b_last = gl.convert_layout(pair_b[1], hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
                 hcu.sched_barrier()
-                lo = gl.amd.cdna4.mfma(a_low[k], b, lo)
+                lo = gl.amd.cdna4.mfma(a_low[pair_k * 2], b_first, lo)
                 hcu.sched_barrier()
-                hi = gl.amd.cdna4.mfma(a_high[k], b, hi)
+                hi = gl.amd.cdna4.mfma(a_high[pair_k * 2], b_first, hi)
                 hcu.sched_barrier()
-
-                if k == 0:
+                if pair_k == 0:
                     hcu.abarrier_try_wait(12 if ((a_epoch - 1) & 1) == 0 else 0, ((a_epoch - 1) >> 1) & 1)
                     sa = ma.index(((a_epoch - 1) & 1) * 4).load(gl.SliceLayout(1, result))
                     weight = ma.index(((a_epoch - 1) & 1) * 4 + 1).load(gl.SliceLayout(1, result))
-            ready = 2 if PARTITION == 1 else 10
-            empty = 4 if PARTITION == 1 else 14
-            phase = 1
-            hcu.abarrier_try_wait(ready, phase)
-            b = bm.index(1).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
-            hcu.wait_lgkmcnt(0)
-            hcu.abarrier_arrive(empty)
+                    hcu.sched_barrier()
+                    lo = gl.amd.cdna4.mfma(a_low[1], b_last, lo)
+                    hcu.sched_barrier()
+                    hi = gl.amd.cdna4.mfma(a_high[1], b_last, hi)
+                    hcu.sched_barrier()
+            b = b_last
             low_accs = gl.split(lo.reshape((2, 32, CN)).permute((1, 2, 0)))
             high_accs = gl.split(hi.reshape((2, 32, CN)).permute((1, 2, 0)))
             accumulators = (gl.convert_layout(low_accs[0], result), gl.convert_layout(low_accs[1], result), gl.convert_layout(high_accs[0], result), gl.convert_layout(high_accs[1], result))
@@ -315,8 +308,8 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     al: gl.constexpr = hcu.MlsSharedLayout(0, (16, 64), order=(1, 0))
     bl: gl.constexpr = hcu.MlsSharedLayout(1, (64, 32), alt=1, order=(0, 1))
     am = gl.allocate_shared_memory(A.dtype.element_ty, [STAGES, BM, K], al)
-    b0 = gl.allocate_shared_memory(B.dtype.element_ty, [2, BK, BN // 4], bl)
-    b1 = gl.allocate_shared_memory(B.dtype.element_ty, [2, BK, BN // 4], bl)
+    b0 = gl.allocate_shared_memory(B.dtype.element_ty, [2, 2 * BK, BN // 4], bl)
+    b1 = gl.allocate_shared_memory(B.dtype.element_ty, [2, 2 * BK, BN // 4], bl)
     output_shared: gl.constexpr = gl.SwizzledSharedLayout(8, 4, 4, [1, 0])
     co0 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)
     co1 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)

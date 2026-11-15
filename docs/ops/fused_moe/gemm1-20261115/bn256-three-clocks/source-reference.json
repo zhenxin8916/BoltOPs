@@ -1,0 +1,8 @@
+{
+  "upstream_commit": "650d405bcdc41e55f6255d76c0afbbcd8b024189",
+  "upstream_kernel": "experiments/moe_channel_ab_shared8/persistent_tail_overlap/kernel_experiment.py",
+  "upstream_sha256": "be72a91dfb03ec5ce94abd81faf286ec949df667cec431678608513fa1c1a258",
+  "working_copy_matches_commit": true,
+  "ported_kernel_sha256": "eb62a34b534026eb313dc52d8d2f26253907661fe204ea00acd1c2e28ad90a85",
+  "status": "No new valid BN256 change to port; temporary buffer_load metadata experiment withdrawn by user. Frequency runs use the existing 650d405-based port."
+}

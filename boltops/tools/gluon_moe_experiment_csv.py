@@ -16,11 +16,23 @@ from boltops.tools.fused_moe_triton_tune.performance_csv import _atomic_write, c
 
 DEFAULT_GC_GHZ = 1.8
 CONFIG_DIR = Path(__file__).resolve().parents[1] / "fused_moe/gluon"
-FIELDS = (
-    'arch', 'quant_type', 'indtype', 'token', 'inter_dim', 'model_dim',
-    'expert', 'topk', 'sol_type', 'sol_id', 'bm', 'bn',
-    'bk', 'time_us', 'triton_commit', 'triton_changes', 'llvm_project_commit', 'llvm_changes',
+FREQUENCIES = (2.2, 1.8, 1.5)
+MMAC_SCOPE = "cu0_wave_lifetime"
+CASE_FIELDS = (
+    "arch", "quant_type", "indtype", "token", "inter_dim", "model_dim",
+    "expert", "topk", "sol_type", "sol_id", "bm", "bn", "bk",
 )
+TOOLCHAIN_FIELDS = ("triton_commit", "triton_changes", "llvm_project_commit", "llvm_changes")
+
+
+def frequency_columns(gc):
+    suffix = f"{gc:.1f}".replace(".", "_") + "ghz"
+    return f"time_us_{suffix}", f"mmac_total_pct_{suffix}"
+
+
+FIELDS = CASE_FIELDS + tuple(
+    column for gc in FREQUENCIES for column in frequency_columns(gc)
+) + TOOLCHAIN_FIELDS
 KEY_FIELDS = (
     'arch', 'quant_type', 'indtype', 'token', 'inter_dim', 'model_dim',
     'expert', 'topk', 'sol_id', 'bm', 'bn', 'bk',
@@ -40,7 +52,7 @@ def upsert_record(stage, record, directory=CONFIG_DIR):
     if stage not in ("top", "bottom"):
         raise ValueError("stage must be top or bottom")
     row = dict(record)
-    for key in FIELDS:
+    for key in CASE_FIELDS + TOOLCHAIN_FIELDS:
         if key not in row:
             raise ValueError(f"missing experiment field: {key}")
     if record.get("mismatches") != 0 or not record.get("verified"):
@@ -61,15 +73,23 @@ def upsert_record(stage, record, directory=CONFIG_DIR):
         raise ValueError("full dispatch cannot be shorter than its wave span")
     if int(record.get("q_size_n", 0)) or int(record.get("q_size_k", 0)):
         raise ValueError("this table records channel scales, not block quantization")
-    if not math.isclose(float(row["gc_ghz"]), DEFAULT_GC_GHZ):
-        raise ValueError("this experiment table uses GC 1.8 GHz")
-    # The model rounds nominal 1.8 GHz to an integer 556-ps period.
-    if abs(float(row["effective_gc_ghz"])-1000/round(1000/DEFAULT_GC_GHZ)) > 1e-5:
+    gc = next((value for value in FREQUENCIES if math.isclose(float(row["gc_ghz"]), value)), None)
+    if gc is None:
+        raise ValueError("supported experiment clocks are 2.2, 1.8 and 1.5 GHz")
+    mmac = row.get("mmac_total_pct")
+    if mmac is not None:
+        if row.get("mmac_scope") != MMAC_SCOPE:
+            raise ValueError(f"MMAC efficiency must use {MMAC_SCOPE}")
+        mmac = float(mmac)
+        if not math.isfinite(mmac) or not 0 <= mmac <= 100:
+            raise ValueError("MMAC efficiency must be a finite percentage")
+    # Model clocks use integer picosecond periods.
+    if abs(float(row["effective_gc_ghz"])-1000/round(1000/gc)) > 1e-5:
         raise ValueError("effective model clock does not match requested GC")
     row={key:str(value) for key,value in row.items()}
     for key in ("time_us", "wave_span_time_us", "effective_gc_ghz"):
         row[key]=f"{float(row[key]):.6f}"
-    row["gc_ghz"]=str(DEFAULT_GC_GHZ)
+    row["gc_ghz"]=str(gc)
     directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
     suffix = "_int8" if row["quant_type"] == "int8_w8a8_channel" else ("_fp8" if stage == "top" else "")
     path=directory/f"tuned_experiment_fmoe_gluon_w8a8channel_{stage}{suffix}.csv"
@@ -82,7 +102,12 @@ def upsert_record(stage, record, directory=CONFIG_DIR):
                 if tuple(reader.fieldnames or ()) != FIELDS:
                     raise ValueError("unexpected experiment CSV header")
                 rows={key(item):item for item in reader}
-        rows[key(row)]={name: row[name] for name in FIELDS}
+        entry = rows.get(key(row), {name: "" for name in FIELDS})
+        entry.update({name: row[name] for name in CASE_FIELDS + TOOLCHAIN_FIELDS})
+        time_column, mmac_column = frequency_columns(gc)
+        entry[time_column] = row["time_us"]
+        entry[mmac_column] = "" if mmac is None else f"{mmac:.6f}"
+        rows[key(row)] = entry
         def write(stream):
             writer=csv.DictWriter(stream,fieldnames=FIELDS,lineterminator="\n")
             writer.writeheader();writer.writerows(sorted(rows.values(),key=lambda item: (int(item["token"]), key(item))))

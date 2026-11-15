@@ -1,0 +1,47 @@
+{
+  "time_us": 65.418404,
+  "wave_span_time_us": 61.004876,
+  "mmac_total_pct": 62.55464559112689,
+  "mmac_scope": "cu0_wave_lifetime",
+  "frequency_ghz": 1.8,
+  "effective_gc_ghz": 1.798561,
+  "clock_period_ps": 556,
+  "fp8_busy_ticks": 145752064,
+  "dispatch": {
+    "begin_tick": 0,
+    "end_tick": 65418404,
+    "duration_ticks": 65418404,
+    "duration_us": 65.418404,
+    "gui_duration_us": 65.418,
+    "section_offset": 8744,
+    "section_type": 15,
+    "source_perf": "/zhenxin/temp/moe-bn256-frequency-update-20261115/baseline-gc1800/m5out/0/0/2326468_python3.10.perf",
+    "source_perf_sha256": "58e8316534f784f31f5e6bb27d12a9774e88f577b2af9b5dbe47e1a8af191262"
+  },
+  "active_mmac_families": {
+    "v_mmac_f32_16x16x16_bf16": 256,
+    "v_mmac_f32_16x16x32_fp8_fp8": 32768
+  },
+  "fp8_wave_counts": {
+    "196619": 4096,
+    "8": 4096,
+    "65546": 4096,
+    "131081": 4096,
+    "65550": 4096,
+    "196623": 4096,
+    "12": 4096,
+    "131085": 4096
+  },
+  "busy_union_matches_sum": true,
+  "simd_busy_ticks": [
+    36438016,
+    36438016,
+    36438016,
+    36438016
+  ],
+  "definition": "CU0 four-SIMD average; active FP8 MMAC 8-cycle interval union / CU0 first WAVE_START to last s_endpgm plus one cycle. Includes CU0 startup and tail, excludes BF16 clears and EXEC0 warmup. Full-dispatch time remains a separate metric.",
+  "dispatch_window_mmac_pct": 55.69994645543478,
+  "cu0_lifetime_us": 58.249896,
+  "cu0_first_wave_start_tick": 4413528,
+  "cu0_last_wave_end_tick": 62663424
+}

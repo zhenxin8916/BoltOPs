@@ -15,7 +15,7 @@ from pathlib import Path
 
 import torch
 from boltops.tools.gluon_moe_gemm1 import prepare_cpu, save_kernel
-from boltops.fused_moe.gluon.gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128_256 import (
+from boltops.fused_moe.gluon.gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
     gemm_bottom_w8a8_channel_wasp_persistent, DEFAULT_LAUNCH_OPTIONS,
 )
 
@@ -24,7 +24,7 @@ def main():
     p = argparse.ArgumentParser(__doc__)
     p.add_argument('--mode', choices=('gluon', 'triton'), default='gluon')
     p.add_argument('--bn', type=int, choices=(128, 256), default=256)
-    p.add_argument('--bk', type=int, choices=(128, 256), default=128)
+    p.add_argument('--bk', type=int, choices=(128,), default=128)
     p.add_argument('--a-buffer', action='store_true')
     p.add_argument('--tiles', type=int, default=384)
     p.add_argument('--grid', type=int, default=48)

@@ -1,0 +1,82 @@
+{
+  "baseline_commit": "ef9f402",
+  "retained_bk": 128,
+  "removed_bk": 256,
+  "reason": "Old multi-BK module is referenced only by boltops.tools.gluon_moe_gemm2; production already selects dedicated BN256/BK128 and BN512/BK64 kernels.",
+  "removed_functions": [
+    "_send_output_mailbox",
+    "_empty_mailbox",
+    "_initialize_mailbox",
+    "_copy_a_mailbox",
+    "_producer_mailbox",
+    "_consumer_mailbox"
+  ],
+  "retained_helper_ast_sha256": {
+    "_output_pack_layout": "793965ff77a7ad07f68cb9110f48d7ae8d2bafcdf46382b45e643894cdecf7b2",
+    "_scatter_output": "0721a3e13ea4962a2d494d2600d1ea486e1901a0a40d764ef10d06c14b933882",
+    "_empty": "0d1e1ecb94aee078a10f0d2a610af5a33ce0b53b27f5246498ca72457e462303",
+    "_initialize": "6b59aec90e05998374269c9fa5006f7d05e5f85cfdbb76a1331f195dc8660f2a",
+    "_producer": "78a257c4de412cdaf704b006f9610a23e102af9e6d4cd64140b4c7c1d72bc8ee",
+    "_consumer": "58004b6078536252534eef534ea8c1bbaeb6304492af811a0cac21b859eeebdb"
+  },
+  "compile_checks": [
+    {
+      "version": "before",
+      "bn": 128,
+      "bk": 128,
+      "mls_a": true,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "before",
+      "bn": 128,
+      "bk": 128,
+      "mls_a": false,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "before",
+      "bn": 256,
+      "bk": 128,
+      "mls_a": true,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "before",
+      "bn": 256,
+      "bk": 128,
+      "mls_a": false,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "after",
+      "bn": 128,
+      "bk": 128,
+      "mls_a": true,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "after",
+      "bn": 128,
+      "bk": 128,
+      "mls_a": false,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "after",
+      "bn": 256,
+      "bk": 128,
+      "mls_a": true,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    },
+    {
+      "version": "after",
+      "bn": 256,
+      "bk": 128,
+      "mls_a": false,
+      "result": "existing SGPR spill rejected by normal compiler validation"
+    }
+  ],
+  "numerical_retest_passed": false,
+  "raw_evidence": "/home/zhenx/temp/moe-gemm2-bk128-cleanup-20261115"
+}

@@ -4,11 +4,11 @@
 
 Four 4-wave WASP roles, native WDRA, K256, N divisible by 512.
 P0 loads A and metadata, prefetches next M, and scatters packed C.
-P1 streams K128 B-left/right panels and their channel scales.
+P1 streams full K256 B-left/right panels and their channel scales.
 C0/C1 each cover 256 columns in two N128 phases; each phase publishes
 its two M32 output panels after applying ((acc * SA) * SB) * weight.
 
-LDS: A 16 KiB; two K128xN128 B slots per consumer, 64 KiB total;
+LDS: A 16 KiB; one K256xN128 B slot per consumer, 64 KiB total;
 two M32xN128 BF16/FP16 output mailboxes, 16 KiB; double metadata 2 KiB;
 SB 1 KiB. Total 99 KiB. All 16 abarriers remain within IDs 0..15.
 
@@ -45,15 +45,13 @@ def _empty():
 
 @gluon.jit
 def _initialize(STAGES: gl.constexpr):
-    # A READY1/EMPTY3; BL READY5/10 EMPTY6/14; BR READY7/2 EMPTY8/4.
+    # A READY1/EMPTY3; full-K BL READY5/EMPTY6; BR READY7/EMPTY8.
     """Initialize READY/EMPTY generations before splitting the four roles.
 
         Buffer          Producer -> Reader     READY   EMPTY   Phase
         A full K256      P0 -> C0 + C1             1       3    M epoch & 1
-        B-left K0/K1     P1 -> C0                  5       6    N epoch & 1
-        B-left K2/K3     P1 -> C0                 10      14    N epoch & 1
-        B-right K0/K1    P1 -> C1                  7       8    N epoch & 1
-        B-right K2/K3    P1 -> C1                  2       4    N epoch & 1
+        B-left full K     P1 -> C0                  5       6    N epoch & 1
+        B-right full K    P1 -> C1                  7       8    N epoch & 1
         C-left/right     C0/C1 -> P0            9/13   11/15    M32 panel & 1
         Metadata         P0 -> C0 + C1         12/0       -    (M epoch >> 1) & 1
 
@@ -144,24 +142,24 @@ def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
                 KH: gl.constexpr, HALF: gl.constexpr, N: gl.constexpr, K: gl.constexpr,
                 BN: gl.constexpr, BK: gl.constexpr, USE_B64: gl.constexpr,
                 STRIDE_SBE: gl.constexpr, STRIDE_SBN: gl.constexpr):
-    """P1 publishes one [K128,N128] B panel and, for KH0, its channel scales.
+    """P1 publishes one [K256,N128] B panel and its channel scales.
 
-    KH0/KH1 select physical slots 0/1. HALF0 feeds C0; HALF1 feeds C1.
+    KH is always zero; HALF0 feeds C0 and HALF1 feeds C1.
     n selects an N128 phase: n0/n1 are the two phases of one BN512 tile.
     Each slot is reused only after that reader returns its EMPTY generation.
     """
     ready = (7 if KH % 2 == 0 else 2) if HALF == 1 else (5 if KH % 2 == 0 else 10)
     empty = (8 if KH % 2 == 0 else 4) if HALF == 1 else (6 if KH % 2 == 0 else 14)
-    # Each physical K128 slot is used once per N128 phase.
+    # Each full-K slot is used once per N128 phase.
     phase = epoch & 1
-    physical = KH % 2
+    physical = 0
     dest = b1 if HALF == 1 else b0
     hcu.abarrier_try_wait(empty, phase)
     hcu.abarrier_seq(ready)
     col = (n // 2) * BN + (n % 2) * (BN // 4) + HALF * (BN // 2)
     if USE_B64:
         panel_base = b_base + col.to(gl.int64) * K + KH * (2 * BK)
-        hcu.matrix_load(dest.index(physical), panel_base, (2 * BK, BN // 4),
+        hcu.matrix_load(dest.index(physical), panel_base, (K, BN // 4),
                         (1, K), (0, 0), warps=(1, 4))
     else:
         hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
@@ -271,9 +269,6 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
             for n in range(0, N_PANELS):
                 _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 0, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
                 _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 1, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
-                _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 1, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
-                _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 1, 0, N, K, BN, BK, USE_B64, STRIDE_SBE, STRIDE_SBN)
-                hcu.abarrier_try_wait(10, epoch & 1)
                 epoch += 1
 
 
@@ -322,36 +317,33 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
             ACC_TYPE: gl.constexpr = gl.int32 if A_IS_INT8 else gl.float32
             lo = gl.full((BM // 2, CN), 0, ACC_TYPE, result)
             hi = gl.full((BM // 2, CN), 0, ACC_TYPE, result)
-            for pair_k in gl.static_range(2):
-                ready = (7 if pair_k == 0 else 2) if PARTITION == 1 else (5 if pair_k == 0 else 10)
-                empty = (8 if pair_k == 0 else 4) if PARTITION == 1 else (6 if pair_k == 0 else 14)
-                hcu.abarrier_try_wait(ready, b_epoch & 1)
-                if pair_k == 0:
-                    current_sb = mb.index(PARTITION).load(gl.SliceLayout(0, result))
-                b = bm.index(pair_k).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
-                hcu.wait_lgkmcnt(0)
-                if pair_k == 0 and n == 0:
-                    hcu.abarrier_arrive(3)
-                hcu.abarrier_arrive(empty)
-                pair_b = gl.split(b.reshape((2, BK, CN)).permute((1, 2, 0)))
-                b_first = gl.convert_layout(pair_b[0], hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
-                b_last = gl.convert_layout(pair_b[1], hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
+            hcu.abarrier_try_wait(7 if PARTITION == 1 else 5, b_epoch & 1)
+            current_sb = mb.index(PARTITION).load(gl.SliceLayout(0, result))
+            b_all = bm.index(0).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
+            hcu.wait_lgkmcnt(0)
+            if n == 0:
+                hcu.abarrier_arrive(3)
+            hcu.abarrier_arrive(8 if PARTITION == 1 else 6)
+            bp = gl.split(b_all.reshape((2, K // 2, CN)).permute((1, 2, 0)))
+            b_quarters = ()
+            for half in gl.static_range(2):
+                bq = gl.split(bp[half].reshape((2, BK, CN)).permute((1, 2, 0)))
+                b_quarters += (gl.convert_layout(bq[0], hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8))), gl.convert_layout(bq[1], hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8))))
+            hcu.sched_barrier()
+            lo = gl.amd.cdna4.mfma(a_low[0], b_quarters[0], lo)
+            hcu.sched_barrier()
+            hi = gl.amd.cdna4.mfma(a_high[0], b_quarters[0], hi)
+            hcu.sched_barrier()
+            if n == 0:
+                hcu.abarrier_try_wait(12 if ((a_epoch - 1) & 1) == 0 else 0, ((a_epoch - 1) >> 1) & 1)
+                sa = ma.index(((a_epoch - 1) & 1) * 4).load(gl.SliceLayout(1, result))
+                weight = ma.index(((a_epoch - 1) & 1) * 4 + 1).load(gl.SliceLayout(1, result))
+            for k_part in gl.static_range(1, 3):
+                lo = gl.amd.cdna4.mfma(a_low[k_part], b_quarters[k_part], lo)
                 hcu.sched_barrier()
-                lo = gl.amd.cdna4.mfma(a_low[pair_k * 2], b_first, lo)
+                hi = gl.amd.cdna4.mfma(a_high[k_part], b_quarters[k_part], hi)
                 hcu.sched_barrier()
-                hi = gl.amd.cdna4.mfma(a_high[pair_k * 2], b_first, hi)
-                hcu.sched_barrier()
-                if pair_k == 0:
-                    if n == 0:
-                        hcu.abarrier_try_wait(12 if ((a_epoch - 1) & 1) == 0 else 0, ((a_epoch - 1) >> 1) & 1)
-                        sa = ma.index(((a_epoch - 1) & 1) * 4).load(gl.SliceLayout(1, result))
-                        weight = ma.index(((a_epoch - 1) & 1) * 4 + 1).load(gl.SliceLayout(1, result))
-                    hcu.sched_barrier()
-                    lo = gl.amd.cdna4.mfma(a_low[1], b_last, lo)
-                    hcu.sched_barrier()
-                    hi = gl.amd.cdna4.mfma(a_high[1], b_last, hi)
-                    hcu.sched_barrier()
-            b = b_last
+            b = b_quarters[3]
             accumulators = (lo, hi)
             a_panels = (a_low[3], a_high[3])
             sa_parts = _row_vectors(sa)
@@ -423,8 +415,8 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     al: gl.constexpr = hcu.MlsSharedLayout(0, (16, 64), order=(1, 0))
     bl: gl.constexpr = hcu.MlsSharedLayout(1, (128, 32), alt=1, order=(0, 1))
     am = gl.allocate_shared_memory(A.dtype.element_ty, [STAGES, BM, K], al)
-    b0 = gl.allocate_shared_memory(B.dtype.element_ty, [2, 2 * BK, BN // 4], bl)
-    b1 = gl.allocate_shared_memory(B.dtype.element_ty, [2, 2 * BK, BN // 4], bl)
+    b0 = gl.allocate_shared_memory(B.dtype.element_ty, [1, K, BN // 4], bl)
+    b1 = gl.allocate_shared_memory(B.dtype.element_ty, [1, K, BN // 4], bl)
     output_shared: gl.constexpr = gl.SwizzledSharedLayout(8, 4, 4, [1, 0])
     co0 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)
     co1 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)

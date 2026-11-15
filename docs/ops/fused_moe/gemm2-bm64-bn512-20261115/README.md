@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.641948 us / whole-dispatch MMAC14.559414%, native B64x32 MLS. The 60% target remains open.**
+**Current best: 15.612480 us / whole-dispatch MMAC14.586895%, full-K256 B slots. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -50,3 +50,11 @@ New full-dispatch result: **15.641948 us / 14.559414211% whole 48-CU dispatch MM
 Source, same-text/input/address/time repeat proof, four passing full-N1024 equivalence cases, metrics and exact perf path are in [native-b-mls64x32](native-b-mls64x32/). This supersedes the initial source snapshot in repeat/; historical rows above remain as recorded.
 
 Rejected numeric-passing candidates: full-CN256 with one B slot16.841240 us; consumer direct scatter19.987088 us; converting to BF16 before direct-scatter layout conversion19.009084 us; full-M64 mailbox17.010820 us; SB prefetch/joint metadata READY16.065064 us (16.464272 with native B); priority1 B15.995564 us; native B K128-consumption15.705332 us; left-first tail15.785396 us; N static unroll15.985000 us; two K128 A READY stages16.256328 us. These implementations remain temporary, not promoted. Wide-A native geometry is rejected by current clean Triton lowering, and a noinline initialization prototype fails the WDRA execution-mode check; neither has a performance result or backend workaround.
+
+## Full-K256 B slot update
+
+Each consumer now owns one K256xN128 B slot instead of two K128xN128 slots. P1 publishes left then right once per N128 phase; consumers read all four K64 quarters before returning EMPTY6/8, then compute from registers. READY5/7 phases are [0,1,0,1] across the two M outputs. The former second-K READY10/2 and EMPTY14/4 are unused (initialization retained). Scale is read before returning B credit. A, metadata, output handoff and scale arithmetic order are unchanged. LDS remains 99 KiB; actual VGPRs rise from 33/9/126/126 to 33/9/146/146, without scratch spills. This supersedes the B-slot description above.
+
+At 1.8 GHz, 48 persistent TGs process two outputs each: **15.612480 us / whole-dispatch MMAC14.586895%**. Independent recompilation repeats exactly the same machine .text, inputs, addresses, output and elapsed time. Improvement versus commit338a785 is **0.188391%** (0.029468 us); versus historical BM12820.680420 us it is **24.505982%**, with half the padded work as stated above. The 60% target is still not achieved.
+
+2,630,144 bounded-output elements match, untouched output remains NaN. Four full-N1024 FP8/INT8 equivalence cases pass; real-trace barrier/phase, active-work and no-consumer-VMEM audits pass. Evidence, tested source, production documentation-only edit proof, HSACO and perf location are under [full-k256-b-slot](full-k256-b-slot/). All measurements use the same clean toolchain and PMD configuration as the prior best.

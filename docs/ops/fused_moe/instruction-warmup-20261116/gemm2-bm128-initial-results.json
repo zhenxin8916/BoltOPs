@@ -1,0 +1,38 @@
+[
+  {
+    "flavor": "off",
+    "case": "gemm2_fp8_bm128_bn256_bk128_m4096_tiles2",
+    "exit_code": 0,
+    "time_us": 16.512088,
+    "comparison": [
+      "\u001b[0mPASS C check=device-periodic17-bitexact mismatches=0/2263040 expected=2263040 nonfinite=0 check_pass=1"
+    ]
+  },
+  {
+    "flavor": "on",
+    "case": "gemm2_fp8_bm128_bn256_bk128_m4096_tiles2",
+    "exit_code": 0,
+    "time_us": 16.580476,
+    "comparison": [
+      "\u001b[0mPASS C check=device-periodic17-bitexact mismatches=0/2263040 expected=2263040 nonfinite=0 check_pass=1"
+    ]
+  },
+  {
+    "flavor": "off",
+    "case": "gemm2_fp8_bm128_bn512_bk64_m4096_tiles2",
+    "exit_code": 0,
+    "time_us": 22.188848,
+    "comparison": [
+      "\u001b[0mPASS C check=device-periodic17-bitexact mismatches=0/4526080 expected=4526080 nonfinite=0 check_pass=1"
+    ]
+  },
+  {
+    "flavor": "on",
+    "case": "gemm2_fp8_bm128_bn512_bk64_m4096_tiles2",
+    "exit_code": 0,
+    "time_us": 22.147704,
+    "comparison": [
+      "\u001b[0mPASS C check=device-periodic17-bitexact mismatches=0/4526080 expected=4526080 nonfinite=0 check_pass=1"
+    ]
+  }
+]

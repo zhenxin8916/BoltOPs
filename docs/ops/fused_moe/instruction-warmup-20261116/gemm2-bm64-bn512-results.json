@@ -1,0 +1,20 @@
+[
+  {
+    "flavor": "off_direct",
+    "case": "gemm2_fp8_bm64_bn512_bk64_m1024_tiles2",
+    "exit_code": 0,
+    "time_us": 20.206708,
+    "comparison": [
+      "\u001b[0mPASS C check=device-periodic17-bitexact mismatches=0/1531904 expected=1531904 nonfinite=0 check_pass=1"
+    ]
+  },
+  {
+    "flavor": "on_direct",
+    "case": "gemm2_fp8_bm64_bn512_bk64_m1024_tiles2",
+    "exit_code": 0,
+    "time_us": 19.413852,
+    "comparison": [
+      "\u001b[0mPASS C check=device-periodic17-bitexact mismatches=0/1531904 expected=1531904 nonfinite=0 check_pass=1"
+    ]
+  }
+]

@@ -1,0 +1,193 @@
+[
+  {
+    "case": "metadata-after-k3-all-cu-disassembly",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-all-cu-disassembly",
+    "time_us": 14.713428,
+    "whole_gpu_mmac_percent": 15.478214866039377,
+    "source_sha256": "4dbfae7f9c1884c30f03040f1aa2a603ed4aa07f4d41454472c185b7bf0f1ac9",
+    "partition_regs_actual": [
+      49,
+      9,
+      155,
+      155
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    },
+    "last_cu": 25,
+    "last_mmac_tick": 13838840,
+    "last_store_tick": 14393172,
+    "last_endpgm_tick": 14713428
+  },
+  {
+    "case": "metadata-after-k3-empty-late-all-cu-disassembly",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-empty-late-all-cu-disassembly",
+    "time_us": 14.769584,
+    "whole_gpu_mmac_percent": 15.419364553531095,
+    "source_sha256": "b7479ba798cce462217fe3cdc3f4a878746da1d4b15f1165f953eee11dc22f5f",
+    "partition_regs_actual": [
+      49,
+      9,
+      155,
+      155
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    },
+    "last_cu": 21,
+    "last_mmac_tick": 14027880,
+    "last_store_tick": 14516048,
+    "last_endpgm_tick": 14769584
+  },
+  {
+    "case": "metadata-after-k3-c1-mmac-priority1",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-c1-mmac-priority1",
+    "time_us": 14.824072,
+    "whole_gpu_mmac_percent": 15.362688470482334,
+    "source_sha256": "57d4c7fe2da6c7fb1e2179ec412f2d53002419357c112b839cbad95f59bc5290",
+    "partition_regs_actual": [
+      49,
+      9,
+      155,
+      155
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    },
+    "last_cu": 24,
+    "last_mmac_tick": 13762668,
+    "last_store_tick": 14457112,
+    "last_endpgm_tick": 14824072
+  },
+  {
+    "case": "metadata-after-k3-p1-expert-buffer-distributed",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p1-expert-buffer-distributed",
+    "time_us": 14.7201,
+    "whole_gpu_mmac_percent": 15.47119924457035,
+    "source_sha256": "3e2bb0b569023138de624c0858672b0f4104df678e3926a1f341aa81ff88b005",
+    "partition_regs_actual": [
+      49,
+      8,
+      155,
+      155
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    },
+    "last_cu": 38,
+    "last_mmac_tick": 14049564,
+    "last_store_tick": 14537732,
+    "last_endpgm_tick": 14720100
+  },
+  {
+    "case": "metadata-after-k3-p1-right-first",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p1-right-first",
+    "time_us": 15.173796,
+    "whole_gpu_mmac_percent": 15.008610897365433,
+    "source_sha256": "67864e509f5340467a3be0e0bb06e8e99d14115a448d609cfe02ff2afbe89082",
+    "partition_regs_actual": [
+      49,
+      9,
+      155,
+      155
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    },
+    "last_cu": 4,
+    "last_mmac_tick": 14306992,
+    "last_store_tick": 14915812,
+    "last_endpgm_tick": 15173796
+  },
+  {
+    "case": "metadata-after-k3-consumer-next-a-before-epilogue",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-consumer-next-a-before-epilogue",
+    "time_us": 14.890236,
+    "whole_gpu_mmac_percent": 15.294425152160114,
+    "source_sha256": "451a420cbb9d2cf47a8be4e905cfc2c5fb9c1ecc89d941bc849de34ef2b5ce47",
+    "partition_regs_actual": [
+      49,
+      9,
+      224,
+      224
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    }
+  },
+  {
+    "case": "metadata-after-k3-consumer-next-a-packed-u32-fixed",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-consumer-next-a-packed-u32-fixed",
+    "time_us": 15.095956,
+    "whole_gpu_mmac_percent": 15.086000515634783,
+    "source_sha256": "885218aa791bc0ca6f00406d81d628c5ed78af1ef44b0a99aaf3bcd83b390fd9",
+    "partition_regs_actual": [
+      49,
+      9,
+      220,
+      220
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    }
+  },
+  {
+    "case": "metadata-after-k3-consumer-next-a-static-n-fixed",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-consumer-next-a-static-n-fixed",
+    "time_us": 15.105408,
+    "whole_gpu_mmac_percent": 15.07656065959953,
+    "source_sha256": "c48015032e7e5b062ee537fe1af367fef7585e36773e2f979022399a2bc55d64",
+    "partition_regs_actual": [
+      49,
+      9,
+      224,
+      224
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    }
+  },
+  {
+    "case": "metadata-after-k3-consumer-next-a-reset-carrier",
+    "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-consumer-next-a-reset-carrier",
+    "time_us": 15.229952,
+    "whole_gpu_mmac_percent": 14.953271028037383,
+    "source_sha256": "9f86e854c6459cc63e42516f9f2de0dc16be8ad06859bc5ebf4d8aeb0fa65ab4",
+    "partition_regs_actual": [
+      49,
+      9,
+      168,
+      168
+    ],
+    "no_spill": {
+      "scratch_bytes": 0,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_bytes": 0
+    }
+  }
+]

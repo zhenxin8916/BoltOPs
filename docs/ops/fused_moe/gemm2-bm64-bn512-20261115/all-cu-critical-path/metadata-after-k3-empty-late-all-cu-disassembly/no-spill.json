@@ -1,0 +1,6 @@
+{
+  "scratch_bytes": 0,
+  "sgpr_spill_count": 0,
+  "vgpr_spill_count": 0,
+  "private_segment_bytes": 0
+}

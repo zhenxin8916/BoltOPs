@@ -1,0 +1,34 @@
+[
+  {
+    "case": "gemm1_fp8_bm128_bn256_bk128_m4096_tiles2",
+    "flavor": "off",
+    "sha256": "edabf97e3892b7292251c32597518bcffd08de56d12068b1c7c16034e299546e",
+    "sgpr_spill": 0,
+    "vgpr_spill": 0,
+    "private_bytes": 0
+  },
+  {
+    "case": "gemm1_fp8_bm128_bn512_bk128_m4096_tiles2",
+    "flavor": "off",
+    "sha256": "e7c05199defb4d558c959b0ae87fd7aa338d0e49fa4061248ef8c9fbd69539cc",
+    "sgpr_spill": 0,
+    "vgpr_spill": 0,
+    "private_bytes": 0
+  },
+  {
+    "case": "gemm1_fp8_bm128_bn256_bk128_m4096_tiles2",
+    "flavor": "on",
+    "sha256": "078bd50e2ff3fb8baa049708ebcb12407349a9728207b467cf9d32ca2adf9a94",
+    "sgpr_spill": 0,
+    "vgpr_spill": 0,
+    "private_bytes": 0
+  },
+  {
+    "case": "gemm1_fp8_bm128_bn512_bk128_m4096_tiles2",
+    "flavor": "on",
+    "sha256": "d98384ca300cecfb799cfa006907adaaeb7cbf9c71c801ef7c933eb72219cab4",
+    "sgpr_spill": 0,
+    "vgpr_spill": 0,
+    "private_bytes": 0
+  }
+]

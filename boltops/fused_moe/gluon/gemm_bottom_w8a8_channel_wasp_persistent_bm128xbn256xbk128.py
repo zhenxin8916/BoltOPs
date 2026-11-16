@@ -27,7 +27,7 @@ One full-A LDS slot (32 KiB); B-left has one K128 slot, B-right has two
 Total: 117 KiB LDS, 16 initialized abarriers. A/metadata generations advance
 per M; B generations advance per N. Grid is caller-supplied; M += grid.
 INT8 accumulates in INT32 and converts once before FP32 scaling.
-No instruction warmup. Production traverses all N; clipping is diagnostic only.
+Instruction warmup is optional and defaults off. Production traverses all N; clipping is diagnostic only.
 """
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
@@ -310,6 +310,57 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
                 epoch += 1
 
 
+@gluon.constexpr_function
+def _icache_label(partition, slot, kind):
+    """Name one consumer's real MMAC block and its warmup return point."""
+    return f"__gemm2_c{partition}_mmac{slot}_{kind}"
+
+
+@gluon.jit
+def _warm_mmac_instructions(PARTITION: gl.constexpr, BLOCKS: gl.constexpr):
+    """Visit real MMAC blocks once with EXEC=0, before reading any tile.
+
+    Four consumer waves divide the blocks by slot % 4. Only instructions
+    are fetched; no arithmetic result, LDS slot or barrier credit changes.
+    """
+    wave = hcu.get_wave_id() & 3
+    for slot in gl.static_range(BLOCKS):
+        if wave == slot % 4:
+            hcu.sched_barrier()
+            # ### ASM Note: Gluon has no EXEC-mask API; save/clear it for instruction-only warmup.
+            saved_exec = gl.inline_asm_elementwise(
+                "s_mov_b64 $0, exec\n\ts_mov_b64 exec, 0", constraints="=&s,~{exec},~{memory}",
+                args=[], dtype=gl.uint64, is_pure=False, pack=1)
+            # ### ASM Note: Gluon cannot jump to the real MMAC block and name its return label.
+            gl.inline_asm_elementwise(
+                "s_branch " + _icache_label(PARTITION, slot, "entry") + "\n" +
+                _icache_label(PARTITION, slot, "resume") + ":",
+                constraints="=s,~{memory}", args=[], dtype=gl.int32, is_pure=False, pack=1)
+            # ### ASM Note: Gluon has no EXEC-mask API; restore the saved mask after the return.
+            gl.inline_asm_elementwise(
+                "s_mov_b64 exec, $1", constraints="=s,s,~{exec},~{memory}", args=[saved_exec],
+                dtype=gl.int32, is_pure=False, pack=1)
+            hcu.sched_barrier()
+
+
+@gluon.jit
+def _mmac(a, b, acc, PARTITION: gl.constexpr, SLOT: gl.constexpr,
+          INSN_WARMUP: gl.constexpr):
+    """Compute one block; optional EXEC=0 visits return before any output work."""
+    if INSN_WARMUP:
+        # ### ASM Note: Gluon cannot define a branch-target label around its generated MMACs.
+        gl.inline_asm_elementwise(
+            _icache_label(PARTITION, SLOT, "entry") + ":", constraints="=s,~{memory}",
+            args=[], dtype=gl.int32, is_pure=False, pack=1)
+    acc = gl.amd.cdna4.mfma(a, b, acc)
+    if INSN_WARMUP:
+        # ### ASM Note: Gluon cannot branch on EXEC to the matching warmup return label.
+        gl.inline_asm_elementwise(
+            "s_cbranch_execz " + _icache_label(PARTITION, SLOT, "resume"),
+            constraints="=s,~{memory}", args=[], dtype=gl.int32, is_pure=False, pack=1)
+    return acc
+
+
 @gluon.jit
 def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
               pid, total, rows, valid_routes,
@@ -317,7 +368,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
               BM: gl.constexpr, BN: gl.constexpr, BK: gl.constexpr,
               STAGES: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
               CK_SORTING: gl.constexpr, PARTITION: gl.constexpr, N_TILES: gl.constexpr,
-              num_tokens_post_padded_ptr):
+              num_tokens_post_padded_ptr, INSN_WARMUP: gl.constexpr = False):
     """C0/C1 retain A across N and publish their scaled 128-column C half.
 
         Before N loop: wait A -> issue full-A LDS read -> split register views
@@ -335,6 +386,12 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
     mma: gl.constexpr = gl.amd.AMDMFMALayout(4, [16, 16, 32], MMAC_LAYOUT, [2, 2], tiles_per_warp=[1, 2])
     result: gl.constexpr = hcu.MmacInterleave2Layout(mma)
     packing: gl.constexpr = _output_pack_layout(gl.to_linear_layout(result, (32, CN)))
+    first_n = 0
+    if INSN_WARMUP:
+        _warm_mmac_instructions(PARTITION, 6)
+        # ### ASM Note: An opaque zero prevents loop peeling/unrolling from cloning named ASM labels.
+        first_n = gl.inline_asm_elementwise(
+            "s_mov_b32 $0, 0", constraints="=s", args=[], dtype=gl.int32, is_pure=False, pack=1)
     a_epoch = 0
     b_epoch = 0
     ACC: gl.constexpr = gl.int32 if am.dtype == gl.int8 else gl.float32
@@ -356,7 +413,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
         a_epoch += 1
         sa = gl.full((BM,), 0, gl.float32, gl.SliceLayout(1, result))
         weight = gl.full((BM,), 0, gl.float32, gl.SliceLayout(1, result))
-        for n in range(0, N_TILES):
+        for n in range(first_n, N_TILES):
             lo = gl.full((BM // 2, CN), 0, ACC, result)
             hi = gl.full((BM // 2, CN), 0, ACC, result)
             for k in gl.static_range(1):
@@ -376,11 +433,17 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
                 hcu.abarrier_arrive(empty)
 
                 hcu.sched_barrier()
-                lo = gl.amd.cdna4.mfma(a_low[k], b, lo)
+                if INSN_WARMUP:
+                    lo = _mmac(a_low[k], b, lo, PARTITION, 0, INSN_WARMUP)
+                else:
+                    lo = gl.amd.cdna4.mfma(a_low[k], b, lo)
                 if k == 0:
                     hcu.sched_barrier()
                     hcu.sched_barrier()
-                    hi = gl.amd.cdna4.mfma(a_high[k], b, hi)
+                    if INSN_WARMUP:
+                        hi = _mmac(a_high[k], b, hi, PARTITION, 1, INSN_WARMUP)
+                    else:
+                        hi = gl.amd.cdna4.mfma(a_high[k], b, hi)
                 hcu.sched_barrier()
 
                 if k == 0:
@@ -416,7 +479,10 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
             weight_parts = _four_row_vectors(weight)
             for panel in gl.static_range(4):
                 hcu.sched_barrier()
-                acc = gl.amd.cdna4.mfma(a_panels[panel], b, accumulators[panel])
+                if INSN_WARMUP:
+                    acc = _mmac(a_panels[panel], b, accumulators[panel], PARTITION, 2 + panel, INSN_WARMUP)
+                else:
+                    acc = gl.amd.cdna4.mfma(a_panels[panel], b, accumulators[panel])
                 hcu.sched_barrier()
 
                 panel_sa = gl.convert_layout(sa_parts[panel], gl.SliceLayout(1, result))
@@ -445,7 +511,7 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     BLOCK_SIZE_M: gl.constexpr = 128, BLOCK_SIZE_N: gl.constexpr = 256,
     BLOCK_SIZE_K: gl.constexpr = 128, GROUP_SIZE_M: gl.constexpr = 1,
     CK_SORTING: gl.constexpr = True, MUL_ROUTED_WEIGHT: gl.constexpr = True,
-    PARTITION_REGS: gl.constexpr = None,
+    PARTITION_REGS: gl.constexpr = None, INSN_WARMUP: gl.constexpr = False,
     USE_ADDR_OFFSET_INT64_A: gl.constexpr = False,
     USE_ADDR_OFFSET_INT64_B: gl.constexpr = False,
     USE_ADDR_OFFSET_INT64_C: gl.constexpr = False,
@@ -512,11 +578,11 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
         (_consumer, (
             C, SA, SB, Weights, Sorted, Experts, am, b0, co0, ma, mb, pid, TOTAL_TILES,
             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
-            GROUP_SIZE_M, CK_SORTING, 0, N_TILES, num_tokens_post_padded_ptr)),
+            GROUP_SIZE_M, CK_SORTING, 0, N_TILES, num_tokens_post_padded_ptr, INSN_WARMUP)),
         (_consumer, (
             C, SA, SB, Weights, Sorted, Experts, am, b1, co1, ma, mb, pid, TOTAL_TILES,
             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
-            GROUP_SIZE_M, CK_SORTING, 1, N_TILES, num_tokens_post_padded_ptr)),
+            GROUP_SIZE_M, CK_SORTING, 1, N_TILES, num_tokens_post_padded_ptr, INSN_WARMUP)),
     ], [4, 4, 4, 4], regs)
     for barrier in gl.static_range(16):
         hcu.abarrier_invalidate(barrier)

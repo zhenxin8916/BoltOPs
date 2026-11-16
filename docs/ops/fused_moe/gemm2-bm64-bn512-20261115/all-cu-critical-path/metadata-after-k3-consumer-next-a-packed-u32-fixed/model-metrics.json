@@ -1,0 +1,123 @@
+{
+  "schema_version": 2,
+  "time_us": 15.095956,
+  "wave_span_time_us": 10.682428,
+  "wave_span_mmac_percent": 21.318898662364024,
+  "dispatch_span": {
+    "begin_tick": 0,
+    "end_tick": 15095956,
+    "duration_ticks": 15095956,
+    "duration_us": 15.095956,
+    "gui_duration_us": 15.095,
+    "section_offset": 7295,
+    "section_type": 15,
+    "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-consumer-next-a-packed-u32-fixed/m5out/0/0/2385863_python3.10.perf",
+    "source_perf_sha256": "20afbf9f8d0217ba095f0b799fd0d3db69f245ddb8688a2088a80a88690756ce"
+  },
+  "whole_gpu_mmac_percent": 15.086000515634783,
+  "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+  "mmac_count_per_cu": {
+    "0": 2048,
+    "1": 2048,
+    "2": 2048,
+    "3": 2048,
+    "4": 2048,
+    "5": 2048,
+    "6": 2048,
+    "7": 2048,
+    "8": 2048,
+    "9": 2048,
+    "10": 2048,
+    "11": 2048,
+    "12": 2048,
+    "13": 2048,
+    "14": 2048,
+    "15": 2048,
+    "16": 2048,
+    "17": 2048,
+    "18": 2048,
+    "19": 2048,
+    "20": 2048,
+    "21": 2048,
+    "22": 2048,
+    "23": 2048,
+    "24": 2048,
+    "25": 2048,
+    "26": 2048,
+    "27": 2048,
+    "28": 2048,
+    "29": 2048,
+    "30": 2048,
+    "31": 2048,
+    "32": 2048,
+    "33": 2048,
+    "34": 2048,
+    "35": 2048,
+    "36": 2048,
+    "37": 2048,
+    "38": 2048,
+    "39": 2048,
+    "40": 2048,
+    "41": 2048,
+    "42": 2048,
+    "43": 2048,
+    "44": 2048,
+    "45": 2048,
+    "46": 2048,
+    "47": 2048
+  },
+  "expected_mmac_instructions": 98304,
+  "padded_tflops": 106.69166868265911,
+  "useful_tflops": 89.20493196986001,
+  "cache": {
+    "TccSendRespBandwidth": 1.321946,
+    "TccRecvRespBandwidth": 0.640667,
+    "TCCHitRate": 0.845933,
+    "TCPCacheLineHitRate": 0.325558,
+    "SQCIHitRate": 0.998369,
+    "missSQCIRequests": 192.0,
+    "missDuplicatedSQCIRequests": 41334.0
+  },
+  "cu_metrics": {
+    "ldsBankConflict": {
+      "mean": 1024.0,
+      "maximum": 1024.0,
+      "sum": 49152.0
+    },
+    "GlobalMemPipeline.cmdCreditStall": {
+      "mean": 714.2708333333334,
+      "maximum": 891.0,
+      "sum": 34285.0
+    },
+    "GlobalMemPipeline.addrCreditStall": {
+      "mean": 32.708333333333336,
+      "maximum": 59.0,
+      "sum": 1570.0
+    },
+    "GlobalMemPipeline.dataCreditStall": {
+      "mean": 98.39583333333333,
+      "maximum": 168.0,
+      "sum": 4723.0
+    },
+    "LocalMemPipeline.creditStall": {
+      "mean": 1548.6458333333333,
+      "maximum": 2801.0,
+      "sum": 74335.0
+    },
+    "tatd.TATD.taSendStallBytcp": {
+      "mean": 522.1041666666666,
+      "maximum": 793.0,
+      "sum": 25061.0
+    },
+    "tatd.TATD.taSendStallByCredit": {
+      "mean": 97.95833333333333,
+      "maximum": 515.0,
+      "sum": 4702.0
+    },
+    "numCyclesWaitIFetchAfterBranchTaken": {
+      "mean": 13081.9375,
+      "maximum": 18742.0,
+      "sum": 627933.0
+    }
+  }
+}

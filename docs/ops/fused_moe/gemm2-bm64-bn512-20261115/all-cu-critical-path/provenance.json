@@ -1,0 +1,12 @@
+{
+  "triton": {
+    "branch": "release/3.6.x",
+    "commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+    "local_changes": ""
+  },
+  "llvm": {
+    "branch": "dtk-llvm-6.3.3",
+    "commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+    "local_changes": "?? 0001-ds_read-mmerge.patch\n?? llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir"
+  }
+}

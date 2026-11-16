@@ -1,0 +1,15 @@
+{
+  "cu": 21,
+  "simd": 0,
+  "observed_role": 3,
+  "after_mmac_ordinal": 180,
+  "begin_tick": 12499992,
+  "end_tick": 12789112,
+  "period_ticks": 556,
+  "per_wave_gap_cycles": 520.0,
+  "other_role_instruction_counts": {
+    "2": 64
+  },
+  "other_role_busy_cycles": 512.0,
+  "true_idle_cycles": 8.0
+}

@@ -432,3 +432,12 @@ EMPTY later shortens CU0 MMAC gaps and advances its final store, but full dispat
 is 14.769584 us. Static P1 traversal, paired metadata stores and P0 scatter priority
 also lose. [Results and scope](output-handoff-controls/README.md) include numerical,
 phase, nonempty SQTT and zero-spill evidence; the retained 14.713428 us is unchanged.
+
+## All-CU critical-path follow-up — 2026-11-16
+
+[Same-binary 48-CU captures and controls](all-cu-critical-path/README.md) identify
+CU25 as the retained dispatch's last CU. A C1-only 520-cycle gap contains512 cycles
+of C0 MMAC work on the same SIMD; the real cross-output MMAC union gap on CU25
+SIMD0 is2052 cycles. Priority, expert buffer loading, right-first B and four next-A
+prefetch variants do not beat14.713428 us. Resetting a stale carrier reduces actual
+consumer registers224 ->168 but still loses. Retain code algorithm `98a1e1e`.

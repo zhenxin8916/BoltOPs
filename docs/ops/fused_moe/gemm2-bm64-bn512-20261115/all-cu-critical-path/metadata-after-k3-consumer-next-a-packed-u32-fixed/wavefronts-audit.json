@@ -1,0 +1,13 @@
+{
+  "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-consumer-next-a-packed-u32-fixed/m5out/0/0/2385863_python3.10.perf",
+  "perf_sha256": "20afbf9f8d0217ba095f0b799fd0d3db69f245ddb8688a2088a80a88690756ce",
+  "perf_bytes": 20620,
+  "sqtt_sections": [
+    {
+      "offset": 7367,
+      "raw_bytes": 79766,
+      "compressed_bytes": 11693
+    }
+  ],
+  "nonempty_sqtt_verified": true
+}

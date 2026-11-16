@@ -1,0 +1,31 @@
+{
+  "frequency_ghz": 1.8,
+  "chip": "sb",
+  "grid": 48,
+  "tiles_per_persistent_tg": 2,
+  "dtype": "fp8",
+  "m": 4096,
+  "n": 1024,
+  "k": 2048,
+  "bm": 128,
+  "bk": 128,
+  "timing_scope": "GEMM dispatch only; excludes device initialization and output check",
+  "results": [
+    {
+      "bn": 256,
+      "warmup_off_us": 41.603812,
+      "warmup_on_us": 41.215724,
+      "reduction_percent": 0.9328183677014891,
+      "correctness": "PASS",
+      "checked_elements": 3145728
+    },
+    {
+      "bn": 512,
+      "warmup_off_us": 63.701476,
+      "warmup_on_us": 62.189156,
+      "reduction_percent": 2.374073718480248,
+      "correctness": "PASS",
+      "checked_elements": 6291456
+    }
+  ]
+}

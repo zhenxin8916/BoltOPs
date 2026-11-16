@@ -549,13 +549,15 @@ def _produce_b_and_routes(
                         hcu.ebarrier_sync(4, 8)
                 _load_b_panel(B, bm, base + 128 * K, k, b_state % 3, b_state // 3 & 1, N, K, 128)
                 b_state = _next_b_tickets(b_state, 1)
-                if k + 1 < q:
-                    hcu.ebarrier_arrive(3, 8)
-                    hcu.ebarrier_sync(4, 8)
                 _load_b_panel(B, bm, base + 64 * K, k, b_state % 3, b_state // 3 & 1, N, K, 128)
                 b_state = _next_b_tickets(b_state, 1)
                 _load_b_panel(B, bm, base + 192 * K, k, b_state % 3, b_state // 3 & 1, N, K, 128)
                 b_state = _next_b_tickets(b_state, 1)
+                # Finish this K's B panels before a next-A EMPTY wait can
+                # hold the producer grant. B FIFO and A/B exclusion are unchanged.
+                if k + 1 < q:
+                    hcu.ebarrier_arrive(3, 8)
+                    hcu.ebarrier_sync(4, 8)
         iteration += 1
 
 

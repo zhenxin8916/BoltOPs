@@ -350,3 +350,13 @@ adjacent-M mapping, full-M64 accumulation, expert scalar loads and P0 paired
 result reads. Production code remains unchanged. See the
 [comparison and counter evidence](controls-after-co-m64/README.md). This preserves
 the same two-output/1.8GHz/48CU scope; the60% target remains active.
+
+
+## Startup and A-credit controls — 2026-11-16
+
+Retained best remains `97cb4cc`,14.776256us /15.412402% full48-CU dispatch MMAC.
+Thirteen bounded-correct controls did not improve it; initialization batching,
+K128 staging, earlier A credits and metadata LDS/read-layout results are recorded
+with source/perf hashes and hardware/work audits in [startup-credit-controls](startup-credit-controls/).
+The trace identifies the first metadata publication as an additional waiting
+chain; no unmeasured change is promoted.

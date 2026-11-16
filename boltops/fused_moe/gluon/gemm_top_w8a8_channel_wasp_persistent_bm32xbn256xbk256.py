@@ -284,6 +284,11 @@ def _produce_a_and_scales(
     BK: gl.constexpr = 256
     layout: gl.constexpr = gl.BlockedLayout([1], [64], [4], [0])
     al: gl.constexpr = gl.BlockedLayout([1, 4 if USE_A64 else 16], [4, 16], [4, 1], [1, 0])
+    if GROUP_SIZE_M == 1:
+        first_output = gl.program_id(0) + TILE_ID
+        first_row = first_output // gl.cdiv(N, BN)
+        seed_routes = gl.load(Routes + first_row * BM + gl.arange(0, BM, gl.SliceLayout(1, al)), first_output < total, other=0)
+        seed_expert = gl.load(Experts + first_row + gl.arange(0, 1, layout), first_output < total, other=-1)
     if num_tokens_post_padded_ptr is not None:
         padded_rows = gl.load(num_tokens_post_padded_ptr)
         total = gl.minimum(total, gl.cdiv(padded_rows, 32) * gl.cdiv(N, BN))
@@ -296,11 +301,6 @@ def _produce_a_and_scales(
         is_pure=False,
         pack=1,
     )
-    if GROUP_SIZE_M == 1:
-        first_output = gl.program_id(0) + TILE_ID
-        first_row = first_output // gl.cdiv(N, BN)
-        seed_routes = gl.load(Routes + first_row * BM + gl.arange(0, BM, gl.SliceLayout(1, al)), first_output < total, other=0)
-        seed_expert = gl.load(Experts + first_row + gl.arange(0, 1, layout), first_output < total, other=-1)
     phase, iteration = (0, 0)
     for output in range(
         gl.program_id(0) + TILE_ID,

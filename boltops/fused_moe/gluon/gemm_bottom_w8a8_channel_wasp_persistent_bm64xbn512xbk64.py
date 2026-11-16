@@ -317,7 +317,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
     if num_tokens_post_padded_ptr is not None:
         total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     CN: gl.constexpr = BN // 4
-    mma: gl.constexpr = gl.amd.AMDMFMALayout(4, [16, 16, 32], MMAC_LAYOUT, [2, 2], tiles_per_warp=[1, 2])
+    mma: gl.constexpr = gl.amd.AMDMFMALayout(4, [16, 16, 32], MMAC_LAYOUT, [1, 4], tiles_per_warp=[1, 2])
     result: gl.constexpr = hcu.MmacInterleave2Layout(mma)
     packing: gl.constexpr = _output_pack_layout(gl.to_linear_layout(result, (32, CN)))
     a_epoch = 0

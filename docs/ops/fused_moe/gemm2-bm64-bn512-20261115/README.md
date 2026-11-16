@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 15.032016 us / whole-dispatch MMAC15.150170%, sb-before-b-empty. The 60% target remains open.**
+**Current best: 14.873556 us / whole-dispatch MMAC15.311577%, consumer-m1n4. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -189,3 +189,53 @@ different-expert and generation proofs before promotion. It is not a claimed win
 Completed negative raw IT traces were losslessly gzip-compressed (1.083GB freed)
 without dropping sources, compiler outputs, perf, stats or results. Exact list:
 `/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/compressed-followup-traces.json`.
+
+## Consumer warp geometry M1/N4 — 2026-11-16
+
+Current best **14.873556 us / 15.311577% whole 48-CU dispatch MMAC**, unchanged
+1.8GHz and two logical M64/N512 outputs per persistent TG. This is
+**1.054150% less elapsed time** than bf26fa0 (15.032016us), a0.158460us
+reduction. The60% target <=8.272168us remains unmet.
+
+Only the MFMA consumer warp geometry changes from [2,2] to **[1,4]**;
+instruction16x16x32 and tiles-per-warp[1,2] remain. There are still four waves per
+role,2P2C, native WDRA requests48/16/224/224, the same producers, slots, A/B
+publications, credit/metadata generations, scaling order and routed output.
+Actual VGPRs36/9/162/162 (was36/9/146/146), no spills, LDS99KiB unchanged.
+
+With fewer M warp groups, B reads have less replication across M warps; A reads
+have more replication across N warps, but A is retained for both N128 phases.
+Assembly matrix-DS read instructions fall80->64 across the kernel. Dynamic CU0
+LDS instructions fall1312->1248; VALU3004->2948 and SCA2320->2288; VMEM352 and
+active MMAC2048 stay unchanged. All48 CUs perform2048 active MMACs. This is a
+reduction of actual instruction work, not a reduction of mathematical output.
+
+The timing benefit is not uniform: CU0 SIMD0 C0 first MMAC moves
+8.171532->8.431740us and C1 moves8.609660->8.629676us. C1 final MMAC ends
+14.167436->14.045116us; the later phase/tail schedule wins overall. C1 between-MMAC
+gaps after63 and191 shrink2224/2184->2028/1864cycles, while its cross-M gap after127
+grows2760->3292cycles. Issued-instruction intervals include other-wave scheduling.
+Bank conflicts stay1024/CU; average LocalMemPipeline.creditStall grows
+1152.604->1311.083. Neither a bank-conflict fix nor uniformly shorter waits is claimed.
+
+Independent compilation repeats .text, frozen inputs, GPU addresses, output and
+elapsed time exactly. Bounded timing checks2630144 outputs with zero mismatches,
+unchanged hash and untouched tail. Four full-N1024 FP8/INT8 x BF16/FP16 equivalence
+cases pass, including independent forced-wide A/B/C and nonunit scale strides.
+A/B phase, adjacent wait-ID, live-wave/work/8-cycle union and consumer-no-VMEM
+load audits pass. Compiler sources and versions are unchanged: Triton5b24821,
+LLVMfd18eddb, control-only-ebarrier clang wrapper. See [complete proof](consumer-m1n4/).
+
+Other numeric-passing controls rejected this round: adjacent-M/two B register
+caches with P0 scatter17.337192us; one B register cache plus retained B1 LDS/direct
+scatter18.269048us. Their generic wait-ID/work audits pass, but first-batch cache
+hit rates fall to about79% vs84.5% and frontend/epilogue costs increase. The
+all-register direct-output variant exceeds the native per-SIMD VGPR budget and
+has no performance result. No resource limit or compiler check was bypassed.
+
+A16KiB native MLS Bright-K128 lookahead stage was also tested with the original
+M assignment: early15.417880us; after current B publications15.193812us; just before
+last current Bright15.423440us; uniform first-stage path15.105408us. All bounded
+numerics pass. Generic wait/work audits pass for all tested variants. These
+remain temporary controls; they do not replace the retained source.
+

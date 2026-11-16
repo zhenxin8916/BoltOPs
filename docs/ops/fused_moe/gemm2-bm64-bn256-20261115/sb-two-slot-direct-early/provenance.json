@@ -1,0 +1,37 @@
+{
+  "raw_root": "/home/zhenx/temp/moe-gemm2-bm64bn256-20261115",
+  "toolchain": {
+    "triton": {
+      "path": "/home/zhenx/worktrees/triton-feature-20261102",
+      "branch": "release/3.6.x",
+      "commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+      "tracked_diff": "clean"
+    },
+    "llvm": {
+      "path": "/home/zhenx/llvm-project",
+      "branch": "dtk-llvm-6.3.3",
+      "commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+      "tracked_diff": "clean",
+      "untracked_not_used": [
+        "0001-ds_read-mmerge.patch",
+        "llvm/test/CodeGen/AMDGPU/hcu-matrix-store-lds-waitcnt.mir"
+      ],
+      "clang_sha256": "0dabcb21b8420844154fb8e313e5ab1e07a7f98df6ccf0e4d07354428f8cc6da",
+      "extra_flags": [
+        "-mllvm",
+        "-hcu-control-only-ebarrier-sync"
+      ]
+    },
+    "pmd": {
+      "commit": "b61a79c58e4f54d6d2920594d3af08582354db3e",
+      "libgem5_opt_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a"
+    }
+  },
+  "source_sha256": "0be0f74cea77882fabcb5588e37496f1e86a4e8c5310645c65853c92fe14665f",
+  "scope": "48 CU dispatch; 48 physical TGs; 2 independent BM64 output tiles per physical persistent TG; one N tile per M diagnostic",
+  "text_sha256": "f8274e6c9ad6bfe85eb8c6dab8fbe62706cffb64dfda94f73932651e415d3fc6",
+  "measured_time_us": 11.999036,
+  "whole_gpu_mmac_percent": 9.489829016264306,
+  "recorded_date": "2026-11-16",
+  "repeat_proof": "repeat-proof.json"
+}

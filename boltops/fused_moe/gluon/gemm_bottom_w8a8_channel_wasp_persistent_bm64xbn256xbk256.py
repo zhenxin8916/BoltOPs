@@ -7,7 +7,7 @@ and column scales; C0/C1 compute the left/right 128 columns, apply the original
 ((acc * SA) * SB) * weight order, narrow, and scatter routed output directly.
 
 Two full-A slots use 32 KiB. One full-K256 B slot per consumer uses 64 KiB.
-Two M metadata slots use 2 KiB, and SB uses 1 KiB: 99 KiB total shared memory.
+Two M metadata slots use 2 KiB. Two SB generations per side use 2 KiB: 100 KiB total shared memory.
 A slots alternate READY1/2 and EMPTY3/4, with phase (M_epoch >> 1) & 1.
 Metadata alternates READY12/0 with the same phase. B uses READY5/7 and EMPTY6/8,
 with phase N_epoch & 1. Initial A/B/metadata reads finish before returning A
@@ -21,6 +21,7 @@ at 1.8 GHz. It has half the padded work of two BM128 output tiles."""
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
 from triton.experimental.gluon.language.amd import hcu
+from triton.experimental.gluon.language.amd.cdna4 import async_copy
 from triton.experimental.gluon.language.amd.cdna3 import buffer_load, buffer_store
 
 # Launch options shared by the library dispatcher and standalone probes.
@@ -28,13 +29,13 @@ DEFAULT_LAUNCH_OPTIONS = dict(
     num_warps=4, num_stages=2, use_async_copy=True,
     wasp_partition_warps=(4, 4, 4, 4), wasp_wdra=True,
 )
-MMAC_LAYOUT = gl.constexpr(3)  # LIT=0, LTS=1 (TRANSPOSE=3).
+MMAC_LAYOUT = gl.constexpr(3)  # gl.amd.MmacLayout.LTS, explicit hardware mode.
 ROW_PERSISTENT_A = True
 
 
 @gluon.constexpr_function
 def _output_pack_layout(layout):
-    """Pair adjacent output halfwords in registers before the LDS handoff."""
+    """Pair adjacent output halfwords in registers for routed scatter."""
     regs = layout.reg_bases
     return gl.DistributedLinearLayout(
         [regs[2], regs[0], regs[1]] + regs[3:],
@@ -82,7 +83,7 @@ def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch
 A slot = epoch & 1, READY = 1 + slot, EMPTY = 3 + slot;
 A phase = (epoch >> 1) & 1. Metadata contains four [64] vectors:
 SA, weight, route bits and expert bits. Its READY is 12/0 by slot.
-Both consumers finish the metadata reads before returning A EMPTY.
+Both consumers finish the row-metadata reads before returning A EMPTY.
 """
     ticket = epoch
     slot = ticket & 1
@@ -135,6 +136,11 @@ def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
 
 HALF0 feeds C0 with READY5/EMPTY6; HALF1 feeds C1 with READY7/EMPTY8.
 One physical B slot per side is reused only after its completed-read credit.
+SB slot = 2 * (epoch & 1) + HALF. Prefetch SB directly to LDS before
+waiting for B EMPTY. Generation e overwrites SB(e-2) only after B(e-1)
+was issued; that issue required the B(e-2) EMPTY credit. Consumers return
+that credit after both B and SB LDS reads finish, so the overwrite is safe.
+The explicit async wait completes SB before publishing this B READY.
 KH is retained in this private helper signature but callers always pass zero.
 """
     ready = 7 if HALF == 1 else 5
@@ -142,6 +148,12 @@ KH is retained in this private helper signature but callers always pass zero.
     phase = epoch & 1
     physical = 0
     dest = b1 if HALF == 1 else b0
+    if KH == 0:
+        ml: gl.constexpr = gl.BlockedLayout([4],[64],[4],[0])
+        mr = gl.arange(0,BN//2,ml)
+        col = n*BN+HALF*(BN//2)+mr
+        async_copy.buffer_load_to_shared(mb.index((epoch&1)*2+HALF),SB,(gl.maximum(expert,0)*STRIDE_SBE+col*STRIDE_SBN).to(gl.uint32))
+        async_copy.commit_group()
     hcu.abarrier_try_wait(empty, phase)
     hcu.abarrier_seq(ready)
     if USE_B64:
@@ -152,17 +164,7 @@ KH is retained in this private helper signature but callers always pass zero.
     else:
         hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
                         (0, n * BN + HALF * (BN // 2)), warps=(1, 4))
-    if KH == 0:
-        hcu.sched_barrier()
-        ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
-        mr = gl.arange(0, BN // 2, ml)
-        col = n * BN + HALF * (BN // 2) + mr
-        if USE_B64:
-            sb = gl.load(SB + gl.maximum(expert, 0).to(gl.int64) * STRIDE_SBE + col.to(gl.int64) * STRIDE_SBN)
-        else:
-            sb = buffer_load(SB, (gl.maximum(expert, 0) * STRIDE_SBE + col * STRIDE_SBN).to(gl.uint32))
-        mb.index(HALF).store(sb)
-        hcu.wait_lgkmcnt(0)
+    async_copy.wait_group(0)
     hcu.abarrier_arrive(ready)
 
 
@@ -245,7 +247,7 @@ or global scale/route load is needed in either consumer.
         expert = gl.full((BM,), 0, gl.int32, gl.SliceLayout(1, result))
         for n in range(0, N_TILES):
             hcu.abarrier_try_wait(7 if PARTITION == 1 else 5, b_epoch & 1)
-            current_sb = mb.index(PARTITION).load(gl.SliceLayout(0, result))
+            current_sb = mb.index((b_epoch&1)*2+PARTITION).load(gl.SliceLayout(0, result))
             b = bm.index(0).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, mma, 8)))
             if n == 0:
                 hcu.abarrier_try_wait(12 if (a_epoch & 1) == 0 else 0, (a_epoch >> 1) & 1)
@@ -326,9 +328,9 @@ when routed-weight multiplication is enabled. C64 is not implemented here.
     meta_shared: gl.constexpr = gl.SwizzledSharedLayout(1, 1, 1, [0])
     ma_layout: gl.constexpr = gl.SharedLinearLayout([[4], [8], [1], [2], [16], [32]], [], 16)
     # MA: two M slots x four [64] FP32 vectors = 2 KiB.
-    # MB: left/right [128] FP32 channel scales = 1 KiB.
+    # MB: two generations x left/right [128] FP32 scales = 2 KiB.
     ma = gl.allocate_shared_memory(gl.float32, [8, BM], ma_layout)
-    mb = gl.allocate_shared_memory(gl.float32, [2, BN // 2], meta_shared)
+    mb = gl.allocate_shared_memory(gl.float32, [4, BN // 2], meta_shared)
     co0 = ma
     co1 = ma
     _initialize(STAGES)

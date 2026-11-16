@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "cases": [
+    "sb-two-slot-direct-early",
+    "sb-two-slot-direct-early-repeat-sqtt",
+    "sb-two-slot-final-source"
+  ],
+  "text_sha256": "f8274e6c9ad6bfe85eb8c6dab8fbe62706cffb64dfda94f73932651e415d3fc6",
+  "text_bytes": 6728,
+  "time_us": 11.999036,
+  "whole_gpu_mmac_percent": 9.489829016264306,
+  "first_and_repeat_same_inputs_addresses_options_source": true,
+  "final_comment_cleanup_same_machine_text": true,
+  "final_source_sha256": "0be0f74cea77882fabcb5588e37496f1e86a4e8c5310645c65853c92fe14665f",
+  "scope": "Final source changes comments/documentation only; its compiled .text equals both numerically validated timing binaries."
+}

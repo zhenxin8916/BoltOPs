@@ -1,0 +1,709 @@
+{
+  "passed": true,
+  "scope": "CU0 all four producer/consumer waves per role; actual SB destination M0 and consumer LDS base addresses, plus LGKM0 before B EMPTY and generation-2 credit ordering",
+  "base": 100352,
+  "slot_stride_bytes": 1024,
+  "half_stride_bytes": 512,
+  "producer_writes": {
+    "0": [
+      {
+        "tick": 6572476,
+        "address": 100352,
+        "wave": 4
+      },
+      {
+        "tick": 7212988,
+        "address": 101376,
+        "wave": 4
+      },
+      {
+        "tick": 9098940,
+        "address": 100352,
+        "wave": 4
+      },
+      {
+        "tick": 10649068,
+        "address": 101376,
+        "wave": 4
+      },
+      {
+        "tick": 13682604,
+        "address": 100352,
+        "wave": 4
+      },
+      {
+        "tick": 14627804,
+        "address": 101376,
+        "wave": 4
+      },
+      {
+        "tick": 16838460,
+        "address": 100352,
+        "wave": 4
+      },
+      {
+        "tick": 17692476,
+        "address": 101376,
+        "wave": 4
+      },
+      {
+        "tick": 19803052,
+        "address": 100352,
+        "wave": 4
+      },
+      {
+        "tick": 20923948,
+        "address": 101376,
+        "wave": 4
+      }
+    ],
+    "1": [
+      {
+        "tick": 6912748,
+        "address": 100864,
+        "wave": 4
+      },
+      {
+        "tick": 8351676,
+        "address": 101888,
+        "wave": 4
+      },
+      {
+        "tick": 10075276,
+        "address": 100864,
+        "wave": 4
+      },
+      {
+        "tick": 11789980,
+        "address": 101888,
+        "wave": 4
+      },
+      {
+        "tick": 14340908,
+        "address": 100864,
+        "wave": 4
+      },
+      {
+        "tick": 15419548,
+        "address": 101888,
+        "wave": 4
+      },
+      {
+        "tick": 17223212,
+        "address": 100864,
+        "wave": 4
+      },
+      {
+        "tick": 18453084,
+        "address": 101888,
+        "wave": 4
+      },
+      {
+        "tick": 20167788,
+        "address": 100864,
+        "wave": 4
+      },
+      {
+        "tick": 21733484,
+        "address": 101888,
+        "wave": 4
+      }
+    ]
+  },
+  "consumer_reads": {
+    "8": [
+      {
+        "tick": 7141820,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9699420,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 11309596,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 12452732,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 14336460,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 15537420,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 17472300,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 18610988,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 20387964,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 21722364,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      }
+    ],
+    "9": [
+      {
+        "tick": 7142376,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9695528,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 11314600,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 12464408,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 14337016,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 15433448,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 17470632,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 18551496,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 20388520,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 21722920,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      }
+    ],
+    "10": [
+      {
+        "tick": 7142932,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9680516,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 11197284,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 12251460,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 14335348,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 15407316,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 17471188,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 18552052,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 20386852,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 21721252,
+        "address": 101376,
+        "base_address": 100352,
+        "encoded_offset": 41088
+      }
+    ],
+    "11": [
+      {
+        "tick": 7143488,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9687744,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 11313488,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 12458848,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 14335904,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 15525744,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 17471744,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 18548160,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 20387408,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 21724032,
+        "address": 101504,
+        "base_address": 100480,
+        "encoded_offset": 41088
+      }
+    ],
+    "12": [
+      {
+        "tick": 7495436,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10319916,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 12303724,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 14291980,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 15837660,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 17410028,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 18906780,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 20372396,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 21987020,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 23234684,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      }
+    ],
+    "13": [
+      {
+        "tick": 7493768,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10333816,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 12319848,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 14250280,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 15549096,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 17286040,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 18673816,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 20283992,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 21843016,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 23239688,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      }
+    ],
+    "14": [
+      {
+        "tick": 7494324,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10329924,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 12315956,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 14108500,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 15469588,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 17264356,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 18674372,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 20306788,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 21839124,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 23229124,
+        "address": 101888,
+        "base_address": 100864,
+        "encoded_offset": 41088
+      }
+    ],
+    "15": [
+      {
+        "tick": 7494880,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10317136,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 12314288,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 14295872,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 15841552,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 17387232,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 18661584,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 20331808,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      },
+      {
+        "tick": 21855248,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 23236352,
+        "address": 102016,
+        "base_address": 100992,
+        "encoded_offset": 41088
+      }
+    ]
+  },
+  "consumer_empty_ticks": {
+    "8": [
+      8000284,
+      9944060,
+      11667660,
+      12788556,
+      14721212,
+      15748700,
+      17803676,
+      18824492,
+      20774940,
+      21931420
+    ],
+    "9": [
+      7996392,
+      9944616,
+      11672664,
+      12784664,
+      14659496,
+      15560216,
+      17768648,
+      18760552,
+      20706552,
+      21931976
+    ],
+    "10": [
+      8001396,
+      9918484,
+      11392996,
+      12404916,
+      14633364,
+      15518516,
+      17771428,
+      18761108,
+      20769380,
+      21928084
+    ],
+    "11": [
+      8008624,
+      9941280,
+      11669328,
+      12781328,
+      14720656,
+      15734800,
+      17771984,
+      18746096,
+      20789952,
+      21933088
+    ],
+    "12": [
+      8087020,
+      10515628,
+      12853052,
+      14514380,
+      16024476,
+      17579052,
+      19182556,
+      20808300,
+      22320620,
+      23448188
+    ],
+    "13": [
+      8083128,
+      10531752,
+      12891416,
+      14394840,
+      15831544,
+      17403912,
+      19116392,
+      20433000,
+      22290040,
+      23455416
+    ],
+    "14": [
+      8083684,
+      10530084,
+      12767428,
+      14210804,
+      15798740,
+      17377780,
+      19116948,
+      20498052,
+      22286148,
+      23422612
+    ],
+    "15": [
+      8086464,
+      10510624,
+      12865840,
+      14507152,
+      16052832,
+      17496208,
+      19104160,
+      20538640,
+      22293376,
+      23449856
+    ]
+  }
+}

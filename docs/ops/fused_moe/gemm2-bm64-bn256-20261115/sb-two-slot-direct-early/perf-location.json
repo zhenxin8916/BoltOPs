@@ -1,0 +1,6 @@
+{
+  "exported_perf": "GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_SB_TWO_SLOT_GC1800_CU0.perf",
+  "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/sb-two-slot-direct-early-repeat-sqtt/m5out/0/0/2368099_python3.10.perf",
+  "sha256": "52acd5f50c2969527096632d2e87bb1750ab7059d59d4d4105706ac81664b01c",
+  "raw_sqtt": "ttrace_model__xcd0_cu0_se0.out"
+}

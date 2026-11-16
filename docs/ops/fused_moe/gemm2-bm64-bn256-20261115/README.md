@@ -3,27 +3,27 @@
 This report, the retained operator and their measured evidence are saved in the same commit.
 
 Current retained operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn256xbk256.py`.
-Current best is **12.168060 μs**, repeated with identical machine `.text`, frozen inputs, GPU addresses, result hash and elapsed time. Target **≤9.602 μs is not met**.
+Current best is **11.999036 μs**, with **9.489829% whole-dispatch MMAC**, repeated with identical machine `.text`, frozen inputs, GPU addresses and elapsed time. The operator, report and new SB two-slot evidence are retained together in this commit. Target **≤9.602 μs is not met**.
 
 ## Measurement scope
 
 PMD gfx946/HCU, 1.8 GHz (556 ps/cycle), 48 CU. Launch grid48, four roles × four waves. Each physical persistent TG processes two independent logical M64 output tiles: M=pid and pid+48, N0 only. Actual GEMM2 N2048/K256; BM64/BN256. The originating MoE preparation is M4096/E256/topk8. This is **one physical TG per CU processing two outputs**, not two simultaneous physical TGs.
 
-MMAC utilization in the table is all 48 CUs averaged over the **whole dispatch**, including startup and tail. Canonical CU0 wave-lifetime utilization is 14.994%, while whole-dispatch is 9.358%; do not interchange them. CU0 has 1024 active MMACs, all 48 CUs have the same count, and active 8-cycle intervals do not overlap on a SIMD. There are 16 live waves per CU, four per SIMD, no exec=0 MMACs, and no compiler spills.
+MMAC utilization in the table is all 48 CUs averaged over the **whole dispatch**, including startup and tail. Current CU0 wave-lifetime utilization is 15.149%, while whole-dispatch is 9.490%; do not interchange them. CU0 has 1024 active MMACs, all 48 CUs have the same count, and active 8-cycle intervals do not overlap on a SIMD. There are 16 live waves per CU, four per SIMD, no exec=0 MMACs, and no compiler spills.
 
-The BM128 two-output reference performs twice the padded work of BM64 two-output runs. 15.364/12.168 is only a bounded two-output latency ratio, not equal-work throughput improvement. Old raw result.json files call this `bounded_equal_padded_output_work`; that inherited label is incorrect **across BM sizes**. It is corrected in the archived harness and repeat result. Within BM64 all candidate comparisons use identical work, input hashes and GPU addresses.
+The BM128 two-output reference performs twice the padded work of BM64 two-output runs. 15.364/11.999 is only a bounded two-output latency ratio, not equal-work throughput improvement. Old raw result.json files call this `bounded_equal_padded_output_work`; that inherited label is incorrect **across BM sizes**. It is corrected in the archived harness and repeat result. Within BM64 all candidate comparisons use identical work, input hashes and GPU addresses.
 
 ## Algorithm and LDS ownership
 
 2P2C remains intact. P0 issues A and SA/weight/route/expert metadata. P1 issues left/right B and channel SB. C0/C1 each compute M64×N128×K256, apply strict `((acc*SA)*SB)*weight`, convert, then scatter directly with packed `buffer_store_dword` in the natural accumulator layout. Generic x4 output conversion was slower and needed additional layout-transpose LDS. Neither consumer performs global metadata loads.
 
-LDS99KiB: A2×64×256 =32KiB, B left/right each256×128 =64KiB, two row-metadata generations =2KiB, SB left/right =1KiB. No output mailbox. B uses native `matrix_load_64x32_b8` selected by `(128,32)` interleave2 panels and loader `(1,4)`; A uses native64x16. Requested WDRA quotas48/16/224/224, total512, no bypass.
+LDS100KiB: A2×64×256 =32KiB, B left/right each256×128 =64KiB, two row-metadata generations =2KiB, two SB generations per side =2KiB. P1 copies SB directly from its buffer to LDS before waiting for B EMPTY; consumers select slot `2*(b_epoch&1)+side`. No output mailbox. B uses native `matrix_load_64x32_b8` selected by `(128,32)` interleave2 panels and loader `(1,4)`; A uses native64x16. Requested WDRA quotas48/16/224/224, total512, no bypass.
 
 A slots alternate `epoch&1`, READY1/2, EMPTY3/4 (eight consumer-wave credits), phase `(epoch>>1)&1`. Metadata READY12/0 has the same two-slot phase. B left/right use READY5/7, EMPTY6/8, phase `N_epoch&1`. Consumers issue A/B/SB/row-metadata reads, wait LDS completion, **then** return both A+metadata and B credits. Thus metadata cannot be overwritten while a consumer still reads it. A remains in registers for later N tiles. `protocol-audit.json` verifies actual trace register values for all eight consumer waves, both in two-output timing and five-M/two-N full traversal. This audits generation sequences, not every hardware-internal transaction.
 
 ## Perf identifies two different gaps
 
-The following figures are CU0 SIMD0 and **issued-instruction intervals**, not isolated hardware instruction latencies. Whole-dispatch time remains the acceptance metric.
+The following historical figures describe commit `973bc63` (12.168060 μs), CU0 SIMD0 and **issued-instruction intervals**, not isolated hardware instruction latencies. Whole-dispatch time remains the acceptance metric.
 
 | Segment (GPU cycles) | C0 | C1 |
 |---|---:|---:|
@@ -45,6 +45,7 @@ Startup has a different bottleneck: C1 first MMAC is1.197μs later than C0. P1 s
 | BM128 reference; two independent M tiles | 15.363948 | 14.823% |
 | BM64: paired M32 mailbox; P0 scatter; B64x16 MLS | 12.761312 | 8.923% |
 | BM64: native B64x32 MLS; two A slots; consumer scatter | 12.168060 | 9.358% |
+| **Two-slot SB, direct buffer-to-LDS before B EMPTY (current)** | **11.999036** | **9.490%** |
 | SB global read hoisted before B MLS | 12.267028 | 9.283% |
 | SB LDS publication before B MLS | 12.337084 | 9.230% |
 | P0/P1 each drain one consumer mailbox | 13.078788 | 8.706% |
@@ -54,13 +55,13 @@ Startup has a different bottleneck: C1 first MMAC is1.197μs later than C0. P1 s
 | B split into two K128 stages; native64x32 MLS | 12.710716 | 8.958% |
 | P1 B send window uses priority1 | 12.252016 | 9.294% |
 
-Only canonical source is retained in the repository. Rejected implementations remain under the raw temporary root for diagnosis. Current best improves BM64 initial baseline12.761312→12.168060μs (4.65% less time). The remaining work is to overlap next-output DS reads with current scaling/store without extending register lifetimes into spills, and reduce cold B-right publication latency without serializing the two producers. These are future work, not claimed gains.
+Only canonical source is retained in the repository. Rejected implementations remain under the raw temporary root for diagnosis. The original retained version improved BM64 initial baseline12.761312→12.168060μs (4.65% less time); the current two-slot SB version improves further to11.999036μs (5.97% less time versus the initial BM64 baseline). The remaining work is to overlap next-output DS reads with current scaling/store without extending register lifetimes into spills, and reduce cold B-right publication latency without serializing the two producers. These are future work, not claimed gains.
 
 ## Correctness and reproducibility
 
 Bounded timing checks1,315,072 selected BF16 elements: zero mismatches at rtol0.02/atol0.002; unselected rows/columns remain NaN. Comparison uses the original strict scale/weight operation order. Independent full-N tests use ten M blocks, grid2 (five M per persistent TG), two N outputs per M: **197,632 elements, zero mismatches for both FP8 and INT8**, exercising slot wrap/reuse and N traversal. These full-N tests are correctness checks, not performance acceptance runs. They do not exhaustively validate every optional wide-address/FP16 mode.
 
-[Best SQTT perf](canonical-repeat-sqtt/GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_GC1800_CU0.perf), [metrics](canonical/metrics.json), [phase split](canonical/phase-analysis.json), [repeat proof](repeat-proof.json), [toolchain provenance](provenance.json), and archived assembly/HSACO accompany the source. Raw IT0 traces and frozen tensor payloads are retained at `/home/zhenx/temp/moe-gemm2-bm64bn256-20261115`; perf SHA/path is recorded beside the exported perf.
+[Historical 12.168 μs SQTT perf](canonical-repeat-sqtt/GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_GC1800_CU0.perf), [metrics](canonical/metrics.json), [phase split](canonical/phase-analysis.json), [repeat proof](repeat-proof.json), [toolchain provenance](provenance.json), and archived assembly/HSACO accompany the source. Raw IT0 traces and frozen tensor payloads are retained at `/home/zhenx/temp/moe-gemm2-bm64bn256-20261115`; perf SHA/path is recorded beside the exported perf.
 
 Use container `zx-perf-node60`, Python `/zhenxin/temp/hcu-gluon-upstream-venv-20261103/bin/python`. Launch harness sets clean Triton source PYTHONPATH and clang wrapper with `-mllvm -hcu-control-only-ebarrier-sync`. Reproduce by copying retained operator to a case directory as `kernel.py`, setting `BENCH_BK=256`, and running `launch.py <case> 64 --kind fp8`; frozen input root is resolved relative to the harness. `--freeze` regenerates frozen inputs at seed3101 if needed. Set `BENCH_DFLAGS='["StatLog","IT0","TT0","Perf"]'` for SQTT. Analyze with `analyze.py`, `phase_analysis.py`, `audit_barriers.py`, `audit_protocol.py`; full-N checks use `launch_check.py <case> <source> fp8` or `int8`, with BENCH_BK256. Toolchain commits/diff states and actual clang/PMD binary hashes are recorded in provenance; LLVM's two untracked files are not compiler inputs. No compiler source changes were introduced for this operator.
 
@@ -74,7 +75,7 @@ Use container `zx-perf-node60`, Python `/zhenxin/temp/hcu-gluon-upstream-venv-20
 | Two DPP swaps without canonical register ordering; scalar stores | 15.787064 | zero numeric errors; rejected (slower) |
 | Two DPP swaps with canonical registers; buffer_store_dwordx4 | 13.378472 | zero numeric errors; rejected (slower) |
 
-Consumer address preparation reduced M0 store-issue spans C0/C1 from1644/1056 to1100/700 cycles, but last-store→next-MMAC intervals rose792/752→1140/1832 cycles. It added a separate metadata LDS completion wait and delayed the next B read. Thus a shorter store segment did not imply shorter dispatch. The DPP variants truly produced dwordx2/x4 in assembly after register ordering was canonicalized, but the extra cross-lane selection and data rearrangement cost more overall. Removing the post-MMAC scheduling barrier also did not beat the retained code. None of these candidate source changes were promoted; **code commit973bc63 remains the BM64×BN256 best**. Measurements use the identical frozen BM64 workload, GPU addresses and1.8GHz setting.
+Consumer address preparation reduced M0 store-issue spans C0/C1 from1644/1056 to1100/700 cycles, but last-store→next-MMAC intervals rose792/752→1140/1832 cycles. It added a separate metadata LDS completion wait and delayed the next B read. Thus a shorter store segment did not imply shorter dispatch. The DPP variants truly produced dwordx2/x4 in assembly after register ordering was canonicalized, but the extra cross-lane selection and data rearrangement cost more overall. Removing the post-MMAC scheduling barrier also did not beat the retained code. None of these candidate source changes were promoted; **these candidates did not exceed code commit973bc63**. Measurements use the identical frozen BM64 workload, GPU addresses and1.8GHz setting.
 
 ## Continuation: LDS overlap, epilogue distribution and fetch evidence
 
@@ -185,3 +186,33 @@ With rebuilt split-store addresses and async prefetch, C0's last-store→next-MM
 Moving the prefetch helper until after current packed values/addresses are prepared and assigning A/B/metadata directly instead of through `na/nb/...` changed register demand but not measured elapsed time: full-store13.240028 μs and split-store12.754640 μs remain identical to their preceding controls. All recorded final native quotas remain legal and scratch size is0. No code control was promoted.
 
 [Combined launch records, numerical results, metrics, phases, source/assembly hashes and instruction-width counts](chunked-store-controls/summary.json) accompany this report. Completed rejected IT traces were losslessly gzip-compressed and their decompressed SHA256 verified to recover approximately0.96GB; canonical and current key comparison traces remain available. [Compression manifest](chunked-store-controls/compressed-rejected-controls.json) records restored paths and hashes. Original≤9.602 μs gate remains unmet.
+
+
+## Retained update: two SB generations and early direct LDS prefetch — 2026-11-16
+
+**11.999036 μs / 9.489829% whole-dispatch MMAC**, down1.39% in time from12.168060μs on identical BM64 work. The ≤9.602μs gate is still unmet. This does not establish 60% equal-work throughput improvement over BM128.
+
+P1 now issues native buffer-to-LDS SB copies before B EMPTY, commits the async group, waits B EMPTY, issues the same B MLS, waits for SB completion, and publishes B READY. SB has two generations per side: slot `2*(epoch&1)+side`. LDS grows99→100KiB; no extra barrier IDs or output mailbox are introduced. P0, A/MA/B ownership, strict scale order, native interleave2 B reads, LTS MMAC and 2P2C remain intact. WDRA requests48/16/224/224; actual registers19/4/156/157, no spills.
+
+Safety: SB(e) reuses SB(e−2). Before issuing SB(e), P1 already issued B(e−1), which required B EMPTY(e−2). All four consumer waves return that credit only after their B and SB reads finish. The first two generations use distinct slots. The trace audit checks actual M0/LDS effective addresses (including encoded DS offsets), completion waits before credit returns, and generation reuse on timing plus full-N FP8/INT8 runs. The A/MA/B protocol audit also passes.
+
+The frozen timing run checks1,315,072 elements with zero errors and untouched masked output; its repeat produces the exact same11.999036μs, inputs, addresses and machine text. Full-N FP8 and INT8 each check197,632 elements with zero errors (five M per persistent TG, two N per M). Final source comment cleanup compiles to the same6728-byte `.text`, SHA256 `f8274e6c9ad6bfe85eb8c6dab8fbe62706cffb64dfda94f73932651e415d3fc6`.
+
+| CU0 SIMD0 issued interval | C0 | C1 |
+|---|---:|---:|
+| first MMAC absolute time, μs |8.562956|8.847628|
+| M0→M1 MMAC gap, cycles |2840|3260|
+| last MMAC→first store, cycles |1028|1236|
+| first→last store issue, cycles |1096|1228|
+| last store→next MMAC, cycles |716|796|
+| final MMAC→wave end, cycles |2104|1196|
+
+C1 startup advances0.572μs; C0 startup and C1's inter-output gap do not improve. This is an overall dispatch gain, not a claim that every gap shrank. The remaining bottleneck includes scaling/scatter and next-output LDS acquisition, with substantial startup/tail cost at short K.
+
+[Current best perf](sb-two-slot-direct-early/GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_SB_TWO_SLOT_GC1800_CU0.perf), [metrics](sb-two-slot-direct-early/first/metrics.json), [repeat proof](sb-two-slot-direct-early/repeat-proof.json), [source](sb-two-slot-direct-early/kernel.py), [provenance](sb-two-slot-direct-early/provenance.json). Raw case roots are `sb-two-slot-direct-early`, `sb-two-slot-direct-early-repeat-sqtt`, `sb-two-slot-fulln-fp8`, and `sb-two-slot-fulln-int8` under the existing temporary root. Reproduction uses the harness and BENCH_BK=256 described above.
+
+### Ordinary-layout controls (rejected)
+
+Native LEGACY/LIT/LIT_LTS with TN2 fail the backend's MLS element-count check; it was not bypassed. Legal TN1 variants validate numerically but take28.725740/15.138768/13.614772μs respectively. LIT TN1 emits16 static buffer_store_dwordx2 instructions versus32 packed dword stores in retained LTS, but is slower. For equal37888 valid output bytes in CU0, per-issued-instruction64/128-byte address-region references are1184/1184 versus592/592; these are address coverage counts, **not measured DRAM transactions**. Wider stores alone do not establish better throughput.
+
+Reading interleave2 B directly as ordinary LIT produces1,222,257 mismatches and is rejected; explicitly converting the native layout fails compilation. These are layout incompatibilities, not evidence of a PMD defect. A metadata-overlap variant of the retained two-slot SB version takes12.050744μs and is also rejected. Rejected source variants remain in temporary evidence, not in production code.

@@ -712,6 +712,14 @@ def _consumer(
         row, col = gemm1_pid_grid(
             output, gl.cdiv(total, gl.cdiv(N, BN)), gl.cdiv(N, BN), GROUP_SIZE_M
         )
+        # ### ASM Note: Materialize the output base before K; ordinary address
+        # arithmetic otherwise sinks into the store epilogue.
+        output_base = C + (row.to(gl.int64) if USE_C64 else row) * 32 * N + (2 * col + PARTITION) * 128
+        output_address = gl.inline_asm_elementwise(
+            "s_mov_b64 $0, $1", constraints="=s,s", args=[output_base.to(gl.uint64)],
+            dtype=gl.uint64, is_pure=False, pack=1,
+        )
+        output_base = output_address.to(gl.pointer_type(C.dtype.element_ty))
         if WARM:
             if iteration == 0:
                 for stage in gl.static_range(2):
@@ -813,8 +821,8 @@ def _consumer(
         if output + (PERSISTENT_GRID if PERSISTENT_GRID > 0 else gl.num_programs(0)) < total:
             hcu.wait_lgkmcnt(0)
             hcu.ebarrier_arrive(5, 12)
-        store_channel_output(C, acc0, sa, sb0, row, 2 * col + PARTITION, N, 128, 0, WM, WN, USE_C64)
-        store_channel_output(C, acc1, sa, sb1, row, 2 * col + PARTITION, N, 128, 1, WM, WN, USE_C64)
+        store_channel_output(output_base, acc0, sa, sb0, 0, 0, N, 128, 0, WM, WN, USE_C64)
+        store_channel_output(output_base, acc1, sa, sb1, 0, 0, N, 128, 1, WM, WN, USE_C64)
         iteration += 1
 
 

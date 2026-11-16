@@ -1,8 +1,7 @@
 {
-  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-full-m64-best-wavefronts/GEMM2_BM64_BN512_GRID48_OUTPUT96_2M_PER_CU_CO_FULL_M64_WAVEFRONTS_GC1800_CU0.perf",
-  "sha256": "356dccf042d11353ea9620903c2dcdcb9043925582efe5c7a3aa18a88002f0e9",
+  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-metadata-wait-after-k3-repeat/GEMM2_BM64_BN512_GRID48_OUTPUT96_2M_PER_CU_METADATA_AFTER_K3_GC1800_CU0.perf",
+  "sha256": "ffb482e942c014c50d11f6f1dd7b8bc8ce1e899e83118530c47314edf934532c",
   "nonempty_sqtt_verified": true,
-  "code_commit": "97cb4cc",
-  "time_us": 14.776256,
-  "scope": "1.8GHz,48CU,2 independent BM64xBN512 outputs per TG; CU0 wavefront capture; all48CU timing/statistics"
+  "time_us": 14.713428,
+  "whole_dispatch_mmac_percent": 15.478214866039377
 }

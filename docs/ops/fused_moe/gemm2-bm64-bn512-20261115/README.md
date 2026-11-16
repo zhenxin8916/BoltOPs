@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 14.776256 us / whole-dispatch MMAC15.412402%, co-full-m64. The 60% target remains open.**
+**Current best: 14.713428 us / whole-dispatch MMAC15.478215%, metadata-after-k3. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -369,3 +369,48 @@ metrics were present. The identical97cb4cc binary was recaptured with TT0, retai
 14.776256us and15.412402% whole-dispatch MMAC. The new perf contains a validated
 nonempty SQTT section forCU0; all48CUs contribute to timing/statistics.
 Use [current perf location](perf-location.json); [capture proof and cause](wavefronts-recapture/).
+
+# Defer metadata READY wait until all K256 MMACs complete
+
+Measured best **14.713428 us /15.478214866% whole48-CU dispatch MMAC**, at1.8GHz,
+48 persistent TGs, two independent BM64xBN512 output tiles per physical TG.
+Versus retained97cb4cc 14.776256us, time decreases **0.425196%**
+(0.062828us). The60% target <=8.272168us is not achieved.
+
+Only the first-N metadata READY wait and SA/weight LDS reads move: from after
+K0 MMAC to after all four K64 MMAC groups. SA and weight are used only in the
+epilogue. A/B data dependencies and EMPTY returns, FP8/INT8 K accumulation,
+strict ((acc*SA)*SB)*weight arithmetic, metadata double generations, C mailbox
+READY/EMPTY ownership and P0 scatter are unchanged. Consumers keep metadata in
+registers across later N phases. No early read bypasses a READY wait.
+
+The request remains2P2C,4 waves per role, WDRA48/16/224/224. Native allocation
+changes60/52/200/200 ->60/56/200/196, sum512 per SIMD; actual registers change
+49/9/163/163 ->49/9/155/155. LDS remains115KiB. No resource check is bypassed,
+consumer VMEM load/permlane instruction or scratch spill is introduced.
+
+The timing benefit is not uniform. CU0 SIMD0 first C0/C1 MMAC issue remains
+8.009180/8.471772us. Its original first K0 metadata gap1096/648cycles no longer
+interrupts K-body execution. However, cross-M gaps grow2092/2292 ->2780/2700,
+and the final C0/C1 MMAC ends move12.695148/13.504684 ->13.088796/13.744876us.
+The global dispatch nevertheless shortens. Thus this is a verified whole-dispatch
+win, not a claim that CU0 MMAC utilization or every handoff improved. The48-CU
+counts and full XCD HYGPERF span are the acceptance criterion. Average LDS-credit
+stall changes2003.958 ->2001.458cycles, bank conflicts remain1024/CU; no large
+bank-conflict fix is claimed. Issue gaps include scheduling/resource effects.
+
+Independent clean-cache compilation repeats exact machine .text, frozen inputs,
+GPU addresses, selected output/hash, MMAC counts and14.713428us. Both bounded
+runs check2630144 values, zero errors, untouched tail. Four full-N1024 cases pass:
+FP8/INT8 and BF16-weighted/FP16-unweighted, independent forced-wide pointers,
+nonunit scale strides, multiple persistent M outputs. Audits verify16 live CU0
+waves,4/SIMD, legal alternating AB IDs, A/B generations,98304 active MMACs across
+48CUs,8-cycle MMAC busy union, and zero consumer VMEM loads/permlane operations.
+Both perf captures include a directly verified nonempty SQTT section (TT0).
+Compiler/model provenance is unchanged from ../provenance.json.
+
+A wait after K2 instead takes14.787376us and is rejected. The previous combined
+metadata publication takes15.039800us; separate scale READY before route/expert
+publication takes15.485712us. Joining the packed C halves into one store takes
+14.958068us. These bounded-correct controls are not in the production source.
+

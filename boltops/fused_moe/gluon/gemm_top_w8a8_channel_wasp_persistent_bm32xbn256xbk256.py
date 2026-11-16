@@ -11,6 +11,7 @@ CPU selection is limited to M128; K>=1024, K%512=0, N%256=0. Four waves per role
     C0: left N128 = two N64 panels; C1: right N128 = two N64 panels
 
 VGPR role budgets: P0/P1/C0/C1 = 16/16/96/96; no spill in the target probe.
+Consumer ping-pong ebarriers are disabled; the existing MMAC priorities remain.
 The 64-KiB LDS footprint permits two TGs per CU when the launch supplies enough work.
 
 One K256 step, per consumer (arrows describe issue/dependency order):
@@ -397,7 +398,7 @@ def gemm_top_w8a8_channel_wasp_persistent(
     ck_sorting: gl.constexpr = True,
     GROUP_SIZE_M: gl.constexpr = 1,
     A_STAGES: gl.constexpr = 2,  # Fixed two-stage BK256 A pool.
-    PINGPONG: gl.constexpr = True,
+    PINGPONG: gl.constexpr = False,  # Consumer rendezvous disabled; priorities remain.
     INSN_WARMUP: gl.constexpr = False,
     # Fixed physical A layout; retained for common launch compatibility.
     LDS_WRAP: gl.constexpr = 32,
@@ -431,8 +432,8 @@ def gemm_top_w8a8_channel_wasp_persistent(
     gl.static_assert(
         a_scale_ptr.dtype.element_ty == gl.float32 and b_scale_ptr.dtype.element_ty == gl.float32
     )
-    gl.static_assert(WAVES % PRODUCER_WAVES == 0 and (not PINGPONG or WAVES == 4))
-    gl.static_assert(PINGPONG, "BN256 requires consumer pingpong")
+    gl.static_assert(WAVES % PRODUCER_WAVES == 0)
+    gl.static_assert(not PINGPONG, "consumer ping-pong is disabled in this specialization")
     _run(
         a_ptr,
         b_ptr,
@@ -611,8 +612,6 @@ def _consume_panel(
             a = am.index(slot).load(gl.DotOperandLayout(0, MMA, 8))
         else:
             a = retained_a
-        if SLOT == 0:
-            _consumer_pingpong(sync_id, True, 4)
         hcu.abarrier_try_wait(7 + bslot, bphase)
         b = bm.index(bslot).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, MMA, 8)))
     if bm.dtype == gl.int8:
@@ -631,11 +630,6 @@ def _consume_panel(
         if not final_k:
             hcu.abarrier_arrive(4 + slot)
     hcu.sched_barrier()
-    if PARTITION == 0:
-        if SLOT == 0:
-            _consumer_pingpong(arrive_id, False, 4)
-        else:
-            _consumer_pingpong(sync_id, True, 4)
     # The last A readers already returned their slots. Read scales now so
     # their LDS latency can overlap the final panel MMAC; EB5 is released
     # only after these reads complete in the consumer epilogue.
@@ -677,8 +671,6 @@ def _consume_panel(
     hcu.sched_barrier()
     hcu.set_priority(3 - PARTITION)
     hcu.sched_barrier()
-    if PARTITION == 1 and SLOT == 0:
-        _consumer_pingpong(arrive_id, False, 4)
     if SLOT == 1:
         slot, phase = _next_a_slot(slot, phase, am.shape[0])
     b_state = _next_b_tickets(b_state, 2)

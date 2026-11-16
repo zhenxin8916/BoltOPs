@@ -21,8 +21,8 @@ User explicitly chose elapsed time for **two output tiles of each geometry**, at
 | `7820cab` | finish both final K64 MMAC groups before either epilogue |15.145996|15.036159%|99|36/9/146/146|
 | `bf26fa0` | SB register load before B EMPTY wait |15.032016|15.150170%|99|36/9/146/146|
 | `347a15a` | consumer warps M1/N4, less replicated B reading |14.873556|15.311577%|99|36/9/162/162|
-| `1d881f7` | P0 scatter with adjacent row pairs |14.832412|15.354050%|99|36/9/162/162|
-| latest (co-full-m64 evidence below) | one M64 result publication per phase |14.776256|15.412402%|115|49/9/163/163|
+| `1d881f7` | P0 scatter with adjacent row pairs |14.832412|15.354050%|99|39/9/162/162|
+| **`97cb4cc`** | one M64 result publication per phase |14.776256|15.412402%|115|49/9/163/163|
 
 The initial baseline elapsed-time reduction was **22.384729%**. The latest retained result is the last row above; later sections preserve the chronological evidence for earlier results. The stricter 60% target remains active. Historical comparator source, HSACO and toolchain are under `../gemm2-20261115/bn512-b-batch-k128-best-gc1800/`. Current compiler is LLVM fd18eddb plus clean Triton 5b24821; provenance records exact binary hashes. This is a cross-toolchain historical comparison, not an isolated single-factor experiment.
 
@@ -335,3 +335,9 @@ P1 priority2 streaming14.941944us. These pass bounded numerics but are slower,
 so neither production nor best snapshots include them. A four-adjacent-row
 P0 layout fails Gluon split-layout verification and has no timing result.
 
+
+The retained full-M64 result update is commit `97cb4cc` (14.776256us), following
+`1d881f7` (14.832412us). A further control joining both packed M32 values into
+one tensor before the LDS store measured14.958068us with zero bounded numerical
+errors; it is slower and was not retained. Native actual P0 registers at1d881f7
+are39, versus36 at347a15a; the current full-M64 version uses49 as archived.

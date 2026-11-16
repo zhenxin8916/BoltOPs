@@ -216,3 +216,41 @@ C1 startup advances0.572μs; C0 startup and C1's inter-output gap do not improve
 Native LEGACY/LIT/LIT_LTS with TN2 fail the backend's MLS element-count check; it was not bypassed. Legal TN1 variants validate numerically but take28.725740/15.138768/13.614772μs respectively. LIT TN1 emits16 static buffer_store_dwordx2 instructions versus32 packed dword stores in retained LTS, but is slower. For equal37888 valid output bytes in CU0, per-issued-instruction64/128-byte address-region references are1184/1184 versus592/592; these are address coverage counts, **not measured DRAM transactions**. Wider stores alone do not establish better throughput.
 
 Reading interleave2 B directly as ordinary LIT produces1,222,257 mismatches and is rejected; explicitly converting the native layout fails compilation. These are layout incompatibilities, not evidence of a PMD defect. A metadata-overlap variant of the retained two-slot SB version takes12.050744μs and is also rejected. Rejected source variants remain in temporary evidence, not in production code.
+
+
+## Controls after code commit `a3db31f` — 2026-11-16
+
+The retained operator remains11.999036μs. All passing controls below use identical frozen inputs, GPU addresses, launch scope and expected output hash:48 CU/1.8GHz/two independent logical BM64 N0 outputs per persistent TG. Each checks1,315,072 elements with zero errors and preserves masked output. None exceeds the retained code; no candidate source was promoted. [Launch/metrics/result/source-hash evidence](post-a3db31f-controls/summary.json).
+
+| Control | dispatch μs | whole48-CU MMAC |
+|---|---:|---:|
+| Initialize/invalidate only used abarriers |12.329300|9.236%|
+| SB wait before B MLS |12.698484|8.967%|
+| Prefetch both SB halves before left B |12.141372|9.379%|
+| Merge four row-metadata stores into one same-byte-layout store |12.074652|9.430%|
+| Merged row-metadata loads before A |12.194748|9.338%|
+| One P0 wave owns merged row-metadata publication |12.079100|9.427%|
+| One-wave interleaved row metadata and combined consumer LDS read |12.287600|9.267%|
+| WM4/WN1 native MMAC layout |12.392684|9.188%|
+| P0=A/Bleft/row metadata, P1=Bright |12.893640|8.831%|
+| Same producer redistribution plus merged row-metadata store |12.528904|9.088%|
+| Redistributed producers, A before expert descriptor acquisition |12.692924|8.971%|
+| Native MLS L1 enabled, TRITON_HCU_DISABLE_MLS_BPS=1 |12.035732|9.461%|
+| Native leading K128 panels with constant two-step consumption |12.354320|9.217%|
+| Native leading K128 panels, opaque trip-count diagnostic |12.865284|8.851%|
+| Separate SB READY; wait SB only after both B MLS groups issued |12.123024|9.393%|
+| Separate SB READY plus merged row metadata |12.282596|9.271%|
+| Explicit C0→C1 MMAC token ping-pong |12.734624|8.942%|
+
+The merged row-metadata store removes three partition ebarrier synchronizations and their LDS drains. Its C0/C1 first MMAC advances8.563/8.848→8.267/8.643μs, but the inter-output MMAC gaps grow2840/3260→3484/3544cycles. Its earlier startup therefore does not shorten total dispatch. Issued intervals include competition between waves and must not be equated to intrinsic instruction latency. Electing one P0 wave additionally removes duplicate cross-wave metadata requests/stores; READY0/12 counts change4→1 and only that wave publishes, without changing A/B reader credits. It still does not improve whole-dispatch time.
+
+Redistributing Bleft to P0 makes the producer byte counts more balanced but moves row-metadata publication onto a longer A/Bleft path. C0/C1 first MMAC becomes8.921/9.206μs in the merged-store control, later than retained. This is evidence against that redistribution as implemented, not a claim that independent B sends can never help.
+
+The K128 control allocates the K panels explicitly and has producers write the matching native layouts; it does not reinterpret full-K storage into an incompatible physical geometry. The opaque-trip-count case is a diagnostic, not a production optimization: LLVM emits192 static MMAC instructions through runtime unrolling/remainder code versus128 for the constant control. Both execute the expected1024 active MMACs per CU. Thus the experiment **did not implement a smaller math body** and does not disprove the fetch hypothesis. No opaque identity is retained in production.
+
+WM1/WN4 is rejected by native WDRA SGPR-spill checking. Capturing a computed expert scalar from the preamble is rejected by HCU WASP lowering. These have no performance result; native validation was not bypassed. Shared-descriptor reshape with mismatched layout rank also fails compilation; the passing merged-store controls use an explicit physically matching shared layout. No new PMD defect is inferred from these compiler failures.
+
+
+A final SB control adds READY9/10, issues both left/right B MLS groups before the shared scale-copy completion wait, then publishes both SB READYs. Consumers complete both B and SB LDS reads before B EMPTY, so the two-slot SB reuse proof still applies; no early EMPTY is used to hide an outstanding scale read. Its12.123024μs and merged-metadata12.282596μs do not beat retained. Explicit consumer compute tokens9/10 enforce C0→C1→C0 ordering with four arrivals per phase. Although they eliminate cross-role MMAC issue interleaving, C1 first MMAC slips8.848→9.464μs and whole dispatch rises12.734624μs. The extra four-wave rendezvous is counterproductive here. These are bounded timing/correctness controls, not full-N promotion validation.
+
+All17 passing controls are slower than `a3db31f`. The best source/perf remains unchanged; these results narrow the next work toward epilogue and fetch scheduling rather than adding producer/consumer synchronization. The requested ≤9.602μs goal remains active and unachieved.

@@ -228,7 +228,7 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
     epoch = 0
     ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
     mr = gl.arange(0, BN // 4, ml)
-    output_store: gl.constexpr = gl.BlockedLayout([1, 8], [4, 16], [4, 1], [1, 0])
+    output_store: gl.constexpr = gl.BlockedLayout([2, 8], [4, 16], [4, 1], [1, 0])
     output_rm = gl.arange(0, 32, gl.SliceLayout(1, output_store))
     output_rn = gl.arange(0, BN // 4, gl.SliceLayout(0, output_store))
     for m in range(pid, total // (N // BN), gl.num_programs(0)):

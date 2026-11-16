@@ -22,7 +22,8 @@ LDS and abarrier ownership (all 16 IDs initialized):
     A: 2 x [32,256] = 16 KiB; READY1,2 / EMPTY4,5
     B: 3 x [256,64] = 48 KiB FIFO; READY7..9 / EMPTY10..12
     A EMPTY: 4 C0 + 4 C1 waves. B EMPTY: four owning-consumer waves.
-    Metadata aliases retired A0; scales alias retired A1. EB5 protects scales
+    Routes/expert are prefetched independently by each producer into registers.
+    Scales alias retired A1. EB5 protects scales
     across outputs; FIFO slot/phase tickets continue when tile_id += grid.
 
 B always uses MLS; A uses buffer-to-LDS (or typed load/store for wide A).
@@ -258,6 +259,8 @@ def _produce_a_and_scales(
     A,
     SA,
     SB,
+    Routes,
+    Experts,
     am,
     meta_mem,
     scales,
@@ -280,6 +283,7 @@ def _produce_a_and_scales(
     BM: gl.constexpr = 32
     BK: gl.constexpr = 256
     layout: gl.constexpr = gl.BlockedLayout([1], [64], [4], [0])
+    al: gl.constexpr = gl.BlockedLayout([1, 4 if USE_A64 else 16], [4, 16], [4, 1], [1, 0])
     if num_tokens_post_padded_ptr is not None:
         padded_rows = gl.load(num_tokens_post_padded_ptr)
         total = gl.minimum(total, gl.cdiv(padded_rows, 32) * gl.cdiv(N, BN))
@@ -292,6 +296,11 @@ def _produce_a_and_scales(
         is_pure=False,
         pack=1,
     )
+    if GROUP_SIZE_M == 1:
+        first_output = gl.program_id(0) + TILE_ID
+        first_row = first_output // gl.cdiv(N, BN)
+        seed_routes = gl.load(Routes + first_row * BM + gl.arange(0, BM, gl.SliceLayout(1, al)), first_output < total, other=0)
+        seed_expert = gl.load(Experts + first_row + gl.arange(0, 1, layout), first_output < total, other=-1)
     phase, iteration = (0, 0)
     for output in range(
         gl.program_id(0) + TILE_ID,
@@ -302,13 +311,13 @@ def _produce_a_and_scales(
             output, gl.cdiv(total, gl.cdiv(N, BN)), gl.cdiv(N, BN), GROUP_SIZE_M
         )
         bank = iteration & 1
-        metadata = meta_mem.index(bank)
-        hcu.ebarrier_sync(1, 8)
-        expert = gl.sum(metadata.slice(BM, 1).load(layout), 0)
+        if GROUP_SIZE_M != 1:
+            seed_routes = gl.load(Routes + row * BM + gl.arange(0, BM, gl.SliceLayout(1, al)))
+            seed_expert = gl.load(Experts + row + gl.arange(0, 1, layout))
+        expert = gl.sum(seed_expert, 0)
         safe = gl.maximum(0, gl.minimum(expert, E - 1))
         hcu.set_priority(1)
-        al: gl.constexpr = gl.BlockedLayout([1, 4 if USE_A64 else 16], [4, 16], [4, 1], [1, 0])
-        routes = metadata.slice(0, BM).load(gl.SliceLayout(1, al)).to(gl.uint32) & 16777215
+        routes = seed_routes.to(gl.uint32) & 16777215
         valid = (routes < M) & (expert >= 0) & (expert < E)
         width: gl.constexpr = BK // 4 if USE_A64 else BK
         vec: gl.constexpr = 4 if USE_A64 else 16
@@ -319,8 +328,13 @@ def _produce_a_and_scales(
             routes.to(gl.int64)[:, None] * (K // 4) if USE_A64 else routes[:, None] * K
         ) + logical_k
         mask = valid[:, None] & gl.full((BM, width), True, gl.int1, al)
-        scale_routes = metadata.slice(0, BM).load(layout).to(gl.uint32) & 16777215
+        scale_routes = seed_routes.to(gl.uint32) & 16777215
         _load_a_tile(am, A, 0, 0, phase, offsets, mask, USE_A64)
+        if GROUP_SIZE_M == 1:
+            next_output = output + (PERSISTENT_GRID if PERSISTENT_GRID > 0 else gl.num_programs(0))
+            next_row = next_output // gl.cdiv(N, BN)
+            seed_routes = gl.load(Routes + next_row * BM + gl.arange(0, BM, gl.SliceLayout(1, al)), next_output < total, other=0)
+            seed_expert = gl.load(Experts + next_row + gl.arange(0, 1, layout), next_output < total, other=-1)
         rn = col * BN + gl.arange(0, BN, layout)
         sa = gl.load(SA + scale_routes.to(gl.int64) * stride_asm, scale_routes < M, other=0)
         sb = gl.load(
@@ -396,7 +410,7 @@ def gemm_top_w8a8_channel_wasp_persistent(
     """Run BM32/BN256/BK256 using two N64 panels per consumer.
 
     TOTAL_TILES is a capacity bound narrowed by the optional GPU counter.
-    Metadata and channel scales alias the two retired A slots.
+    Each producer reads its own metadata; channel scales alias retired A1.
     """
     partition_regs: gl.constexpr = (16, 16, 80, 80) if PARTITION_REGS is None else PARTITION_REGS
     gl.static_assert(M == 128, "this standalone specialization covers M128 only")
@@ -479,7 +493,7 @@ def _produce_b_and_routes(
     num_tokens_post_padded_ptr=None,
     PERSISTENT_GRID: gl.constexpr = 0,
 ):
-    """P0: publish CK routes/expert, then stream four N64 B panels per K256."""
+    """P0: prefetch expert and stream four N64 B panels per K256."""
     BM: gl.constexpr = 32
     BK: gl.constexpr = 256
     layout: gl.constexpr = gl.BlockedLayout([1], [64], [4], [0])
@@ -516,17 +530,12 @@ def _produce_b_and_routes(
         )
         bank = iteration & 1
         metadata = meta_mem.index(bank)
-        hcu.abarrier_try_wait(4, iteration * (K // BK) // 2 & 1)
         if GROUP_SIZE_M == 1:
             routes, expert = (seed_routes, seed_expert)
         else:
             routes = gl.load(Routes + row * BM + gl.arange(0, BM, layout))
             expert = gl.load(Experts + row + gl.arange(0, 1, layout))
-        metadata.slice(0, BM).store(routes)
-        metadata.slice(BM, 1).store(expert)
-        hcu.wait_lgkmcnt(0)
-        hcu.ebarrier_arrive(1, 8)
-        expert = gl.sum(metadata.slice(BM, 1).load(layout), 0)
+        expert = gl.sum(expert, 0)
         safe = gl.maximum(0, gl.minimum(expert, E - 1))
         hcu.set_priority(1)
         base = B + safe.to(gl.int64) * N * K + (col * BN).to(gl.int64) * K
@@ -864,7 +873,7 @@ def _run(
     )
     am = gl.allocate_shared_memory(storage_dtype, [A_STAGES, BM, BK], al)
     bm = gl.allocate_shared_memory(B.dtype.element_ty, [3, BK, 64], bl)
-    # No extra LDS allocation: metadata in retired A0, scales in retired A1.
+    # Channel scales use retired A1; routes/expert remain in producer registers.
     meta = am.index(0)._reinterpret(gl.int32, [2, 128], sl)
     scales = am.index(1)._reinterpret(gl.float32, [2, 1024], sl)
     flat_am = am._reinterpret(
@@ -900,6 +909,8 @@ def _run(
                     A,
                     SA,
                     SB,
+                    Routes,
+                    Experts,
                     flat_am,
                     meta,
                     scales,

@@ -1,0 +1,71 @@
+{
+  "source_commit": "86d3db712f51feb53101d03364019f2ca8bbd874",
+  "source_sha256": "b38aa13948d25b541ec198301187ad6d9a1eecac6ec9c7359925f0c38e84311e",
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "triton_tracked_changes": "",
+  "llvm_commit": "89bee503d8e9d0bdcfbb4d97e204d5e346f02550",
+  "llvm_tracked_changes": "",
+  "clang_sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+  "lld_sha256": "0700bdbe96890128fc9dc20dbdd20d89277a3b34a057d7e2be0e1270c484a395",
+  "clang_wrapper": "#!/bin/sh\nexec /zhenxin/temp/bm64-gemm1-port-20261116/clang-frozen -mllvm -hcu-control-only-ebarrier-sync \"$@\"\n",
+  "frozen_input_sha256": "eb2b2bbd6e3ec3e68f4e01cdae618e55a0f9d0c7b55ec07cab1e6a24bc561a02",
+  "frozen_input_path": "/home/zhenx/temp/bm64-gemm1-port-20261116/frozen_inputs.pt",
+  "model": "PMD b61a79c5/CoreArch1769",
+  "frequency_results": {
+    "1800": {
+      "time_us": 69.284272,
+      "cu0_mmac_total_pct": 28.507549010298423,
+      "hot_math_mmac_pct": 31.870182437025356,
+      "math_only_cu0_pct": 28.286560258280605,
+      "kernel_text_sha256": "d0a9244a7a36fef12caaaccb5002c77c13ae20d6d3b64b8a40998de7c7d5838b",
+      "hsaco_sha256": "a4227b225460ff674711e99b66753a1a6704f608bab2016674ce66149181e3c8",
+      "input_sha256": {
+        "A": "f65dd55aa086a71c722f867ebdff27a03205a8819f3da2515dd3e56b9e80b01a",
+        "B": "5a641423c62e0a87b93f137287bd61b6b6dc34a71e34ec3e98bfec1380eea72f",
+        "SA": "bfa5491457bbec1b5741c8fa1a35168bf1e9eb3ea6fdd494a20b56bf52a79e2a",
+        "SB": "e247cb0ea92a474f510cbd79a64eb15f346cb656e1a8ba5085bc4f9aeadf5ff9",
+        "Sorted": "2c677469ccf139c8794d1753d31d919b19c705529e2469949d8309d2265c94d1",
+        "Experts": "8808405eec6fbe306fe3369f88daed79dd5613ddbb5e801f632b01d6218c5f08",
+        "RouteWeights": "d08188435e7b677257b51d92ce43c0edad52141bd249a45a4d7e2afa875e2d48",
+        "SortedWeights": "2c713002acc817e31e13e46adf51529cbd41d8513c10127e17801359673c3dbe"
+      }
+    },
+    "1500": {
+      "time_us": 71.671816,
+      "cu0_mmac_total_pct": 33.70208596971057,
+      "hot_math_mmac_pct": 38.10429269813221,
+      "math_only_cu0_pct": 33.440829489325225,
+      "kernel_text_sha256": "d0a9244a7a36fef12caaaccb5002c77c13ae20d6d3b64b8a40998de7c7d5838b",
+      "hsaco_sha256": "2e2ed8076bc7dc44bcdc7066ead6f1533ebe95d068ac02a2cda4d34577bcc386",
+      "input_sha256": {
+        "A": "f65dd55aa086a71c722f867ebdff27a03205a8819f3da2515dd3e56b9e80b01a",
+        "B": "5a641423c62e0a87b93f137287bd61b6b6dc34a71e34ec3e98bfec1380eea72f",
+        "SA": "bfa5491457bbec1b5741c8fa1a35168bf1e9eb3ea6fdd494a20b56bf52a79e2a",
+        "SB": "e247cb0ea92a474f510cbd79a64eb15f346cb656e1a8ba5085bc4f9aeadf5ff9",
+        "Sorted": "2c677469ccf139c8794d1753d31d919b19c705529e2469949d8309d2265c94d1",
+        "Experts": "8808405eec6fbe306fe3369f88daed79dd5613ddbb5e801f632b01d6218c5f08",
+        "RouteWeights": "d08188435e7b677257b51d92ce43c0edad52141bd249a45a4d7e2afa875e2d48",
+        "SortedWeights": "2c713002acc817e31e13e46adf51529cbd41d8513c10127e17801359673c3dbe"
+      }
+    },
+    "2200": {
+      "time_us": 67.961984,
+      "cu0_mmac_total_pct": 23.76665155342531,
+      "hot_math_mmac_pct": 26.281241258185062,
+      "math_only_cu0_pct": 23.582413944484028,
+      "kernel_text_sha256": "d0a9244a7a36fef12caaaccb5002c77c13ae20d6d3b64b8a40998de7c7d5838b",
+      "hsaco_sha256": "dd8209eee33874d75f80162b97c53793ae162be38ce79c9e6f799cf03526acc9",
+      "input_sha256": {
+        "A": "f65dd55aa086a71c722f867ebdff27a03205a8819f3da2515dd3e56b9e80b01a",
+        "B": "5a641423c62e0a87b93f137287bd61b6b6dc34a71e34ec3e98bfec1380eea72f",
+        "SA": "bfa5491457bbec1b5741c8fa1a35168bf1e9eb3ea6fdd494a20b56bf52a79e2a",
+        "SB": "e247cb0ea92a474f510cbd79a64eb15f346cb656e1a8ba5085bc4f9aeadf5ff9",
+        "Sorted": "2c677469ccf139c8794d1753d31d919b19c705529e2469949d8309d2265c94d1",
+        "Experts": "8808405eec6fbe306fe3369f88daed79dd5613ddbb5e801f632b01d6218c5f08",
+        "RouteWeights": "d08188435e7b677257b51d92ce43c0edad52141bd249a45a4d7e2afa875e2d48",
+        "SortedWeights": "2c713002acc817e31e13e46adf51529cbd41d8513c10127e17801359673c3dbe"
+      }
+    }
+  },
+  "libtriton_sha256": "49ae398b737f663ebe5dd369b66edc453f6de5a1a1a22156f4faf48e4941efe4"
+}

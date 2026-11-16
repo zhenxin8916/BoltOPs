@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """Maintain normalized Gluon GEMM1/GEMM2 experiment CSVs (default GC 1.8 GHz).
 
-These diagnostic dispatches are not full-MoE timings. BM128 and
-BN512/256/128 x 2/4/8 outputs per persistent TG give equal padded output work.
+These diagnostic dispatches are not full-MoE timings. BM128 uses
+BN512/256/128 x 2/4/8 outputs per TG; BM64 uses two tiles per TG at M1024.
 Publish a validated record with --stage top|bottom --record record.json.
 """
 import argparse
@@ -57,13 +57,22 @@ def upsert_record(stage, record, directory=CONFIG_DIR):
             raise ValueError(f"missing experiment field: {key}")
     if record.get("mismatches") != 0 or not record.get("verified"):
         raise ValueError("only verified, numerically correct runs may be published")
-    if int(row["bm"]) != 128 or int(row["tiles_per_tg"]) != tiles_per_tg(int(row["bn"])):
-        raise ValueError("expected BM128 and BN512/256/128 x 2/4/8 tiles per TG")
+    bm, bn = int(row["bm"]), int(row["bn"])
+    if bm == 64:
+        expected_tiles, expected_scope = 2, "bounded_two_tiles_per_tg"
+        if int(row["token"]) != 1024 or bn not in (256, 512):
+            raise ValueError("BM64 measurements use M1024 and BN256/512")
+    elif bm == 128:
+        expected_tiles, expected_scope = tiles_per_tg(bn), "bounded_equal_padded_output_work"
+    else:
+        raise ValueError("BM must be 64 or 128")
+    if int(row["tiles_per_tg"]) != expected_tiles:
+        raise ValueError("unexpected number of output tiles per TG")
     if int(row["total_tiles"]) != int(row["cu_count"]) * int(row["tiles_per_tg"]):
         raise ValueError("total_tiles must give each CU one TG with equal work")
-    if int(row["output_elements_per_tg"]) != 128 * 1024:
+    if int(row["output_elements_per_tg"]) != bm * bn * expected_tiles:
         raise ValueError("unequal padded output work per TG")
-    if row["time_scope"] != "full_dispatch" or row["work_scope"] != "bounded_equal_padded_output_work":
+    if row["time_scope"] != "full_dispatch" or row["work_scope"] != expected_scope:
         raise ValueError("expected an explicitly labelled diagnostic dispatch")
     for key in ("time_us", "wave_span_time_us", "gc_ghz", "effective_gc_ghz"):
         value=float(row[key])

@@ -1,0 +1,39 @@
+{
+  "source_commit": "98a1e1e",
+  "all_jit_and_layout_functions_ast_equal": true,
+  "current_source_sha256": "e74c69a46964d070b68642e74dce315603140c47f5d4aa212d43e7c4a535cbc0",
+  "support_query_change": "Reject GROUP_SIZE_M != 1 to match existing entry static_assert",
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "llvm_commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "compiler_replacement_audit": {
+    "artifacts": [
+      {
+        "path": "/home/zhenx/temp/bm64-gemm2-bn512-port-20261116/fp8-gc1500/gemm/kernel.hsaco",
+        "mtime_utc": "2026-11-16T07:37:23.456905+00:00",
+        "sha256": "bdb0e99c620d548d304baf6ec266697806bc5efccaf1a3b5d0df434f0348fd7b"
+      },
+      {
+        "path": "/home/zhenx/temp/bm64-gemm2-bn512-port-20261116/fp8-gc1800/gemm/kernel.hsaco",
+        "mtime_utc": "2026-11-16T07:35:05.784912+00:00",
+        "sha256": "fa2e284c0deaea8c5d150de1ce2dbe49c7150813c2b5adc7b295709e2896a1e8"
+      },
+      {
+        "path": "/home/zhenx/temp/bm64-gemm2-bn512-port-20261116/fp8-gc2200/gemm/kernel.hsaco",
+        "mtime_utc": "2026-11-16T07:36:16.064909+00:00",
+        "sha256": "c40da8df581828435d745e9f0f6f82063b62a177ae3dc517cfdc6a722bdc990c"
+      },
+      {
+        "path": "/home/zhenx/temp/bm64-gemm2-bn512-port-20261116/int8-gc1800/gemm/kernel.hsaco",
+        "mtime_utc": "2026-11-16T07:38:23.988903+00:00",
+        "sha256": "302c9ce6f61ec5ece1e27543a6846ac40e0a9e7c57124649bceb3d0e1cfcb56d"
+      }
+    ],
+    "clang_rebuilt_mtime_utc": "2026-11-16T07:43:45.304888+00:00",
+    "replacement_llvm_commit": "89bee503d8e9d0bdcfbb4d97e204d5e346f02550",
+    "replacement_commit_time_utc": "2026-11-16T07:45:54+00:00",
+    "all_four_benchmark_objects_precede_clang_rebuild": true,
+    "old_clang_binary_sha256": null,
+    "old_clang_binary_sha256_note": "Not captured at compilation. Do not attribute the later rebuilt clang hash to these older measurements.",
+    "replacement_current_clang_sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add"
+  }
+}

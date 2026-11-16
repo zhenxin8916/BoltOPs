@@ -1,0 +1,91 @@
+{
+  "case": {
+    "M": 1024,
+    "E": 16,
+    "N": 256,
+    "K": 2048,
+    "topk": 8
+  },
+  "kind": "fp8",
+  "grid": 48,
+  "bm": 64,
+  "bn": 256,
+  "bk": 256,
+  "cu_count": 48,
+  "tiles_per_tg": 2,
+  "total_tiles": 96,
+  "output_elements_per_tg": 32768,
+  "kernel_total_tiles_argument": 768,
+  "N_TILES_LIMIT": 1,
+  "input_sha256": {
+    "A": "9adc5584745c8d0cc1e8656a0ac7c5735382a748d81625b756a6e1cace4ea75a",
+    "B": "01bc2b39d6ced1b49b4457a040a31d6199ef166f8c4a2794dcdf2690e1e8ce5c",
+    "SA": "d631c602b63e740ac5dd918aba9c60b9d504a14d3d3c0c484c0a1be3478914c3",
+    "SB": "6624a7e87474b2be6fd153ec5690b18bf558b38a0d249a59f40fcc6e0e6595bd",
+    "Sorted": "fae45fdab7ba8a8a212730582afd66399946e6ea15369533bb45432f630f4f1f",
+    "Experts": "5d41da4a4c175f7cec8e2eb40c5c92020e82ccb3526d9c5ce0835a995a6f287a",
+    "RouteWeights": "6fb376087ad5c153f855be1827fc1db949450bf0eeece9827ac3c19138d0afc8",
+    "SortedWeights": "fc2d61b07acd41b20a8fd582aec76a90f4d4071eb736905b6116b36d71c8d451",
+    "golden": "92f82acc8c3e26938aca8d57b320070289b1a7275427bf13fd5ce7c549900f75",
+    "selected_rows": "cef76502c2195faf32cb1b16740b067dd6014590b5cc20fe681d94b06d764c9b"
+  },
+  "options": {
+    "num_warps": 4,
+    "num_stages": 2,
+    "use_async_copy": true,
+    "wasp_partition_warps": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "wasp_wdra": true,
+    "N": 2048,
+    "K": 256,
+    "top_k": 8,
+    "BLOCK_SIZE_M": 64,
+    "BLOCK_SIZE_N": 256,
+    "BLOCK_SIZE_K": 256,
+    "CK_SORTING": true,
+    "N_TILES_LIMIT": 1
+  },
+  "source_sha256": "d6cc1e599cca59568609511977f8f4227862ff647eb6e1c1fafae35c6d66e48a",
+  "gpu_buffers": {
+    "A": {
+      "address": 140728596430848,
+      "bytes": 2260992
+    },
+    "B": {
+      "address": 140728598691840,
+      "bytes": 8388608
+    },
+    "SA": {
+      "address": 140728571265024,
+      "bytes": 35328
+    },
+    "SB": {
+      "address": 140728571300352,
+      "bytes": 131072
+    },
+    "Sorted": {
+      "address": 140728571431424,
+      "bytes": 35328
+    },
+    "Experts": {
+      "address": 140728571466752,
+      "bytes": 552
+    },
+    "RouteWeights": {
+      "address": 140728571467776,
+      "bytes": 32768
+    },
+    "SortedWeights": {
+      "address": 140728571500544,
+      "bytes": 35328
+    },
+    "C": {
+      "address": 140728495767552,
+      "bytes": 33554432
+    }
+  }
+}

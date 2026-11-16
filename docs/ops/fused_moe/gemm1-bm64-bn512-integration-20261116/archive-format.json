@@ -1,0 +1,50 @@
+[
+  {
+    "archive": "final-equivalence/run.log.gz",
+    "uncompressed_sha256": "d2484c2be4b518b439edd0ea4935c5f3cdc0567602712c1cab634fa8fb23031f"
+  },
+  {
+    "archive": "framework-equivalence/run.log.gz",
+    "uncompressed_sha256": "082023e7615ac4ae624967bb97afbff6ab27deda05f5c4002a917bbdf4a5d19f"
+  },
+  {
+    "archive": "gc1500/kernel.amdgcn.gz",
+    "uncompressed_sha256": "112ec7f656f76f516b732f5b3cd0ce87900a6b14c6f21b83504d4d8ecb96c051"
+  },
+  {
+    "archive": "gc1500/kernel.llir.gz",
+    "uncompressed_sha256": "757a62697d76ad8db5d5fbb50e1a58154b97cbef776e0e8e05f8d976ce320081"
+  },
+  {
+    "archive": "gc1500/run.log.gz",
+    "uncompressed_sha256": "ac39289d318ce9ae82c226fcf55e530009468531e7cfc97622a39dadb69a9670"
+  },
+  {
+    "archive": "gc1800/kernel.amdgcn.gz",
+    "uncompressed_sha256": "112ec7f656f76f516b732f5b3cd0ce87900a6b14c6f21b83504d4d8ecb96c051"
+  },
+  {
+    "archive": "gc1800/kernel.llir.gz",
+    "uncompressed_sha256": "757a62697d76ad8db5d5fbb50e1a58154b97cbef776e0e8e05f8d976ce320081"
+  },
+  {
+    "archive": "gc1800/run.log.gz",
+    "uncompressed_sha256": "4f6941e7cc5cbdbb2a64546f07b0894c29722fd5cb30dcc197ab269bcd77a5d6"
+  },
+  {
+    "archive": "gc2200/kernel.amdgcn.gz",
+    "uncompressed_sha256": "112ec7f656f76f516b732f5b3cd0ce87900a6b14c6f21b83504d4d8ecb96c051"
+  },
+  {
+    "archive": "gc2200/kernel.llir.gz",
+    "uncompressed_sha256": "757a62697d76ad8db5d5fbb50e1a58154b97cbef776e0e8e05f8d976ce320081"
+  },
+  {
+    "archive": "gc2200/run.log.gz",
+    "uncompressed_sha256": "e96439b543e562f0c52eb5861d37936569e929de27e38a6df2e9fcd034a21eab"
+  },
+  {
+    "archive": "source-compiler-regression/original-86d3db7-compile.log.gz",
+    "uncompressed_sha256": "25c8352b2713534ee03130dec7b38342aeb405f3be11e047f6fcf1cf54038d72"
+  }
+]

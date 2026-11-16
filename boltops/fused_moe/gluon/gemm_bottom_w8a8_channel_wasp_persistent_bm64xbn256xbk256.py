@@ -4,7 +4,7 @@
 
 CK-sorted contiguous byte A/B; FP32 channel scales; BF16/FP16 scatter output,
 before the top-k reduction. Requires K256 and N divisible by 256.
-Four waves per role. This standalone specialization is not framework-selected.
+Four waves per role; a CPU metadata query selects this specialization.
 
 Roles and data flow:
     P0: A + SA/weight/routes -> C0/C1, alternating two full-A slots
@@ -175,8 +175,17 @@ KH is retained in this private helper signature but callers always pass zero.
         ml: gl.constexpr = gl.BlockedLayout([4],[64],[4],[0])
         mr = gl.arange(0,BN//2,ml)
         col = n*BN+HALF*(BN//2)+mr
-        async_copy.buffer_load_to_shared(mb.index((epoch&1)*2+HALF),SB,(gl.maximum(expert,0)*STRIDE_SBE+col*STRIDE_SBN).to(gl.uint32))
-        async_copy.commit_group()
+        if USE_B64:
+            # Keep scale offsets local to the panel, like the B descriptor.
+            sb_base = (SB + gl.maximum(expert, 0).to(gl.int64) * STRIDE_SBE
+                       + (n.to(gl.int64) * BN + HALF * (BN // 2)) * STRIDE_SBN)
+            mb.index((epoch & 1) * 2 + HALF).store(
+                gl.load(sb_base + mr.to(gl.int64) * STRIDE_SBN))
+        else:
+            sb_base = SB
+            sb_offsets = (gl.maximum(expert, 0) * STRIDE_SBE + col * STRIDE_SBN).to(gl.uint32)
+            async_copy.buffer_load_to_shared(mb.index((epoch&1)*2+HALF), sb_base, sb_offsets)
+            async_copy.commit_group()
     hcu.abarrier_try_wait(empty, phase)
     hcu.abarrier_seq(ready)
     if USE_B64:
@@ -187,7 +196,10 @@ KH is retained in this private helper signature but callers always pass zero.
     else:
         hcu.matrix_load(dest.index(physical), b_base, (K, N), (1, K),
                         (0, n * BN + HALF * (BN // 2)), warps=(1, 4))
-    async_copy.wait_group(0)
+    if USE_B64:
+        hcu.wait_lgkmcnt(0)
+    else:
+        async_copy.wait_group(0)
     hcu.abarrier_arrive(ready)
 
 
@@ -238,7 +250,8 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
 @gluon.jit
 def _scale_store_rows(acc, sa, sb, weight, route, expert, C, n, valid_routes,
                       N:gl.constexpr, BN:gl.constexpr, CN:gl.constexpr,
-                      PARTITION:gl.constexpr, TOP_K:gl.constexpr, CK_SORTING:gl.constexpr):
+                      PARTITION:gl.constexpr, TOP_K:gl.constexpr, CK_SORTING:gl.constexpr,
+                      USE_C64:gl.constexpr):
     """Scale one [M32,N128] register panel and scatter directly to routed C.
 
         acc -> ((acc * SA) * SB) * weight -> pack adjacent 16-bit values -> store
@@ -255,9 +268,14 @@ def _scale_store_rows(acc, sa, sb, weight, route, expert, C, n, valid_routes,
     out_route = gl.convert_layout(route,gl.SliceLayout(1,packing))
     out_expert = gl.convert_layout(expert,gl.SliceLayout(1,packing))
     rn = gl.arange(0,CN,gl.SliceLayout(0,packing))
-    offsets = out_route.to(gl.uint32)[:,None]*N+n*BN+PARTITION*CN+rn[None,:]
-    valid = (out_route>=0)&(out_route<valid_routes)&(out_expert>=0)
-    buffer_store(packed,C,offsets,valid[:,None])
+    valid = (out_route >= 0) & (out_route < valid_routes) & (out_expert >= 0)
+    if USE_C64:
+        offsets = (out_route.to(gl.int64)[:, None] * N + n.to(gl.int64) * BN
+                   + PARTITION * CN + rn[None, :].to(gl.int64))
+        gl.store(C + offsets, packed, valid[:, None])
+    else:
+        offsets = out_route.to(gl.uint32)[:, None] * N + n * BN + PARTITION * CN + rn[None, :]
+        buffer_store(packed, C, offsets, valid[:, None])
 
 
 @gluon.constexpr_function
@@ -318,7 +336,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
               BM: gl.constexpr, BN: gl.constexpr, BK: gl.constexpr,
               STAGES: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
               CK_SORTING: gl.constexpr, PARTITION: gl.constexpr, N_TILES: gl.constexpr,
-              num_tokens_post_padded_ptr, INSN_WARMUP: gl.constexpr = False):
+              USE_C64: gl.constexpr, num_tokens_post_padded_ptr, INSN_WARMUP: gl.constexpr = False):
     """Retain A across N, compute full K256, and scatter a 64x128 half.
 
 First N: issue A/B/SB and metadata reads; wait once before returning
@@ -380,9 +398,9 @@ or global scale/route load is needed in either consumer.
             w0,w1 = gl.split(gl.permute(gl.reshape(weight,(2,32)),(1,0)))
             r0,r1 = gl.split(gl.permute(gl.reshape(route,(2,32)),(1,0)))
             e0,e1 = gl.split(gl.permute(gl.reshape(expert,(2,32)),(1,0)))
-            _scale_store_rows(x0,sa0,current_sb,w0,r0,e0,C,n,valid_routes,N,BN,CN,PARTITION,TOP_K,CK_SORTING)
+            _scale_store_rows(x0,sa0,current_sb,w0,r0,e0,C,n,valid_routes,N,BN,CN,PARTITION,TOP_K,CK_SORTING,USE_C64)
             hcu.sched_barrier()
-            _scale_store_rows(x1,sa1,current_sb,w1,r1,e1,C,n,valid_routes,N,BN,CN,PARTITION,TOP_K,CK_SORTING)
+            _scale_store_rows(x1,sa1,current_sb,w1,r1,e1,C,n,valid_routes,N,BN,CN,PARTITION,TOP_K,CK_SORTING,USE_C64)
             b_epoch += 1
         a_epoch += 1
 
@@ -409,11 +427,10 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
 TOTAL_TILES = M blocks * (N/256). Each physical persistent TG traverses
 M += grid; a two-output diagnostic uses 96 M blocks and grid 48.
 C is route-major output before top-k reduction. SortedWeights is supplied
-when routed-weight multiplication is enabled. C64 is not implemented here.
+when routed-weight multiplication is enabled. A/B/C wide addressing is constexpr.
 """
     gl.static_assert(BLOCK_SIZE_M == 64 and BLOCK_SIZE_N == 256 and BLOCK_SIZE_K == 256)
     gl.static_assert(K == 256 and N % 256 == 0 and N > 0)
-    gl.static_assert(not USE_ADDR_OFFSET_INT64_C, "C64 scatter is not implemented in this standalone kernel")
     STRIDE_SA: gl.constexpr = stride_asm
     STRIDE_SBE: gl.constexpr = N if stride_bse is None else stride_bse
     STRIDE_SBN: gl.constexpr = stride_bsn
@@ -463,13 +480,47 @@ when routed-weight multiplication is enabled. C64 is not implemented here.
         (_consumer, (
             C, SA, SB, Weights, Sorted, Experts, am, b0, co0, ma, mb, pid, TOTAL_TILES,
             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
-            GROUP_SIZE_M, CK_SORTING, 0, N_TILES, num_tokens_post_padded_ptr, INSN_WARMUP)),
+            GROUP_SIZE_M, CK_SORTING, 0, N_TILES, USE_ADDR_OFFSET_INT64_C, num_tokens_post_padded_ptr, INSN_WARMUP)),
         (_consumer, (
             C, SA, SB, Weights, Sorted, Experts, am, b1, co1, ma, mb, pid, TOTAL_TILES,
             num_sorted_rows, num_valid_routes, N, K, top_k, BM, BN, BK, STAGES,
-            GROUP_SIZE_M, CK_SORTING, 1, N_TILES, num_tokens_post_padded_ptr, INSN_WARMUP)),
+            GROUP_SIZE_M, CK_SORTING, 1, N_TILES, USE_ADDR_OFFSET_INT64_C, num_tokens_post_padded_ptr, INSN_WARMUP)),
     ], [4, 4, 4, 4], regs)
     for barrier in gl.static_range(16):
         hcu.abarrier_invalidate(barrier)
 
 
+
+
+def is_persistent_channel_gemm2_supported(a, b, a_scale, b_scale, *, arch, cu_count,
+                                        top_k, config, c_sorted=False, a_sorted=True,
+                                        ck_sorting=True, output_dtype=None,
+                                        scale_recipe="fp8_channel", has_bias=False,
+                                        mul_routed_weight=True):
+    """CPU metadata query for the BM64/BN256/K256 pipeline; otherwise use Triton.
+
+    Only BM is part of the sorting contract. This candidate selects its own
+    BN256/BK256, launch options and row-persistent traversal. The caller checks
+    tensor devices, CK metadata and sorted routed weights before dispatch.
+    """
+    import torch
+    if arch != "gfx946" or type(cu_count) is not int or cu_count <= 0:
+        return False
+    if c_sorted or not a_sorted or not ck_sorting or has_bias:
+        return False
+    fp8 = (torch.float8_e4m3fn, torch.float8_e5m2)
+    inputs = ((a.dtype in fp8 and b.dtype in fp8 and scale_recipe == "fp8_channel")
+              or (a.dtype == b.dtype == torch.int8 and scale_recipe == "int8_channel"))
+    if not inputs or a_scale.dtype != torch.float32 or b_scale.dtype != torch.float32:
+        return False
+    if output_dtype is not None and output_dtype not in (torch.bfloat16, torch.float16):
+        return False
+    if a.ndim != 2 or b.ndim != 3 or not a.is_contiguous() or not b.is_contiguous():
+        return False
+    rows, k = a.shape
+    experts, n, bk = b.shape
+    if min(rows, experts, n) <= 0 or k != 256 or bk != k or n % 256 or not 0 < top_k <= 256:
+        return False
+    if a_scale.shape not in ((rows,), (rows, 1)) or b_scale.shape not in ((experts, n), (experts, n, 1)):
+        return False
+    return config.get("BLOCK_SIZE_M") == 64 and config.get("GROUP_SIZE_M", 1) == 1

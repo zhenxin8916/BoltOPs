@@ -13,8 +13,8 @@ Roles and data flow:
 
 Persistent traversal (arrows show issue order, not completion):
     P0 startup: load A(M0) + metadata(M0).
-    P0 each M: prefetch next-M A/metadata into registers -> drain first N phase
-               -> publish next-M metadata -> drain remaining output panels.
+    P0 each M: wait A EMPTY -> load next A into LDS; hold its metadata in registers
+               -> drain first N phase -> publish next metadata -> drain outputs.
     P1 each N128 phase: full-K B-left -> full-K B-right.
     C0/C1, first phase: read A -> read full-K B/SB -> LDS wait -> release A/B.
     Every phase: split K256 into four BK64 register views -> MMAC all K
@@ -224,7 +224,7 @@ def _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch,
 
 @gluon.jit
 def _row_vectors(x):
-    """Split [64] metadata into two [32] register views matching C mailboxes."""
+    """Split [64] row scales/weights into two [32] views matching the M32 accumulators."""
     parts = gl.split(x.reshape((2, 32)).permute((1, 0)))
     return parts[0], parts[1]
 
@@ -609,4 +609,4 @@ def is_persistent_channel_gemm2_supported(a, b, a_scale, b_scale, *, arch, cu_co
         return False
     if a_scale.shape not in ((rows,), (rows, 1)) or b_scale.shape not in ((experts, n), (experts, n, 1)):
         return False
-    return config.get("BLOCK_SIZE_M") == 64
+    return config.get("BLOCK_SIZE_M") == 64 and config.get("GROUP_SIZE_M", 1) == 1

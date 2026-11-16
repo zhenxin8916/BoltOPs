@@ -1,0 +1,23 @@
+{
+  "fp8": {
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0,
+    "scratch_instructions": 0,
+    "hsaco_sha256": "5ede9caed590b590da9ca1004040be6191447aa3f356d9d08c4d9289831eca05"
+  },
+  "int8": {
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0,
+    "scratch_instructions": 0,
+    "hsaco_sha256": "e20d6c6eba82ac67957218beba35fdbdadda6fb3e8abf30cdc772a72a5833371"
+  },
+  "fp8-wide-fp16": {
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0,
+    "scratch_instructions": 0,
+    "hsaco_sha256": "597d92e4ded6ab1dba94ade6c3b12ab03c215cf69b091be70ccfd6473ad46934"
+  }
+}

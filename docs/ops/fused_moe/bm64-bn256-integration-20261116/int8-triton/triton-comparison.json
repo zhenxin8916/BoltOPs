@@ -1,0 +1,10 @@
+{
+  "mismatches": 0,
+  "bitwise_unequal": 0,
+  "rtol": 0.02,
+  "atol": 0.002,
+  "checked_elements": 197632,
+  "kind": "int8",
+  "wide": false,
+  "fp16": false
+}

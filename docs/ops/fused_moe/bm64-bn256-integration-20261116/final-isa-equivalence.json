@@ -1,0 +1,35 @@
+{
+  "e256-fp8-gc2200": {
+    "text_sha256": "52c3b17c0bc556ef7572680c67f3a4a58a585eb2a2691b30b60e841e3400ce5c",
+    "hsaco_sha256": "975064ddbba478c304e5c3ca56d0090cb3b30e58cfe4b6ee39dc5b65a3def510",
+    "text_bytes": 6364,
+    "hsaco_mtime_ns": 1794814884676894536
+  },
+  "e256-fp8-gc1800": {
+    "text_sha256": "52c3b17c0bc556ef7572680c67f3a4a58a585eb2a2691b30b60e841e3400ce5c",
+    "hsaco_sha256": "6c59a2f402212fbbcfc4ae5e0075a812d1d1951592c78254f5979687694aa175",
+    "text_bytes": 6364,
+    "hsaco_mtime_ns": 1794814883532894587
+  },
+  "e256-fp8-gc1500": {
+    "text_sha256": "52c3b17c0bc556ef7572680c67f3a4a58a585eb2a2691b30b60e841e3400ce5c",
+    "hsaco_sha256": "d93e9bbd5b111a0a6110a62443b1929f5f05130f64400805770f0a9731eea3e0",
+    "text_bytes": 6364,
+    "hsaco_mtime_ns": 1794814885876894482
+  },
+  "final-compile-1800": {
+    "text_sha256": "52c3b17c0bc556ef7572680c67f3a4a58a585eb2a2691b30b60e841e3400ce5c",
+    "hsaco_sha256": "4c6a1c141caf3a944b6259f31ceb9ac534eadd036e80dd74f63515e0e8bc547a",
+    "text_bytes": 6364,
+    "hsaco_mtime_ns": 1794815456012868877
+  },
+  "all_machine_text_equal": true,
+  "final_compile_clang": {
+    "path": "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18",
+    "sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+    "mtime_ns": 1794815025304888220,
+    "version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git fd18eddbaf4a662ae5ce86c516d28e5b16952513)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin\n",
+    "source_head_at_audit": "89bee503d8e9d0bdcfbb4d97e204d5e346f02550",
+    "note": "Binary was replaced between perf compilation and final wide-path recheck. Embedded version fd18 was not refreshed. The final narrow compile is compared byte-for-byte by ELF .text; historical binary hash was not captured."
+  }
+}

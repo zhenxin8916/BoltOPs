@@ -1,0 +1,23 @@
+{
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "triton_tracked_changes": "",
+  "llvm_tracked_changes": "",
+  "source_sha256": "b30fca33dd347f69d0fb298e503f63302a767d969981e83d276d06e9cfe1fbae",
+  "source_origin_commit": "23c77c41f1f4cab3652700da33b2e29ee6e67d7e",
+  "raw_root": "/zhenxin/temp/bm64-bn256-integration-20261116",
+  "limitations": [
+    "PMD validation only; no new hardware runs",
+    "Wide paths exercised on small allocations, not an allocated >4 GiB output",
+    "Performance uses N_TILES_LIMIT=1; full N separately checked"
+  ],
+  "llvm_source_head_at_initial_capture": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "llvm_provenance_note": "The initial source HEAD fd18 and clean tracked diff were observed before a concurrent rebuild. The actual clang binary was replaced at 07:43:45 UTC, after perf HSACO compilation and before final wide-path validation. Its embedded version still says fd18 although the current source HEAD is 89bee. No historical binary hash was captured. See final-isa-equivalence.json: final narrow code and all three perf code objects have identical ELF .text.",
+  "compiler_binary_at_final_validation": {
+    "path": "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18",
+    "sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+    "mtime_ns": 1794815025304888220,
+    "version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git fd18eddbaf4a662ae5ce86c516d28e5b16952513)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin\n",
+    "source_head_at_audit": "89bee503d8e9d0bdcfbb4d97e204d5e346f02550",
+    "note": "Binary was replaced between perf compilation and final wide-path recheck. Embedded version fd18 was not refreshed. The final narrow compile is compared byte-for-byte by ELF .text; historical binary hash was not captured."
+  }
+}

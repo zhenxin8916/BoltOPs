@@ -21,6 +21,8 @@ import torch
     ("int8", torch.bfloat16, True, False),
     ("fp8", torch.float16, False, True),
     ("int8", torch.float16, False, True),
+    ("fp8_e5m2", torch.bfloat16, True, False),
+    ("fp8_mixed", torch.float16, True, True),
 ])
 def test_gluon_gemm2_matches_triton(monkeypatch, record_property, kind, out, mul, wide):
     import triton.language as tl
@@ -42,6 +44,11 @@ def test_gluon_gemm2_matches_triton(monkeypatch, record_property, kind, out, mul
         t["B"] = torch.randint(-16, 17, t["B"].shape, dtype=torch.int8)
         t["SA"] = torch.full_like(t["SA"], .01)
         t["SB"] = torch.full_like(t["SB"], .02)
+    if kind == "fp8_e5m2":
+        t["A"] = t["A"].float().to(torch.float8_e5m2)
+        t["B"] = t["B"].float().to(torch.float8_e5m2)
+    elif kind == "fp8_mixed":
+        t["B"] = t["B"].float().to(torch.float8_e5m2)
     a = t["A"].view(torch.uint8)[gather].clone()
     a[~valid] = 0
     t["A"] = a.view(t["A"].dtype)
@@ -108,7 +115,7 @@ def test_gluon_gemm2_matches_triton(monkeypatch, record_property, kind, out, mul
         torch.zeros((193, 2), dtype=torch.int32, device="cuda"),
         gpu["Sorted"], gpu["SortedWeights"], gpu["Experts"], gpu["WorkCount"],
         mul, 1, tl.bfloat16 if out == torch.bfloat16 else tl.float16,
-        use_fp8_w8a8=kind == "fp8", use_int8_w8a8=kind == "int8",
+        use_fp8_w8a8=kind.startswith("fp8"), use_int8_w8a8=kind == "int8",
         per_channel_quant=True, c_sorted=False, a_sorted=True, ck_sorting=True,
         ck_topk=2, config=dict(BLOCK_SIZE_M=64, BLOCK_SIZE_N=128, BLOCK_SIZE_K=64,
                               GROUP_SIZE_M=1, COMBINE_SCALE_LOAD=False,
@@ -125,3 +132,26 @@ def test_gluon_gemm2_matches_triton(monkeypatch, record_property, kind, out, mul
                   differences=int((gh != rh).sum()))
     record_property("equivalence", json.dumps(report))
     print(json.dumps(report), flush=True)
+
+
+@pytest.mark.parametrize("recipe,dtype", [
+    ("fp8_channel", torch.float8_e4m3fn),
+    ("fp8_channel", torch.float8_e5m2),
+    ("int8_channel", torch.int8),
+])
+def test_bm64_bn512_support_query(recipe, dtype):
+    """Metadata selection follows the sorted-row and fixed K256 contract."""
+    from boltops.fused_moe.gluon import (
+        gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64 as mod,
+    )
+    a = torch.empty((128, 256), dtype=dtype)
+    b = torch.empty((2, 512, 256), dtype=dtype)
+    sa = torch.empty((128, 1), dtype=torch.float32)
+    sb = torch.empty((2, 512, 1), dtype=torch.float32)
+    options = dict(arch="gfx946", cu_count=48, top_k=8,
+                   config={"BLOCK_SIZE_M": 64}, scale_recipe=recipe)
+    assert mod.is_persistent_channel_gemm2_supported(a, b, sa, sb, **options)
+    assert not mod.is_persistent_channel_gemm2_supported(
+        a, b, sa, sb, **dict(options, config={"BLOCK_SIZE_M": 64, "GROUP_SIZE_M": 2}))
+    assert not mod.is_persistent_channel_gemm2_supported(a, b, sa, sb, **options, ck_sorting=False)
+    assert not mod.is_persistent_channel_gemm2_supported(a, b, sa, sb, **options, c_sorted=True)

@@ -1,0 +1,39 @@
+{
+  "kind": "fp8",
+  "M": 1024,
+  "BM": 64,
+  "BN": 512,
+  "BK": 64,
+  "grid": 48,
+  "tiles_per_tg": 2,
+  "gc_mhz": 2200,
+  "time_us": 17.22812,
+  "cu0_mmac_percent": 13.839708068657927,
+  "checked": 1571840,
+  "shared_bytes": 117760,
+  "spill": {
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  "actual_partition_vgprs": [
+    49,
+    9,
+    155,
+    155
+  ],
+  "allocated_partition_vgprs": [
+    60,
+    56,
+    200,
+    196
+  ],
+  "source_sha256": "fad199ad8be9b287307379beeac59e35d6c0c820b55992b7efc6050f0f9d072f",
+  "perf": "/home/zhenx/temp/bm64-gemm2-bn512-port-20261116/fp8-gc2200/m5out/0/0/2388203_python3.10.perf",
+  "cu0_stats_total_cycles": 29595,
+  "E": 256,
+  "actual_N": 2048,
+  "actual_K": 256,
+  "cu0_total_cycles": 29596,
+  "cu0_denominator": "first WAVE_START through last s_endpgm plus one cycle"
+}

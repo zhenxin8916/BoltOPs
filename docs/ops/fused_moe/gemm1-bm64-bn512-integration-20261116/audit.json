@@ -1,0 +1,446 @@
+{
+  "ticket_equivalence": [
+    {
+      "role": "P0",
+      "steps": 100000,
+      "slot_and_phase_equal": true
+    },
+    {
+      "role": "C0",
+      "steps": 100000,
+      "slot_and_phase_equal": true
+    },
+    {
+      "role": "C1",
+      "steps": 100000,
+      "slot_and_phase_equal": true
+    }
+  ],
+  "trace_barrier_rules": {
+    "1800": {
+      "initializing_waves": 4,
+      "initialization_ids_and_counts": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          15,
+          4
+        ]
+      ],
+      "all_16_initialized": true,
+      "wait_rules_checked_waves": 16,
+      "first_wait_nonzero": true,
+      "no_adjacent_duplicate_wait_id": true,
+      "barrier_ids_in_range": true
+    },
+    "1500": {
+      "initializing_waves": 4,
+      "initialization_ids_and_counts": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          15,
+          4
+        ]
+      ],
+      "all_16_initialized": true,
+      "wait_rules_checked_waves": 16,
+      "first_wait_nonzero": true,
+      "no_adjacent_duplicate_wait_id": true,
+      "barrier_ids_in_range": true
+    },
+    "2200": {
+      "initializing_waves": 4,
+      "initialization_ids_and_counts": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          15,
+          4
+        ]
+      ],
+      "all_16_initialized": true,
+      "wait_rules_checked_waves": 16,
+      "first_wait_nonzero": true,
+      "no_adjacent_duplicate_wait_id": true,
+      "barrier_ids_in_range": true
+    }
+  },
+  "no_spill_artifacts": [
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-gc1800/cache/OET7N6FDTRJLVFADZUAB5OSVE66LCGUBUCPGLV3UOW267PPPI5KQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "112ec7f656f76f516b732f5b3cd0ce87900a6b14c6f21b83504d4d8ecb96c051",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-gc1500/cache/OET7N6FDTRJLVFADZUAB5OSVE66LCGUBUCPGLV3UOW267PPPI5KQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "112ec7f656f76f516b732f5b3cd0ce87900a6b14c6f21b83504d4d8ecb96c051",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-gc2200/cache/OET7N6FDTRJLVFADZUAB5OSVE66LCGUBUCPGLV3UOW267PPPI5KQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "112ec7f656f76f516b732f5b3cd0ce87900a6b14c6f21b83504d4d8ecb96c051",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/RHGLXZRN6PTA5T3EB2OX4NOYBDZKHKPWJLJEXARM6V4ZMQEQ6PHQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "f7ccffad88eec17ec920a8a2293854c32f52d9ad5496600c0f0f35d2fcdd2804",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/LGH5GLZSYXVEUGMPOYZOIUFXQNFNXUI2XVMBXIUWXWEP66LOS3YA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "aa46d88c643a63c816153ec1766d81b07b501251102e8b7bb5b23700d36dc4d0",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/QU4UGZUXLLWFGDKG5NI3EKNKVGXQUSN7HXZ53CT6ZNKMZO64KWKA/fused_moe_kernel.amdgcn",
+      "sha256": "8b84f9cb7085f92788e4a5ced0807569cd503bec6fd7045032166c8125271b1d",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/E7UKPZU54TZVU7I4GA7SR3FMIUS7E4OCW5GEKHGWN6KUY6PTAWMQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "519e50b0ea948cdb487be0f8467ddb4215cefcb35d3302b2d614c8e6da4ae278",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/EC3Q623Y2PT4UE4J7TL6B5DKGPSF7TUQGMJ2NAEQT3UABONYLGPA/fused_moe_kernel.amdgcn",
+      "sha256": "de58f6d7bd24ebcf0e4de83af6a239d749ee9526b7ad091e64042e496475b15f",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/3RTMTRLFYAVSTFUNNSTL5TUSADIDOXUVPZX62OYU4BWY6IEZ3U3A/fused_moe_kernel.amdgcn",
+      "sha256": "cce18c566acd696415a01e4d64ce6505a268d7909e7cb2d76dc6771bdffa0f1f",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/4KTUCUSE2EKMY6UODDKY4YRZ4MCWCCI3XAKDGUW53I4U3FCCBOUA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "b2654dfa805ffa3cc6906dc70df3cc4d244330e92d4370a84127b032d3754a84",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/JWVLZLIXZSYESSVRJPNOBL7Y56ETKKC7KRRSEXZU7LK2MWI7Z5AA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "bd87e89710da9122ec1186bb1d5efb1b22ab3db755415c4717fd98a6aa5c8d70",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/PWTYHXMCE5MR3FHZ56NBSXMDPXS2YBC2UW76KLRFIGM2JWOUSDHQ/fused_moe_kernel.amdgcn",
+      "sha256": "5b3ff73556e7fe782e199f163ba3887df959e6b0115ff19154a58a3cef77ccae",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/3HQ3F4J5BNLXAH66UI7ONPW53LY6YVDSBTGDQAU2YHJHBP62AF7A/fused_moe_kernel.amdgcn",
+      "sha256": "bc0a93fd825fbd458a0c2b73492d2cab8948599f7550b409d88232e795c24b88",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/5TCUDY3IEVSSXJK3B4BM4RKOE4TL5RXGR2ZU4U3BJEJCNQYVGCPQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "bc9278164b1788d8c4af3da37170c3ff6dba1ba5b397d930943c390ff2d06fef",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/final-equivalence/cache/2QXSWMBCNLNKVD7IGMDGBWAIH3OKVDYJQ7BHC67TFDUJ5ESWXRNA/fused_moe_kernel.amdgcn",
+      "sha256": "00779c2d66619a032e040a1eaa58701bf3d9febbadf3ab8753a2470eda1715e8",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/framework-equivalence/cache/RHGLXZRN6PTA5T3EB2OX4NOYBDZKHKPWJLJEXARM6V4ZMQEQ6PHQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "f7ccffad88eec17ec920a8a2293854c32f52d9ad5496600c0f0f35d2fcdd2804",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/framework-equivalence/cache/EC3Q623Y2PT4UE4J7TL6B5DKGPSF7TUQGMJ2NAEQT3UABONYLGPA/fused_moe_kernel.amdgcn",
+      "sha256": "de58f6d7bd24ebcf0e4de83af6a239d749ee9526b7ad091e64042e496475b15f",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/framework-equivalence/cache/26WYZ5BZNSACTE7Q4Z5NAAYEUQSOKMJWBUCNCHWC2VSY2B6QDLVA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "a55d09d6bc6964b3f65bc32a66d414b5a9866278c8976bd7e706b64c45b6231b",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/framework-equivalence/cache/3HQ3F4J5BNLXAH66UI7ONPW53LY6YVDSBTGDQAU2YHJHBP62AF7A/fused_moe_kernel.amdgcn",
+      "sha256": "bc0a93fd825fbd458a0c2b73492d2cab8948599f7550b409d88232e795c24b88",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "path": "/home/zhenx/temp/bm64-gemm1-port-20261116/framework-equivalence/cache/5TCUDY3IEVSSXJK3B4BM4RKOE4TL5RXGR2ZU4U3BJEJCNQYVGCPQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+      "sha256": "bc9278164b1788d8c4af3da37170c3ff6dba1ba5b397d930943c390ff2d06fef",
+      "spill_count": {
+        "sgpr": 0,
+        "vgpr": 0
+      },
+      "scratch_instruction": false,
+      "private_segment_fixed_size": 0
+    }
+  ],
+  "all_actual_compiled_variants_no_spill": true
+}

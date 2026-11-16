@@ -1,0 +1,17 @@
+{
+  "actual_dispatcher_used": false,
+  "frozen_algorithm": "BN512-B3-single-ticket",
+  "experimental_kernel_snapshot": false,
+  "INSN_WARMUP": false,
+  "capacity_logical_tiles": 512,
+  "selected_logical_tiles": 96,
+  "equivalent_BN256_tiles": 192,
+  "experimental_launch_option_adapter": false,
+  "GPU_padded_counter_used": true,
+  "mismatches": 0,
+  "padded_row_errors": 0,
+  "remaining_nan": 0,
+  "checked_valid_elements": 1580032,
+  "untouched_modified": 0,
+  "shared": 131072
+}

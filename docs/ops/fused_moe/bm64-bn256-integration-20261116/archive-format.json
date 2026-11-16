@@ -1,0 +1,14 @@
+[
+  {
+    "archive": "fp8/kernel.amdgcn.gz",
+    "uncompressed_sha256": "fdec4f894f13a95c9c65744ed0468c279d09986886d263766f0d03556486ec99"
+  },
+  {
+    "archive": "fp8-wide-fp16/kernel.amdgcn.gz",
+    "uncompressed_sha256": "fc95241ae18f775fd4183f1af09e4101b1f88d193e76c7dd263cabc832daed3e"
+  },
+  {
+    "archive": "int8/kernel.amdgcn.gz",
+    "uncompressed_sha256": "64fa6144efa4ffae20aa2be3ee9054dc639e16bf393d87c763fae4407132e418"
+  }
+]

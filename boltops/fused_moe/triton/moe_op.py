@@ -2843,7 +2843,7 @@ def moe_set_use_persistent_kernel(value: bool):
     global _USE_MOE_PERSISTENT_KERNEL
     _USE_MOE_PERSISTENT_KERNEL = value
 
-def _gluon_channel_gemm2_module(block_n=256):
+def _gluon_channel_gemm2_module(block_n=256, block_m=128):
     """Load the optional HCU Gluon candidate without affecting Triton installs."""
     import importlib.util
     try:
@@ -2852,6 +2852,12 @@ def _gluon_channel_gemm2_module(block_n=256):
         available = False
     if not available:
         return None
+    if block_m == 64:
+        if block_n == 512:
+            from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64
+            return gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64
+        from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn256xbk256
+        return gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn256xbk256
     if block_n == 512:
         from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn512xbk64
         return gemm_bottom_w8a8_channel_wasp_persistent_bm128xbn512xbk64
@@ -2870,7 +2876,7 @@ def _gluon_gemm2_prefers_sorted_layout(B, B_scale, *, top_k, config, output_dtyp
     if device.arch != "gfx946":
         return False
     bn = 512 if B.ndim == 3 and B.shape[1] > 0 and B.shape[1] % 512 == 0 else 256
-    mod = _gluon_channel_gemm2_module(512) if bn == 512 else _gluon_channel_gemm2_module()
+    mod = _gluon_channel_gemm2_module(bn, config.get("BLOCK_SIZE_M"))
     if mod is None:
         return False
     # Only metadata is needed before the quantized activation exists.
@@ -2897,7 +2903,7 @@ def _try_gluon_channel_gemm2(
     if device.arch != "gfx946":
         return False
     bn = 512 if B.ndim == 3 and B.shape[1] > 0 and B.shape[1] % 512 == 0 else 256
-    mod = _gluon_channel_gemm2_module(512) if bn == 512 else _gluon_channel_gemm2_module()
+    mod = _gluon_channel_gemm2_module(bn, config.get("BLOCK_SIZE_M"))
     if mod is None or not mod.is_persistent_channel_gemm2_supported(
         A, B, A_scale, B_scale, arch=device.arch, cu_count=device.cu_count,
         top_k=ck_topk, config=config, c_sorted=c_sorted, a_sorted=a_sorted,
@@ -2921,7 +2927,8 @@ def _try_gluon_channel_gemm2(
     rows = min(A.shape[0], sorted_token_ids.numel())
     if mul_routed_weight:
         rows = min(rows, sorted_weights.numel())
-    m_blocks = min(rows // 128, expert_ids.numel())
+    bm = config["BLOCK_SIZE_M"]
+    m_blocks = min(rows // bm, expert_ids.numel())
     if not m_blocks:
         return False
     def byte_span(t):
@@ -2962,23 +2969,31 @@ def _try_gluon_channel_gemm1(
         gluon_available = False
     if not gluon_available:
         return False
+    bm = config.get("BLOCK_SIZE_M")
     # BN512 retains each A pair across two N panels; complete K512 cycles
     # preserve its cross-output slot phases. Other shapes keep BN128/256.
-    if B.shape[1] > 0 and B.shape[1] % 512 == 0 and A.shape[1] % 512 == 0:
+    if bm == 64:
+        from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm64xbn512xbk256 import (
+            DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
+            is_persistent_channel_gemm1_supported,
+        )
+        bn, bk = 512, 256
+    elif B.shape[1] > 0 and B.shape[1] % 512 == 0 and A.shape[1] % 512 == 0:
         from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn512xbk128 import (
             DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
             is_persistent_channel_gemm1_supported,
         )
-        bn = 512
+        bn, bk = 512, 128
     else:
         from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm128xbn128_256xbk128 import (
             DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
             is_persistent_channel_gemm1_supported,
         )
         bn = 256 if B.shape[1] >= 256 and B.shape[1] % 128 == 0 else 128
+        bk = 128
     # Only BM belongs to sorting; each candidate selects its own BN/BK.
     candidate = dict(BLOCK_SIZE_M=config.get("BLOCK_SIZE_M"),
-                     BLOCK_SIZE_N=bn, BLOCK_SIZE_K=128,
+                     BLOCK_SIZE_N=bn, BLOCK_SIZE_K=bk,
                      GROUP_SIZE_M=config.get("GROUP_SIZE_M", 1))
     if not is_persistent_channel_gemm1_supported(
         A, B, A_scale, B_scale, arch=device.arch, cu_count=device.cu_count,
@@ -2999,11 +3014,14 @@ def _try_gluon_channel_gemm1(
     if any(t.device != A.device for t in (B, C, A_scale, B_scale, *metadata)):
         return False
     rows = min(sorted_token_ids.numel(), C.numel() // B.shape[1])
-    m_blocks = min(rows // 128, expert_ids.numel())
+    m_blocks = min(rows // bm, expert_ids.numel())
     if m_blocks == 0:
         return False
     opts = dict(DEFAULT_LAUNCH_OPTIONS)
     opts.update(candidate)
+    if bm == 64:
+        # The grid is already known on the host; keep its loop step constant.
+        opts["PERSISTENT_GRID"] = device.cu_count
     def byte_span(tensor):
         return (1 + sum((size - 1) * stride for size, stride in zip(tensor.shape, tensor.stride()))) * tensor.element_size()
     for name, tensor in (("A", A), ("B", B), ("C", C)):

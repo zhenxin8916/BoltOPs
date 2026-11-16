@@ -59,3 +59,14 @@ def test_frequency_updates_preserve_other_measurements(tmp_path):
     assert len(rows) == 1
     assert [rows[0][f"time_us_{gc}ghz"] for gc in ("2_2", "1_8", "1_5")] == ["55.000000", "60.000000", "68.000000"]
     assert [rows[0][f"mmac_total_pct_{gc}ghz"] for gc in ("2_2", "1_8", "1_5")] == ["65.000000%", "70.000000%", "75.000000%"]
+
+
+@pytest.mark.parametrize("bn,bk", [(256, 256), (512, 64)])
+def test_bm64_records_two_tiles_per_tg(tmp_path, bn, bk):
+    row = record(bn)
+    row.update(token=1024, bm=64, bk=bk, tiles_per_tg=2, total_tiles=96,
+               output_elements_per_tg=64*bn*2, work_scope="bounded_two_tiles_per_tg")
+    path = upsert_record("bottom", row, tmp_path)
+    with path.open() as stream:
+        saved, = csv.DictReader(stream)
+    assert saved["bm"] == "64" and saved["time_us_1_8ghz"] == "60.000000"

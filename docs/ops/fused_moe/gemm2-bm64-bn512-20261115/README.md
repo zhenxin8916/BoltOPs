@@ -22,7 +22,8 @@ User explicitly chose elapsed time for **two output tiles of each geometry**, at
 | `bf26fa0` | SB register load before B EMPTY wait |15.032016|15.150170%|99|36/9/146/146|
 | `347a15a` | consumer warps M1/N4, less replicated B reading |14.873556|15.311577%|99|36/9/162/162|
 | `1d881f7` | P0 scatter with adjacent row pairs |14.832412|15.354050%|99|39/9/162/162|
-| **`97cb4cc`** | one M64 result publication per phase |14.776256|15.412402%|115|49/9/163/163|
+| `97cb4cc` | one M64 result publication per phase |14.776256|15.412402%|115|49/9/163/163|
+| **`98a1e1e`** | metadata wait after all K256 MMACs, shorter scale lifetimes |14.713428|15.478215%|115|49/9/155/155|
 
 The initial baseline elapsed-time reduction was **22.384729%**. The latest retained result is the last row above; later sections preserve the chronological evidence for earlier results. The stricter 60% target remains active. Historical comparator source, HSACO and toolchain are under `../gemm2-20261115/bn512-b-batch-k128-best-gc1800/`. Current compiler is LLVM fd18eddb plus clean Triton 5b24821; provenance records exact binary hashes. This is a cross-toolchain historical comparison, not an isolated single-factor experiment.
 
@@ -414,3 +415,6 @@ metadata publication takes15.039800us; separate scale READY before route/expert
 publication takes15.485712us. Joining the packed C halves into one store takes
 14.958068us. These bounded-correct controls are not in the production source.
 
+The metadata-after-K3 retained change is commit `98a1e1e` (14.713428us);
+[rejected publication and wait-position controls](metadata-wait-controls/)
+include the slower combined packed-C store retested on this new baseline.

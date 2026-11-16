@@ -3,5 +3,6 @@
   "sha256": "ffb482e942c014c50d11f6f1dd7b8bc8ce1e899e83118530c47314edf934532c",
   "nonempty_sqtt_verified": true,
   "time_us": 14.713428,
-  "whole_dispatch_mmac_percent": 15.478214866039377
+  "whole_dispatch_mmac_percent": 15.478214866039377,
+  "code_commit": "98a1e1e"
 }

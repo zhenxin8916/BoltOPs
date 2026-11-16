@@ -360,3 +360,12 @@ K128 staging, earlier A credits and metadata LDS/read-layout results are recorde
 with source/perf hashes and hardware/work audits in [startup-credit-controls](startup-credit-controls/).
 The trace identifies the first metadata publication as an additional waiting
 chain; no unmeasured change is promoted.
+
+
+## Corrected Wavefronts perf capture — 2026-11-16
+
+The old perf lacked SQTT because TT0 was omitted; IT0 text traces and full-dispatch
+metrics were present. The identical97cb4cc binary was recaptured with TT0, retaining
+14.776256us and15.412402% whole-dispatch MMAC. The new perf contains a validated
+nonempty SQTT section forCU0; all48CUs contribute to timing/statistics.
+Use [current perf location](perf-location.json); [capture proof and cause](wavefronts-recapture/).

@@ -1,0 +1,19 @@
+{
+  "same_machine_text": true,
+  "same_source": true,
+  "same_inputs": true,
+  "same_gpu_addresses": true,
+  "same_output": true,
+  "same_time": true,
+  "same_mmac_counts": true,
+  "time_us": 14.776256,
+  "whole_dispatch_mmac_percent": 15.412402167369056,
+  "code_commit": "97cb4cc",
+  "debug_flags": [
+    "StatLog",
+    "IT0",
+    "TT0",
+    "Perf"
+  ],
+  "text_sha256": "60ef7334c9ed6b562da48d325d4517b1c3520ffc45e433465de42285d3a839bc"
+}

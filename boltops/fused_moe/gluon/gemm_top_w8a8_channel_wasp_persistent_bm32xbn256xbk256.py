@@ -10,12 +10,13 @@ CPU selection is limited to M128; K>=1024, K%512=0, N%256=0. Four waves per role
     P1:               A0/A1, with EB3/EB4 granting exclusive issue turns
     C0: left N128 = two N64 panels; C1: right N128 = two N64 panels
 
-VGPR role budgets: P0/P1/C0/C1 = 16/16/80/80; no spill in the initial probe.
+VGPR role budgets: P0/P1/C0/C1 = 16/16/96/96; no spill in the target probe.
 The 64-KiB LDS footprint permits two TGs per CU when the launch supplies enough work.
 
 One K256 step, per consumer (arrows describe issue/dependency order):
     panel0: wait B/A -> read A/B -> complete LDS reads -> MMAC
     panel1: reuse A registers -> read B -> complete reads -> MMAC
+    Final panel1 prefetches scales before MMAC; EB5 protects the scale reads.
     Normal K: return A after panel1. Final K: return A after panel0 read.
 
 LDS and abarrier ownership (all 16 IDs initialized):
@@ -412,7 +413,7 @@ def gemm_top_w8a8_channel_wasp_persistent(
     TOTAL_TILES is a capacity bound narrowed by the optional GPU counter.
     Each producer reads its own metadata; channel scales alias retired A1.
     """
-    partition_regs: gl.constexpr = (16, 16, 80, 80) if PARTITION_REGS is None else PARTITION_REGS
+    partition_regs: gl.constexpr = (16, 16, 96, 96) if PARTITION_REGS is None else PARTITION_REGS
     gl.static_assert(M == 128, "this standalone specialization covers M128 only")
     gl.static_assert(ck_sorting, "this kernel requires CK-packed sorted token IDs")
     gl.static_assert(0 < top_k and top_k <= 256, "CK packs the route index in eight bits")
@@ -586,6 +587,12 @@ def _consume_panel(
     WARM: gl.constexpr,
     retained_a=None,
     final_k=False,
+    scales=None,
+    scale_bank=0,
+    BN: gl.constexpr = 256,
+    sa=None,
+    sb0=None,
+    sb1=None,
 ):
     """Read one N64 panel; retain A registers across both panels of this K256."""
     bslot = b_state % 3
@@ -629,6 +636,19 @@ def _consume_panel(
             _consumer_pingpong(arrive_id, False, 4)
         else:
             _consumer_pingpong(sync_id, True, 4)
+    # The last A readers already returned their slots. Read scales now so
+    # their LDS latency can overlap the final panel MMAC; EB5 is released
+    # only after these reads complete in the consumer epilogue.
+    if SLOT == 1:
+        if final_k:
+            hcu.ebarrier_sync(2 if PARTITION == 0 else 0, 8)
+            result: gl.constexpr = acc.type.layout
+            cm: gl.constexpr = acc.shape[0]
+            cn: gl.constexpr = acc.shape[1]
+            sa = scales.index(scale_bank).slice(0, cm).load(gl.SliceLayout(1, result))
+            sb0 = scales.index(scale_bank).slice(BN + PARTITION * (2 * cn), cn).load(gl.SliceLayout(0, result))
+            sb1 = scales.index(scale_bank).slice(BN + PARTITION * (2 * cn) + cn, cn).load(gl.SliceLayout(0, result))
+            hcu.sched_barrier()
     hcu.set_priority(1 + 2 * SLOT if PARTITION == 0 else 2 * SLOT)
     hcu.sched_barrier()
     if WARM:
@@ -662,7 +682,7 @@ def _consume_panel(
     if SLOT == 1:
         slot, phase = _next_a_slot(slot, phase, am.shape[0])
     b_state = _next_b_tickets(b_state, 2)
-    return acc, slot, phase, b_state, a
+    return acc, slot, phase, b_state, a, sa, sb0, sb1
 
 
 @gluon.jit
@@ -774,8 +794,11 @@ def _consumer(
             "s_mov_b32 $0, 0", constraints="=s", args=[], dtype=gl.int32, is_pure=False, pack=1
         )
         gl.assume(first < K // 256)
+        sa = gl.full((BM,), 0, gl.float32, gl.SliceLayout(1, result))
+        sb0 = gl.full((CN,), 0, gl.float32, gl.SliceLayout(0, result))
+        sb1 = gl.full((CN,), 0, gl.float32, gl.SliceLayout(0, result))
         for k in range(first, K // 256):
-            acc0, slot, phase, b_state, retained_a = _consume_panel(
+            acc0, slot, phase, b_state, retained_a, sa, sb0, sb1 = _consume_panel(
                 acc0,
                 am,
                 bm,
@@ -789,8 +812,9 @@ def _consumer(
                 0,
                 WARM,
                 final_k=(k == K // 256 - 1),
+                scales=scales, scale_bank=iteration & 1, BN=BN, sa=sa, sb0=sb0, sb1=sb1,
             )
-            acc1, slot, phase, b_state, _ = _consume_panel(
+            acc1, slot, phase, b_state, _, sa, sb0, sb1 = _consume_panel(
                 acc1,
                 am,
                 bm,
@@ -805,19 +829,8 @@ def _consumer(
                 WARM,
                 retained_a,
                 final_k=(k == K // 256 - 1),
+                scales=scales, scale_bank=iteration & 1, BN=BN, sa=sa, sb0=sb0, sb1=sb1,
             )
-        hcu.ebarrier_sync(2 if PARTITION == 0 else 0, 8)
-        sa = scales.index(iteration & 1).slice(0, BM).load(gl.SliceLayout(1, result))
-        sb0 = (
-            scales.index(iteration & 1)
-            .slice(BN + PARTITION * (2 * CN), CN)
-            .load(gl.SliceLayout(0, result))
-        )
-        sb1 = (
-            scales.index(iteration & 1)
-            .slice(BN + PARTITION * (2 * CN) + CN, CN)
-            .load(gl.SliceLayout(0, result))
-        )
         if output + (PERSISTENT_GRID if PERSISTENT_GRID > 0 else gl.num_programs(0)) < total:
             hcu.wait_lgkmcnt(0)
             hcu.ebarrier_arrive(5, 12)
@@ -854,7 +867,7 @@ def _run(
     USE_ADDR_OFFSET_INT64_C: gl.constexpr = False,
     INSN_WARMUP: gl.constexpr = False,
     GROUP_SIZE_M: gl.constexpr = 1,
-    PARTITION_REGS: gl.constexpr = (16, 16, 80, 80),
+    PARTITION_REGS: gl.constexpr = (16, 16, 96, 96),
     A_STAGES: gl.constexpr = 2,
     LDS_WRAP: gl.constexpr = 32,
     COPY_BYTES: gl.constexpr = 16,

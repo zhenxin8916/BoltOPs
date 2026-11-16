@@ -1,0 +1,3057 @@
+{
+  "retained_algorithm_commit": "98a1e1e",
+  "retained_time_us": 14.713428,
+  "retained_whole_gpu_mmac_percent": 15.478214866039377,
+  "scope": "1.8 GHz, 48 persistent TGs, two independent BM64xBN512 outputs per TG; bounded FP8 only for rejected controls",
+  "production_ast_matches_retained_best": true,
+  "controls": [
+    {
+      "name": "metadata-after-k3-output-empty-after-convert",
+      "algorithm": "Wait for output EMPTY immediately before first LDS output store",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-output-empty-after-convert",
+      "source_sha256": "b7479ba798cce462217fe3cdc3f4a878746da1d4b15f1165f953eee11dc22f5f",
+      "time_us": 14.769584,
+      "whole_gpu_mmac_percent": 15.419364553531095,
+      "no_spill": {
+        "scratch_bytes": 0,
+        "sgpr_spills": 0,
+        "vgpr_spills": 0,
+        "private_segment_bytes": 0
+      },
+      "partition_regs_allocated": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "partition_regs_actual": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "evidence": {
+        "result.json": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 117760,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "launch.json": {
+          "case": {
+            "M": 4096,
+            "E": 256,
+            "N": 256,
+            "K": 2048,
+            "topk": 8
+          },
+          "kind": "fp8",
+          "grid": 48,
+          "bm": 64,
+          "bn": 512,
+          "bk": 64,
+          "cu_count": 48,
+          "tiles_per_tg": 2,
+          "total_tiles": 96,
+          "output_elements_per_tg": 65536,
+          "kernel_total_tiles_argument": 384,
+          "N_TILES_LIMIT": 1,
+          "input_sha256": {
+            "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+            "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+            "golden": "45c78093f81060ea9c4fec15b35c8e85d0b11170c92522f6015d4e3aa9ecf242",
+            "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+          },
+          "options": {
+            "num_warps": 4,
+            "num_stages": 2,
+            "use_async_copy": true,
+            "wasp_partition_warps": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "wasp_wdra": true,
+            "N": 2048,
+            "K": 256,
+            "top_k": 8,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 512,
+            "BLOCK_SIZE_K": 64,
+            "CK_SORTING": true,
+            "N_TILES_LIMIT": 1
+          },
+          "source_sha256": "b7479ba798cce462217fe3cdc3f4a878746da1d4b15f1165f953eee11dc22f5f",
+          "gpu_buffers": {
+            "A": {
+              "address": 140728445435904,
+              "bytes": 10354688
+            },
+            "B": {
+              "address": 140723261276160,
+              "bytes": 134217728
+            },
+            "SA": {
+              "address": 140728409784320,
+              "bytes": 161792
+            },
+            "SB": {
+              "address": 140728455790592,
+              "bytes": 2097152
+            },
+            "Sorted": {
+              "address": 140728409946112,
+              "bytes": 161792
+            },
+            "Experts": {
+              "address": 140728410107904,
+              "bytes": 2528
+            },
+            "RouteWeights": {
+              "address": 140728410110464,
+              "bytes": 131072
+            },
+            "SortedWeights": {
+              "address": 140728410241536,
+              "bytes": 161792
+            },
+            "C": {
+              "address": 140722992840704,
+              "bytes": 134217728
+            }
+          }
+        },
+        "model-metrics.json": {
+          "schema_version": 2,
+          "time_us": 14.769584,
+          "wave_span_time_us": 10.356056,
+          "wave_span_mmac_percent": 21.99076559647804,
+          "dispatch_span": {
+            "begin_tick": 0,
+            "end_tick": 14769584,
+            "duration_ticks": 14769584,
+            "duration_us": 14.769584,
+            "gui_duration_us": 14.769,
+            "section_offset": 6760,
+            "section_type": 15,
+            "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-output-empty-after-convert/m5out/0/0/2382487_python3.10.perf",
+            "source_perf_sha256": "10d2ca6f38a3bb2ed335c149d20c722483c8701b815cdd94e9756fedf31ae599"
+          },
+          "whole_gpu_mmac_percent": 15.419364553531095,
+          "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+          "mmac_count_per_cu": {
+            "0": 2048,
+            "1": 2048,
+            "2": 2048,
+            "3": 2048,
+            "4": 2048,
+            "5": 2048,
+            "6": 2048,
+            "7": 2048,
+            "8": 2048,
+            "9": 2048,
+            "10": 2048,
+            "11": 2048,
+            "12": 2048,
+            "13": 2048,
+            "14": 2048,
+            "15": 2048,
+            "16": 2048,
+            "17": 2048,
+            "18": 2048,
+            "19": 2048,
+            "20": 2048,
+            "21": 2048,
+            "22": 2048,
+            "23": 2048,
+            "24": 2048,
+            "25": 2048,
+            "26": 2048,
+            "27": 2048,
+            "28": 2048,
+            "29": 2048,
+            "30": 2048,
+            "31": 2048,
+            "32": 2048,
+            "33": 2048,
+            "34": 2048,
+            "35": 2048,
+            "36": 2048,
+            "37": 2048,
+            "38": 2048,
+            "39": 2048,
+            "40": 2048,
+            "41": 2048,
+            "42": 2048,
+            "43": 2048,
+            "44": 2048,
+            "45": 2048,
+            "46": 2048,
+            "47": 2048
+          },
+          "expected_mmac_instructions": 98304,
+          "padded_tflops": 109.04929590433963,
+          "useful_tflops": 91.1761447038725,
+          "cache": {
+            "TccSendRespBandwidth": 1.3488,
+            "TccRecvRespBandwidth": 0.644893,
+            "TCCHitRate": 0.845831,
+            "TCPCacheLineHitRate": 0.325496,
+            "SQCIHitRate": 0.998668,
+            "missSQCIRequests": 144.0,
+            "missDuplicatedSQCIRequests": 36581.0
+          },
+          "cu_metrics": {
+            "ldsBankConflict": {
+              "mean": 1024.0,
+              "maximum": 1024.0,
+              "sum": 49152.0
+            },
+            "GlobalMemPipeline.cmdCreditStall": {
+              "mean": 734.1875,
+              "maximum": 936.0,
+              "sum": 35241.0
+            },
+            "GlobalMemPipeline.addrCreditStall": {
+              "mean": 29.875,
+              "maximum": 66.0,
+              "sum": 1434.0
+            },
+            "GlobalMemPipeline.dataCreditStall": {
+              "mean": 108.41666666666667,
+              "maximum": 200.0,
+              "sum": 5204.0
+            },
+            "LocalMemPipeline.creditStall": {
+              "mean": 1888.5,
+              "maximum": 2907.0,
+              "sum": 90648.0
+            },
+            "tatd.TATD.taSendStallBytcp": {
+              "mean": 546.9375,
+              "maximum": 857.0,
+              "sum": 26253.0
+            },
+            "tatd.TATD.taSendStallByCredit": {
+              "mean": 22.5,
+              "maximum": 406.0,
+              "sum": 1080.0
+            },
+            "numCyclesWaitIFetchAfterBranchTaken": {
+              "mean": 11709.333333333334,
+              "maximum": 12377.0,
+              "sum": 562048.0
+            }
+          }
+        },
+        "wavefronts-audit.json": {
+          "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-output-empty-after-convert/m5out/0/0/2382487_python3.10.perf",
+          "perf_sha256": "10d2ca6f38a3bb2ed335c149d20c722483c8701b815cdd94e9756fedf31ae599",
+          "perf_bytes": 19313,
+          "sqtt_sections": [
+            {
+              "offset": 6832,
+              "raw_bytes": 71866,
+              "compressed_bytes": 10921
+            }
+          ],
+          "nonempty_sqtt_verified": true
+        },
+        "two-tg-audit.json": {
+          "peak_live_waves_cu0": 16,
+          "per_simd_at_peak": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "starts": 16,
+          "ends": 16,
+          "cu0_mmac_count": 2048,
+          "exec0_mmac_count": 0,
+          "mmac_busy8_cycle_union_verified": true,
+          "simds": [
+            {
+              "simd": 0,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 1,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 2,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 3,
+              "mmac": 512,
+              "busy_cycles": 4096
+            }
+          ],
+          "wait_id_audit": {
+            "9": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "10": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "8": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "11": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "13": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "14": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "12": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "15": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "7": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "5": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "6": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "4": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "1": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "3": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "2": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "0": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            }
+          },
+          "numerical": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 2630144,
+            "untouched_tail": true,
+            "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+            "shared": 117760,
+            "scope": "bounded_two_output_tiles_per_tg",
+            "tiles_per_tg": 2
+          },
+          "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+        },
+        "bn512-batch-b-phase-audit.json": {
+          "00020009": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0001000a": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "00000008": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0003000b": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0002000d": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0001000e": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0000000c": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0003000f": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          }
+        },
+        "consumer-no-vmem-audit.json": {
+          "0": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "1": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "2": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "3": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "4": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "5": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "6": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "7": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "8": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "9": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "10": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "11": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "12": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "13": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "14": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "15": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "metadata-after-k3-p1-static-n-original-sb",
+      "algorithm": "Static P1 N traversal, original per-phase SB staging",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p1-static-n-original-sb",
+      "source_sha256": "a4e52cdd112bbf60c98619a7174f14b3f7006a76c32ad124aa70e29622b0b6dd",
+      "time_us": 14.961404,
+      "whole_gpu_mmac_percent": 15.221673046192723,
+      "no_spill": {
+        "scratch_bytes": 0,
+        "sgpr_spills": 0,
+        "vgpr_spills": 0,
+        "private_segment_bytes": 0
+      },
+      "partition_regs_allocated": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "partition_regs_actual": [
+        49,
+        11,
+        155,
+        155
+      ],
+      "evidence": {
+        "result.json": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 117760,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "launch.json": {
+          "case": {
+            "M": 4096,
+            "E": 256,
+            "N": 256,
+            "K": 2048,
+            "topk": 8
+          },
+          "kind": "fp8",
+          "grid": 48,
+          "bm": 64,
+          "bn": 512,
+          "bk": 64,
+          "cu_count": 48,
+          "tiles_per_tg": 2,
+          "total_tiles": 96,
+          "output_elements_per_tg": 65536,
+          "kernel_total_tiles_argument": 384,
+          "N_TILES_LIMIT": 1,
+          "input_sha256": {
+            "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+            "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+            "golden": "45c78093f81060ea9c4fec15b35c8e85d0b11170c92522f6015d4e3aa9ecf242",
+            "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+          },
+          "options": {
+            "num_warps": 4,
+            "num_stages": 2,
+            "use_async_copy": true,
+            "wasp_partition_warps": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "wasp_wdra": true,
+            "N": 2048,
+            "K": 256,
+            "top_k": 8,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 512,
+            "BLOCK_SIZE_K": 64,
+            "CK_SORTING": true,
+            "N_TILES_LIMIT": 1
+          },
+          "source_sha256": "a4e52cdd112bbf60c98619a7174f14b3f7006a76c32ad124aa70e29622b0b6dd",
+          "gpu_buffers": {
+            "A": {
+              "address": 140728445435904,
+              "bytes": 10354688
+            },
+            "B": {
+              "address": 140723261276160,
+              "bytes": 134217728
+            },
+            "SA": {
+              "address": 140728409784320,
+              "bytes": 161792
+            },
+            "SB": {
+              "address": 140728455790592,
+              "bytes": 2097152
+            },
+            "Sorted": {
+              "address": 140728409946112,
+              "bytes": 161792
+            },
+            "Experts": {
+              "address": 140728410107904,
+              "bytes": 2528
+            },
+            "RouteWeights": {
+              "address": 140728410110464,
+              "bytes": 131072
+            },
+            "SortedWeights": {
+              "address": 140728410241536,
+              "bytes": 161792
+            },
+            "C": {
+              "address": 140722992840704,
+              "bytes": 134217728
+            }
+          }
+        },
+        "model-metrics.json": {
+          "schema_version": 2,
+          "time_us": 14.961404,
+          "wave_span_time_us": 10.547876,
+          "wave_span_mmac_percent": 21.590849190870276,
+          "dispatch_span": {
+            "begin_tick": 0,
+            "end_tick": 14961404,
+            "duration_ticks": 14961404,
+            "duration_us": 14.961404,
+            "gui_duration_us": 14.961,
+            "section_offset": 6786,
+            "section_type": 15,
+            "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p1-static-n-original-sb/m5out/0/0/2382717_python3.10.perf",
+            "source_perf_sha256": "0376e9121a920706ca2e3ea7e56c7baea380d6f7d40148307e5c3b138f47ccde"
+          },
+          "whole_gpu_mmac_percent": 15.221673046192723,
+          "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+          "mmac_count_per_cu": {
+            "0": 2048,
+            "1": 2048,
+            "2": 2048,
+            "3": 2048,
+            "4": 2048,
+            "5": 2048,
+            "6": 2048,
+            "7": 2048,
+            "8": 2048,
+            "9": 2048,
+            "10": 2048,
+            "11": 2048,
+            "12": 2048,
+            "13": 2048,
+            "14": 2048,
+            "15": 2048,
+            "16": 2048,
+            "17": 2048,
+            "18": 2048,
+            "19": 2048,
+            "20": 2048,
+            "21": 2048,
+            "22": 2048,
+            "23": 2048,
+            "24": 2048,
+            "25": 2048,
+            "26": 2048,
+            "27": 2048,
+            "28": 2048,
+            "29": 2048,
+            "30": 2048,
+            "31": 2048,
+            "32": 2048,
+            "33": 2048,
+            "34": 2048,
+            "35": 2048,
+            "36": 2048,
+            "37": 2048,
+            "38": 2048,
+            "39": 2048,
+            "40": 2048,
+            "41": 2048,
+            "42": 2048,
+            "43": 2048,
+            "44": 2048,
+            "45": 2048,
+            "46": 2048,
+            "47": 2048
+          },
+          "expected_mmac_instructions": 98304,
+          "padded_tflops": 107.65117605272874,
+          "useful_tflops": 90.00717633184694,
+          "cache": {
+            "TccSendRespBandwidth": 1.331576,
+            "TccRecvRespBandwidth": 0.642819,
+            "TCCHitRate": 0.845804,
+            "TCPCacheLineHitRate": 0.325558,
+            "SQCIHitRate": 0.998463,
+            "missSQCIRequests": 167.0,
+            "missDuplicatedSQCIRequests": 39381.0
+          },
+          "cu_metrics": {
+            "ldsBankConflict": {
+              "mean": 1024.0,
+              "maximum": 1024.0,
+              "sum": 49152.0
+            },
+            "GlobalMemPipeline.cmdCreditStall": {
+              "mean": 774.0833333333334,
+              "maximum": 1000.0,
+              "sum": 37156.0
+            },
+            "GlobalMemPipeline.addrCreditStall": {
+              "mean": 38.541666666666664,
+              "maximum": 66.0,
+              "sum": 1850.0
+            },
+            "GlobalMemPipeline.dataCreditStall": {
+              "mean": 100.5625,
+              "maximum": 253.0,
+              "sum": 4827.0
+            },
+            "LocalMemPipeline.creditStall": {
+              "mean": 2044.3125,
+              "maximum": 3149.0,
+              "sum": 98127.0
+            },
+            "tatd.TATD.taSendStallBytcp": {
+              "mean": 613.3333333333334,
+              "maximum": 912.0,
+              "sum": 29440.0
+            },
+            "tatd.TATD.taSendStallByCredit": {
+              "mean": 50.166666666666664,
+              "maximum": 560.0,
+              "sum": 2408.0
+            },
+            "numCyclesWaitIFetchAfterBranchTaken": {
+              "mean": 11780.229166666666,
+              "maximum": 12477.0,
+              "sum": 565451.0
+            }
+          }
+        },
+        "wavefronts-audit.json": {
+          "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p1-static-n-original-sb/m5out/0/0/2382717_python3.10.perf",
+          "perf_sha256": "0376e9121a920706ca2e3ea7e56c7baea380d6f7d40148307e5c3b138f47ccde",
+          "perf_bytes": 19453,
+          "sqtt_sections": [
+            {
+              "offset": 6858,
+              "raw_bytes": 72748,
+              "compressed_bytes": 11035
+            }
+          ],
+          "nonempty_sqtt_verified": true
+        },
+        "two-tg-audit.json": {
+          "peak_live_waves_cu0": 16,
+          "per_simd_at_peak": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "starts": 16,
+          "ends": 16,
+          "cu0_mmac_count": 2048,
+          "exec0_mmac_count": 0,
+          "mmac_busy8_cycle_union_verified": true,
+          "simds": [
+            {
+              "simd": 0,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 1,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 2,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 3,
+              "mmac": 512,
+              "busy_cycles": 4096
+            }
+          ],
+          "wait_id_audit": {
+            "13": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "12": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "14": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "15": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "9": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "11": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "10": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "8": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "7": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "5": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "4": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "6": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "1": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "3": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "2": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "0": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            }
+          },
+          "numerical": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 2630144,
+            "untouched_tail": true,
+            "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+            "shared": 117760,
+            "scope": "bounded_two_output_tiles_per_tg",
+            "tiles_per_tg": 2
+          },
+          "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+        },
+        "bn512-batch-b-phase-audit.json": {
+          "0002000d": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0000000c": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0001000e": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0003000f": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "00020009": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0003000b": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0001000a": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "00000008": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          }
+        },
+        "consumer-no-vmem-audit.json": {
+          "0": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "1": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "2": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "3": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "4": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "5": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "6": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "7": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "8": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "9": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "10": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "11": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "12": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "13": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "14": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "15": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "metadata-after-k3-pair-sa-weight-store",
+      "algorithm": "Pair SA/weight metadata LDS stores",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-pair-sa-weight-store",
+      "source_sha256": "8cbb4145c1d13c11e24766726dec3cd9ac93be5482012a40bd185963a386bad3",
+      "time_us": 15.286664,
+      "whole_gpu_mmac_percent": 14.897795882738052,
+      "no_spill": {
+        "scratch_bytes": 0,
+        "sgpr_spills": 0,
+        "vgpr_spills": 0,
+        "private_segment_bytes": 0
+      },
+      "partition_regs_allocated": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "partition_regs_actual": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "evidence": {
+        "result.json": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 117760,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "launch.json": {
+          "case": {
+            "M": 4096,
+            "E": 256,
+            "N": 256,
+            "K": 2048,
+            "topk": 8
+          },
+          "kind": "fp8",
+          "grid": 48,
+          "bm": 64,
+          "bn": 512,
+          "bk": 64,
+          "cu_count": 48,
+          "tiles_per_tg": 2,
+          "total_tiles": 96,
+          "output_elements_per_tg": 65536,
+          "kernel_total_tiles_argument": 384,
+          "N_TILES_LIMIT": 1,
+          "input_sha256": {
+            "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+            "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+            "golden": "45c78093f81060ea9c4fec15b35c8e85d0b11170c92522f6015d4e3aa9ecf242",
+            "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+          },
+          "options": {
+            "num_warps": 4,
+            "num_stages": 2,
+            "use_async_copy": true,
+            "wasp_partition_warps": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "wasp_wdra": true,
+            "N": 2048,
+            "K": 256,
+            "top_k": 8,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 512,
+            "BLOCK_SIZE_K": 64,
+            "CK_SORTING": true,
+            "N_TILES_LIMIT": 1
+          },
+          "source_sha256": "8cbb4145c1d13c11e24766726dec3cd9ac93be5482012a40bd185963a386bad3",
+          "gpu_buffers": {
+            "A": {
+              "address": 140728445435904,
+              "bytes": 10354688
+            },
+            "B": {
+              "address": 140723261276160,
+              "bytes": 134217728
+            },
+            "SA": {
+              "address": 140728409784320,
+              "bytes": 161792
+            },
+            "SB": {
+              "address": 140728455790592,
+              "bytes": 2097152
+            },
+            "Sorted": {
+              "address": 140728409946112,
+              "bytes": 161792
+            },
+            "Experts": {
+              "address": 140728410107904,
+              "bytes": 2528
+            },
+            "RouteWeights": {
+              "address": 140728410110464,
+              "bytes": 131072
+            },
+            "SortedWeights": {
+              "address": 140728410241536,
+              "bytes": 161792
+            },
+            "C": {
+              "address": 140722992840704,
+              "bytes": 134217728
+            }
+          }
+        },
+        "model-metrics.json": {
+          "schema_version": 2,
+          "time_us": 15.286664,
+          "wave_span_time_us": 10.873136,
+          "wave_span_mmac_percent": 20.944978523215383,
+          "dispatch_span": {
+            "begin_tick": 0,
+            "end_tick": 15286664,
+            "duration_ticks": 15286664,
+            "duration_us": 15.286664,
+            "gui_duration_us": 15.286,
+            "section_offset": 6774,
+            "section_type": 15,
+            "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-pair-sa-weight-store/m5out/0/0/2382783_python3.10.perf",
+            "source_perf_sha256": "27245ae4cb67f04d34e7c34612e1dbe0e1bde0019fb6a4b90151477cb96a9173"
+          },
+          "whole_gpu_mmac_percent": 14.897795882738052,
+          "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+          "mmac_count_per_cu": {
+            "0": 2048,
+            "1": 2048,
+            "2": 2048,
+            "3": 2048,
+            "4": 2048,
+            "5": 2048,
+            "6": 2048,
+            "7": 2048,
+            "8": 2048,
+            "9": 2048,
+            "10": 2048,
+            "11": 2048,
+            "12": 2048,
+            "13": 2048,
+            "14": 2048,
+            "15": 2048,
+            "16": 2048,
+            "17": 2048,
+            "18": 2048,
+            "19": 2048,
+            "20": 2048,
+            "21": 2048,
+            "22": 2048,
+            "23": 2048,
+            "24": 2048,
+            "25": 2048,
+            "26": 2048,
+            "27": 2048,
+            "28": 2048,
+            "29": 2048,
+            "30": 2048,
+            "31": 2048,
+            "32": 2048,
+            "33": 2048,
+            "34": 2048,
+            "35": 2048,
+            "36": 2048,
+            "37": 2048,
+            "38": 2048,
+            "39": 2048,
+            "40": 2048,
+            "41": 2048,
+            "42": 2048,
+            "43": 2048,
+            "44": 2048,
+            "45": 2048,
+            "46": 2048,
+            "47": 2048
+          },
+          "expected_mmac_instructions": 98304,
+          "padded_tflops": 105.36064219112816,
+          "useful_tflops": 88.0920603736695,
+          "cache": {
+            "TccSendRespBandwidth": 1.303042,
+            "TccRecvRespBandwidth": 0.631101,
+            "TCCHitRate": 0.845867,
+            "TCPCacheLineHitRate": 0.325558,
+            "SQCIHitRate": 0.998661,
+            "missSQCIRequests": 144.0,
+            "missDuplicatedSQCIRequests": 40690.0
+          },
+          "cu_metrics": {
+            "ldsBankConflict": {
+              "mean": 1024.0,
+              "maximum": 1024.0,
+              "sum": 49152.0
+            },
+            "GlobalMemPipeline.cmdCreditStall": {
+              "mean": 643.7916666666666,
+              "maximum": 830.0,
+              "sum": 30902.0
+            },
+            "GlobalMemPipeline.addrCreditStall": {
+              "mean": 84.9375,
+              "maximum": 111.0,
+              "sum": 4077.0
+            },
+            "GlobalMemPipeline.dataCreditStall": {
+              "mean": 77.35416666666667,
+              "maximum": 168.0,
+              "sum": 3713.0
+            },
+            "LocalMemPipeline.creditStall": {
+              "mean": 1592.7708333333333,
+              "maximum": 2549.0,
+              "sum": 76453.0
+            },
+            "tatd.TATD.taSendStallBytcp": {
+              "mean": 969.2916666666666,
+              "maximum": 1255.0,
+              "sum": 46526.0
+            },
+            "tatd.TATD.taSendStallByCredit": {
+              "mean": 0.8541666666666666,
+              "maximum": 41.0,
+              "sum": 41.0
+            },
+            "numCyclesWaitIFetchAfterBranchTaken": {
+              "mean": 11854.125,
+              "maximum": 12411.0,
+              "sum": 568998.0
+            }
+          }
+        },
+        "wavefronts-audit.json": {
+          "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-pair-sa-weight-store/m5out/0/0/2382783_python3.10.perf",
+          "perf_sha256": "27245ae4cb67f04d34e7c34612e1dbe0e1bde0019fb6a4b90151477cb96a9173",
+          "perf_bytes": 19108,
+          "sqtt_sections": [
+            {
+              "offset": 6846,
+              "raw_bytes": 72424,
+              "compressed_bytes": 10702
+            }
+          ],
+          "nonempty_sqtt_verified": true
+        },
+        "two-tg-audit.json": {
+          "peak_live_waves_cu0": 16,
+          "per_simd_at_peak": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "starts": 16,
+          "ends": 16,
+          "cu0_mmac_count": 2048,
+          "exec0_mmac_count": 0,
+          "mmac_busy8_cycle_union_verified": true,
+          "simds": [
+            {
+              "simd": 0,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 1,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 2,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 3,
+              "mmac": 512,
+              "busy_cycles": 4096
+            }
+          ],
+          "wait_id_audit": {
+            "8": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "10": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "9": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "11": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "15": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "13": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "12": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "14": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "3": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "1": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "0": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "2": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "7": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "5": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "4": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "6": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            }
+          },
+          "numerical": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 2630144,
+            "untouched_tail": true,
+            "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+            "shared": 117760,
+            "scope": "bounded_two_output_tiles_per_tg",
+            "tiles_per_tg": 2
+          },
+          "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+        },
+        "bn512-batch-b-phase-audit.json": {
+          "00000008": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0001000a": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "00020009": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0003000b": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0003000f": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0002000d": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0000000c": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0001000e": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          }
+        },
+        "consumer-no-vmem-audit.json": {
+          "0": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "1": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "2": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "3": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "4": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "5": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "6": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "7": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "8": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "9": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "10": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "11": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "12": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "13": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "14": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "15": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "metadata-after-k3-p0-scatter-priority1",
+      "algorithm": "P0 priority 1 during output drain/scatter",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p0-scatter-priority1",
+      "source_sha256": "f053d686c0dc9f1a2cfd43bae10a554976655638605e8b6c1b7b5e5cd8a62014",
+      "time_us": 14.842976,
+      "whole_gpu_mmac_percent": 15.343122565178303,
+      "no_spill": {
+        "scratch_bytes": 0,
+        "sgpr_spills": 0,
+        "vgpr_spills": 0,
+        "private_segment_bytes": 0
+      },
+      "partition_regs_allocated": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "partition_regs_actual": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "evidence": {
+        "result.json": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 117760,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "launch.json": {
+          "case": {
+            "M": 4096,
+            "E": 256,
+            "N": 256,
+            "K": 2048,
+            "topk": 8
+          },
+          "kind": "fp8",
+          "grid": 48,
+          "bm": 64,
+          "bn": 512,
+          "bk": 64,
+          "cu_count": 48,
+          "tiles_per_tg": 2,
+          "total_tiles": 96,
+          "output_elements_per_tg": 65536,
+          "kernel_total_tiles_argument": 384,
+          "N_TILES_LIMIT": 1,
+          "input_sha256": {
+            "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+            "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+            "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+            "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+            "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+            "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+            "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+            "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+            "golden": "45c78093f81060ea9c4fec15b35c8e85d0b11170c92522f6015d4e3aa9ecf242",
+            "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+          },
+          "options": {
+            "num_warps": 4,
+            "num_stages": 2,
+            "use_async_copy": true,
+            "wasp_partition_warps": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "wasp_wdra": true,
+            "N": 2048,
+            "K": 256,
+            "top_k": 8,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 512,
+            "BLOCK_SIZE_K": 64,
+            "CK_SORTING": true,
+            "N_TILES_LIMIT": 1
+          },
+          "source_sha256": "f053d686c0dc9f1a2cfd43bae10a554976655638605e8b6c1b7b5e5cd8a62014",
+          "gpu_buffers": {
+            "A": {
+              "address": 140728445435904,
+              "bytes": 10354688
+            },
+            "B": {
+              "address": 140723261276160,
+              "bytes": 134217728
+            },
+            "SA": {
+              "address": 140728409784320,
+              "bytes": 161792
+            },
+            "SB": {
+              "address": 140728455790592,
+              "bytes": 2097152
+            },
+            "Sorted": {
+              "address": 140728409946112,
+              "bytes": 161792
+            },
+            "Experts": {
+              "address": 140728410107904,
+              "bytes": 2528
+            },
+            "RouteWeights": {
+              "address": 140728410110464,
+              "bytes": 131072
+            },
+            "SortedWeights": {
+              "address": 140728410241536,
+              "bytes": 161792
+            },
+            "C": {
+              "address": 140722992840704,
+              "bytes": 134217728
+            }
+          }
+        },
+        "model-metrics.json": {
+          "schema_version": 2,
+          "time_us": 14.842976,
+          "wave_span_time_us": 10.429448,
+          "wave_span_mmac_percent": 21.836016632903295,
+          "dispatch_span": {
+            "begin_tick": 0,
+            "end_tick": 14842976,
+            "duration_ticks": 14842976,
+            "duration_us": 14.842976,
+            "gui_duration_us": 14.842,
+            "section_offset": 6863,
+            "section_type": 15,
+            "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p0-scatter-priority1/m5out/0/0/2382857_python3.10.perf",
+            "source_perf_sha256": "100a2ca4b2e1390ff2f5255721367664ee6e419f3441ed2cbc200754446470a4"
+          },
+          "whole_gpu_mmac_percent": 15.343122565178303,
+          "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+          "mmac_count_per_cu": {
+            "0": 2048,
+            "1": 2048,
+            "2": 2048,
+            "3": 2048,
+            "4": 2048,
+            "5": 2048,
+            "6": 2048,
+            "7": 2048,
+            "8": 2048,
+            "9": 2048,
+            "10": 2048,
+            "11": 2048,
+            "12": 2048,
+            "13": 2048,
+            "14": 2048,
+            "15": 2048,
+            "16": 2048,
+            "17": 2048,
+            "18": 2048,
+            "19": 2048,
+            "20": 2048,
+            "21": 2048,
+            "22": 2048,
+            "23": 2048,
+            "24": 2048,
+            "25": 2048,
+            "26": 2048,
+            "27": 2048,
+            "28": 2048,
+            "29": 2048,
+            "30": 2048,
+            "31": 2048,
+            "32": 2048,
+            "33": 2048,
+            "34": 2048,
+            "35": 2048,
+            "36": 2048,
+            "37": 2048,
+            "38": 2048,
+            "39": 2048,
+            "40": 2048,
+            "41": 2048,
+            "42": 2048,
+            "43": 2048,
+            "44": 2048,
+            "45": 2048,
+            "46": 2048,
+            "47": 2048
+          },
+          "expected_mmac_instructions": 98304,
+          "padded_tflops": 108.51009501059626,
+          "useful_tflops": 90.72531869619678,
+          "cache": {
+            "TccSendRespBandwidth": 1.342131,
+            "TccRecvRespBandwidth": 0.648034,
+            "TCCHitRate": 0.845381,
+            "TCPCacheLineHitRate": 0.325496,
+            "SQCIHitRate": 0.998663,
+            "missSQCIRequests": 145.0,
+            "missDuplicatedSQCIRequests": 39165.0
+          },
+          "cu_metrics": {
+            "ldsBankConflict": {
+              "mean": 1024.0,
+              "maximum": 1024.0,
+              "sum": 49152.0
+            },
+            "GlobalMemPipeline.cmdCreditStall": {
+              "mean": 729.7916666666666,
+              "maximum": 969.0,
+              "sum": 35030.0
+            },
+            "GlobalMemPipeline.addrCreditStall": {
+              "mean": 36.083333333333336,
+              "maximum": 60.0,
+              "sum": 1732.0
+            },
+            "GlobalMemPipeline.dataCreditStall": {
+              "mean": 102.77083333333333,
+              "maximum": 233.0,
+              "sum": 4933.0
+            },
+            "LocalMemPipeline.creditStall": {
+              "mean": 1845.0625,
+              "maximum": 3360.0,
+              "sum": 88563.0
+            },
+            "tatd.TATD.taSendStallBytcp": {
+              "mean": 553.1458333333334,
+              "maximum": 883.0,
+              "sum": 26551.0
+            },
+            "tatd.TATD.taSendStallByCredit": {
+              "mean": 18.0,
+              "maximum": 314.0,
+              "sum": 864.0
+            },
+            "numCyclesWaitIFetchAfterBranchTaken": {
+              "mean": 11712.104166666666,
+              "maximum": 12148.0,
+              "sum": 562181.0
+            }
+          }
+        },
+        "wavefronts-audit.json": {
+          "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-p0-scatter-priority1/m5out/0/0/2382857_python3.10.perf",
+          "perf_sha256": "100a2ca4b2e1390ff2f5255721367664ee6e419f3441ed2cbc200754446470a4",
+          "perf_bytes": 19388,
+          "sqtt_sections": [
+            {
+              "offset": 6935,
+              "raw_bytes": 72442,
+              "compressed_bytes": 10893
+            }
+          ],
+          "nonempty_sqtt_verified": true
+        },
+        "two-tg-audit.json": {
+          "peak_live_waves_cu0": 16,
+          "per_simd_at_peak": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "starts": 16,
+          "ends": 16,
+          "cu0_mmac_count": 2048,
+          "exec0_mmac_count": 0,
+          "mmac_busy8_cycle_union_verified": true,
+          "simds": [
+            {
+              "simd": 0,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 1,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 2,
+              "mmac": 512,
+              "busy_cycles": 4096
+            },
+            {
+              "simd": 3,
+              "mmac": 512,
+              "busy_cycles": 4096
+            }
+          ],
+          "wait_id_audit": {
+            "10": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "8": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "9": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "11": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "14": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "12": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "13": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "15": {
+              "first_id": 1,
+              "waits": 12,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "7": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "5": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "6": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "4": {
+              "first_id": 6,
+              "waits": 8,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "1": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "3": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "2": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            },
+            "0": {
+              "first_id": 3,
+              "waits": 11,
+              "all_ids_in_range": true,
+              "no_adjacent_repeat": true
+            }
+          },
+          "numerical": {
+            "verified": true,
+            "mismatches": 0,
+            "checked_elements": 2630144,
+            "untouched_tail": true,
+            "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+            "shared": 117760,
+            "scope": "bounded_two_output_tiles_per_tg",
+            "tiles_per_tg": 2
+          },
+          "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+        },
+        "bn512-batch-b-phase-audit.json": {
+          "0001000a": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "00000008": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "00020009": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0003000b": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "0001000e": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0000000c": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0002000d": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "0003000f": {
+            "token_phases": [],
+            "a_phases": [
+              0,
+              1
+            ],
+            "b_id_phase": [
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ]
+            ]
+          }
+        },
+        "consumer-no-vmem-audit.json": {
+          "0": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "1": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "2": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "3": {
+            "role": "P0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "buffer_load_dwordx4": 6,
+              "buffer_load_dword": 2,
+              "ds_read_b32": 4,
+              "ds_read_b128": 32,
+              "buffer_store_dwordx4": 32
+            }
+          },
+          "4": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "5": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "6": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "7": {
+            "role": "P1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "global_load_dword": 2,
+              "buffer_load_dwordx4": 8
+            }
+          },
+          "8": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "9": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "10": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "11": {
+            "role": "C0",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "12": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "13": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "14": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          },
+          "15": {
+            "role": "C1",
+            "instruction_counts": {
+              "ds_read_addtid_b32": 1,
+              "ds_read_matrix_trans_format": 64,
+              "ds_read_b64": 4,
+              "ds_read_b128": 16
+            }
+          }
+        }
+      }
+    }
+  ]
+}

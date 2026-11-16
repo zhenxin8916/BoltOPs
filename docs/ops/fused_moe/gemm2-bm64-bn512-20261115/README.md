@@ -424,3 +424,11 @@ include the slower combined packed-C store retested on this new baseline.
 Nine bounded-correct READY, scale-batching and expert-prefetch controls did not
 beat `98a1e1e` (14.713428us). The closest static P1 N/independent-scale-batch
 control takes14.722324us and is not promoted. [Protocol analysis and evidence](post-metadata-sb-controls/).
+
+## Output handoff controls — 2026-11-16
+
+Four additional controls preserve the retained `98a1e1e` algorithm. Moving output
+EMPTY later shortens CU0 MMAC gaps and advances its final store, but full dispatch
+is 14.769584 us. Static P1 traversal, paired metadata stores and P0 scatter priority
+also lose. [Results and scope](output-handoff-controls/README.md) include numerical,
+phase, nonempty SQTT and zero-spill evidence; the retained 14.713428 us is unchanged.

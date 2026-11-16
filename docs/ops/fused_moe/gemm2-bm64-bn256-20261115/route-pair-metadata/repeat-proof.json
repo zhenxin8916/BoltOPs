@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "text_sha256": "77415e7ff945fcbd763c5405ce73c9abd7e650bba24e9746f29b1f8c12cb12db",
+  "text_bytes": 6364,
+  "source_sha256": "3640e70a78144a047cec8ebb0723656f64a42fc1aa5a8f2f863b83c78985431c",
+  "time_us": 11.794984,
+  "whole_gpu_mmac_percent": 9.654002074102008,
+  "same_inputs_addresses_options_source": true,
+  "cases": [
+    "row32-route-pair-metadata",
+    "row32-route-pair-metadata-repeat-sqtt"
+  ]
+}

@@ -1,30 +1,38 @@
 # Copyright (c) 2026 Hygon Information Technology Co., Ltd.
 # SPDX-License-Identifier: MIT
-"""Persistent channel GEMM2 for gfx946, BM64/BN256/K256.
+"""Persistent FP8/INT8 channel GEMM2 for gfx946, BM64/BN256/BK256.
 
-Four roles, four waves each (2P2C): P0 loads A and row metadata; P1 loads B
-and column scales; C0/C1 compute the left/right 128 columns, apply the original
-((acc * SA) * SB) * weight order, narrow, and scatter routed output directly.
+CK-sorted contiguous byte A/B; FP32 channel scales; BF16/FP16 scatter output,
+before the top-k reduction. Requires K256 and N divisible by 256.
+Four waves per role. This standalone specialization is not framework-selected.
 
-Two full-A slots use 32 KiB. One full-K256 B slot per consumer uses 64 KiB.
-Two M metadata slots use 2 KiB. Two SB generations per side use 2 KiB: 100 KiB total shared memory.
-A slots alternate READY1/2 and EMPTY3/4, with phase (M_epoch >> 1) & 1.
-Metadata alternates READY12/0 with the same phase. B uses READY5/7 and EMPTY6/8,
-with phase N_epoch & 1. Initial A/B/metadata reads finish before returning A
-and B credits, so metadata remains safe across arbitrarily many M iterations.
+Roles and data flow:
+    P0: A + SA/weight/routes -> C0/C1, alternating two full-A slots
+    P1: full-K B-left + SB-left -> C0; full-K B-right + SB-right -> C1
+    C0: left 128 columns; C1: right 128 columns -> direct routed scatter C
 
-FP8 uses FP32 accumulation; INT8 uses INT32 through K, then converts once.
-This is a standalone specialization, not selected by the framework dispatcher.
-Full N traversal is the default. N_TILES_LIMIT is diagnostic only. The tested
-performance scope is 48 CUs, two independent logical BM64 output tiles per TG
-at 1.8 GHz. It has half the padded work of two BM128 output tiles."""
+Persistent traversal (arrows show issue order, not completion):
+    P0 each M: wait A EMPTY -> load A -> publish A and metadata -> next M.
+    P1 each N: load full-K B-left/SB -> full-K B-right/SB -> next N.
+    C0/C1, first N: read A/B/SB + metadata -> LDS wait -> release A/B
+                   -> full-K MMAC -> scale/store two M32 halves.
+    C0/C1, later N: reuse A/metadata -> read/release B/SB -> MMAC -> scatter.
+    A EMPTY follows both consumers' A and metadata reads. No C LDS handoff.
+
+Two full-A slots: 32 KiB; one [K256,N128] B slot per consumer: 64 KiB total.
+Double metadata: 2 KiB; two SB generations per consumer: 2 KiB.
+Total: 100 KiB LDS. All 16 abarriers initialized; ten IDs carry live handoffs.
+A/metadata phases are (M epoch >> 1) & 1; B phases are N epoch & 1.
+Grid is caller-supplied; M += grid. INT8 keeps INT32 accumulation through K,
+then applies FP32 ((acc * SA) * SB) * weight. No instruction warmup.
+Full N is the default; N_TILES_LIMIT is diagnostic only."""
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
 from triton.experimental.gluon.language.amd import hcu
 from triton.experimental.gluon.language.amd.cdna4 import async_copy
 from triton.experimental.gluon.language.amd.cdna3 import buffer_load, buffer_store
 
-# Launch options shared by the library dispatcher and standalone probes.
+# Launch options for this standalone specialization and its probes.
 DEFAULT_LAUNCH_OPTIONS = dict(
     num_warps=4, num_stages=2, use_async_copy=True,
     wasp_partition_warps=(4, 4, 4, 4), wasp_wdra=True,
@@ -50,12 +58,21 @@ def _empty():
 
 @gluon.jit
 def _initialize(STAGES: gl.constexpr):
-    """Initialize all 16 hardware abarriers before splitting the four roles.
+    """Initialize all 16 abarriers, rendezvous, then seed initial EMPTY.
 
-Used IDs: A READY1/2, EMPTY3/4 (8 reader waves); B READY5/7,
-EMPTY6/8 (4 reader waves each); metadata READY12/0. Other IDs are unused.
-A EMPTY starts with two credits per wave; B EMPTY starts with one.
-"""
+        Buffer              Writer -> Reader    READY    EMPTY   Phase
+        A slot0/1           P0 -> C0 + C1        1/2      3/4     (M epoch >> 1) & 1
+        B-left, full K256   P1 -> C0             5        6       N epoch & 1
+        B-right, full K256  P1 -> C1             7        8       N epoch & 1
+        M metadata slot0/1  P0 -> C0 + C1        12/0     -       (M epoch >> 1) & 1
+
+        Writer: wait EMPTY -> copy/store -> READY ---> wait READY -> read
+                        ^                                              |
+                        +---------------- EMPTY <----------------------+
+
+        A EMPTY needs four credits from each consumer; B EMPTY needs four.
+        Metadata lifetime is protected by the corresponding A EMPTY returns.
+        Other IDs have no runtime handoff; their initialization grants no work."""
     hcu.abarrier_init(1, 4)
     hcu.abarrier_init(3, 8)
     for i in gl.static_range(2, 16):
@@ -77,14 +94,17 @@ A EMPTY starts with two credits per wave; B EMPTY starts with one.
 def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch,
                          K: gl.constexpr, BM: gl.constexpr, BK: gl.constexpr,
                          USE_A64: gl.constexpr, STRIDE_SA: gl.constexpr,
-                         MUL_ROUTED_WEIGHT: gl.constexpr):
-    """P0 publishes one M in its alternating A and metadata slots.
+                         MUL_ROUTED_WEIGHT: gl.constexpr, TOP_K: gl.constexpr, CK_SORTING: gl.constexpr):
+    """P0 publishes one M using alternating full-A and metadata slots.
 
-A slot = epoch & 1, READY = 1 + slot, EMPTY = 3 + slot;
-A phase = (epoch >> 1) & 1. Metadata contains four [64] vectors:
-SA, weight, route bits and expert bits. Its READY is 12/0 by slot.
-Both consumers finish the row-metadata reads before returning A EMPTY.
-"""
+        slot = epoch & 1; phase = (epoch >> 1) & 1
+        A: READY = 1 + slot, EMPTY = 3 + slot
+        Metadata: READY12 for slot0, READY0 for slot1; same phase as A
+        Three [64] vectors hold SA, weight and decoded route; the fourth is unused.
+        P0 folds invalid experts into route=-1. SA/weight share one LDS store.
+
+        Both consumers finish A and metadata LDS reads before returning A EMPTY.
+        This protects metadata even when P0 has advanced by multiple M blocks."""
     ticket = epoch
     slot = ticket & 1
     phase = (ticket >> 1) & 1
@@ -119,10 +139,13 @@ Both consumers finish the row-metadata reads before returning A EMPTY.
             weight = gl.full((BM,), 1, gl.float32, ml)
         route = buffer_load(Sorted, (m * BM + mr).to(gl.uint32))
         expert = buffer_load(Experts, (m + 0 * mr).to(gl.uint32))
-    ma.index((epoch & 1) * 4 + 0).store(sa)
-    ma.index((epoch & 1) * 4 + 1).store(weight)
+    if CK_SORTING:
+        route = (route & 0x00ffffff) * TOP_K + ((route >> 24) & 255)
+    route = gl.where(expert >= 0, route, -1)
+    saw = gl.join(sa, weight).permute((1,0))
+    pair_meta_layout: gl.constexpr = gl.SharedLinearLayout([[0,4],[0,8],[0,1],[0,2],[0,16],[0,32],[1,0]], [], 16)
+    ma._reinterpret(gl.float32,[4,2,BM],pair_meta_layout).index((epoch&1)*2).store(saw)
     ma.index((epoch & 1) * 4 + 2).store(route.to(gl.float32, bitcast=True))
-    ma.index((epoch & 1) * 4 + 3).store(expert.to(gl.float32, bitcast=True))
     hcu.wait_lgkmcnt(0)
     hcu.abarrier_arrive(12 if (epoch & 1) == 0 else 0)
 
@@ -181,11 +204,12 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
               USE_B64: gl.constexpr, USE_C64: gl.constexpr,
               STRIDE_SA: gl.constexpr, STRIDE_SBE: gl.constexpr, STRIDE_SBN: gl.constexpr,
               MUL_ROUTED_WEIGHT: gl.constexpr, num_tokens_post_padded_ptr):
-    """P0 streams A/metadata across two slots; P1 streams both B halves.
+    """P0 fills alternating A/metadata slots; P1 streams the two full-K B halves.
 
-P0 can issue the next M without waiting for the current output stores.
-P1's epochs advance per N tile, while P0's epochs advance per M.
-"""
+        P0 each M: wait A EMPTY -> A READY -> metadata READY -> next M.
+        P1 each N: wait/load/publish B-left + SB -> B-right + SB -> next N.
+        P0 does not drain output buffers: C0/C1 scatter their results directly.
+        P0 epochs count M blocks; P1 epochs count N tiles across all M blocks."""
     if num_tokens_post_padded_ptr is not None:
         total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     epoch = 0
@@ -198,7 +222,7 @@ P1's epochs advance per N tile, while P0's epochs advance per M.
     for m in range(pid, total // (N // BN), gl.num_programs(0)):
         if PARTITION == 0:
             _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch,
-                K, BM, BK, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
+                K, BM, BK, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT, TOP_K, CK_SORTING)
             epoch += 1
         else:
             expert = gl.load(Experts + m)
@@ -209,6 +233,31 @@ P1's epochs advance per N tile, while P0's epochs advance per M.
                 _load_b_panel(B, SB, b_base, expert, b0, b1, mb, n, epoch, 0, 1, N, K, BN, BK,
                     USE_B64, STRIDE_SBE, STRIDE_SBN)
                 epoch += 1
+
+
+@gluon.jit
+def _scale_store_rows(acc, sa, sb, weight, route, expert, C, n, valid_routes,
+                      N:gl.constexpr, BN:gl.constexpr, CN:gl.constexpr,
+                      PARTITION:gl.constexpr, TOP_K:gl.constexpr, CK_SORTING:gl.constexpr):
+    """Scale one [M32,N128] register panel and scatter directly to routed C.
+
+        acc -> ((acc * SA) * SB) * weight -> pack adjacent 16-bit values -> store
+        P0 already decoded CK routes and mapped invalid experts to route=-1.
+        Route/expert masks suppress padding. No shared output buffer is used."""
+    linear:gl.constexpr = gl.to_linear_layout(acc.type.layout,(32,CN))
+    packing:gl.constexpr = _output_pack_layout(linear)
+    acc = gl.convert_layout(acc,linear)
+    sa = gl.convert_layout(sa,gl.SliceLayout(1,linear))
+    weight = gl.convert_layout(weight,gl.SliceLayout(1,linear))
+    sb = gl.convert_layout(sb,gl.SliceLayout(0,linear))
+    value = ((acc * sa[:,None]) * sb[None,:]) * weight[:,None]
+    packed = gl.convert_layout(value,packing).to(C.dtype.element_ty)
+    out_route = gl.convert_layout(route,gl.SliceLayout(1,packing))
+    out_expert = gl.convert_layout(expert,gl.SliceLayout(1,packing))
+    rn = gl.arange(0,CN,gl.SliceLayout(0,packing))
+    offsets = out_route.to(gl.uint32)[:,None]*N+n*BN+PARTITION*CN+rn[None,:]
+    valid = (out_route>=0)&(out_route<valid_routes)&(out_expert>=0)
+    buffer_store(packed,C,offsets,valid[:,None])
 
 
 @gluon.jit
@@ -254,7 +303,6 @@ or global scale/route load is needed in either consumer.
                 sa = ma.index((a_epoch & 1) * 4).load(gl.SliceLayout(1, result))
                 weight = ma.index((a_epoch & 1) * 4 + 1).load(gl.SliceLayout(1, result))
                 route = ma.index((a_epoch & 1) * 4 + 2).load(gl.SliceLayout(1, result)).to(gl.int32, bitcast=True)
-                expert = ma.index((a_epoch & 1) * 4 + 3).load(gl.SliceLayout(1, result)).to(gl.int32, bitcast=True)
             hcu.wait_lgkmcnt(0)
             if n == 0:
                 hcu.abarrier_arrive(3 + (a_epoch & 1))
@@ -265,15 +313,16 @@ or global scale/route load is needed in either consumer.
             hcu.sched_barrier()
             if acc.dtype == gl.int32:
                 acc = acc.to(gl.float32)
-            value = ((acc * sa[:, None]) * current_sb[None, :]) * weight[:, None]
-            packed = gl.convert_layout(value, packing).to(C.dtype.element_ty)
-            out_route = gl.convert_layout(route, gl.SliceLayout(1, output_store))
-            out_expert = gl.convert_layout(expert, gl.SliceLayout(1, output_store))
-            if CK_SORTING:
-                out_route = (out_route & 0x00ffffff) * TOP_K + ((out_route >> 24) & 255)
-            offsets = out_route.to(gl.uint32)[:, None] * N + n * BN + PARTITION * CN + rn[None, :]
-            valid = (out_route >= 0) & (out_route < valid_routes) & (out_expert >= 0)
-            buffer_store(packed, C, offsets, valid[:, None])
+            # acc[64,128] + four row vectors -> two M32 panels,
+            # scaled and scattered independently without an LDS mailbox.
+            x0,x1 = gl.split(gl.permute(gl.reshape(acc,(2,32,CN)),(1,2,0)))
+            sa0,sa1 = gl.split(gl.permute(gl.reshape(sa,(2,32)),(1,0)))
+            w0,w1 = gl.split(gl.permute(gl.reshape(weight,(2,32)),(1,0)))
+            r0,r1 = gl.split(gl.permute(gl.reshape(route,(2,32)),(1,0)))
+            e0,e1 = gl.split(gl.permute(gl.reshape(expert,(2,32)),(1,0)))
+            _scale_store_rows(x0,sa0,current_sb,w0,r0,e0,C,n,valid_routes,N,BN,CN,PARTITION,TOP_K,CK_SORTING)
+            hcu.sched_barrier()
+            _scale_store_rows(x1,sa1,current_sb,w1,r1,e1,C,n,valid_routes,N,BN,CN,PARTITION,TOP_K,CK_SORTING)
             b_epoch += 1
         a_epoch += 1
 

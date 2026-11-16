@@ -3,32 +3,30 @@
 """Persistent FP8/INT8 channel GEMM1 for gfx946, BM128/BN128,256/BK128.
 
 Contiguous FP8 (E4M3FN/E5M2, including mixed formats) or signed INT8 A/B;
-FP32 channel scales; BF16/FP16 sorted output. CK routes select A by low24 bits.
-Requires K>=512 and K%256=0. Each role owns four waves.
+FP32 channel scales; BF16/FP16 sorted output. CK low24 route bits select A.
+Requires K>=512 and K%256=0. Four waves per role; grid is caller-supplied.
 
-All supported geometries use the same eight-slot A/B ring.
-Copy issue order (arrows do not imply waiting for data to return):
-    First BK: Bleft0(P0) -> A0(P1) -> Bright0(P0)
-    Later BKs: A1(P1) -> Bleft1(P0) -> Bright1(P0) -> A2(P1) -> ...
-    EB3/EB4 gate each A burst between P0's B bursts.
-Consumer order, with four waves per role:
-    C0: wait/read B -> wait/read A -> release B/A -> handoff -> MMAC
-    C1: wait/read A -> ping handoff -> wait/read B -> release A/B -> MMAC
-    The pre-B C1 handoff applies to ping only; C0 waits before pong MMAC.
-    A reuse requires both consumers' EMPTY credits; B has one consumer.
+Roles and data flow:
+    P0: B-left -> C0; B-right -> C1; next-output routes/expert -> P1
+    P1: A + tail channel scales -> C0/C1
+    C0: left BN/2 columns; C1: right BN/2 columns -> sorted C
 
-A and both B halves alias eight 16-KiB LDS slots with 16 abarriers. P0 owns B;
-P1 owns A/scales. B uses MLS global->LDS copies; A uses buffer-to-LDS or typed loads/stores
-for wide addresses. Each consumer owns an N half; both share A.
-Continuous tickets determine slot/phase across outputs, including short K.
-Metadata aliases the next A0 slot; scales alias the next Bright0 slot.
-P0 publishes completed next-output metadata before Bleft0 so P1 can prepare A0.
-Consumers release scales before output stores, overlapping the next Bleft/A.
-Each consumer K-loop iteration processes two BKs (ping/pong).
-Grid is caller-supplied; persistent TGs advance tile_id += grid.
-Instruction warmup is disabled by default.
-All transport preserves input bytes. INT8 accumulates in INT32; FP8 in FP32.
-"""
+Persistent traversal (arrows show issue order, not completion):
+    Startup: P0 B-left0 -> EB3 grant -> P1 A0 -> EB4 done -> P0 B-right0.
+    Later BKs: P1 A(k) -> P0 B-left(k) -> B-right(k), gated by EB3/EB4.
+    C0 each BK: wait/read B -> wait/read A -> release B/A -> handoff -> MMAC.
+    C1 each BK: wait/read A -> ping handoff -> wait/read B -> release A/B -> MMAC.
+    C0 waits before pong MMAC; C1's pre-B handoff is only on ping.
+    Each K-loop iteration consumes two BKs. Persistent outputs use tile += grid.
+
+A and both B halves share eight 16-KiB LDS slots and 16 abarriers. Tickets
+carry slot/phase across outputs; A needs both consumers' EMPTY credits, B
+needs its one reader's credits. BN256 releases operands at lgkmcnt(8)/0;
+BN128 drains all reads before either EMPTY. Metadata aliases next A0; tail
+scales alias next B-right0. Both scale readers finish before that slot is reused.
+P0 preissues next B-left while P1 prepares A, overlapping the output tail.
+B uses MLS; A uses buffer-to-LDS, or packed loads/stores for 64-bit offsets.
+INT8 accumulates in INT32, FP8 in FP32; scaling uses FP32. Warmup defaults off."""
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
 from triton.experimental.gluon.language.amd import hcu

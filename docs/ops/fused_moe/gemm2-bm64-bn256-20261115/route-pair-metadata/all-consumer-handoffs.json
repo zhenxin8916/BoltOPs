@@ -1,0 +1,70 @@
+{
+  "row32-scale-convert-store-repeat-sqtt": {
+    "8": {
+      "first_mmac_tick": 8240476,
+      "inter_output_gap_cycles": 3224.0
+    },
+    "9": {
+      "first_mmac_tick": 8243256,
+      "inter_output_gap_cycles": 3220.0
+    },
+    "11": {
+      "first_mmac_tick": 8257712,
+      "inter_output_gap_cycles": 3208.0
+    },
+    "10": {
+      "first_mmac_tick": 8261604,
+      "inter_output_gap_cycles": 3200.0
+    },
+    "12": {
+      "first_mmac_tick": 8525148,
+      "inter_output_gap_cycles": 2988.0
+    },
+    "13": {
+      "first_mmac_tick": 8527928,
+      "inter_output_gap_cycles": 3276.0
+    },
+    "15": {
+      "first_mmac_tick": 8542384,
+      "inter_output_gap_cycles": 3128.0
+    },
+    "14": {
+      "first_mmac_tick": 8546276,
+      "inter_output_gap_cycles": 3280.0
+    }
+  },
+  "row32-route-pair-metadata-repeat-sqtt": {
+    "8": {
+      "first_mmac_tick": 8322764,
+      "inter_output_gap_cycles": 3060.0
+    },
+    "9": {
+      "first_mmac_tick": 8323320,
+      "inter_output_gap_cycles": 3092.0
+    },
+    "10": {
+      "first_mmac_tick": 8323876,
+      "inter_output_gap_cycles": 3072.0
+    },
+    "11": {
+      "first_mmac_tick": 8340000,
+      "inter_output_gap_cycles": 3064.0
+    },
+    "14": {
+      "first_mmac_tick": 8777572,
+      "inter_output_gap_cycles": 2868.0
+    },
+    "15": {
+      "first_mmac_tick": 8778128,
+      "inter_output_gap_cycles": 2732.0
+    },
+    "12": {
+      "first_mmac_tick": 8780908,
+      "inter_output_gap_cycles": 2784.0
+    },
+    "13": {
+      "first_mmac_tick": 8781464,
+      "inter_output_gap_cycles": 2860.0
+    }
+  }
+}

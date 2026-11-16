@@ -2,27 +2,30 @@
 # SPDX-License-Identifier: MIT
 """Persistent FP8/INT8 channel GEMM2 for gfx946, BM128/BN512/BK64.
 
-CK-sorted, contiguous byte A/B; FP32 channel scales; BF16/FP16 scatter output.
-K256 and N divisible by 512. Four waves per role; caller supplies the CU grid.
+Contiguous FP8 (E4M3FN/E5M2, including mixed formats) or signed INT8 A/B;
+FP32 channel scales; BF16/FP16 scatter output, before the top-k reduction.
+Requires CK-sorted A/routes, K256 and N divisible by 512. Four waves per role.
 
-    P0: full A + SA/weight/routes ---> C0 + C1; C mailboxes ---> scatter C
-    P1: B-left + SB-left -----------> C0 (left 256 columns)
-        B-right + SB-right --------> C1 (right 256 columns)
+Roles and data flow:
+    P0: A + SA/weight/routes -> C0/C1; C0/C1 output buffers -> scatter C
+    P1: B-left + SB-left -> C0; B-right + SB-right -> C1
+    C0: left 256 columns; C1: right 256 columns. Both retain A across N.
 
-    P0 each M: retain routes -> prefetch next-M A -> drain all N mailboxes.
+Persistent traversal (arrows show issue order, not completion):
+    P0 startup: load A(M0) + metadata(M0).
+    P0 each M: prefetch next-M A/metadata -> drain all N output panels.
     P1 each N128 phase: BL(K0/K1) -> BR(K0/K1) -> BR(K2/K3) -> BL(K2/K3).
-    C0/C1: read A once -> retain in registers across N128 phases;
-           wait/read B(K0/K1) -> release A/B -> MMAC K0/K1;
-           wait/read B(K2/K3) -> release B -> MMAC K2;
-           four M32 panels: MMAC K3 -> scale -> publish C -> P0 scatter.
+    C0/C1, first phase: read A -> read B(K0/K1)/SB -> LDS wait -> release A/B.
+    Every phase: MMAC K0/K1 -> read/release B(K2/K3) -> MMAC K2
+                 -> four M32 panels: MMAC K3 -> scale -> publish C to P0.
+    Later phases reuse A in registers. Each EMPTY follows completed LDS reads.
 
-One 32-KiB A slot, two 16-KiB B slots per consumer, two 8-KiB output
-mailboxes, 4-KiB metadata and 1-KiB SB: 117 KiB LDS, 16 abarriers.
-A/metadata epochs advance per M; B epochs advance per N128 phase. Each
-EMPTY return follows completed LDS reads. INT8 keeps INT32 accumulation
-through K, converting once before FP32 scale/weight multiplication.
-No instruction warmup. Full N is the default; clipping is diagnostic only.
-"""
+One full-A slot: 32 KiB; two [K128,N128] B slots per consumer: 64 KiB total.
+One M32xN128 output buffer per consumer: 16 KiB total. Metadata/scales: 5 KiB.
+Total: 117 KiB LDS, 16 initialized abarriers. A/metadata advance per M; B
+advances per N128 phase. Grid is caller-supplied; M += grid. Each BN512 tile
+contains two N128 phases per consumer. INT8 converts to FP32 only after K.
+No instruction warmup. Full N is the default; clipping is diagnostic only."""
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
 from triton.experimental.gluon.language.amd import hcu
@@ -208,12 +211,13 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
               USE_C64: gl.constexpr, STRIDE_SA: gl.constexpr,
               STRIDE_SBE: gl.constexpr, STRIDE_SBN: gl.constexpr,
               MUL_ROUTED_WEIGHT: gl.constexpr, num_tokens_post_padded_ptr):
-    """P0 prefetches next-M A/metadata and scatters C; P1 streams both B halves.
+    """P0 prefetches next-M A/metadata and scatters outputs; P1 streams B.
 
-    P0: current routes -> next-M A -> C0 M32 mailbox -> C1 M32 mailbox -> repeat.
-    P1: BL K0/K1 -> BR K0/K1 -> BR K2/K3 -> BL K2/K3 -> next N128 phase.
-    P0 epochs count M preloads; P1 epochs count N128 phases across all M.
-    """
+        P0 before N: retain current routes -> next-M A/metadata prefetch.
+        P0 each phase: drain four M32 C0/C1 output-buffer handoffs -> scatter.
+        P1 each phase: BL(K0/K1) -> BR(K0/K1) -> BR(K2/K3) -> BL(K2/K3).
+        Each B transfer is K128; each MMAC chunk is BK64. These are distinct sizes.
+        A epochs count M blocks; B epochs count N128 phases across all M blocks."""
     if num_tokens_post_padded_ptr is not None:
         total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     epoch = 0
@@ -293,13 +297,16 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
               BM: gl.constexpr, BN: gl.constexpr, BK: gl.constexpr,
               STAGES: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
               CK_SORTING: gl.constexpr, PARTITION: gl.constexpr, N_PANELS: gl.constexpr, A_IS_INT8: gl.constexpr, num_tokens_post_padded_ptr):
-    """Retain full A in registers and compute one 256-column consumer half.
+    """Retain A across N and produce one 256-column consumer half.
 
-    first N phase: wait/read A -> wait/read B0/SB -> LDS wait -> release A/B0
-    every phase:  MMAC K0/K1 -> wait/read B1 -> release B1 -> MMAC K2
-                  -> four M32 MMAC K3/scale/mailbox handoffs.
-    Metadata is read once per M; A remains in registers through all N phases.
-    """
+        Before N: read A[128,256] -> two M64 groups -> four BK64 views.
+        First phase: read B(K0/K1)/SB -> LDS wait -> release A/B.
+        Each phase: MMAC K0/K1 -> read/release B(K2/K3) -> MMAC K2
+                    -> four M32 groups: final MMAC K3 -> scale -> C handoff.
+
+        Metadata is loaded once per M; later N128 phases reuse A and metadata.
+        Each C group waits EMPTY before writing and completes its LDS store
+        before READY. P0 returns EMPTY after reading, before the global scatter."""
     if num_tokens_post_padded_ptr is not None:
         total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     CN: gl.constexpr = BN // 4
@@ -312,6 +319,8 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
         ticket = a_epoch
         hcu.abarrier_try_wait(1, ticket & 1)
         a = am.index(0).load(gl.DotOperandLayout(0, mma, 8))
+        # A[128,256] -> two M64 groups -> four K64 views per group.
+        # Later N phases reuse these register operands after A EMPTY.
         pair = gl.split(a.reshape((2, BM // 2, K)).permute((1, 2, 0)))
         low_full = gl.convert_layout(pair[0], gl.DotOperandLayout(0, mma, 8))
         high_full = gl.convert_layout(pair[1], gl.DotOperandLayout(0, mma, 8))
@@ -361,6 +370,8 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
                     hi = gl.amd.cdna4.mfma(a_high[1], b_last, hi)
                     hcu.sched_barrier()
             b = b_last
+            # Two M64 accumulators -> four M32 panels. Defer K3 so each
+            # final MMAC can overlap P0 draining the previous output panel.
             low_accs = gl.split(lo.reshape((2, 32, CN)).permute((1, 2, 0)))
             high_accs = gl.split(hi.reshape((2, 32, CN)).permute((1, 2, 0)))
             accumulators = (gl.convert_layout(low_accs[0], result), gl.convert_layout(low_accs[1], result), gl.convert_layout(high_accs[0], result), gl.convert_layout(high_accs[1], result))

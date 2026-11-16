@@ -1,0 +1,538 @@
+[
+  {
+    "case": "row32-sb-independent",
+    "time_us": 12.235892,
+    "whole_gpu_mmac_percent": 9.306129867769346,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "8224441db582fad530eba4f17e8ea9c0aed4d4c7a8e872b09ee129510cba2b0e",
+    "retained": false,
+    "phase": {
+      "C0": {
+        "first_mmac_tick": 8620780,
+        "initial_to_mmac_cycles": 7535.0,
+        "inter_output_gap_cycles": 3216.0,
+        "mmac_end_to_first_store_cycles": 764.0,
+        "first_to_last_store_issue_cycles": 1656.0,
+        "last_store_to_next_mmac_cycles": 796.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s1, s2",
+            "tick": 10273212,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s1, 5, s0",
+            "tick": 10302124,
+            "next_issue_gap_cycles": 4.0,
+            "id": 5
+          },
+          {
+            "op": "s_abarrier_try_wait s1, 9, s0",
+            "tick": 10388860,
+            "next_issue_gap_cycles": 4.0,
+            "id": 9
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s3, s2",
+            "tick": 10404428,
+            "next_issue_gap_cycles": 4.0,
+            "id": 0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10487828,
+            "next_issue_gap_cycles": 326.0
+          }
+        ],
+        "last_mmac_end_tick": 10978220,
+        "tail_after_mmac_cycles": 1940.0
+      },
+      "C1": {
+        "first_mmac_tick": 8905452,
+        "initial_to_mmac_cycles": 8031.0,
+        "inter_output_gap_cycles": 3232.0,
+        "mmac_end_to_first_store_cycles": 744.0,
+        "first_to_last_store_issue_cycles": 1580.0,
+        "last_store_to_next_mmac_cycles": 908.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s1, s2",
+            "tick": 10626828,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s1, 7, s0",
+            "tick": 10655740,
+            "next_issue_gap_cycles": 4.0,
+            "id": 7
+          },
+          {
+            "op": "s_abarrier_try_wait s1, 10, s0",
+            "tick": 10733580,
+            "next_issue_gap_cycles": 4.0,
+            "id": 10
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s3, s2",
+            "tick": 10749148,
+            "next_issue_gap_cycles": 4.0,
+            "id": 0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10832548,
+            "next_issue_gap_cycles": 330.0
+          }
+        ],
+        "last_mmac_end_tick": 11403004,
+        "tail_after_mmac_cycles": 1248.0
+      }
+    }
+  },
+  {
+    "case": "row32-whole-meta",
+    "time_us": 12.143596,
+    "whole_gpu_mmac_percent": 9.376860033881233,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "85ff500cd376b08ba524f7619ac4e42df78d7ee7d8d197d822663ee8e96cce0f",
+    "retained": false
+  },
+  {
+    "case": "row32-metadata-after-mmac",
+    "time_us": 12.032952,
+    "whole_gpu_mmac_percent": 9.463081046114038,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "3132671f61e06444e2520d73ded32fdab9f208fb177b747547c371fad873b89b",
+    "retained": false,
+    "phase": {
+      "C0": {
+        "first_mmac_tick": 8098140,
+        "initial_to_mmac_cycles": 6595.0,
+        "inter_output_gap_cycles": 3180.0,
+        "mmac_end_to_first_store_cycles": 968.0,
+        "first_to_last_store_issue_cycles": 1584.0,
+        "last_store_to_next_mmac_cycles": 628.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s3, s1",
+            "tick": 8502908,
+            "next_issue_gap_cycles": 4.0,
+            "id": 12
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(4)",
+            "tick": 8526260,
+            "next_issue_gap_cycles": 58.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(2)",
+            "tick": 8590756,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(1)",
+            "tick": 8730868,
+            "next_issue_gap_cycles": 10.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 8853188,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 8864308,
+            "next_issue_gap_cycles": 90.0
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s2, s1",
+            "tick": 9944060,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s2, 5, s0",
+            "tick": 9972972,
+            "next_issue_gap_cycles": 4.0,
+            "id": 5
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10060820,
+            "next_issue_gap_cycles": 334.0
+          }
+        ],
+        "last_mmac_end_tick": 10555660,
+        "tail_after_mmac_cycles": 2444.0
+      },
+      "C1": {
+        "first_mmac_tick": 8362796,
+        "initial_to_mmac_cycles": 7055.0,
+        "inter_output_gap_cycles": 3412.0,
+        "mmac_end_to_first_store_cycles": 1104.0,
+        "first_to_last_store_issue_cycles": 1672.0,
+        "last_store_to_next_mmac_cycles": 636.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s3, s1",
+            "tick": 8827612,
+            "next_issue_gap_cycles": 4.0,
+            "id": 12
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(4)",
+            "tick": 8875428,
+            "next_issue_gap_cycles": 198.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(2)",
+            "tick": 9002196,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(1)",
+            "tick": 9044452,
+            "next_issue_gap_cycles": 26.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 9351364,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 9362484,
+            "next_issue_gap_cycles": 78.0
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s2, s1",
+            "tick": 10388860,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s2, 7, s0",
+            "tick": 10417772,
+            "next_issue_gap_cycles": 4.0,
+            "id": 7
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10496724,
+            "next_issue_gap_cycles": 334.0
+          }
+        ],
+        "last_mmac_end_tick": 11009356,
+        "tail_after_mmac_cycles": 1728.0
+      }
+    }
+  },
+  {
+    "case": "row32-independent-metadata-after-mmac",
+    "time_us": 12.503884,
+    "whole_gpu_mmac_percent": 9.106674374138468,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "f0e6ca903e8ab3199e599c57020b3c0dcafde1f65bcae6403b58b81575a286b2",
+    "retained": false
+  },
+  {
+    "case": "row32-late-meta-whole-store",
+    "time_us": 12.268696,
+    "whole_gpu_mmac_percent": 9.281247167588145,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "d2481e002eef10d8131d575c8ff89c1c937ba76fd0fbd5bc63c69755398a5ace",
+    "retained": false,
+    "phase": {
+      "C0": {
+        "first_mmac_tick": 8091468,
+        "initial_to_mmac_cycles": 6583.0,
+        "inter_output_gap_cycles": 3504.0,
+        "mmac_end_to_first_store_cycles": 1396.0,
+        "first_to_last_store_issue_cycles": 1480.0,
+        "last_store_to_next_mmac_cycles": 628.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s3, s1",
+            "tick": 8776460,
+            "next_issue_gap_cycles": 4.0,
+            "id": 12
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(4)",
+            "tick": 8797588,
+            "next_issue_gap_cycles": 646.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(2)",
+            "tick": 9184564,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(1)",
+            "tick": 9206804,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 9331348,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 9342468,
+            "next_issue_gap_cycles": 66.0
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s2, s1",
+            "tick": 10279884,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s2, 5, s0",
+            "tick": 10317692,
+            "next_issue_gap_cycles": 4.0,
+            "id": 5
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10398868,
+            "next_issue_gap_cycles": 334.0
+          }
+        ],
+        "last_mmac_end_tick": 10893708,
+        "tail_after_mmac_cycles": 2316.0
+      },
+      "C1": {
+        "first_mmac_tick": 9165660,
+        "initial_to_mmac_cycles": 8499.0,
+        "inter_output_gap_cycles": 2692.0,
+        "mmac_end_to_first_store_cycles": 596.0,
+        "first_to_last_store_issue_cycles": 1480.0,
+        "last_store_to_next_mmac_cycles": 616.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s3, s1",
+            "tick": 9452556,
+            "next_issue_gap_cycles": 4.0,
+            "id": 12
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(4)",
+            "tick": 9478132,
+            "next_issue_gap_cycles": 38.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(2)",
+            "tick": 9533732,
+            "next_issue_gap_cycles": 22.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(1)",
+            "tick": 9564868,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 9636036,
+            "next_issue_gap_cycles": 6.0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 9647156,
+            "next_issue_gap_cycles": 58.0
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s2, s1",
+            "tick": 10626828,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s2, 7, s0",
+            "tick": 10655740,
+            "next_issue_gap_cycles": 4.0,
+            "id": 7
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10739140,
+            "next_issue_gap_cycles": 334.0
+          }
+        ],
+        "last_mmac_end_tick": 11231756,
+        "tail_after_mmac_cycles": 1772.0
+      }
+    }
+  },
+  {
+    "case": "row32-late-meta-overlap",
+    "time_us": 12.311508,
+    "whole_gpu_mmac_percent": 9.24897258727363,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "3155f274f428723b337c201b16822220499f43089edb94366947fb707b44b37a",
+    "retained": false
+  },
+  {
+    "case": "row32-producer-route-decode",
+    "time_us": 11.832236,
+    "whole_gpu_mmac_percent": 9.623607913161976,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "bb07952eba05018698391601fea1646b7162f0009724e433c01f14a7be873632",
+    "retained": false,
+    "phase": {
+      "C0": {
+        "first_mmac_tick": 8258268,
+        "initial_to_mmac_cycles": 6883.0,
+        "inter_output_gap_cycles": 3112.0,
+        "mmac_end_to_first_store_cycles": 1032.0,
+        "first_to_last_store_issue_cycles": 1324.0,
+        "last_store_to_next_mmac_cycles": 756.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s1, s2",
+            "tick": 9986316,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s1, 5, s0",
+            "tick": 10015228,
+            "next_issue_gap_cycles": 4.0,
+            "id": 5
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s3, s2",
+            "tick": 10119756,
+            "next_issue_gap_cycles": 4.0,
+            "id": 0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10178692,
+            "next_issue_gap_cycles": 330.0
+          }
+        ],
+        "last_mmac_end_tick": 10671308,
+        "tail_after_mmac_cycles": 1756.0
+      },
+      "C1": {
+        "first_mmac_tick": 9054460,
+        "initial_to_mmac_cycles": 8299.0,
+        "inter_output_gap_cycles": 2584.0,
+        "mmac_end_to_first_store_cycles": 544.0,
+        "first_to_last_store_issue_cycles": 1132.0,
+        "last_store_to_next_mmac_cycles": 908.0,
+        "waits": [
+          {
+            "op": "s_abarrier_try_wait s1, s1, s2",
+            "tick": 10295452,
+            "next_issue_gap_cycles": 4.0,
+            "id": 2
+          },
+          {
+            "op": "s_abarrier_try_wait s1, 7, s0",
+            "tick": 10324364,
+            "next_issue_gap_cycles": 4.0,
+            "id": 7
+          },
+          {
+            "op": "s_abarrier_try_wait s2, s3, s2",
+            "tick": 10455580,
+            "next_issue_gap_cycles": 4.0,
+            "id": 0
+          },
+          {
+            "op": "s_waitcnt lgkmcnt(0)",
+            "tick": 10516740,
+            "next_issue_gap_cycles": 318.0
+          }
+        ],
+        "last_mmac_end_tick": 11071628,
+        "tail_after_mmac_cycles": 1136.0
+      }
+    }
+  },
+  {
+    "case": "row32-route-metadata-after-mmac",
+    "time_us": 11.930092,
+    "whole_gpu_mmac_percent": 9.544670736822482,
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "source_sha256": "da372a1a4e9b24455a8f8246cdb3db97a172659e5fdf835d12ad06863125c0fc",
+    "retained": false
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "text_bytes": 6720,
+  "text_sha256": "4aced79ff52ca8cfefce641feb25ca87c17ca87248d2d16d62a659ae6e894087",
+  "source_sha256": "14c2f814077f1334ce118e3ee9f84cb5b6a799ba518434ebeb78c64f202fd160",
+  "time_us": 11.954,
+  "whole_gpu_mmac_percent": 9.525581395348837,
+  "same_inputs_addresses_options_source": true,
+  "cases": [
+    "row32-scale-convert-store",
+    "row32-scale-convert-store-repeat-sqtt"
+  ]
+}

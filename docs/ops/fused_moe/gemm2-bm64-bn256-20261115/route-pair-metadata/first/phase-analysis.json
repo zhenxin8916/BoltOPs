@@ -1,0 +1,72 @@
+{
+  "C0": {
+    "first_mmac_tick": 8322764,
+    "initial_to_mmac_cycles": 6999.0,
+    "inter_output_gap_cycles": 3060.0,
+    "mmac_end_to_first_store_cycles": 960.0,
+    "first_to_last_store_issue_cycles": 1360.0,
+    "last_store_to_next_mmac_cycles": 740.0,
+    "waits": [
+      {
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "tick": 9952956,
+        "next_issue_gap_cycles": 4.0,
+        "id": 2
+      },
+      {
+        "op": "s_abarrier_try_wait s1, 5, s0",
+        "tick": 9981868,
+        "next_issue_gap_cycles": 4.0,
+        "id": 5
+      },
+      {
+        "op": "s_abarrier_try_wait s2, s3, s2",
+        "tick": 10073052,
+        "next_issue_gap_cycles": 4.0,
+        "id": 0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 10134212,
+        "next_issue_gap_cycles": 330.0
+      }
+    ],
+    "last_mmac_end_tick": 10631276,
+    "tail_after_mmac_cycles": 1856.0
+  },
+  "C1": {
+    "first_mmac_tick": 8780908,
+    "initial_to_mmac_cycles": 7807.0,
+    "inter_output_gap_cycles": 2784.0,
+    "mmac_end_to_first_store_cycles": 628.0,
+    "first_to_last_store_issue_cycles": 1452.0,
+    "last_store_to_next_mmac_cycles": 704.0,
+    "waits": [
+      {
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "tick": 10415548,
+        "next_issue_gap_cycles": 4.0,
+        "id": 2
+      },
+      {
+        "op": "s_abarrier_try_wait s1, 7, s0",
+        "tick": 10444460,
+        "next_issue_gap_cycles": 4.0,
+        "id": 7
+      },
+      {
+        "op": "s_abarrier_try_wait s2, s3, s2",
+        "tick": 10524524,
+        "next_issue_gap_cycles": 8.0,
+        "id": 0
+      },
+      {
+        "op": "s_waitcnt lgkmcnt(0)",
+        "tick": 10583460,
+        "next_issue_gap_cycles": 322.0
+      }
+    ],
+    "last_mmac_end_tick": 11078300,
+    "tail_after_mmac_cycles": 1148.0
+  }
+}

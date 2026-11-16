@@ -2,20 +2,32 @@
 # SPDX-License-Identifier: MIT
 """Persistent FP8/INT8 channel GEMM2 for gfx946, BM64/BN512/BK64.
 
-Four 4-wave WASP roles, native WDRA, K256, N divisible by 512.
-P0 loads A and metadata, prefetches next M, and scatters packed C.
-P1 streams full K256 B-left/right panels and their channel scales.
-C0/C1 each cover 256 columns in two N128 phases; each phase publishes
-one M64 output panel after applying ((acc * SA) * SB) * weight.
+Contiguous FP8 (E4M3FN/E5M2, including mixed formats) or signed INT8 A/B;
+FP32 channel scales; BF16/FP16 scatter output, before the top-k reduction.
+Requires CK-sorted A/routes, K256 and N divisible by 512. Four waves per role.
 
-LDS: A 16 KiB; one K256xN128 B slot per consumer, 64 KiB total;
-two M64xN128 BF16/FP16 output mailboxes, 32 KiB; double metadata 2 KiB;
-SB 1 KiB. Total 115 KiB. Twelve live abarriers remain within IDs 0..15.
+Roles and data flow:
+    P0: A + SA/weight/routes -> C0/C1; C0/C1 output buffers -> scatter C
+    P1: full-K B-left + SB-left -> C0; full-K B-right + SB-right -> C1
+    C0: left 256 columns; C1: right 256 columns. Both retain A across N.
 
-A epochs advance per M, B epochs per N128 phase. EMPTY credits follow
-completed reads. Full N traversal is the default; N_TILES_LIMIT is only
-for bounded diagnostics. Output is a routed scatter through buffer_store.
-"""
+Persistent traversal (arrows show issue order, not completion):
+    P0 startup: load A(M0) + metadata(M0).
+    P0 each M: prefetch next-M A/metadata into registers -> drain first N phase
+               -> publish next-M metadata -> drain remaining output panels.
+    P1 each N128 phase: full-K B-left -> full-K B-right.
+    C0/C1, first phase: read A -> read full-K B/SB -> LDS wait -> release A/B.
+    Every phase: split K256 into four BK64 register views -> MMAC all K
+                 -> scale two M32 halves -> publish one M64 output buffer.
+    Later phases reuse A. No B reload is needed between the four K chunks.
+
+One full-A slot: 16 KiB; one [K256,N128] B slot per consumer: 64 KiB total.
+One M64xN128 output buffer per consumer: 32 KiB total. Metadata/scales: 3 KiB.
+Total: 115 KiB LDS, 12 initialized abarriers within IDs 0..15. A/metadata
+advance per M; B/output advance per N128 phase. Grid is caller-supplied;
+M += grid. Each BN512 tile contains two N128 phases per consumer. INT8
+converts to FP32 only after K, before ((acc * SA) * SB) * weight.
+No instruction warmup. Full N is the default; clipping is diagnostic only."""
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
 from triton.experimental.gluon.language.amd import hcu
@@ -75,7 +87,7 @@ def _initialize(STAGES: gl.constexpr):
     hcu.abarrier_arrive(8)
     hcu.abarrier_arrive(11)
     hcu.abarrier_arrive(15)
-    # AB10/14 are the second Bleft READY/EMPTY, not compute tokens.
+    # IDs 2/4/10/14 are unused: each B half fits in one full-K slot.
     gl.thread_barrier()
 
 
@@ -84,15 +96,14 @@ def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch
                          K: gl.constexpr, BM: gl.constexpr, BK: gl.constexpr,
                          USE_A64: gl.constexpr, STRIDE_SA: gl.constexpr,
                          MUL_ROUTED_WEIGHT: gl.constexpr, WITH_METADATA: gl.constexpr = True):
-    """P0 loads one full-A slot and publishes this M's metadata.
+    """P0 fills the single full-K A slot; optionally publish M metadata too.
 
-        A slot: 0       READY=1, EMPTY=3       phase = epoch & 1
-        MA slot: epoch & 1, four [64] vectors: SA, weight, route, expert
-        MA READY: 12 for even epochs, 0 for odd; phase = (epoch >> 1) & 1
+        A slot0: READY1 / EMPTY3, phase = epoch & 1.
+        Metadata: two slots of four [64] vectors; READY12/0 by epoch parity,
+        phase = (epoch >> 1) & 1. Consumers both return A EMPTY after their reads.
 
-    Both consumers must finish reading A before P0 reuses slot 0. Metadata
-    has two M slots, so P0 can prepare next M while this M is still computing.
-    """
+        WITH_METADATA=False prefetches next A only. P0 separately holds next-M
+        metadata in registers, publishing it after the current first N phase."""
     ticket = epoch
     slot = 0
     phase = ticket & 1
@@ -116,6 +127,7 @@ def _load_a_and_metadata(A, SA, Weights, Sorted, Experts, am, ma, m, rows, epoch
 def _load_metadata_only(SA, Weights, Sorted, Experts, ma, m, epoch,
                         BM: gl.constexpr, USE_A64: gl.constexpr,
                         STRIDE_SA: gl.constexpr, MUL_ROUTED_WEIGHT: gl.constexpr):
+    """Read and publish SA/weight/route/expert for one M; leave the A slot alone."""
     sa, weight, route, expert = _read_metadata(SA, Weights, Sorted, Experts, m, BM, USE_A64, STRIDE_SA, MUL_ROUTED_WEIGHT)
     _publish_metadata(ma, epoch, sa, weight, route, expert)
 
@@ -123,6 +135,10 @@ def _load_metadata_only(SA, Weights, Sorted, Experts, ma, m, epoch,
 @gluon.jit
 def _read_metadata(SA, Weights, Sorted, Experts, m, BM: gl.constexpr,
                    USE_A64: gl.constexpr, STRIDE_SA: gl.constexpr, MUL_ROUTED_WEIGHT: gl.constexpr):
+    """Prefetch this M's four row vectors into P0 registers; do not signal READY.
+
+        SA/weight are FP32; route/expert retain their integer bits. P0 can hold
+        next-M values while current-M readers still own their metadata slot."""
     ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
     mr = gl.arange(0, BM, ml)
     if USE_A64:
@@ -147,6 +163,14 @@ def _read_metadata(SA, Weights, Sorted, Experts, m, BM: gl.constexpr,
 
 @gluon.jit
 def _publish_metadata(ma, epoch, sa, weight, route, expert):
+    """Publish four [64] vectors into the alternating M-metadata slot.
+
+        slot = epoch & 1; READY = 12 (even) or 0 (odd)
+        phase = (epoch >> 1) & 1, tracked by consumers
+        SA/weight/route/expert stores -> lgkmcnt(0) -> READY
+
+        The caller delays next-M publication until the first N phase drains,
+        so current-M metadata reads have finished before that storage is reused."""
     ma.index((epoch & 1) * 4 + 0).store(sa)
     ma.index((epoch & 1) * 4 + 1).store(weight)
     ma.index((epoch & 1) * 4 + 2).store(route.to(gl.float32, bitcast=True))
@@ -300,13 +324,17 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
               BM: gl.constexpr, BN: gl.constexpr, BK: gl.constexpr,
               STAGES: gl.constexpr, GROUP_SIZE_M: gl.constexpr,
               CK_SORTING: gl.constexpr, PARTITION: gl.constexpr, N_PANELS: gl.constexpr, A_IS_INT8: gl.constexpr, num_tokens_post_padded_ptr):
-    """Retain full A in registers and compute one 256-column consumer half.
+    """Retain A across N and produce one 256-column consumer half.
 
-    first N phase: wait/read A -> wait/read B0/SB -> LDS wait -> release A/B0
-    every phase: read full-K B -> MMAC K0/K1/K2
-                  -> both M32 MMAC K3 groups -> scale -> one M64 mailbox handoff.
-    Metadata is read once per M; A remains in registers through all N phases.
-    """
+        Before N: wait/read A[64,256] -> two M32 groups -> four BK64 views.
+        First phase: read B[256,128]/SB -> LDS wait -> return A/B EMPTY.
+        Each phase: split B into four BK64 views -> MMAC all four K chunks
+                    -> load metadata once on first phase -> scale two M32 groups
+                    -> one M64 output handoff to P0.
+
+        B is loaded once per N128 phase, regardless of BK64 arithmetic splitting.
+        Later phases reuse A/metadata registers. Finish output LDS stores before
+        C READY; P0 returns C EMPTY after reading, before scattering globally."""
     if num_tokens_post_padded_ptr is not None:
         total = gl.minimum(total, gl.cdiv(gl.load(num_tokens_post_padded_ptr), BM) * (N // BN))
     CN: gl.constexpr = BN // 4
@@ -319,6 +347,8 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
         ticket = a_epoch
         hcu.abarrier_try_wait(1, ticket & 1)
         a = am.index(0).load(gl.DotOperandLayout(0, mma, 8))
+        # A[64,256] -> two M32 groups -> four K64 views per group.
+        # These are register views, not additional LDS transfers.
         pair = gl.split(a.reshape((2, BM // 2, K)).permute((1, 2, 0)))
         low_full = gl.convert_layout(pair[0], gl.DotOperandLayout(0, mma, 8))
         high_full = gl.convert_layout(pair[1], gl.DotOperandLayout(0, mma, 8))

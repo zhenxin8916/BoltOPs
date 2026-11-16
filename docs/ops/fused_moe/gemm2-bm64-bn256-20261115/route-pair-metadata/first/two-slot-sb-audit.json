@@ -1,0 +1,181 @@
+{
+  "passed": true,
+  "scope": "CU0 all four producer/consumer waves per role; actual SB destination M0 and consumer LDS base addresses, plus LGKM0 before B EMPTY and generation-2 credit ordering",
+  "base": 100352,
+  "slot_stride_bytes": 1024,
+  "half_stride_bytes": 512,
+  "producer_writes": {
+    "0": [
+      {
+        "tick": 6483516,
+        "address": 100352,
+        "wave": 4
+      },
+      {
+        "tick": 8507356,
+        "address": 101376,
+        "wave": 4
+      }
+    ],
+    "1": [
+      {
+        "tick": 7789004,
+        "address": 100864,
+        "wave": 4
+      },
+      {
+        "tick": 9085596,
+        "address": 101888,
+        "wave": 4
+      }
+    ]
+  },
+  "consumer_reads": {
+    "8": [
+      {
+        "tick": 7955804,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9992988,
+        "address": 101376,
+        "base_address": 101376,
+        "encoded_offset": 8192
+      }
+    ],
+    "9": [
+      {
+        "tick": 7956360,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10004664,
+        "address": 101504,
+        "base_address": 101504,
+        "encoded_offset": 8192
+      }
+    ],
+    "10": [
+      {
+        "tick": 7954692,
+        "address": 100352,
+        "base_address": 100352,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9996324,
+        "address": 101376,
+        "base_address": 101376,
+        "encoded_offset": 8192
+      }
+    ],
+    "11": [
+      {
+        "tick": 7955248,
+        "address": 100480,
+        "base_address": 100480,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 9999104,
+        "address": 101504,
+        "base_address": 101504,
+        "encoded_offset": 8192
+      }
+    ],
+    "12": [
+      {
+        "tick": 8482892,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10455580,
+        "address": 101888,
+        "base_address": 101888,
+        "encoded_offset": 8192
+      }
+    ],
+    "13": [
+      {
+        "tick": 8483448,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10493944,
+        "address": 102016,
+        "base_address": 102016,
+        "encoded_offset": 8192
+      }
+    ],
+    "14": [
+      {
+        "tick": 8481780,
+        "address": 100864,
+        "base_address": 100864,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10487828,
+        "address": 101888,
+        "base_address": 101888,
+        "encoded_offset": 8192
+      }
+    ],
+    "15": [
+      {
+        "tick": 8482336,
+        "address": 100992,
+        "base_address": 100992,
+        "encoded_offset": 8192
+      },
+      {
+        "tick": 10435008,
+        "address": 102016,
+        "base_address": 102016,
+        "encoded_offset": 8192
+      }
+    ]
+  },
+  "consumer_empty_ticks": {
+    "8": [
+      8300524,
+      10319916
+    ],
+    "9": [
+      8301080,
+      10340488
+    ],
+    "10": [
+      8301636,
+      10329924
+    ],
+    "11": [
+      8317760,
+      10337152
+    ],
+    "12": [
+      8758668,
+      10764716
+    ],
+    "13": [
+      8759224,
+      10800856
+    ],
+    "14": [
+      8755332,
+      10794740
+    ],
+    "15": [
+      8755888,
+      10706336
+    ]
+  }
+}

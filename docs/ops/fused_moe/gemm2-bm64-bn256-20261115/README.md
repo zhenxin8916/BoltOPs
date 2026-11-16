@@ -3,19 +3,19 @@
 This report, the retained operator and their measured evidence are saved in the same commit.
 
 Current retained operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn256xbk256.py`.
-Current best is **11.999036 μs**, with **9.489829% whole-dispatch MMAC**, repeated with identical machine `.text`, frozen inputs, GPU addresses and elapsed time. The operator, report and new SB two-slot evidence are retained together in this commit. Target **≤9.602 μs is not met**.
+Current best is **11.794984 μs**, with **9.654002% whole-dispatch MMAC**, repeated with identical machine `.text`, frozen inputs, GPU addresses and elapsed time. The operator, report and row32 epilogue evidence are retained together in this commit. Target **≤9.602 μs is not met**.
 
 ## Measurement scope
 
 PMD gfx946/HCU, 1.8 GHz (556 ps/cycle), 48 CU. Launch grid48, four roles × four waves. Each physical persistent TG processes two independent logical M64 output tiles: M=pid and pid+48, N0 only. Actual GEMM2 N2048/K256; BM64/BN256. The originating MoE preparation is M4096/E256/topk8. This is **one physical TG per CU processing two outputs**, not two simultaneous physical TGs.
 
-MMAC utilization in the table is all 48 CUs averaged over the **whole dispatch**, including startup and tail. Current CU0 wave-lifetime utilization is 15.149%, while whole-dispatch is 9.490%; do not interchange them. CU0 has 1024 active MMACs, all 48 CUs have the same count, and active 8-cycle intervals do not overlap on a SIMD. There are 16 live waves per CU, four per SIMD, no exec=0 MMACs, and no compiler spills.
+MMAC utilization in the table is all 48 CUs averaged over the **whole dispatch**, including startup and tail. Current CU0 wave-lifetime utilization is 15.317%, while whole-dispatch is 9.526%; do not interchange them. CU0 has 1024 active MMACs, all 48 CUs have the same count, and active 8-cycle intervals do not overlap on a SIMD. There are 16 live waves per CU, four per SIMD, no exec=0 MMACs, and no compiler spills.
 
-The BM128 two-output reference performs twice the padded work of BM64 two-output runs. 15.364/11.999 is only a bounded two-output latency ratio, not equal-work throughput improvement. Old raw result.json files call this `bounded_equal_padded_output_work`; that inherited label is incorrect **across BM sizes**. It is corrected in the archived harness and repeat result. Within BM64 all candidate comparisons use identical work, input hashes and GPU addresses.
+The BM128 two-output reference performs twice the padded work of BM64 two-output runs. 15.364/11.954 is only a bounded two-output latency ratio, not equal-work throughput improvement. Old raw result.json files call this `bounded_equal_padded_output_work`; that inherited label is incorrect **across BM sizes**. It is corrected in the archived harness and repeat result. Within BM64 all candidate comparisons use identical work, input hashes and GPU addresses.
 
 ## Algorithm and LDS ownership
 
-2P2C remains intact. P0 issues A and SA/weight/route/expert metadata. P1 issues left/right B and channel SB. C0/C1 each compute M64×N128×K256, apply strict `((acc*SA)*SB)*weight`, convert, then scatter directly with packed `buffer_store_dword` in the natural accumulator layout. Generic x4 output conversion was slower and needed additional layout-transpose LDS. Neither consumer performs global metadata loads.
+2P2C remains intact. P0 issues A and SA/weight/route/expert metadata. P1 issues left/right B and channel SB. C0/C1 each compute M64×N128×K256, apply strict `((acc*SA)*SB)*weight`, then scale, convert and scatter two32-row groups with packed `buffer_store_dword` in the natural accumulator distribution. The MMAC computation itself remains full BM64. Generic x4 output conversion was slower and needed additional layout-transpose LDS. Neither consumer performs global metadata loads.
 
 LDS100KiB: A2×64×256 =32KiB, B left/right each256×128 =64KiB, two row-metadata generations =2KiB, two SB generations per side =2KiB. P1 copies SB directly from its buffer to LDS before waiting for B EMPTY; consumers select slot `2*(b_epoch&1)+side`. No output mailbox. B uses native `matrix_load_64x32_b8` selected by `(128,32)` interleave2 panels and loader `(1,4)`; A uses native64x16. Requested WDRA quotas48/16/224/224, total512, no bypass.
 
@@ -45,7 +45,8 @@ Startup has a different bottleneck: C1 first MMAC is1.197μs later than C0. P1 s
 | BM128 reference; two independent M tiles | 15.363948 | 14.823% |
 | BM64: paired M32 mailbox; P0 scatter; B64x16 MLS | 12.761312 | 8.923% |
 | BM64: native B64x32 MLS; two A slots; consumer scatter | 12.168060 | 9.358% |
-| **Two-slot SB, direct buffer-to-LDS before B EMPTY (current)** | **11.999036** | **9.490%** |
+| Two-slot SB, direct buffer-to-LDS before B EMPTY (`a3db31f`) | 11.999036 | 9.490% |
+| **Same producer protocol; row32 scale/convert/store groups (current)** | **11.954000** | **9.526%** |
 | SB global read hoisted before B MLS | 12.267028 | 9.283% |
 | SB LDS publication before B MLS | 12.337084 | 9.230% |
 | P0/P1 each drain one consumer mailbox | 13.078788 | 8.706% |
@@ -254,3 +255,34 @@ WM1/WN4 is rejected by native WDRA SGPR-spill checking. Capturing a computed exp
 A final SB control adds READY9/10, issues both left/right B MLS groups before the shared scale-copy completion wait, then publishes both SB READYs. Consumers complete both B and SB LDS reads before B EMPTY, so the two-slot SB reuse proof still applies; no early EMPTY is used to hide an outstanding scale read. Its12.123024μs and merged-metadata12.282596μs do not beat retained. Explicit consumer compute tokens9/10 enforce C0→C1→C0 ordering with four arrivals per phase. Although they eliminate cross-role MMAC issue interleaving, C1 first MMAC slips8.848→9.464μs and whole dispatch rises12.734624μs. The extra four-wave rendezvous is counterproductive here. These are bounded timing/correctness controls, not full-N promotion validation.
 
 All17 passing controls are slower than `a3db31f`. The best source/perf remains unchanged; these results narrow the next work toward epilogue and fetch scheduling rather than adding producer/consumer synchronization. The requested ≤9.602μs goal remains active and unachieved.
+
+
+## Retained update: row32 epilogue groups — 2026-11-16
+
+Primary acceptance input: **11.954000 μs / 9.525581% whole48-CU dispatch MMAC**, down0.3753% from `a3db31f` (11.999036μs). Repeat SQTT uses identical source/options/inputs/addresses and the same6720-byte machine `.text` (SHA256 `4aced79ff52ca8cfefce641feb25ca87c17ca87248d2d16d62a659ae6e894087`), with exactly equal timing and outputs. This is a small measured improvement; **the ≤9.602μs goal is not met**.
+
+C0/C1 still compute full BM64×N128×K256. After MMAC, the accumulator and row metadata are split into two32-row views whose partition boundary is a register basis. Each group separately performs strict `((acc*SA)*SB)*weight`, narrowing and routed dword scatter; a scheduling fence keeps the first group's stores ahead of the second group's arithmetic. Unlike the older split-store controls, this also splits the scaling/conversion work, rather than preparing all scaled values first. No extra LDS allocation, data exchange between waves, output mailbox, consumer global load, barrier ID, or slot ownership change is introduced. A/B/SB producer protocol, WDRA requests48/16/224/224 and actual19/4/156/157 remain the same; scratch0, LDS100KiB.
+
+Both FP8 and INT8 full-N tests check197,632 elements with zero errors (five M per TG, two N per M). Timing checks1,315,072 elements with zero errors and untouched masked output. A/MA/B phase audits and two-slot SB address/completion/reuse audits pass on timing and both full-N traces. The timing barrier audit sees16 live waves/four per SIMD,1024 active MMACs/CU0 and zero exec=0 MMACs.
+
+An independent input/routing seed3209 compares the old and row32 versions on identical new inputs, GPU addresses, launch options and expected outputs:11.993476→11.812220μs,1.5113% less time,1,280,000 checked elements with zero errors. These are a paired generalization control, **not a replacement for the primary acceptance input**. It supports a benefit beyond one frozen routing sample but does not prove improvement for every shape or routing distribution.
+
+| CU0 SIMD0 issued interval, cycles | old C0 | row32 C0 | old C1 | row32 C1 |
+|---|---:|---:|---:|---:|
+| MMAC end to first store |1028|1092|1236|368|
+| First to last store |1096|1348|1228|1644|
+| Last store to next MMAC |716|784|796|976|
+| Complete inter-output MMAC gap |2840|3224|3260|2988|
+| Final MMAC to wave end |2104|2160|1196|1068|
+
+C1 starts writing earlier and its inter-output gap shortens, while C0's gap grows. Whole-dispatch gain is therefore the acceptance evidence; there is no claim that every local interval improves. Increasing the memory cluster budget or enabling MMAC clustering leaves timing exactly11.999036μs; maximum-ILP scheduling regresses12.513892μs. Packing before scaling12.050188μs, column64 groups12.146932μs,32×64 quarter groups12.207536μs and C1-only async lookahead12.888636μs are rejected. [Control evidence](row32-scale-convert-store/rejected-controls.json).
+
+[Current best perf](row32-scale-convert-store/GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_ROW32_EPILOGUE_GC1800_CU0.perf), [metrics](row32-scale-convert-store/first/metrics.json), [repeat proof](row32-scale-convert-store/repeat-proof.json), [seed3209 paired proof](row32-scale-convert-store/seed3209-pair-proof.json), [toolchain provenance](row32-scale-convert-store/provenance.json), and [retained source](row32-scale-convert-store/kernel.py) accompany this update. Raw case directories are `row32-scale-convert-store`, `row32-scale-convert-store-repeat-sqtt`, `row32-fulln-fp8`, `row32-fulln-int8`, `row32-seed3209`, and `baseline-seed3209` under the existing temporary root. Native compiler checks remain enabled. Rejected sources stay temporary. Completed old negative-control IT traces were losslessly compressed with decompressed SHA verification; [compression manifest](post-a3db31f-controls/compression-manifest.json).
+
+## Retained update: P0 route preparation and paired metadata — 2026-11-16
+
+**11.794984 μs / whole-dispatch 48-CU MMAC 9.654002%**, 1.3302% less time than the previous row32 version (11.954000 μs). Same 1.8 GHz / 48 physical TG / two independent BM64 outputs per TG scope. P0 decodes routes and folds invalid experts once; consumers drop the expert LDS read and duplicate decoding. SA/weight share one LDS store operation. No slot, phase, MMAC layout, multiplication order or LDS budget change.
+
+CU0 SIMD0 inter-output MMAC gaps improve C0 **3224→3060 cycles**, C1 **2988→2784 cycles**. First MMAC starts later by 148/460 cycles, so startup starvation remains; final C1 tail grows 80 cycles, C0 tail shrinks 304. Overall repeat is identical and both handoffs shrink. FP8/INT8 full-N correctness and A/metadata/B/SB reuse audits pass. Independent seed3209 improves 11.812220→11.741608 μs.
+
+[Algorithm, phase breakdown, validation and rejected controls](route-pair-metadata/README.md), [current perf](route-pair-metadata/GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_ROUTE_PAIR_METADATA_GC1800_CU0.perf), [repeat proof](route-pair-metadata/repeat-proof.json), [toolchain](route-pair-metadata/provenance.json). The ≤9.602 μs target remains unmet.

@@ -1,0 +1,1448 @@
+[
+  {
+    "case": "epilogue-max-ilp",
+    "metrics": {
+      "time_us": 12.513892,
+      "wave_span_time_us": 8.100364,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 14.302674767791046,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 12374892,
+      "cu0_lifetime_us": 7.961364,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 9.099391300484294,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "131081": 128,
+        "65546": 128,
+        "196619": 128,
+        "8": 128,
+        "131085": 128,
+        "65550": 128,
+        "196623": 128,
+        "12": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 12513892,
+        "duration_ticks": 12513892,
+        "duration_us": 12.513892,
+        "gui_duration_us": 12.513,
+        "section_offset": 6726,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/epilogue-max-ilp/m5out/0/0/2375859_python3.10.perf",
+        "source_perf_sha256": "4a57737f268ecf04741c3b04a7c0f132eb6859af1b334d822b02266c9932f838"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 9.099391300484294,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "misched_regpressure": false,
+        "amdgpu_enable_max_ilp_scheduling_strategy": true,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "91eaac181687de3b8daa0f6989ec5512d80a7d36bd993530fa5807d84e42d0cf",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  },
+  {
+    "case": "memory-cluster32",
+    "metrics": {
+      "time_us": 11.999036,
+      "wave_span_time_us": 7.585508,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 15.149049485908721,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 11930092,
+      "cu0_lifetime_us": 7.516564,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 9.489829016264306,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "131081": 128,
+        "65546": 128,
+        "196619": 128,
+        "8": 128,
+        "131085": 128,
+        "65550": 128,
+        "196623": 128,
+        "12": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 11999036,
+        "duration_ticks": 11999036,
+        "duration_us": 11.999036,
+        "gui_duration_us": 11.999,
+        "section_offset": 7098,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/memory-cluster32/m5out/0/0/2375857_python3.10.perf",
+        "source_perf_sha256": "09a85edbd0e82f56f3654af366d8da41fdccc5990063cc78cbd9ec45b0eeacc6"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 9.489829016264306,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "max_memory_cluster_dwords": 32,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "0ca21457631703c57ab44600b7ef8279c6933044d0566f75464d6a526a38dec6",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  },
+  {
+    "case": "native-mmac-cluster1",
+    "metrics": {
+      "time_us": 11.999036,
+      "wave_span_time_us": 7.585508,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 15.149049485908721,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 11930092,
+      "cu0_lifetime_us": 7.516564,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 9.489829016264306,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "131081": 128,
+        "65546": 128,
+        "196619": 128,
+        "8": 128,
+        "131085": 128,
+        "65550": 128,
+        "196623": 128,
+        "12": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 11999036,
+        "duration_ticks": 11999036,
+        "duration_us": 11.999036,
+        "gui_duration_us": 11.999,
+        "section_offset": 7101,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/native-mmac-cluster1/m5out/0/0/2375858_python3.10.perf",
+        "source_perf_sha256": "68386d666404b8cb6634067e4ffd7110f5d18efc76e2da811a8dcd4468394609"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 9.489829016264306,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "enable_v_mmac_cluster": 1,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "880692a905be90a9738eecb04523f479a8e67c5cf4e6c0dbc10ee96f8a8cd315",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  },
+  {
+    "case": "pack-layout-before-scale",
+    "metrics": {
+      "time_us": 12.050188,
+      "wave_span_time_us": 7.63666,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 15.118854274324525,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 11945104,
+      "cu0_lifetime_us": 7.531576,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 9.449545517464125,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "65546": 128,
+        "196619": 128,
+        "8": 128,
+        "131081": 128,
+        "65550": 128,
+        "196623": 128,
+        "12": 128,
+        "131085": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 12050188,
+        "duration_ticks": 12050188,
+        "duration_us": 12.050188,
+        "gui_duration_us": 12.05,
+        "section_offset": 7328,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/pack-layout-before-scale/m5out/0/0/2376218_python3.10.perf",
+        "source_perf_sha256": "d4cadc905dfacf03e188c174d49d83210f7e7173b8ffe51d52c1c9042143ec23"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 9.449545517464125,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "1d3c96c1e2949faae289138884e7d0595db69edfece5bd2e03b5b86d85d02186",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  },
+  {
+    "case": "col64-scale-convert-store",
+    "metrics": {
+      "time_us": 12.146932,
+      "wave_span_time_us": 7.733404,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 15.399654109331529,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 11807772,
+      "cu0_lifetime_us": 7.394244,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 9.374284798828214,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "131081": 128,
+        "65546": 128,
+        "196619": 128,
+        "8": 128,
+        "131085": 128,
+        "65550": 128,
+        "196623": 128,
+        "12": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 12146932,
+        "duration_ticks": 12146932,
+        "duration_us": 12.146932,
+        "gui_duration_us": 12.146,
+        "section_offset": 6888,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/col64-scale-convert-store/m5out/0/0/2376361_python3.10.perf",
+        "source_perf_sha256": "bb55d83af74d1746c39eaac605b2275828c9528e84b34085434d92354f2c43c5"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 9.374284798828214,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "4da65bd773b2c23f2137cc2bb77a222ccacf0f7683ae691f66b1d5d11f292aa6",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  },
+  {
+    "case": "quarter-scale-convert-store",
+    "metrics": {
+      "time_us": 12.207536,
+      "wave_span_time_us": 7.794008,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 15.73327187524007,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 11650980,
+      "cu0_lifetime_us": 7.237452,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 9.327746401894698,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "65546": 128,
+        "196619": 128,
+        "131081": 128,
+        "8": 128,
+        "12": 128,
+        "131085": 128,
+        "196623": 128,
+        "65550": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 12207536,
+        "duration_ticks": 12207536,
+        "duration_us": 12.207536,
+        "gui_duration_us": 12.207,
+        "section_offset": 6681,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/quarter-scale-convert-store/m5out/0/0/2376647_python3.10.perf",
+        "source_perf_sha256": "d00a9479dbc6ddc47741e3c9c51e722bd37186fd728995a569026e55e21f43c1"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 9.327746401894698,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "c0b8863ad7e4209134e414ae80f2cd096a2c0a26df320e53c1cd880d85b9cd47",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  },
+  {
+    "case": "row32-c1-async-lookahead",
+    "metrics": {
+      "time_us": 12.888636,
+      "wave_span_time_us": 8.475108,
+      "mmac_scope": "cu0_wave_lifetime",
+      "mmac_total_pct": 13.458631793388973,
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 12874180,
+      "cu0_lifetime_us": 8.460652,
+      "simd_busy_ticks": [
+        1138688,
+        1138688,
+        1138688,
+        1138688
+      ],
+      "dispatch_window_mmac_pct": 8.834821621155257,
+      "clock_period_ps": 556,
+      "effective_gc_ghz": 1.798561,
+      "gc_ghz": 1.8,
+      "active_mmac_families": {
+        "v_mmac_f32_16x16x32_fp8_fp8": 1024
+      },
+      "active_wave_counts": {
+        "65546": 128,
+        "196619": 128,
+        "131081": 128,
+        "8": 128,
+        "65550": 128,
+        "12": 128,
+        "131085": 128,
+        "196623": 128
+      },
+      "dispatch": {
+        "begin_tick": 0,
+        "end_tick": 12888636,
+        "duration_ticks": 12888636,
+        "duration_us": 12.888636,
+        "gui_duration_us": 12.888,
+        "section_offset": 8113,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/row32-c1-async-lookahead/m5out/0/0/2377188_python3.10.perf",
+        "source_perf_sha256": "b584bd5b115c6156ff7a3b5bf60d2dbef7abefb5337c52d58a6ef3d4b9b765bb"
+      },
+      "definition": "CU0 four-SIMD active MMAC 8-cycle interval unions / CU0 first WAVE_START to last s_endpgm plus one cycle; includes startup and tail",
+      "whole_gpu_mmac_percent": 8.834821621155257,
+      "all_48_cu_mmac_counts": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    "result": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 1315072,
+      "untouched_tail": true,
+      "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+      "shared": 102400,
+      "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+      "tiles_per_tg": 2
+    },
+    "launch": {
+      "case": {
+        "M": 4096,
+        "E": 256,
+        "N": 256,
+        "K": 2048,
+        "topk": 8
+      },
+      "kind": "fp8",
+      "grid": 48,
+      "bm": 64,
+      "bn": 256,
+      "bk": 256,
+      "cu_count": 48,
+      "tiles_per_tg": 2,
+      "total_tiles": 96,
+      "output_elements_per_tg": 32768,
+      "kernel_total_tiles_argument": 768,
+      "N_TILES_LIMIT": 1,
+      "input_sha256": {
+        "A": "9607cb83bc058817c9b01480781a9091e29c9e1bb56fe71ddcb18c8ece4f8650",
+        "B": "a31ca98851a987027f88e8a2eed9d9f66809274c2ea491d0976c192c6c1da2a6",
+        "SA": "a93ef5240d09ff25423d5be79e21f35038385e5409dfe030350184f003e2766e",
+        "SB": "58b63fe1041fbbe0aac118b0f7f9b16bf7c3c56629311e73570e32bf5d0320be",
+        "Sorted": "03cb9ca20feb825ba26751a4937abe104d23debb5530ff3c4669becfb97c986b",
+        "Experts": "10eed5cb71449499c6927ce5c794638267c8bd6ba7a419e78fab2dceaaccdc1e",
+        "RouteWeights": "dfb80a738a1937984db2b476cc1e855d5f0d77e60296ee44170942974a5b6691",
+        "SortedWeights": "ab374c5e06e86408d4058ee268ce9ae7c2e6d583920b04e9f221cd0ec7370176",
+        "golden": "316143e930d108462c71360484511a1c7fa14d0f4d7a233baf2eefd3dcb8e3ec",
+        "selected_rows": "39499049dd986f01afb4e7515ded94c27af4b1313c9f21a13e389992f4c327f5"
+      },
+      "options": {
+        "num_warps": 4,
+        "num_stages": 2,
+        "use_async_copy": true,
+        "wasp_partition_warps": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "wasp_wdra": true,
+        "N": 2048,
+        "K": 256,
+        "top_k": 8,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 256,
+        "BLOCK_SIZE_K": 256,
+        "CK_SORTING": true,
+        "N_TILES_LIMIT": 1
+      },
+      "source_sha256": "0f3094b6e8ca0a30816647b0e68d5cb4d7a99b7e277e11155be3315d29d2a7d1",
+      "gpu_buffers": {
+        "A": {
+          "address": 140728462213120,
+          "bytes": 10354688
+        },
+        "B": {
+          "address": 140723261276160,
+          "bytes": 134217728
+        },
+        "SA": {
+          "address": 140728426561536,
+          "bytes": 161792
+        },
+        "SB": {
+          "address": 140728472567808,
+          "bytes": 2097152
+        },
+        "Sorted": {
+          "address": 140728426723328,
+          "bytes": 161792
+        },
+        "Experts": {
+          "address": 140728426885120,
+          "bytes": 2528
+        },
+        "RouteWeights": {
+          "address": 140728426887680,
+          "bytes": 131072
+        },
+        "SortedWeights": {
+          "address": 140728427018752,
+          "bytes": 161792
+        },
+        "C": {
+          "address": 140722992840704,
+          "bytes": 134217728
+        }
+      }
+    },
+    "retained": false,
+    "static_opcodes": {
+      "buffer_store_short": 0,
+      "buffer_store_dword": 32,
+      "v_pk_mul_f32": 96,
+      "v_cvt_pk_bf16_f32": 32
+    }
+  }
+]

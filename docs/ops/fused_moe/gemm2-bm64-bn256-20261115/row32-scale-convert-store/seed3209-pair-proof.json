@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "baseline_time_us": 11.993476,
+  "row32_time_us": 11.81222,
+  "time_reduction_percent": 1.5112883037411318,
+  "same_inputs_addresses_options_and_output": true,
+  "scope": "Independent seed3209; same 48-CU, 1.8GHz, two-output persistent diagnostic, not the primary acceptance input"
+}

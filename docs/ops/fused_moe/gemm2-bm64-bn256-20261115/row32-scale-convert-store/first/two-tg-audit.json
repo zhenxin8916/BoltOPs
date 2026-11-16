@@ -1,0 +1,145 @@
+{
+  "peak_live_waves_cu0": 16,
+  "per_simd_at_peak": [
+    4,
+    4,
+    4,
+    4
+  ],
+  "starts": 16,
+  "ends": 16,
+  "cu0_mmac_count": 1024,
+  "exec0_mmac_count": 0,
+  "mmac_busy8_cycle_union_verified": true,
+  "simds": [
+    {
+      "simd": 0,
+      "mmac": 256,
+      "busy_cycles": 2048
+    },
+    {
+      "simd": 1,
+      "mmac": 256,
+      "busy_cycles": 2048
+    },
+    {
+      "simd": 2,
+      "mmac": 256,
+      "busy_cycles": 2048
+    },
+    {
+      "simd": 3,
+      "mmac": 256,
+      "busy_cycles": 2048
+    }
+  ],
+  "wait_id_audit": {
+    "8": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "9": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "10": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "11": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "3": {
+      "first_id": 3,
+      "waits": 2,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "13": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "14": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "0": {
+      "first_id": 3,
+      "waits": 2,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "1": {
+      "first_id": 3,
+      "waits": 2,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "2": {
+      "first_id": 3,
+      "waits": 2,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "15": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "12": {
+      "first_id": 1,
+      "waits": 6,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "5": {
+      "first_id": 6,
+      "waits": 4,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "7": {
+      "first_id": 6,
+      "waits": 4,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "6": {
+      "first_id": 6,
+      "waits": 4,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    },
+    "4": {
+      "first_id": 6,
+      "waits": 4,
+      "all_ids_in_range": true,
+      "no_adjacent_repeat": true
+    }
+  },
+  "numerical": {
+    "verified": true,
+    "mismatches": 0,
+    "checked_elements": 1315072,
+    "untouched_tail": true,
+    "output_sha256": "fb69550d42b8768b3791826a8c64f1a343c12f8f1ef321bc779c1a00d6ead8a7",
+    "shared": 102400,
+    "scope": "two_independent_logical_M_tiles_per_persistent_TG",
+    "tiles_per_tg": 2
+  },
+  "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+}

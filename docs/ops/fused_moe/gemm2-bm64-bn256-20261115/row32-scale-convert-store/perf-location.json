@@ -1,0 +1,5 @@
+{
+  "source": "/zhenxin/temp/moe-gemm2-bm64bn256-20261115/row32-scale-convert-store-repeat-sqtt/m5out/0/0/2376427_python3.10.perf",
+  "exported": "GEMM2_BM64_BN256_K256_GRID48_OUTPUT96_2M_PER_CU_ROW32_EPILOGUE_GC1800_CU0.perf",
+  "sha256": "8a04f22eccf883da6cc064d3ed19525b7b5195cd38041e699689a8d1ae9246a0"
+}

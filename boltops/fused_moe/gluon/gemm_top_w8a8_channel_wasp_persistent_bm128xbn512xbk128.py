@@ -2,23 +2,30 @@
 # SPDX-License-Identifier: MIT
 """Persistent FP8/INT8 channel GEMM1 for gfx946, BM128/BN512/BK128.
 
-CK-sorted routes select rows of contiguous A[M,K]; B[E,N,K] is K-contiguous.
-FP32 channel scales; BF16/FP16 sorted output. Requires K>=512, K%512=0 and
-N%512=0. Each P0/P1/C0/C1 role owns four waves; grid is caller-supplied.
+Contiguous FP8 (E4M3FN/E5M2, including mixed formats) or signed INT8 A/B;
+FP32 channel scales; BF16/FP16 sorted output. CK low24 route bits select A.
+Requires K>=512, K%512=0 and N%512=0. Four waves per role.
 
-    P0: B-left + B-right -> C0/C1 through three shared B FIFO slots
-    P1: A -> C0 + C1 through two A slots; publishes channel scales at tail
-    C0: left N256; C1: right N256. Both retain A across two N128 panels.
+Roles and data flow:
+    P0: B-left -> C0; B-right -> C1, through one shared three-slot B FIFO
+    P1: A + tail channel scales -> C0/C1, through two shared A slots
+    C0: left N256; C1: right N256 -> native fragments of sorted C
 
-For each K256 pair, consumers read A0/A1 once, compute N panel0, then reuse
-those registers for N panel1. Each B slot holds [K256,N128]; both K128 reads
-must finish before EMPTY. B issue order is left/right panel0, then left/right
-panel1. EB3/4 order A bursts between B bursts.
-A2 x 16 KiB + B3 x 32 KiB fill 128 KiB LDS. Metadata aliases A slot0;
-tail scales alias A slot1, protected by EMPTY and EB5. Tickets continue across
-outputs. Native output fragments preserve wave ownership, without LDS exchange.
-INT8 accumulates in INT32 and scales in FP32. Warmup is disabled by default.
-"""
+Persistent traversal (arrows show issue order, not completion):
+    Startup: P0 B-left0 -> EB3 grant -> P1 A0 -> EB4 done -> P0 B-right0.
+    Each K256 pair, per consumer:
+        N panel0: read A0/B(K0) -> MMAC -> read A1/B(K1) -> MMAC
+        N panel1: reuse A0/A1 registers -> read new B(K0/K1) -> MMAC
+    B issue order: left/right panel0, then left/right panel1.
+    EB3/EB4 grant the A0/A1 bursts only for panel0. Outputs use tile += grid.
+
+A: 2 x 16 KiB; B: 3 x 32 KiB, each [K256,N128]. Total: 128 KiB LDS.
+All 16 abarriers are initialized; five READY/EMPTY pairs own these buffers.
+A EMPTY needs both consumers; B EMPTY follows both K128 reads by its owner.
+Metadata aliases A slot0; tail scales alias A slot1. EMPTY and EB5 protect
+reuse across outputs. Continuous tickets preserve generations across tiles.
+B uses MLS; A uses buffer-to-LDS or packed loads/stores for 64-bit offsets.
+INT8 keeps INT32 accumulation through K, then scales in FP32. Warmup defaults off."""
 from triton.experimental import gluon
 from triton.experimental.gluon import language as gl
 from triton.experimental.gluon.language.amd import hcu
@@ -120,12 +127,17 @@ def store_channel_output(C, acc, sa, sb, block_m, block_n,
 @gluon.constexpr_function
 def abarrier_count(a_stages):
     # Initialize the complete 16-ID hardware namespace, including reserved IDs.
+    """Return the full 16-ID initialization range, including reserved IDs."""
     return 16
 
 
 @gluon.constexpr_function
 def abarrier_init_asm(a_stages):
     # A READY1/2, EMPTY8/9; shared B READY4/5/6, EMPTY11/12/13.
+    """Generate READY(count4)/EMPTY(count8) initializers for IDs 0..15.
+
+        A: READY1/2, EMPTY8/9. B FIFO: READY4/5/6, EMPTY11/12/13.
+        Reserved IDs are initialized too; only buffer EMPTY credits are used."""
     lines = []
     for barrier_id in range(16):
         count = 8 if barrier_id >= 8 else 4
@@ -135,16 +147,13 @@ def abarrier_init_asm(a_stages):
 
 @gluon.constexpr_function
 def _buffer_lds_layout(rows, bk, element_bytes, waves, wrap_step, copy_bytes):
-    """Build the shared-memory layout for a K-contiguous [rows, bk] tile.
+    """Match A's producer copy addresses to the consumer's LDS view.
 
-    Interleave row chunks from the producer waves in SharedLinearLayout,
-    then describe the buffer-to-LDS placement with BufferLdsSharedLayout.
-    The consumer uses the same layout to find the copied data in LDS.
-
-    waves is the producer wave count; copy_bytes is bytes copied per lane
-    (0 selects the fallback below); wrap_step is the wave wrap step in bytes.
-    This constructs the requested layout; it does not search for an optimum.
-    """
+        Default byte inputs: [128,128] = 16 KiB, four producer waves,
+        32 lanes per row chunk, 16 bytes per lane, wrap_step=32 bytes.
+        SharedLinearLayout interleaves wave-owned row chunks;
+        BufferLdsSharedLayout describes placement of the global-to-LDS copy.
+        This is a fixed layout construction, not a layout search."""
     # FP8 uses 32 lanes per row chunk; wider elements use a full wave.
     lanes_per_row = WAVE_SIZE.value // 2 if element_bytes == 1 else WAVE_SIZE.value
     copy_bytes = copy_bytes or element_bytes * bk // lanes_per_row
@@ -165,15 +174,16 @@ def _buffer_lds_layout(rows, bk, element_bytes, waves, wrap_step, copy_bytes):
 @gluon.jit
 def _load_a_tile(A, am, a_offsets, a_mask, BK: gl.constexpr, tile, first_k_tile,
     WAIT_EMPTY: gl.constexpr = True, WAIT_GATE: gl.constexpr = False, USE_A64: gl.constexpr = False):
-    """P1 waits/gates one K128 A copy into slot=(first_k_tile+tile)&1.
+    """P1 issues one A K128 tile into an alternating 16-KiB LDS slot.
 
-            ticket = first_k_tile + tile; phase = (ticket >> 1) & 1
-            EMPTY = 8 + slot    P1 waits; C0/C1 each return one credit per wave
-            READY = 1 + slot   P1 publishes after the copy
+        ticket = first_k_tile + tile; slot = ticket & 1
+        phase = (ticket >> 1) & 1; READY = 1 + slot; EMPTY = 8 + slot
+        P1: wait EMPTY -> optional EB3 grant -> copy -> READY -> EB4 in caller
+        C0/C1: wait READY -> read -> each returns one EMPTY credit per wave
 
-        EB3 grants the A burst; only the burst raises P1 to priority2. Narrow
-        addresses use buffer-to-LDS; wide addresses use two packed K64 writes
-        to limit temporary VGPRs. Both paths preserve raw FP8/INT8 bytes."""
+        Both consumers must finish LDS reads before slot reuse; register copies
+        may outlive that reuse. The copy burst runs at priority2. The narrow
+        path uses buffer-to-LDS; 64-bit offsets use two packed K64 load/stores."""
     ticket = first_k_tile + tile
     slot = ticket & 1
     phase = (ticket >> 1) & 1
@@ -183,8 +193,6 @@ def _load_a_tile(A, am, a_offsets, a_mask, BK: gl.constexpr, tile, first_k_tile,
     dest = am.index(slot)
     memory_tile = tile
     source = A + gl.cast(memory_tile, gl.int64) * BK if USE_A64 else A + memory_tile * BK
-    # Empty tied-register asm materializes the pointer before the issue gate;
-    # it emits no instruction and leaves register assignment to LLVM.
     # ### ASM Note: Gluon cannot pin source preparation before EB3; tied SGPR ASM emits no instruction.
     source = gl.inline_asm_elementwise(
         "", constraints="=s,0", args=[source.to(gl.uint64)],
@@ -415,16 +423,16 @@ def _warm_mmac_instructions(PARTITION: gl.constexpr, SLOT: gl.constexpr):
     # Symbolic labels avoid fixed code addresses. Normal compute pays one
     # untaken EXEC=0 return guard per BK; scalar temporaries are allocated.
     """Visit the real MMAC block with EXEC=0; restore EXEC before normal work."""
-    # ### ASM Note: Gluon has no EXEC-save or branch-to-MMAC-label operation; ASM implements the optional warmup.
+    # ### ASM Note: Gluon has no EXEC-mask API; save and clear EXEC for instruction warmup.
     saved_exec = gl.inline_asm_elementwise(
         "s_mov_b64 $0, exec\n\ts_mov_b64 exec, 0", constraints="=&s,~{exec},~{memory}",
         args=[], dtype=gl.uint64, is_pure=False, pack=1)
-    # ### ASM Note: Gluon has no EXEC-save or branch-to-MMAC-label operation; ASM implements the optional warmup.
+    # ### ASM Note: Gluon cannot jump to named MMAC labels; ASM supplies entry/return control.
     gl.inline_asm_elementwise(
         "s_branch " + _icache_label(PARTITION, SLOT, "mmac") + "\n"
         + _icache_label(PARTITION, SLOT, "resume") + ":",
         constraints="=s,~{memory}", args=[], dtype=gl.uint32, is_pure=False, pack=1)
-    # ### ASM Note: Gluon has no EXEC-save or branch-to-MMAC-label operation; ASM implements the optional warmup.
+    # ### ASM Note: Gluon has no EXEC-mask API; restore the saved mask after warmup.
     gl.inline_asm_elementwise(
         "s_mov_b64 exec, $1", constraints="=s,s,~{exec},~{memory}", args=[saved_exec],
         dtype=gl.uint32, is_pure=False, pack=1)
@@ -432,15 +440,20 @@ def _warm_mmac_instructions(PARTITION: gl.constexpr, SLOT: gl.constexpr):
 
 @gluon.jit
 def _initialize(PRODUCER_WAVES: gl.constexpr, WAVES: gl.constexpr, A_STAGES: gl.constexpr):
-    """Initialize READY/EMPTY before splitting into the four roles.
+    """Initialize the 16-ID namespace, rendezvous, then seed EMPTY credits.
 
-            Buffer       Slots      READY       EMPTY       Consumer credits
-            A K128       0/1        1/2         8/9         C0 x4 + C1 x4
-            B K256,N128  0/1/2      4/5/6       11/12/13    its reader: 4 x2
+        Buffer           Slots     Writer -> Reader    READY    EMPTY
+        A [128,128]      0/1       P1 -> C0 + C1        1/2      8/9
+        B [256,128]      0/1/2     P0 -> C0 or C1       4/5/6    11/12/13
 
-        Each READY counts four producer waves. Startup grants eight EMPTY credits
-        per slot. IDs 0/3/7/10/14/15 are reserved. Scale READY uses EB2 for C0 and
-        EB0 for C1; EB5 protects old scale reads before next-output A1 reuse."""
+        Writer: wait EMPTY -> issue copy -> READY ---> wait READY -> read
+                        ^                                             |
+                        +---------------- EMPTY <---------------------+
+
+        READY counts four writer waves. A EMPTY needs 4 C0 + 4 C1 credits;
+        B EMPTY needs its reader's four waves x2, after both K128 reads.
+        Reserved IDs: 0/3/7/10/14/15. EB2/EB0 publish scales to C0/C1;
+        EB5 waits for both scale readers before the next output overwrites A1."""
     # ### ASM Note: Builtin init adds a rendezvous per ID; batch ASM needs only the one barrier below.
     gl.inline_asm_elementwise(abarrier_init_asm(A_STAGES), constraints="=s", args=[], dtype=gl.int32,
         is_pure=False, pack=1)
@@ -466,16 +479,18 @@ def _consume_retained(acc, am, bm, a0, a1, a_ticket, b_ticket, sync_id, arrive_i
                       MMA: gl.constexpr, PARTITION: gl.constexpr, SLOT: gl.constexpr,
                       WAVES: gl.constexpr, PINGPONG: gl.constexpr,
                       INSN_WARMUP: gl.constexpr, N_PANEL: gl.constexpr):
-    """Consume one K128 half; retain A for the second N128 panel.
+    """Consume one K128 half, retaining A registers for the next N128 panel.
 
-            C0: wait/read B -> wait/read A (panel0 only) -> release -> MMAC
-            C1: wait/read A -> ping handoff -> wait/read B -> release -> MMAC
-            Panel1: both reuse a0/a1 registers instead of reading A again.
+        panel0 C0: wait/read B -> wait/read A -> release -> handoff -> MMAC
+        panel0 C1: wait/read A -> ping handoff -> wait/read B -> release -> MMAC
+        panel1:    reuse A0/A1 -> wait/read new B -> release -> MMAC
 
-        B EMPTY is returned only after SLOT1, when both K halves have been read.
-        For panel0/SLOT1, split LDS waits release the earlier operand first:
-        C0 B-before-A: lgkmcnt(8) -> B EMPTY -> lgkmcnt(0) -> A EMPTY.
-        C1 A-before-B: lgkmcnt(6) -> A EMPTY -> lgkmcnt(0) -> B EMPTY."""
+        SLOT0/1 are K0/K1 within the same [K256,N128] B buffer. B EMPTY is
+        returned only after SLOT1. A may be released after each K128 read.
+        On panel0/SLOT1, release the earlier LDS operand first:
+            C0 B then A: lgkmcnt(8) -> B EMPTY(x2) -> lgkmcnt(0) -> A EMPTY(x1)
+            C1 A then B: lgkmcnt(6) -> A EMPTY(x1) -> lgkmcnt(0) -> B EMPTY(x2)
+        These counts match this file's read geometry, not the BN128/256 kernel."""
     a_slot = a_ticket & 1
     a_phase = (a_ticket >> 1) & 1
     b_slot = b_ticket % 3
@@ -512,25 +527,25 @@ def _consume_retained(acc, am, bm, a0, a1, a_ticket, b_ticket, sync_id, arrive_i
     if N_PANEL == 0:
         if SLOT == 1 and PARTITION == 0:
             hcu.wait_lgkmcnt(8)
-            # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+            # ### ASM Note: Builtin arrive can insert a full LDS drain; ASM keeps the explicit wait above.
             gl.inline_asm_elementwise("s_abarrier_arrive $0, $1, 2", constraints="=&s,s,~{memory}",
                 args=[11 + b_slot], dtype=gl.int32, is_pure=False, pack=1)
             hcu.wait_lgkmcnt(0)
-            # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+            # ### ASM Note: Builtin arrive can insert a full LDS drain; ASM keeps the explicit wait above.
             gl.inline_asm_elementwise("s_abarrier_arrive $0, $1, 1", constraints="=&s,s,~{memory}",
                 args=[8 + a_slot], dtype=gl.int32, is_pure=False, pack=1)
         elif SLOT == 1 and PARTITION == 1:
             hcu.wait_lgkmcnt(6)
-            # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+            # ### ASM Note: Builtin arrive can insert a full LDS drain; ASM keeps the explicit wait above.
             gl.inline_asm_elementwise("s_abarrier_arrive $0, $1, 1", constraints="=&s,s,~{memory}",
                 args=[8 + a_slot], dtype=gl.int32, is_pure=False, pack=1)
             hcu.wait_lgkmcnt(0)
-            # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+            # ### ASM Note: Builtin arrive can insert a full LDS drain; ASM keeps the explicit wait above.
             gl.inline_asm_elementwise("s_abarrier_arrive $0, $1, 2", constraints="=&s,s,~{memory}",
                 args=[11 + b_slot], dtype=gl.int32, is_pure=False, pack=1)
         else:
             hcu.wait_lgkmcnt(0)
-            # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+            # ### ASM Note: Builtin arrive can insert a full LDS drain; ASM keeps the explicit wait above.
             gl.inline_asm_elementwise("s_abarrier_arrive $0, $1, 1", constraints="=&s,s,~{memory}",
                 args=[8 + a_slot], dtype=gl.int32, is_pure=False, pack=1)
         if SLOT == 0:
@@ -540,7 +555,7 @@ def _consume_retained(acc, am, bm, a0, a1, a_ticket, b_ticket, sync_id, arrive_i
     else:
         hcu.wait_lgkmcnt(0)
         if SLOT == 1:
-            # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+            # ### ASM Note: Builtin arrive can insert a full LDS drain; ASM keeps the explicit wait above.
             gl.inline_asm_elementwise("s_abarrier_arrive $0, $1, 2", constraints="=&s,s,~{memory}",
                 args=[11 + b_slot], dtype=gl.int32, is_pure=False, pack=1)
     hcu.sched_barrier()
@@ -553,14 +568,14 @@ def _consume_retained(acc, am, bm, a0, a1, a_ticket, b_ticket, sync_id, arrive_i
     hcu.set_priority(priority)
     hcu.sched_barrier()
     if INSN_WARMUP:
-        # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+        # ### ASM Note: Gluon cannot define branch-target labels; mark the warmup MMAC entry.
         gl.inline_asm_elementwise(_icache_label(PARTITION, 2 * N_PANEL + SLOT, "mmac") + ":",
             constraints="=s,~{memory}", args=[], dtype=gl.uint32, is_pure=False, pack=1)
     hcu.sched_barrier()
     acc = gl.amd.cdna4.mfma(a, b, acc)
     hcu.sched_barrier()
     if INSN_WARMUP:
-        # ### ASM Note: Builtin arrive drains all LDS reads; ASM preserves the explicit split wait. Warmup labels also require ASM.
+        # ### ASM Note: Gluon cannot branch on EXEC to a named label; return warmup waves here.
         gl.inline_asm_elementwise("s_cbranch_execz " + _icache_label(PARTITION, 2 * N_PANEL + SLOT, "resume"),
             constraints="=s,~{memory}", args=[], dtype=gl.uint32, is_pure=False, pack=1)
     hcu.sched_barrier()
@@ -616,11 +631,11 @@ def _consumer(C, Sorted, Experts, am, bm, sam, sbm, route_mem, SHARE_ROUTES: gl.
         zero_a = gl.full((CM, INIT_INST_K), 0, gl.bfloat16, gl.DotOperandLayout(0, init_mma, INIT_K_WIDTH))
         zero_b = gl.full((INIT_INST_K, CN), 0, gl.bfloat16,
             hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, init_mma, INIT_K_WIDTH)))
-        # ### ASM Note: Opaque MOV prevents CSE of initialization or cloning of symbolic warmup blocks.
+        # ### ASM Note: Gluon zeros can be folded; opaque MOV keeps the BF16 MMAC initialization.
         zero_a = gl.inline_asm_elementwise(
             "v_mov_b32 $0, $1", constraints="=v,v", args=[zero_a],
             dtype=gl.bfloat16, is_pure=False, pack=2)
-        # ### ASM Note: Opaque MOV prevents CSE of initialization or cloning of symbolic warmup blocks.
+        # ### ASM Note: Gluon may merge identical zeros; opaque MOV keeps B independent of A.
         zero_b = gl.inline_asm_elementwise(
             "v_mov_b32 $0, $1", constraints="=v,v", args=[zero_b],
             dtype=gl.bfloat16, is_pure=False, pack=2)
@@ -637,7 +652,8 @@ def _consumer(C, Sorted, Experts, am, bm, sam, sbm, route_mem, SHARE_ROUTES: gl.
     # Operand EMPTY credits already count each reader wave independently.
     # No consumer rendezvous is needed here. EB0 belongs to C1 scale READY;
     # EB2 belongs to C0 scale READY, and both complete before slot1 reuse.
-    # Two complete BK tiles per iteration; no remainder or separate tail.
+    # Each K256 pair has four consumer calls: panel0 K0/K1, then panel1 K0/K1.
+    # Only panel0 reads fresh A; panel1 reuses those K128 register operands.
     gl.static_assert(K % (2 * BK) == 0)
     a_slot = first_k_tile % A_STAGES
     a_phase = (first_k_tile // A_STAGES) & 1
@@ -645,7 +661,7 @@ def _consumer(C, Sorted, Experts, am, bm, sam, sbm, route_mem, SHARE_ROUTES: gl.
     if INSN_WARMUP:
         # Preserve the committed short-loop warmup fix: LLVM must not clone
         # the inline assembly's symbolic MMAC-entry labels.
-        # ### ASM Note: Opaque MOV prevents CSE of initialization or cloning of symbolic warmup blocks.
+        # ### ASM Note: A constant zero may unroll the loop and duplicate ASM labels; opaque MOV prevents that.
         first_pair = gl.inline_asm_elementwise(
             "s_mov_b32 $0, 0", constraints="=s", args=[],
             dtype=gl.int32, is_pure=False, pack=1)

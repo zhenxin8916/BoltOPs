@@ -418,3 +418,9 @@ publication takes15.485712us. Joining the packed C halves into one store takes
 The metadata-after-K3 retained change is commit `98a1e1e` (14.713428us);
 [rejected publication and wait-position controls](metadata-wait-controls/)
 include the slower combined packed-C store retested on this new baseline.
+
+## Post-metadata scale scheduling controls — 2026-11-16
+
+Nine bounded-correct READY, scale-batching and expert-prefetch controls did not
+beat `98a1e1e` (14.713428us). The closest static P1 N/independent-scale-batch
+control takes14.722324us and is not promoted. [Protocol analysis and evidence](post-metadata-sb-controls/).

@@ -1,0 +1,3793 @@
+{
+  "baseline_code_commit": "98a1e1e",
+  "baseline_us": 14.713428,
+  "baseline_mmac_percent": 15.478214866039377,
+  "scope": "1.8GHz,48CU,2 independent BM64xBN512 outputs per TG,frozen inputs,full dispatch",
+  "toolchain_provenance": "../provenance.json",
+  "controls": [
+    {
+      "case": "metadata-after-k3-separate-sb-wait-after-mmac",
+      "algorithm": "Separate B/SB READY; read SB after MMAC",
+      "time_us": 14.89246,
+      "whole_dispatch_mmac_percent": 15.292141123763301,
+      "source_sha256": "a2af05517f4c0acaded38dbb2250fd44a9c8d6fb75f5c83a81173516195131bf",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-wait-after-mmac",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-wait-after-mmac/m5out/0/0/2379732_python3.10.perf",
+        "perf_sha256": "1ed933463a41a90ed5e774600ac0a79181a921eb3a66af51ed6f2276769d14db",
+        "perf_bytes": 19244,
+        "sqtt_sections": [
+          {
+            "offset": 6911,
+            "raw_bytes": 73712,
+            "compressed_bytes": 10773
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        9,
+        153,
+        153
+      ],
+      "native_vgprs": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 352,
+        "LDS": 1248,
+        "SCA": 2344
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 14.89246,
+        "wave_span_time_us": 10.478932,
+        "wave_span_mmac_percent": 21.732901788082984,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 14892460,
+          "duration_ticks": 14892460,
+          "duration_us": 14.89246,
+          "gui_duration_us": 14.892,
+          "section_offset": 6839,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-wait-after-mmac/m5out/0/0/2379732_python3.10.perf",
+          "source_perf_sha256": "1ed933463a41a90ed5e774600ac0a79181a921eb3a66af51ed6f2276769d14db"
+        },
+        "whole_gpu_mmac_percent": 15.292141123763301,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 108.14954252017463,
+        "useful_tflops": 90.42386066506138,
+        "cache": {
+          "TccSendRespBandwidth": 1.337852,
+          "TccRecvRespBandwidth": 0.652413,
+          "TCCHitRate": 0.845219,
+          "TCPCacheLineHitRate": 0.325543,
+          "SQCIHitRate": 0.998448,
+          "missSQCIRequests": 170.0,
+          "missDuplicatedSQCIRequests": 35674.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 630.3333333333334,
+            "maximum": 825.0,
+            "sum": 30256.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 29.375,
+            "maximum": 58.0,
+            "sum": 1410.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 76.125,
+            "maximum": 166.0,
+            "sum": 3654.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1520.0,
+            "maximum": 2556.0,
+            "sum": 72960.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 523.7083333333334,
+            "maximum": 991.0,
+            "sum": 25138.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 47.791666666666664,
+            "maximum": 529.0,
+            "sum": 2294.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 12322.333333333334,
+            "maximum": 12908.0,
+            "sum": 591472.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-wait-after-mmac/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-both-b-before-sb-publications",
+      "algorithm": "Publish both B halves before separate SB publications",
+      "time_us": 15.254972,
+      "whole_dispatch_mmac_percent": 14.928745854138572,
+      "source_sha256": "12d4b65561e88116d078ac67c05e9686d94b8832fede901d997a5114507e5dfd",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-both-b-before-sb-publications",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-both-b-before-sb-publications/m5out/0/0/2379815_python3.10.perf",
+        "perf_sha256": "2c4ed816b09c2699a01e3b5d343ff0c8308732c55214e6484c87e93a7ce28421",
+        "perf_bytes": 19313,
+        "sqtt_sections": [
+          {
+            "offset": 6956,
+            "raw_bytes": 74220,
+            "compressed_bytes": 10797
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        13,
+        153,
+        153
+      ],
+      "native_vgprs": [
+        60,
+        60,
+        196,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 352,
+        "LDS": 1248,
+        "SCA": 2360
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 15.254972,
+        "wave_span_time_us": 10.841444,
+        "wave_span_mmac_percent": 21.00620544643315,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 15254972,
+          "duration_ticks": 15254972,
+          "duration_us": 15.254972,
+          "gui_duration_us": 15.254,
+          "section_offset": 6884,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-both-b-before-sb-publications/m5out/0/0/2379815_python3.10.perf",
+          "source_perf_sha256": "2c4ed816b09c2699a01e3b5d343ff0c8308732c55214e6484c87e93a7ce28421"
+        },
+        "whole_gpu_mmac_percent": 14.928745854138572,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 105.5795275140459,
+        "useful_tflops": 88.27507044916241,
+        "cache": {
+          "TccSendRespBandwidth": 1.306051,
+          "TccRecvRespBandwidth": 0.627696,
+          "TCCHitRate": 0.845632,
+          "TCPCacheLineHitRate": 0.325558,
+          "SQCIHitRate": 0.998477,
+          "missSQCIRequests": 168.0,
+          "missDuplicatedSQCIRequests": 35615.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 831.2708333333334,
+            "maximum": 1090.0,
+            "sum": 39901.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 59.0625,
+            "maximum": 100.0,
+            "sum": 2835.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 114.9375,
+            "maximum": 197.0,
+            "sum": 5517.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1713.7708333333333,
+            "maximum": 2770.0,
+            "sum": 82261.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 924.3958333333334,
+            "maximum": 1368.0,
+            "sum": 44371.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 0.0,
+            "maximum": 0.0,
+            "sum": 0.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 12331.9375,
+            "maximum": 12908.0,
+            "sum": 591933.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-both-b-before-sb-publications/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-prefetch-next-expert",
+      "algorithm": "Prefetch next expert before current N traversal",
+      "time_us": 14.760688,
+      "whole_dispatch_mmac_percent": 15.428657525990658,
+      "source_sha256": "3b559bc9fc40be5e0a54b60d3760611ba7f1447e8b5242b1ca8cfc46b71290e4",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-prefetch-next-expert",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-prefetch-next-expert/m5out/0/0/2380122_python3.10.perf",
+        "perf_sha256": "e8d74bfe45376ee2021b059b748d7ad099975c10dcaa713aaa4222165ad2ade7",
+        "perf_bytes": 19715,
+        "sqtt_sections": [
+          {
+            "offset": 6881,
+            "raw_bytes": 72840,
+            "compressed_bytes": 11274
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "native_vgprs": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 352,
+        "LDS": 1248,
+        "SCA": 2208
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 14.760688,
+        "wave_span_time_us": 10.34716,
+        "wave_span_mmac_percent": 22.00967221923697,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 14760688,
+          "duration_ticks": 14760688,
+          "duration_us": 14.760688,
+          "gui_duration_us": 14.76,
+          "section_offset": 6809,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-prefetch-next-expert/m5out/0/0/2380122_python3.10.perf",
+          "source_perf_sha256": "e8d74bfe45376ee2021b059b748d7ad099975c10dcaa713aaa4222165ad2ade7"
+        },
+        "whole_gpu_mmac_percent": 15.428657525990658,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 109.115017944963,
+        "useful_tflops": 91.23109491915282,
+        "cache": {
+          "TccSendRespBandwidth": 1.349682,
+          "TccRecvRespBandwidth": 0.643322,
+          "TCCHitRate": 0.84599,
+          "TCPCacheLineHitRate": 0.325558,
+          "SQCIHitRate": 0.998478,
+          "missSQCIRequests": 166.0,
+          "missDuplicatedSQCIRequests": 39544.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 719.1666666666666,
+            "maximum": 958.0,
+            "sum": 34520.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 56.020833333333336,
+            "maximum": 98.0,
+            "sum": 2689.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 114.16666666666667,
+            "maximum": 181.0,
+            "sum": 5480.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1615.2291666666667,
+            "maximum": 2744.0,
+            "sum": 77531.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 452.2916666666667,
+            "maximum": 660.0,
+            "sum": 21710.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 27.1875,
+            "maximum": 507.0,
+            "sum": 1305.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11724.270833333334,
+            "maximum": 12232.0,
+            "sum": 562765.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-prefetch-next-expert/two-tg-audit.json"
+      }
+    },
+    {
+      "case": "metadata-after-k3-one-sb-batch-per-bn512",
+      "algorithm": "Whole BN512 SB batch, separate READY/EMPTY",
+      "time_us": 15.02034,
+      "whole_dispatch_mmac_percent": 15.161947066444569,
+      "source_sha256": "70a83c7fac439043f2d3cfcd9972257bf805b2d5a0b8cf0b85e96b5511c88a86",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-one-sb-batch-per-bn512",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-one-sb-batch-per-bn512/m5out/0/0/2380278_python3.10.perf",
+        "perf_sha256": "750fac328f04ee9201e4280dfbd0b2024a73446fefad4b5c8565b3adfc616328",
+        "perf_bytes": 19196,
+        "sqtt_sections": [
+          {
+            "offset": 6978,
+            "raw_bytes": 72834,
+            "compressed_bytes": 10658
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        7,
+        153,
+        153
+      ],
+      "native_vgprs": [
+        60,
+        52,
+        200,
+        200
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 328,
+        "LDS": 1224,
+        "SCA": 2294
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 15.02034,
+        "wave_span_time_us": 10.606812,
+        "wave_span_mmac_percent": 21.47088116580175,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 15020340,
+          "duration_ticks": 15020340,
+          "duration_us": 15.02034,
+          "gui_duration_us": 15.02,
+          "section_offset": 6906,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-one-sb-batch-per-bn512/m5out/0/0/2380278_python3.10.perf",
+          "source_perf_sha256": "750fac328f04ee9201e4280dfbd0b2024a73446fefad4b5c8565b3adfc616328"
+        },
+        "whole_gpu_mmac_percent": 15.161947066444569,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 107.22878017408395,
+        "useful_tflops": 89.6540110277131,
+        "cache": {
+          "TccSendRespBandwidth": 1.326249,
+          "TccRecvRespBandwidth": 0.627974,
+          "TCCHitRate": 0.845817,
+          "TCPCacheLineHitRate": 0.212382,
+          "SQCIHitRate": 0.998523,
+          "missSQCIRequests": 161.0,
+          "missDuplicatedSQCIRequests": 41410.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 788.2083333333334,
+            "maximum": 919.0,
+            "sum": 37834.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 18.854166666666668,
+            "maximum": 50.0,
+            "sum": 905.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 148.0625,
+            "maximum": 201.0,
+            "sum": 7107.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1806.25,
+            "maximum": 3081.0,
+            "sum": 86700.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 987.5,
+            "maximum": 1396.0,
+            "sum": 47400.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 23.395833333333332,
+            "maximum": 293.0,
+            "sum": 1123.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11541.416666666666,
+            "maximum": 12223.0,
+            "sum": 553988.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-one-sb-batch-per-bn512/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-sb-batch-with-b-ready",
+      "algorithm": "Whole BN512 SB batch, both B EMPTYs protect reuse",
+      "time_us": 15.085392,
+      "whole_dispatch_mmac_percent": 15.09656494176618,
+      "source_sha256": "46ed9c6ae1338c5165923a45a4001074e8858c2ebce71e561598bd93aa0710dd",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-with-b-ready",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-with-b-ready/m5out/0/0/2380732_python3.10.perf",
+        "perf_sha256": "ecace72abb5cd583b1e1922349ece83ff8c49d7887b62db7c5a35b26112aecb0",
+        "perf_bytes": 18683,
+        "sqtt_sections": [
+          {
+            "offset": 6920,
+            "raw_bytes": 72046,
+            "compressed_bytes": 10203
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        7,
+        155,
+        155
+      ],
+      "native_vgprs": [
+        60,
+        52,
+        200,
+        200
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 328,
+        "LDS": 1224,
+        "SCA": 2164
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 15.085392,
+        "wave_span_time_us": 10.671864,
+        "wave_span_mmac_percent": 21.34000208398458,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 15085392,
+          "duration_ticks": 15085392,
+          "duration_us": 15.085392,
+          "gui_duration_us": 15.085,
+          "section_offset": 6848,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-with-b-ready/m5out/0/0/2380732_python3.10.perf",
+          "source_perf_sha256": "ecace72abb5cd583b1e1922349ece83ff8c49d7887b62db7c5a35b26112aecb0"
+        },
+        "whole_gpu_mmac_percent": 15.09656494176618,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 106.76638273635845,
+        "useful_tflops": 89.26740040961481,
+        "cache": {
+          "TccSendRespBandwidth": 1.320428,
+          "TccRecvRespBandwidth": 0.639775,
+          "TCCHitRate": 0.845378,
+          "TCPCacheLineHitRate": 0.212382,
+          "SQCIHitRate": 0.998663,
+          "missSQCIRequests": 144.0,
+          "missDuplicatedSQCIRequests": 41274.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 766.6458333333334,
+            "maximum": 885.0,
+            "sum": 36799.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 21.416666666666668,
+            "maximum": 35.0,
+            "sum": 1028.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 106.16666666666667,
+            "maximum": 153.0,
+            "sum": 5096.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1798.6875,
+            "maximum": 2712.0,
+            "sum": 86337.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 740.1875,
+            "maximum": 954.0,
+            "sum": 35529.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 29.416666666666668,
+            "maximum": 329.0,
+            "sum": 1412.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11780.645833333334,
+            "maximum": 12296.0,
+            "sum": 565471.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-with-b-ready/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-sb-batch-independent-consumers",
+      "algorithm": "Independent N256 SB batch per consumer",
+      "time_us": 14.812952,
+      "whole_dispatch_mmac_percent": 15.374221154567975,
+      "source_sha256": "b3b218dc2765c382c67df772632872c8c44669810c578157a515712a7abc6620",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-independent-consumers",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-independent-consumers/m5out/0/0/2380899_python3.10.perf",
+        "perf_sha256": "790b33830fee4601140875ebc5cf195da4aa7c524acacdf6b546c323d4435801",
+        "perf_bytes": 19202,
+        "sqtt_sections": [
+          {
+            "offset": 6929,
+            "raw_bytes": 71742,
+            "compressed_bytes": 10713
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "native_vgprs": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 336,
+        "LDS": 1232,
+        "SCA": 2164
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 14.812952,
+        "wave_span_time_us": 10.399424,
+        "wave_span_mmac_percent": 21.899059024807528,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 14812952,
+          "duration_ticks": 14812952,
+          "duration_us": 14.812952,
+          "gui_duration_us": 14.812,
+          "section_offset": 6857,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-independent-consumers/m5out/0/0/2380899_python3.10.perf",
+          "source_perf_sha256": "790b33830fee4601140875ebc5cf195da4aa7c524acacdf6b546c323d4435801"
+        },
+        "whole_gpu_mmac_percent": 15.374221154567975,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 108.7300313941475,
+        "useful_tflops": 90.90920756375907,
+        "cache": {
+          "TccSendRespBandwidth": 1.344713,
+          "TccRecvRespBandwidth": 0.64698,
+          "TCCHitRate": 0.845773,
+          "TCPCacheLineHitRate": 0.254104,
+          "SQCIHitRate": 0.998665,
+          "missSQCIRequests": 144.0,
+          "missDuplicatedSQCIRequests": 39027.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 716.8125,
+            "maximum": 952.0,
+            "sum": 34407.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 40.5625,
+            "maximum": 62.0,
+            "sum": 1947.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 112.02083333333333,
+            "maximum": 273.0,
+            "sum": 5377.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1776.4375,
+            "maximum": 2659.0,
+            "sum": 85269.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 570.2708333333334,
+            "maximum": 1023.0,
+            "sum": 27373.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 44.395833333333336,
+            "maximum": 646.0,
+            "sum": 2131.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11698.541666666666,
+            "maximum": 12136.0,
+            "sum": 561530.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-independent-consumers/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-sb-batch-p1-static-n",
+      "algorithm": "Independent SB batches; static P1 N traversal",
+      "time_us": 14.722324,
+      "whole_dispatch_mmac_percent": 15.46886211714944,
+      "source_sha256": "3b705671db0aef4199e267df6a5b046f762e442b985520d9ea3abdc2a7193149",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-p1-static-n",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-p1-static-n/m5out/0/0/2381465_python3.10.perf",
+        "perf_sha256": "0e4fa421f02bd2849fbfc8ad75e94cc49b66f12f51d665db8017c3b1bfd548cc",
+        "perf_bytes": 19268,
+        "sqtt_sections": [
+          {
+            "offset": 6951,
+            "raw_bytes": 71934,
+            "compressed_bytes": 10757
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "native_vgprs": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 336,
+        "LDS": 1232,
+        "SCA": 2172
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 14.722324,
+        "wave_span_time_us": 10.308796,
+        "wave_span_mmac_percent": 22.091580820883447,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 14722324,
+          "duration_ticks": 14722324,
+          "duration_us": 14.722324,
+          "gui_duration_us": 14.722,
+          "section_offset": 6879,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-p1-static-n/m5out/0/0/2381465_python3.10.perf",
+          "source_perf_sha256": "0e4fa421f02bd2849fbfc8ad75e94cc49b66f12f51d665db8017c3b1bfd548cc"
+        },
+        "whole_gpu_mmac_percent": 15.46886211714944,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 109.3993540693711,
+        "useful_tflops": 91.46882842681632,
+        "cache": {
+          "TccSendRespBandwidth": 1.353095,
+          "TccRecvRespBandwidth": 0.648163,
+          "TCCHitRate": 0.84574,
+          "TCPCacheLineHitRate": 0.254104,
+          "SQCIHitRate": 0.998663,
+          "missSQCIRequests": 144.0,
+          "missDuplicatedSQCIRequests": 38965.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 739.9166666666666,
+            "maximum": 897.0,
+            "sum": 35516.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 35.833333333333336,
+            "maximum": 62.0,
+            "sum": 1720.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 115.54166666666667,
+            "maximum": 241.0,
+            "sum": 5546.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1789.75,
+            "maximum": 2449.0,
+            "sum": 85908.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 532.9791666666666,
+            "maximum": 1063.0,
+            "sum": 25583.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 62.333333333333336,
+            "maximum": 549.0,
+            "sum": 2992.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11804.9375,
+            "maximum": 13213.0,
+            "sum": 566637.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-batch-p1-static-n/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-separate-sb-batched-extra-init",
+      "algorithm": "Separate READY with batched initialization of added counters",
+      "time_us": 15.008664,
+      "whole_dispatch_mmac_percent": 15.173742313106617,
+      "source_sha256": "a2ad4c00222a1407352df68353a6c9cbeff0c42a940a0116d21b6190e395ddf2",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-batched-extra-init",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-batched-extra-init/m5out/0/0/2381464_python3.10.perf",
+        "perf_sha256": "764106a2e5aff338ef96b8a086a38254906b687a4ebd3de4ea9336355f01cd69",
+        "perf_bytes": 19799,
+        "sqtt_sections": [
+          {
+            "offset": 6929,
+            "raw_bytes": 73784,
+            "compressed_bytes": 11310
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        9,
+        153,
+        153
+      ],
+      "native_vgprs": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 352,
+        "LDS": 1248,
+        "SCA": 2321
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 15.008664,
+        "wave_span_time_us": 10.595136,
+        "wave_span_mmac_percent": 21.49454240134341,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 15008664,
+          "duration_ticks": 15008664,
+          "duration_us": 15.008664,
+          "gui_duration_us": 15.008,
+          "section_offset": 6857,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-batched-extra-init/m5out/0/0/2381464_python3.10.perf",
+          "source_perf_sha256": "764106a2e5aff338ef96b8a086a38254906b687a4ebd3de4ea9336355f01cd69"
+        },
+        "whole_gpu_mmac_percent": 15.173742313106617,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 107.31219887393043,
+        "useful_tflops": 89.72375742437835,
+        "cache": {
+          "TccSendRespBandwidth": 1.327523,
+          "TccRecvRespBandwidth": 0.645229,
+          "TCCHitRate": 0.845608,
+          "TCPCacheLineHitRate": 0.325488,
+          "SQCIHitRate": 0.998477,
+          "missSQCIRequests": 168.0,
+          "missDuplicatedSQCIRequests": 37890.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 622.3958333333334,
+            "maximum": 815.0,
+            "sum": 29875.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 25.75,
+            "maximum": 53.0,
+            "sum": 1236.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 73.14583333333333,
+            "maximum": 149.0,
+            "sum": 3511.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1594.5208333333333,
+            "maximum": 2293.0,
+            "sum": 76537.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 523.5416666666666,
+            "maximum": 1048.0,
+            "sum": 25130.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 39.208333333333336,
+            "maximum": 527.0,
+            "sum": 1882.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11261.083333333334,
+            "maximum": 11799.0,
+            "sum": 540532.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-separate-sb-batched-extra-init/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ]
+          ]
+        },
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "scale_ready_id_phase": [
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              14,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "case": "metadata-after-k3-sb-static-late-expert-prefetch",
+      "algorithm": "Static P1 SB batches; next expert after last B-left",
+      "time_us": 14.922484,
+      "whole_dispatch_mmac_percent": 15.261373374566862,
+      "source_sha256": "5a495c407ce50b67d1977f9a8272047d317d76e151deeb5e7fac7dc9cb8c0134",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-static-late-expert-prefetch",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "wavefronts": {
+        "perf_path": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-static-late-expert-prefetch/m5out/0/0/2381944_python3.10.perf",
+        "perf_sha256": "e2ca35ffd0e33ecf52b9b8571b2c1705b64c18aa43d5304c252829ee431b2fca",
+        "perf_bytes": 19610,
+        "sqtt_sections": [
+          {
+            "offset": 7038,
+            "raw_bytes": 72334,
+            "compressed_bytes": 11012
+          }
+        ],
+        "nonempty_sqtt_verified": true
+      },
+      "actual_vgprs": [
+        49,
+        9,
+        155,
+        155
+      ],
+      "native_vgprs": [
+        60,
+        56,
+        200,
+        196
+      ],
+      "cu0_instruction_counts": {
+        "VMEM": 336,
+        "LDS": 1232,
+        "SCA": 2220
+      },
+      "metrics": {
+        "schema_version": 2,
+        "time_us": 14.922484,
+        "wave_span_time_us": 10.508956,
+        "wave_span_mmac_percent": 21.670811068197448,
+        "dispatch_span": {
+          "begin_tick": 0,
+          "end_tick": 14922484,
+          "duration_ticks": 14922484,
+          "duration_us": 14.922484,
+          "gui_duration_us": 14.922,
+          "section_offset": 6966,
+          "section_type": 15,
+          "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-static-late-expert-prefetch/m5out/0/0/2381944_python3.10.perf",
+          "source_perf_sha256": "e2ca35ffd0e33ecf52b9b8571b2c1705b64c18aa43d5304c252829ee431b2fca"
+        },
+        "whole_gpu_mmac_percent": 15.261373374566862,
+        "definition": "all 48 CU MMOP counts * 8 cycles / (48 CU * 4 SIMD * full HYGPERF XCD time-section cycles, including startup); FP8 16x16x32 geometry/work audited. Schema 1 incorrectly called the narrower first-to-last-wave interval whole dispatch; legacy values retained as wave_span fields.",
+        "mmac_count_per_cu": {
+          "0": 2048,
+          "1": 2048,
+          "2": 2048,
+          "3": 2048,
+          "4": 2048,
+          "5": 2048,
+          "6": 2048,
+          "7": 2048,
+          "8": 2048,
+          "9": 2048,
+          "10": 2048,
+          "11": 2048,
+          "12": 2048,
+          "13": 2048,
+          "14": 2048,
+          "15": 2048,
+          "16": 2048,
+          "17": 2048,
+          "18": 2048,
+          "19": 2048,
+          "20": 2048,
+          "21": 2048,
+          "22": 2048,
+          "23": 2048,
+          "24": 2048,
+          "25": 2048,
+          "26": 2048,
+          "27": 2048,
+          "28": 2048,
+          "29": 2048,
+          "30": 2048,
+          "31": 2048,
+          "32": 2048,
+          "33": 2048,
+          "34": 2048,
+          "35": 2048,
+          "36": 2048,
+          "37": 2048,
+          "38": 2048,
+          "39": 2048,
+          "40": 2048,
+          "41": 2048,
+          "42": 2048,
+          "43": 2048,
+          "44": 2048,
+          "45": 2048,
+          "46": 2048,
+          "47": 2048
+        },
+        "expected_mmac_instructions": 98304,
+        "padded_tflops": 107.93194591463458,
+        "useful_tflops": 90.24192808650355,
+        "cache": {
+          "TccSendRespBandwidth": 1.335049,
+          "TccRecvRespBandwidth": 0.636141,
+          "TCCHitRate": 0.846054,
+          "TCPCacheLineHitRate": 0.254104,
+          "SQCIHitRate": 0.998668,
+          "missSQCIRequests": 145.0,
+          "missDuplicatedSQCIRequests": 36006.0
+        },
+        "cu_metrics": {
+          "ldsBankConflict": {
+            "mean": 1024.0,
+            "maximum": 1024.0,
+            "sum": 49152.0
+          },
+          "GlobalMemPipeline.cmdCreditStall": {
+            "mean": 751.8125,
+            "maximum": 879.0,
+            "sum": 36087.0
+          },
+          "GlobalMemPipeline.addrCreditStall": {
+            "mean": 28.354166666666668,
+            "maximum": 67.0,
+            "sum": 1361.0
+          },
+          "GlobalMemPipeline.dataCreditStall": {
+            "mean": 126.35416666666667,
+            "maximum": 215.0,
+            "sum": 6065.0
+          },
+          "LocalMemPipeline.creditStall": {
+            "mean": 1745.5625,
+            "maximum": 2961.0,
+            "sum": 83787.0
+          },
+          "tatd.TATD.taSendStallBytcp": {
+            "mean": 556.0208333333334,
+            "maximum": 1027.0,
+            "sum": 26689.0
+          },
+          "tatd.TATD.taSendStallByCredit": {
+            "mean": 28.083333333333332,
+            "maximum": 379.0,
+            "sum": 1348.0
+          },
+          "numCyclesWaitIFetchAfterBranchTaken": {
+            "mean": 11862.708333333334,
+            "maximum": 12905.0,
+            "sum": 569410.0
+          }
+        }
+      },
+      "hardware_audit": {
+        "peak_live_waves": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "full_audit": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/metadata-after-k3-sb-static-late-expert-prefetch/two-tg-audit.json"
+      },
+      "phase_audit": {
+        "0003000f": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0002000d": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0001000e": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "0000000c": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "00020009": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0003000b": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "0001000a": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "00000008": {
+          "token_phases": [],
+          "a_phases": [
+            0,
+            1
+          ],
+          "b_id_phase": [
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

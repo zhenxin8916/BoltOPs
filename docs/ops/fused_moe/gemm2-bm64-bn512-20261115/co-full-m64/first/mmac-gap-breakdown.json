@@ -1,0 +1,483 @@
+{
+  "8": {
+    "role": "C0",
+    "mmac_first_tick": 8009180,
+    "mmac_last_end_tick": 12695148,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 127,
+        "gap_cycles": 2092.0,
+        "first_tick": 10137548,
+        "next_tick": 11300700,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 3,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "ds_write2st64_b32": 8,
+          "s_add_i32": 4,
+          "s_cmp_lt_i32": 1,
+          "s_waitcnt": 3,
+          "s_ebarrier_sync": 1,
+          "s_abarrier_arrive": 3,
+          "s_cbranch_scc1": 1,
+          "s_and_b32": 1,
+          "ds_read_matrix_trans_format": 24,
+          "ds_read_b64": 1,
+          "s_cmp_eq_u32": 1,
+          "s_cselect_b32": 1,
+          "s_lshl_b32": 1,
+          "v_add_u32": 3,
+          "s_bfe_u32": 1,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 11, 1",
+          "v_pk_mul_f32 v[0:1], v[98:99], v[139:140] opsel: 0x38",
+          "v_pk_mul_f32 v[2:3], v[96:97], v[137:138] opsel: 0x38",
+          "v_pk_mul_f32 v[4:5], v[98:99], v[143:144] opsel: 0x38",
+          "v_pk_mul_f32 v[6:7], v[96:97], v[141:142] opsel: 0x38",
+          "v_pk_mul_f32 v[8:9], v[94:95], v[50:51] opsel: 0x38",
+          "v_pk_mul_f32 v[10:11], v[92:93], v[48:49] opsel: 0x38",
+          "v_pk_mul_f32 v[12:13], v[94:95], v[147:148] opsel: 0x38"
+        ],
+        "last_ops": [
+          "v_add_u32 v80, literl:0x0001c000, v44",
+          "v_add_u32 v81, s1, v100",
+          "s_mov_b32 s2, s0",
+          "s_mov_b32 s3, s0",
+          "s_mov_b32 s1, s0",
+          "v_mov_b64 v46, s2",
+          "v_mov_b64 v44, s0",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 1584.0,
+        "first_tick": 8903228,
+        "next_tick": 9783932,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 2,
+          "s_waitcnt": 7,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "ds_write2st64_b32": 8,
+          "s_ebarrier_sync": 1,
+          "s_abarrier_arrive": 2,
+          "ds_read_b64": 1,
+          "ds_read_matrix_trans_format": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 11, 0",
+          "s_waitcnt lgkmcnt(3)",
+          "v_pk_mul_f32 v[105:106], v[98:99], v[131:132] opsel: 0x38",
+          "v_pk_mul_f32 v[107:108], v[96:97], v[129:130] opsel: 0x38",
+          "v_pk_mul_f32 v[109:110], v[98:99], v[135:136] opsel: 0x38",
+          "v_pk_mul_f32 v[111:112], v[96:97], v[133:134] opsel: 0x38",
+          "s_waitcnt lgkmcnt(2)",
+          "v_pk_mul_f32 v[113:114], v[94:95], v[139:140] opsel: 0x38"
+        ],
+        "last_ops": [
+          "ds_read_matrix_trans_format v[113:116], s[12], row:2, col:2, alt:1, elem:1, offset:2048",
+          "ds_read_matrix_trans_format v[117:120], s[12], row:2, col:2, alt:1, elem:1, offset:2080",
+          "ds_read_matrix_trans_format v[121:124], s[12], row:2, col:2, alt:1, elem:1, offset:4096",
+          "ds_read_matrix_trans_format v[125:128], s[12], row:2, col:2, alt:1, elem:1, offset:4128",
+          "ds_read_matrix_trans_format v[129:132], s[12], row:2, col:2, alt:1, elem:1, offset:6144",
+          "ds_read_matrix_trans_format v[133:136], s[12], row:2, col:2, alt:1, elem:1, offset:6176",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s1, 6, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 191,
+        "gap_cycles": 1432.0,
+        "first_tick": 11609836,
+        "next_tick": 12406028,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 2,
+          "s_waitcnt": 7,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "ds_write2st64_b32": 8,
+          "s_ebarrier_sync": 1,
+          "s_abarrier_arrive": 2,
+          "ds_read_b64": 1,
+          "ds_read_matrix_trans_format": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 11, 0",
+          "s_waitcnt lgkmcnt(3)",
+          "v_pk_mul_f32 v[105:106], v[98:99], v[131:132] opsel: 0x38",
+          "v_pk_mul_f32 v[107:108], v[96:97], v[129:130] opsel: 0x38",
+          "v_pk_mul_f32 v[109:110], v[98:99], v[135:136] opsel: 0x38",
+          "v_pk_mul_f32 v[111:112], v[96:97], v[133:134] opsel: 0x38",
+          "s_waitcnt lgkmcnt(2)",
+          "v_pk_mul_f32 v[113:114], v[94:95], v[139:140] opsel: 0x38"
+        ],
+        "last_ops": [
+          "ds_read_matrix_trans_format v[113:116], s[12], row:2, col:2, alt:1, elem:1, offset:2048",
+          "ds_read_matrix_trans_format v[117:120], s[12], row:2, col:2, alt:1, elem:1, offset:2080",
+          "ds_read_matrix_trans_format v[121:124], s[12], row:2, col:2, alt:1, elem:1, offset:4096",
+          "ds_read_matrix_trans_format v[125:128], s[12], row:2, col:2, alt:1, elem:1, offset:4128",
+          "ds_read_matrix_trans_format v[129:132], s[12], row:2, col:2, alt:1, elem:1, offset:6144",
+          "ds_read_matrix_trans_format v[133:136], s[12], row:2, col:2, alt:1, elem:1, offset:6176",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s1, 6, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 15,
+        "gap_cycles": 1096.0,
+        "first_tick": 8080348,
+        "next_tick": 8689724,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, s16, s17",
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128"
+        ],
+        "last_ops": [
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128",
+          "ds_read_b128 v80, v80, offset:192"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 126,
+        "gap_cycles": 120.0,
+        "first_tick": 10066380,
+        "next_tick": 10133100,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 143,
+        "gap_cycles": 44.0,
+        "first_tick": 11371868,
+        "next_tick": 11396332,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, s16, s17",
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128"
+        ],
+        "last_ops": [
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128",
+          "ds_read_b128 v80, v80, offset:192"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 93,
+        "gap_cycles": 4.0,
+        "first_tick": 9917372,
+        "next_tick": 9919596,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 213,
+        "gap_cycles": 4.0,
+        "first_tick": 12503884,
+        "next_tick": 12506108,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 237,
+        "gap_cycles": 4.0,
+        "first_tick": 12612860,
+        "next_tick": 12615084,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      }
+    ],
+    "gaps_sum_cycles": 6380.0
+  },
+  "12": {
+    "role": "C1",
+    "mmac_first_tick": 8471772,
+    "mmac_last_end_tick": 13504684,
+    "top_gaps": [
+      {
+        "after_mmac_ordinal": 127,
+        "gap_cycles": 2292.0,
+        "first_tick": 10546764,
+        "next_tick": 11821116,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 3,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "ds_write2st64_b32": 8,
+          "s_add_i32": 4,
+          "s_cmp_lt_i32": 1,
+          "s_waitcnt": 3,
+          "s_ebarrier_sync": 1,
+          "s_abarrier_arrive": 3,
+          "s_cbranch_scc1": 1,
+          "s_and_b32": 1,
+          "ds_read_matrix_trans_format": 24,
+          "ds_read_b64": 1,
+          "s_cmp_eq_u32": 1,
+          "s_cselect_b32": 1,
+          "s_lshl_b32": 1,
+          "v_add_u32": 3,
+          "s_bfe_u32": 1,
+          "s_mov_b32": 3,
+          "v_mov_b64": 2,
+          "s_nop": 1
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 15, 1",
+          "v_pk_mul_f32 v[0:1], v[98:99], v[139:140] opsel: 0x38",
+          "v_pk_mul_f32 v[2:3], v[96:97], v[137:138] opsel: 0x38",
+          "v_pk_mul_f32 v[4:5], v[98:99], v[143:144] opsel: 0x38",
+          "v_pk_mul_f32 v[6:7], v[96:97], v[141:142] opsel: 0x38",
+          "v_pk_mul_f32 v[8:9], v[94:95], v[50:51] opsel: 0x38",
+          "v_pk_mul_f32 v[10:11], v[92:93], v[48:49] opsel: 0x38",
+          "v_pk_mul_f32 v[12:13], v[94:95], v[147:148] opsel: 0x38"
+        ],
+        "last_ops": [
+          "v_add_u32 v80, literl:0x0001c000, v44",
+          "v_add_u32 v81, s1, v100",
+          "s_mov_b32 s2, s0",
+          "s_mov_b32 s3, s0",
+          "s_mov_b32 s1, s0",
+          "v_mov_b64 v46, s2",
+          "v_mov_b64 v44, s0",
+          "s_nop 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 63,
+        "gap_cycles": 1704.0,
+        "first_tick": 9118956,
+        "next_tick": 10066380,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 2,
+          "s_waitcnt": 7,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "ds_write2st64_b32": 8,
+          "s_ebarrier_sync": 1,
+          "s_abarrier_arrive": 2,
+          "ds_read_b64": 1,
+          "ds_read_matrix_trans_format": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 15, 0",
+          "s_waitcnt lgkmcnt(3)",
+          "v_pk_mul_f32 v[105:106], v[98:99], v[131:132] opsel: 0x38",
+          "v_pk_mul_f32 v[107:108], v[96:97], v[129:130] opsel: 0x38",
+          "v_pk_mul_f32 v[109:110], v[98:99], v[135:136] opsel: 0x38",
+          "v_pk_mul_f32 v[111:112], v[96:97], v[133:134] opsel: 0x38",
+          "s_waitcnt lgkmcnt(2)",
+          "v_pk_mul_f32 v[113:114], v[94:95], v[139:140] opsel: 0x38"
+        ],
+        "last_ops": [
+          "ds_read_matrix_trans_format v[113:116], s[12], row:2, col:2, alt:1, elem:1, offset:2048",
+          "ds_read_matrix_trans_format v[117:120], s[12], row:2, col:2, alt:1, elem:1, offset:2080",
+          "ds_read_matrix_trans_format v[121:124], s[12], row:2, col:2, alt:1, elem:1, offset:4096",
+          "ds_read_matrix_trans_format v[125:128], s[12], row:2, col:2, alt:1, elem:1, offset:4128",
+          "ds_read_matrix_trans_format v[129:132], s[12], row:2, col:2, alt:1, elem:1, offset:6144",
+          "ds_read_matrix_trans_format v[133:136], s[12], row:2, col:2, alt:1, elem:1, offset:6176",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s1, 8, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 191,
+        "gap_cycles": 1644.0,
+        "first_tick": 12301500,
+        "next_tick": 13215564,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 2,
+          "s_waitcnt": 7,
+          "v_pk_mul_f32": 48,
+          "v_cvt_pk_bf16_f32": 16,
+          "ds_write2st64_b32": 8,
+          "s_ebarrier_sync": 1,
+          "s_abarrier_arrive": 2,
+          "ds_read_b64": 1,
+          "ds_read_matrix_trans_format": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, 15, 0",
+          "s_waitcnt lgkmcnt(3)",
+          "v_pk_mul_f32 v[105:106], v[98:99], v[131:132] opsel: 0x38",
+          "v_pk_mul_f32 v[107:108], v[96:97], v[129:130] opsel: 0x38",
+          "v_pk_mul_f32 v[109:110], v[98:99], v[135:136] opsel: 0x38",
+          "v_pk_mul_f32 v[111:112], v[96:97], v[133:134] opsel: 0x38",
+          "s_waitcnt lgkmcnt(2)",
+          "v_pk_mul_f32 v[113:114], v[94:95], v[139:140] opsel: 0x38"
+        ],
+        "last_ops": [
+          "ds_read_matrix_trans_format v[113:116], s[12], row:2, col:2, alt:1, elem:1, offset:2048",
+          "ds_read_matrix_trans_format v[117:120], s[12], row:2, col:2, alt:1, elem:1, offset:2080",
+          "ds_read_matrix_trans_format v[121:124], s[12], row:2, col:2, alt:1, elem:1, offset:4096",
+          "ds_read_matrix_trans_format v[125:128], s[12], row:2, col:2, alt:1, elem:1, offset:4128",
+          "ds_read_matrix_trans_format v[129:132], s[12], row:2, col:2, alt:1, elem:1, offset:6144",
+          "ds_read_matrix_trans_format v[133:136], s[12], row:2, col:2, alt:1, elem:1, offset:6176",
+          "s_waitcnt lgkmcnt(0)",
+          "s_abarrier_arrive s1, 8, 1"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 15,
+        "gap_cycles": 648.0,
+        "first_tick": 8542940,
+        "next_tick": 8903228,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, s16, s17",
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128"
+        ],
+        "last_ops": [
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128",
+          "ds_read_b128 v80, v80, offset:192"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 112,
+        "gap_cycles": 344.0,
+        "first_tick": 10288780,
+        "next_tick": 10480044,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 143,
+        "gap_cycles": 320.0,
+        "first_tick": 11894508,
+        "next_tick": 12072428,
+        "instruction_counts": {
+          "s_abarrier_try_wait": 1,
+          "ds_read_b128": 8
+        },
+        "first_ops": [
+          "s_abarrier_try_wait s1, s16, s17",
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128"
+        ],
+        "last_ops": [
+          "ds_read_b128 v76, v80, offset:256",
+          "ds_read_b128 v88, v81, offset:64",
+          "ds_read_b128 v72, v81, offset:128",
+          "ds_read_b128 v68, v81, offset:192",
+          "ds_read_b128 v96, v80",
+          "ds_read_b128 v92, v80, offset:64",
+          "ds_read_b128 v84, v80, offset:128",
+          "ds_read_b128 v80, v80, offset:192"
+        ]
+      },
+      {
+        "after_mmac_ordinal": 150,
+        "gap_cycles": 16.0,
+        "first_tick": 12103564,
+        "next_tick": 12112460,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 158,
+        "gap_cycles": 12.0,
+        "first_tick": 12148044,
+        "next_tick": 12154716,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 78,
+        "gap_cycles": 8.0,
+        "first_tick": 10133100,
+        "next_tick": 10137548,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 55,
+        "gap_cycles": 4.0,
+        "first_tick": 9081148,
+        "next_tick": 9083372,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 139,
+        "gap_cycles": 4.0,
+        "first_tick": 11874492,
+        "next_tick": 11876716,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      },
+      {
+        "after_mmac_ordinal": 214,
+        "gap_cycles": 4.0,
+        "first_tick": 13317868,
+        "next_tick": 13320092,
+        "instruction_counts": {},
+        "first_ops": [],
+        "last_ops": []
+      }
+    ],
+    "gaps_sum_cycles": 7004.0
+  }
+}

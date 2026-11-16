@@ -2,7 +2,7 @@
 
 2026-11-15. Dedicated operator: `boltops/fused_moe/gluon/gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64.py`. No change to BM128 operators or framework selection. Full N traversal is supported by the direct entry; timing intentionally measures only the first BN512 panel.
 
-**Current best: 14.832412 us / whole-dispatch MMAC15.354050%, p0-adjacent-rows. The 60% target remains open.**
+**Current best: 14.776256 us / whole-dispatch MMAC15.412402%, co-full-m64. The 60% target remains open.**
 
 ## Acceptance and current results
 
@@ -20,26 +20,28 @@ User explicitly chose elapsed time for **two output tiles of each geometry**, at
 | `bbac17c` | initialize only the 12 live abarriers |15.218832|14.964197%|99|36/9/146/146|
 | `7820cab` | finish both final K64 MMAC groups before either epilogue |15.145996|15.036159%|99|36/9/146/146|
 | `bf26fa0` | SB register load before B EMPTY wait |15.032016|15.150170%|99|36/9/146/146|
-| **`347a15a`** | **consumer warps M1/N4, less replicated B reading** |**14.873556**|**15.311577%**|**99**|**36/9/162/162**|
+| `347a15a` | consumer warps M1/N4, less replicated B reading |14.873556|15.311577%|99|36/9/162/162|
+| `1d881f7` | P0 scatter with adjacent row pairs |14.832412|15.354050%|99|36/9/162/162|
+| latest (co-full-m64 evidence below) | one M64 result publication per phase |14.776256|15.412402%|115|49/9/163/163|
 
-The initial baseline elapsed-time reduction was **22.384729%**. The latest retained result is the bold row above; later sections preserve the chronological evidence for earlier results. The stricter 60% target remains active. Historical comparator source, HSACO and toolchain are under `../gemm2-20261115/bn512-b-batch-k128-best-gc1800/`. Current compiler is LLVM fd18eddb plus clean Triton 5b24821; provenance records exact binary hashes. This is a cross-toolchain historical comparison, not an isolated single-factor experiment.
+The initial baseline elapsed-time reduction was **22.384729%**. The latest retained result is the last row above; later sections preserve the chronological evidence for earlier results. The stricter 60% target remains active. Historical comparator source, HSACO and toolchain are under `../gemm2-20261115/bn512-b-batch-k128-best-gc1800/`. Current compiler is LLVM fd18eddb plus clean Triton 5b24821; provenance records exact binary hashes. This is a cross-toolchain historical comparison, not an isolated single-factor experiment.
 
-The BM64 best checks 2,630,144 valid elements with zero mismatches; unselected columns and rows remain NaN. The repeated run matches inputs, GPU addresses, machine `.text` bytes, output hash and elapsed time exactly. See `repeat-proof.json`. Raw traces and frozen tensor payloads remain in the raw root recorded by `provenance.json`; perf path/SHA are in `perf-location.json`. The promoted source matches repeat/kernel.py exactly.
+The BM64 best checks 2,630,144 valid elements with zero mismatches; unselected columns and rows remain NaN. The repeated run matches inputs, GPU addresses, machine `.text` bytes, output hash and elapsed time exactly. See the current evidence subdirectory’s `repeat-proof.json`. Raw traces and frozen tensor payloads remain in the raw root recorded by `provenance.json`; perf path/SHA are in `perf-location.json`. The promoted source matches repeat/kernel.py exactly.
 
-## Current pipeline at 347a15a
+## Current pipeline (full-M64 result mailbox update below)
 
 2P2C, four waves per role, native WDRA requests48/16/224/224. P0 loads A and row
-metadata, prefetches the next M, and drains/scatters both consumers' M32 output
+metadata, prefetches the next M, and drains/scatters both consumers' M64 output
 mailboxes with buffer_store_dwordx4. P1 issues full-K256 left/right B panels per
 N128 phase; its SB register load precedes the B EMPTY wait, while the SB LDS store
 and READY remain after MLS. Consumers use M1/N4 warp geometry, retain A for all N,
 compute K64 chunks, finish both M32 final-K groups before epilogues, scale in the
 strict original order, and return completed-read B credits before MMAC.
 
-Current LDS: A16 + BL32 + BR32 + C0 8 + C1 8 + two metadata generations2 + SB1
-=99KiB. There is one full-K B slot per consumer. A uses READY1/EMPTY3, B uses
+Current LDS: A16 + BL32 + BR32 + C0 16 + C1 16 + two metadata generations2 + SB1
+=115KiB. There is one full-K B slot per consumer. A uses READY1/EMPTY3, B uses
 READY5/7 and EMPTY6/8, output mailboxes use READY9/13 and EMPTY11/15, metadata
-READY12/0. All12 IDs are in0..15; A phase advances per M, B phase per N128 phase.
+READY12/0. All12 IDs are in0..15; A phase advances per M, B/output phase per N128 phase.
 A/B/output ownership and metadata generation proofs accompany the code snapshots.
 
 ## Initial pipeline and resource layout (superseded by updates below)
@@ -290,4 +292,46 @@ A/B generations, hardware wait-ID restrictions, 16 live waves and unchanged
 98304 active MMAC instructions across48CU, no consumer global loads all audited.
 Toolchain remains Triton5b24821 and LLVMfd18eddb, with control-only-ebarrier
 clang wrapper. See [reproducible evidence](p0-adjacent-rows/).
+
+
+## One full-M64 output publication per N phase — 2026-11-16
+
+Best14.776256us /15.412402% whole48CU dispatch MMAC at1.8GHz,
+48 persistent TGs with two BM64/BN512 outputs each. Versus1d881f7
+14.832412us, elapsed time decreases0.378603%. The <=8.272168us goal remains unmet.
+
+Each consumer's result mailbox grows M32xN128 -> M64xN128. The two M32 MMAC
+accumulators and strict ((acc*SA)*SB)*weight arithmetic are retained, but the
+consumer reserves one full result slot, scales/stores both halves, waits for
+completed LDS writes once, then publishes one READY. P0 reads/scatters all64
+rows once. Output READY/EMPTY phases now advance per N128 phase instead of
+per M32 half; N_PANELS is even, so resetting n at each M preserves generations.
+The same12 live abarrier IDs and four waves per each 2P2C role are retained.
+
+LDS rises99->115KiB: A16 +BL32 +BR32 +C0 16 +C1 16 +MA2 +SB1.
+Requested WDRA remains48/16/224/224; native allocation becomes60/52/200/200,
+actual49/9/163/163, within the per-SIMD512-register budget; no forced bypass.
+No compiler source change, scratch spill, or consumer VMEM load is introduced.
+
+CU0 SIMD0 C0 cross-M between-MMAC interval falls2576->2092 cycles and C1
+2904->2292. C0 first MMAC8.227132->8.009180us; C1 final MMAC end
+13.867196->13.504684us. Overall gain is only0.056156us: the remaining tail and
+larger LDS transfer partly consume the benefit. Mean LocalMemPipeline.creditStall
+rises1367.708->2003.958cycles; bank conflicts remain1024/CU. Issue intervals
+include other-wave scheduling and are not isolated barrier latency.
+
+Independent compilation repeats .text, frozen inputs, addresses, output and exact
+elapsed time. Both bounded runs verify2630144 elements with zero mismatches,
+unchanged output hash and untouched tail. Four full-N1024 FP8/INT8 x BF16/FP16
+weighted/unweighted equivalence tests pass, including independent64-bit pointers
+and nonunit scale strides. A/B generations, legal/adjacent wait IDs,16 live waves,
+98304 active MMACs across48CU and consumer-no-VMEM audits pass. Evidence and
+compiled artifacts: [co-full-m64](co-full-m64/). Toolchain unchanged: Triton5b24821,
+LLVMfd18eddb, control-only-ebarrier wrapper; see archived provenance.
+
+Rejected controls based on1d881f7: right-result LDS read before left store
+14.978084us; independent M32 result slots/16 live barriers15.280548us;
+P1 priority2 streaming14.941944us. These pass bounded numerics but are slower,
+so neither production nor best snapshots include them. A four-adjacent-row
+P0 layout fails Gluon split-layout verification and has no timing result.
 

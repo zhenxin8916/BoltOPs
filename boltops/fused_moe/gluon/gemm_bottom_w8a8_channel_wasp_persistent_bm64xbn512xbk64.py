@@ -6,11 +6,11 @@ Four 4-wave WASP roles, native WDRA, K256, N divisible by 512.
 P0 loads A and metadata, prefetches next M, and scatters packed C.
 P1 streams full K256 B-left/right panels and their channel scales.
 C0/C1 each cover 256 columns in two N128 phases; each phase publishes
-its two M32 output panels after applying ((acc * SA) * SB) * weight.
+one M64 output panel after applying ((acc * SA) * SB) * weight.
 
 LDS: A 16 KiB; one K256xN128 B slot per consumer, 64 KiB total;
-two M32xN128 BF16/FP16 output mailboxes, 16 KiB; double metadata 2 KiB;
-SB 1 KiB. Total 99 KiB. Twelve live abarriers remain within IDs 0..15.
+two M64xN128 BF16/FP16 output mailboxes, 32 KiB; double metadata 2 KiB;
+SB 1 KiB. Total 115 KiB. Twelve live abarriers remain within IDs 0..15.
 
 A epochs advance per M, B epochs per N128 phase. EMPTY credits follow
 completed reads. Full N traversal is the default; N_TILES_LIMIT is only
@@ -52,7 +52,7 @@ def _initialize(STAGES: gl.constexpr):
         A full K256      P0 -> C0 + C1             1       3    M epoch & 1
         B-left full K     P1 -> C0                  5       6    N epoch & 1
         B-right full K    P1 -> C1                  7       8    N epoch & 1
-        C-left/right     C0/C1 -> P0            9/13   11/15    M32 panel & 1
+        C-left/right     C0/C1 -> P0            9/13   11/15    N epoch & 1
         Metadata         P0 -> C0 + C1         12/0       -    (M epoch >> 1) & 1
 
         writer: wait EMPTY -> load/store -> READY ---> reader: wait READY -> read
@@ -229,7 +229,7 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
     ml: gl.constexpr = gl.BlockedLayout([4], [64], [4], [0])
     mr = gl.arange(0, BN // 4, ml)
     output_store: gl.constexpr = gl.BlockedLayout([2, 8], [4, 16], [4, 1], [1, 0])
-    output_rm = gl.arange(0, 32, gl.SliceLayout(1, output_store))
+    output_rm = gl.arange(0, BM, gl.SliceLayout(1, output_store))
     output_rn = gl.arange(0, BN // 4, gl.SliceLayout(0, output_store))
     for m in range(pid, total // (N // BN), gl.num_programs(0)):
         if PARTITION == 0:
@@ -240,20 +240,14 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
             routes = ma.index(((epoch - 1) & 1) * 4 + 2).load(gl.SliceLayout(1, output_store)).to(gl.int32, bitcast=True)
             experts = ma.index(((epoch - 1) & 1) * 4 + 3).load(gl.SliceLayout(1, output_store)).to(gl.int32, bitcast=True)
             hcu.wait_lgkmcnt(0)
-            route_parts = _row_vectors(routes)
-            expert_parts = _row_vectors(experts)
-            output_rows = ()
-            output_valid = ()
-            for panel in gl.static_range(2):
-                route = gl.convert_layout(route_parts[panel], gl.SliceLayout(1, output_store))
-                expert = gl.convert_layout(expert_parts[panel], gl.SliceLayout(1, output_store))
-                if CK_SORTING:
-                    route = (route & 0x00ffffff) * TOP_K + ((route >> 24) & 255)
-                if USE_C64:
-                    output_rows += (route.to(gl.int64) * N,)
-                else:
-                    output_rows += (route.to(gl.uint32) * N,)
-                output_valid += ((route >= 0) & (route < valid_routes) & (expert >= 0),)
+            route = routes
+            if CK_SORTING:
+                route = (route & 0x00ffffff) * TOP_K + ((route >> 24) & 255)
+            if USE_C64:
+                output_rows = route.to(gl.int64) * N
+            else:
+                output_rows = route.to(gl.uint32) * N
+            output_valid = (route >= 0) & (route < valid_routes) & (experts >= 0)
             next_sa = gl.full((BM,), 0, gl.float32, ml)
             next_weight = gl.full((BM,), 0, gl.float32, ml)
             next_route = gl.full((BM,), 0, gl.int32, ml)
@@ -269,28 +263,27 @@ def _producer(A, B, Experts, am, b0, b1, C, Sorted, valid_routes, co0, co1,
                 epoch += 1
             for n in range(0, N_PANELS):
                 col = (n // 2) * BN + (n % 2) * (BN // 4) + output_rn
-                for panel in gl.static_range(2):
-                    hcu.abarrier_try_wait(9, panel & 1)
-                    x = co0.load(output_store)
-                    hcu.wait_lgkmcnt(0)
-                    hcu.abarrier_arrive(11)
-                    offsets = output_rows[panel][:, None] + col[None, :].to(gl.uint32)
-                    valid = output_valid[panel]
-                    if USE_C64:
-                        gl.store(C + offsets, x, valid[:, None])
-                    else:
-                        buffer_store(x, C, offsets, valid[:, None])
-                    hcu.abarrier_try_wait(13, panel & 1)
-                    y = co1.load(output_store)
-                    hcu.wait_lgkmcnt(0)
-                    hcu.abarrier_arrive(15)
-                    if USE_C64:
-                        gl.store(C + offsets + BN // 2, y, valid[:, None])
-                    else:
-                        buffer_store(y, C, offsets + BN // 2, valid[:, None])
-                    if n == 0 and panel == 1:
-                        if next_m < total // (N // BN):
-                            _publish_metadata(ma, epoch - 1, next_sa, next_weight, next_route, next_expert)
+                hcu.abarrier_try_wait(9, n & 1)
+                x = co0.load(output_store)
+                hcu.wait_lgkmcnt(0)
+                hcu.abarrier_arrive(11)
+                offsets = output_rows[:, None] + col[None, :].to(gl.uint32)
+                valid = output_valid
+                if USE_C64:
+                    gl.store(C + offsets, x, valid[:, None])
+                else:
+                    buffer_store(x, C, offsets, valid[:, None])
+                hcu.abarrier_try_wait(13, n & 1)
+                y = co1.load(output_store)
+                hcu.wait_lgkmcnt(0)
+                hcu.abarrier_arrive(15)
+                if USE_C64:
+                    gl.store(C + offsets + BN // 2, y, valid[:, None])
+                else:
+                    buffer_store(y, C, offsets + BN // 2, valid[:, None])
+                if n == 0:
+                    if next_m < total // (N // BN):
+                        _publish_metadata(ma, epoch - 1, next_sa, next_weight, next_route, next_expert)
         else:
             expert = gl.load(Experts + m)
             b_base = B + gl.maximum(expert, 0).to(gl.int64) * N * K
@@ -311,7 +304,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
 
     first N phase: wait/read A -> wait/read B0/SB -> LDS wait -> release A/B0
     every phase: read full-K B -> MMAC K0/K1/K2
-                  -> two M32 MMAC K3/scale/mailbox handoffs.
+                  -> both M32 MMAC K3 groups -> scale -> one M64 mailbox handoff.
     Metadata is read once per M; A remains in registers through all N phases.
     """
     if num_tokens_post_padded_ptr is not None:
@@ -381,6 +374,7 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
             a_panels = (a_low[3], a_high[3])
             sa_parts = _row_vectors(sa)
             weight_parts = _row_vectors(weight)
+            hcu.abarrier_try_wait(11 + 4 * PARTITION, b_epoch & 1)
             for panel in gl.static_range(2):
 
                 hcu.sched_barrier()
@@ -393,13 +387,9 @@ def _consumer(C, SA, SB, Weights, Sorted, Experts, am, bm, co, ma, mb,
                     acc = acc.to(gl.float32)
                 value = ((acc * panel_sa[:, None]) * current_sb[None, :]) * panel_weight[:, None]
                 packed = gl.convert_layout(value, packing).to(C.dtype.element_ty)
-                if panel > 0:
-                    # Completed own READY separates consecutive EMPTY waits.
-                    hcu.abarrier_try_wait(9 + 4 * PARTITION, (panel - 1) & 1)
-                hcu.abarrier_try_wait(11 + 4 * PARTITION, panel & 1)
-                co.store(packed)
-                hcu.wait_lgkmcnt(0)
-                hcu.abarrier_arrive(9 + 4 * PARTITION)
+                co.slice(panel * 32, 32, dim=0).store(packed)
+            hcu.wait_lgkmcnt(0)
+            hcu.abarrier_arrive(9 + 4 * PARTITION)
             b_epoch += 1
 
 
@@ -451,8 +441,8 @@ def gemm_bottom_w8a8_channel_wasp_persistent(
     b0 = gl.allocate_shared_memory(B.dtype.element_ty, [1, K, BN // 4], bl)
     b1 = gl.allocate_shared_memory(B.dtype.element_ty, [1, K, BN // 4], bl)
     output_shared: gl.constexpr = gl.SwizzledSharedLayout(8, 1, 8, [1, 0])
-    co0 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)
-    co1 = gl.allocate_shared_memory(C.dtype.element_ty, [32, BN // 4], output_shared)
+    co0 = gl.allocate_shared_memory(C.dtype.element_ty, [BM, BN // 4], output_shared)
+    co1 = gl.allocate_shared_memory(C.dtype.element_ty, [BM, BN // 4], output_shared)
     meta_shared: gl.constexpr = gl.SwizzledSharedLayout(1, 1, 1, [0])
     ma_layout: gl.constexpr = gl.SharedLinearLayout([[4], [8], [1], [2], [16], [32]], [], 16)
     ma = gl.allocate_shared_memory(gl.float32, [8, BM], ma_layout)

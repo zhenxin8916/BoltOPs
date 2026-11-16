@@ -1,4 +1,4 @@
 {
-  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/m1n4-p0-two-adjacent-rows-repeat/GEMM2_BM64_BN512_GRID48_OUTPUT96_2M_PER_CU_P0_ADJACENT_ROWS_GC1800_CU0.perf",
-  "sha256": "7056cecfbeb878bce2c95ad5999e07461f3d5cd33b4405916b24e1ce4324a5c5"
+  "path": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-full-m64-single-publication-repeat/GEMM2_BM64_BN512_GRID48_OUTPUT96_2M_PER_CU_CO_FULL_M64_GC1800_CU0.perf",
+  "sha256": "f75038fd1399ffb8d52fc54148154ca401a8484d64c20aacb3cc53a229f85d9d"
 }

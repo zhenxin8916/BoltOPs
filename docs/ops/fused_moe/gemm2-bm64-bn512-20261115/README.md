@@ -341,3 +341,12 @@ The retained full-M64 result update is commit `97cb4cc` (14.776256us), following
 one tensor before the LDS store measured14.958068us with zero bounded numerical
 errors; it is slower and was not retained. Native actual P0 registers at1d881f7
 are39, versus36 at347a15a; the current full-M64 version uses49 as archived.
+
+## Controls after full-M64 publication — 2026-11-16
+
+Thirteen bounded numeric-passing controls did not beat retained commit`97cb4cc`
+14.776256us: direct/two-generation SB and split READY, delayed P1 right scatter,
+adjacent-M mapping, full-M64 accumulation, expert scalar loads and P0 paired
+result reads. Production code remains unchanged. See the
+[comparison and counter evidence](controls-after-co-m64/README.md). This preserves
+the same two-output/1.8GHz/48CU scope; the60% target remains active.

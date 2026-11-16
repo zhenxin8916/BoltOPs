@@ -1,0 +1,1642 @@
+{
+  "baseline_commit": "97cb4cc",
+  "baseline_us": 14.776256,
+  "baseline_whole_dispatch_mmac_percent": 15.412402167369056,
+  "scope": "1.8GHz, 48CU, two independent M64xN512 output tiles per persistent TG, frozen inputs",
+  "toolchain_provenance": "../provenance.json",
+  "controls": [
+    {
+      "case": "co-m64-sb-two-generation-direct-lds",
+      "algorithm": "Two SB generations, direct buffer-to-LDS",
+      "time_us": 14.829632,
+      "whole_dispatch_mmac_percent": 15.356928614277145,
+      "change_percent": 0.36122817579771205,
+      "source_sha256": "60f8e0b62ce5fd777f20992b9831cb21a80d96b21ef46ca3bd4141d433804524",
+      "hsaco_sha256": "a0e4d7edcc18aacad815fe28d655de75d784c542bd7abf5c6593f2b8b880ea6b",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-two-generation-direct-lds",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.343511,
+        "TccRecvRespBandwidth": 0.641229,
+        "TCCHitRate": 0.845883,
+        "TCPCacheLineHitRate": 0.18972,
+        "SQCIHitRate": 0.998466,
+        "missSQCIRequests": 168.0,
+        "missDuplicatedSQCIRequests": 36898.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 696.375,
+          "maximum": 817.0,
+          "sum": 33426.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 8.104166666666666,
+          "maximum": 42.0,
+          "sum": 389.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 127.66666666666667,
+          "maximum": 186.0,
+          "sum": 6128.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1938.125,
+          "maximum": 3024.0,
+          "sum": 93030.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 673.4791666666666,
+          "maximum": 980.0,
+          "sum": 32327.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 23.833333333333332,
+          "maximum": 361.0,
+          "sum": 1144.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 12429.6875,
+          "maximum": 12945.0,
+          "sum": 596625.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 14829632,
+        "duration_ticks": 14829632,
+        "duration_us": 14.829632,
+        "gui_duration_us": 14.829,
+        "section_offset": 6869,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-two-generation-direct-lds/m5out/0/0/2371539_python3.10.perf",
+        "source_perf_sha256": "a7cc313e077de241bc35626eebdc4d0a2cfbb38415bdd629de599ebafb39bf8d"
+      },
+      "full_n_regression": false,
+      "repeat": false,
+      "generic_wait_and_work_audit": {
+        "peak_live_waves_cu0": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "starts": 16,
+        "ends": 16,
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "simds": [
+          {
+            "simd": 0,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 1,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 2,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 3,
+            "mmac": 512,
+            "busy_cycles": 4096
+          }
+        ],
+        "wait_id_audit": {
+          "9": {
+            "observed_ids": [
+              0,
+              1,
+              5,
+              11,
+              12
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "11": {
+            "observed_ids": [
+              0,
+              1,
+              5,
+              11,
+              12
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "8": {
+            "observed_ids": [
+              0,
+              1,
+              5,
+              11,
+              12
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "10": {
+            "observed_ids": [
+              0,
+              1,
+              5,
+              11,
+              12
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "12": {
+            "observed_ids": [
+              0,
+              1,
+              7,
+              12,
+              15
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "15": {
+            "observed_ids": [
+              0,
+              1,
+              7,
+              12,
+              15
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "13": {
+            "observed_ids": [
+              0,
+              1,
+              7,
+              12,
+              15
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "14": {
+            "observed_ids": [
+              0,
+              1,
+              7,
+              12,
+              15
+            ],
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "4": {
+            "observed_ids": [
+              6,
+              8
+            ],
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "5": {
+            "observed_ids": [
+              6,
+              8
+            ],
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "6": {
+            "observed_ids": [
+              6,
+              8
+            ],
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "7": {
+            "observed_ids": [
+              6,
+              8
+            ],
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "0": {
+            "observed_ids": [
+              1,
+              3,
+              9,
+              13
+            ],
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "2": {
+            "observed_ids": [
+              1,
+              3,
+              9,
+              13
+            ],
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "1": {
+            "observed_ids": [
+              1,
+              3,
+              9,
+              13
+            ],
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "3": {
+            "observed_ids": [
+              1,
+              3,
+              9,
+              13
+            ],
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          }
+        },
+        "numerical": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 118784,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+      }
+    },
+    {
+      "case": "co-m64-sb-two-generation-vec4-lds",
+      "algorithm": "Direct SB with vec4 shared layout",
+      "time_us": 14.829632,
+      "whole_dispatch_mmac_percent": 15.356928614277145,
+      "change_percent": 0.36122817579771205,
+      "source_sha256": "ed5ec329da5b7cfc8be513e4407ee4e10df0b69bf3818b01e4276803d28f7ca8",
+      "hsaco_sha256": "6108527449a0d148ffc8967e5498c9328b421ebc5730c5b177985b8aec1ce652",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-two-generation-vec4-lds",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.343511,
+        "TccRecvRespBandwidth": 0.641229,
+        "TCCHitRate": 0.845883,
+        "TCPCacheLineHitRate": 0.18972,
+        "SQCIHitRate": 0.998466,
+        "missSQCIRequests": 168.0,
+        "missDuplicatedSQCIRequests": 36898.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 696.375,
+          "maximum": 817.0,
+          "sum": 33426.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 8.104166666666666,
+          "maximum": 42.0,
+          "sum": 389.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 127.66666666666667,
+          "maximum": 186.0,
+          "sum": 6128.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1938.125,
+          "maximum": 3024.0,
+          "sum": 93030.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 673.4791666666666,
+          "maximum": 980.0,
+          "sum": 32327.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 23.833333333333332,
+          "maximum": 361.0,
+          "sum": 1144.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 12429.6875,
+          "maximum": 12945.0,
+          "sum": 596625.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 14829632,
+        "duration_ticks": 14829632,
+        "duration_us": 14.829632,
+        "gui_duration_us": 14.829,
+        "section_offset": 6869,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-two-generation-vec4-lds/m5out/0/0/2371655_python3.10.perf",
+        "source_perf_sha256": "947ac98d9ee6c9dbd1c604daacd32e0cc6353702d4dd6c4f04adefc8d88788b0"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "co-m64-sb-two-generation-separate-ready",
+      "algorithm": "Separate B/SB READY; return B credit after SB read",
+      "time_us": 15.092064,
+      "whole_dispatch_mmac_percent": 15.089890951959918,
+      "change_percent": 2.1372667068031426,
+      "source_sha256": "639aba58b35220e56f1a16ea805619d907af790f1134dcae69f27bc8d9cb414a",
+      "hsaco_sha256": "177decfc3692bca89f78e9bc42faecc6c980243f6ff0b52d68c63037595fd98c",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-two-generation-separate-ready",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.320251,
+        "TccRecvRespBandwidth": 0.645413,
+        "TCCHitRate": 0.845458,
+        "TCPCacheLineHitRate": 0.18972,
+        "SQCIHitRate": 0.998653,
+        "missSQCIRequests": 149.0,
+        "missDuplicatedSQCIRequests": 36679.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 697.3125,
+          "maximum": 847.0,
+          "sum": 33471.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 23.833333333333332,
+          "maximum": 44.0,
+          "sum": 1144.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 73.29166666666667,
+          "maximum": 168.0,
+          "sum": 3518.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1324.2291666666667,
+          "maximum": 2445.0,
+          "sum": 63563.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 427.1875,
+          "maximum": 824.0,
+          "sum": 20505.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 14.354166666666666,
+          "maximum": 287.0,
+          "sum": 689.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 12199.916666666666,
+          "maximum": 12790.0,
+          "sum": 585596.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15092064,
+        "duration_ticks": 15092064,
+        "duration_us": 15.092064,
+        "gui_duration_us": 15.092,
+        "section_offset": 6955,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-two-generation-separate-ready/m5out/0/0/2371599_python3.10.perf",
+        "source_perf_sha256": "b09f4ab2ff6fdac594f12a65e44df930f62b7e2d366abff52ab1e5b02ddfae01"
+      },
+      "full_n_regression": false,
+      "repeat": false,
+      "generic_wait_and_work_audit": {
+        "peak_live_waves_cu0": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "starts": 16,
+        "ends": 16,
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "simds": [
+          {
+            "simd": 0,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 1,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 2,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 3,
+            "mmac": 512,
+            "busy_cycles": 4096
+          }
+        ],
+        "wait_id_audit": {
+          "10": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "9": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "11": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "8": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "15": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "14": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "13": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "12": {
+            "first_id": 1,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "6": {
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "2": {
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "4": {
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "5": {
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "7": {
+            "first_id": 6,
+            "waits": 8,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "0": {
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "1": {
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "3": {
+            "first_id": 3,
+            "waits": 11,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          }
+        },
+        "numerical": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 118784,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+      }
+    },
+    {
+      "case": "co-m64-sb-both-halves-before-b-left",
+      "algorithm": "Prefetch both SB halves before BL; wait groups1/0",
+      "time_us": 15.013112,
+      "whole_dispatch_mmac_percent": 15.169246722465003,
+      "change_percent": 1.6029500301023347,
+      "source_sha256": "99e8373f7f3377b0d96756052234eeb74eb663219aaaab3c33a21a859be842da",
+      "hsaco_sha256": "12857f6eaec24a70b85e0a979950bc1e8da519a19bd26ee52d0417533b560f05",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-both-halves-before-b-left",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 118784,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.327194,
+        "TccRecvRespBandwidth": 0.639837,
+        "TCCHitRate": 0.84577,
+        "TCPCacheLineHitRate": 0.18972,
+        "SQCIHitRate": 0.998623,
+        "missSQCIRequests": 151.0,
+        "missDuplicatedSQCIRequests": 39601.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 703.1666666666666,
+          "maximum": 857.0,
+          "sum": 33752.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 32.958333333333336,
+          "maximum": 84.0,
+          "sum": 1582.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 125.70833333333333,
+          "maximum": 190.0,
+          "sum": 6034.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1647.8958333333333,
+          "maximum": 2185.0,
+          "sum": 79099.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 1008.7916666666666,
+          "maximum": 1216.0,
+          "sum": 48422.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 5.4375,
+          "maximum": 261.0,
+          "sum": 261.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 12071.75,
+          "maximum": 12628.0,
+          "sum": 579444.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15013112,
+        "duration_ticks": 15013112,
+        "duration_us": 15.013112,
+        "gui_duration_us": 15.013,
+        "section_offset": 6951,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-sb-both-halves-before-b-left/m5out/0/0/2372335_python3.10.perf",
+        "source_perf_sha256": "e69d82222da121a70a212b7f83911cfd8bec94dceb1c965b1704b7c8876fe215"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "split-scatter-p1-delayed-legal-waits",
+      "algorithm": "P1 scatters right output one phase behind B, with metadata credits",
+      "time_us": 16.371976,
+      "whole_dispatch_mmac_percent": 13.910208517285879,
+      "change_percent": 10.799217338952438,
+      "source_sha256": "8fd9643748681f935519c28d596acdac5e950396163309fdcc1d91659a623f5d",
+      "hsaco_sha256": "4abf82b1c120d9ed8d65c8766cd8bcf82f3e3504b520ce2fed25ae362670bbdf",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/split-scatter-p1-delayed-legal-waits",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.218797,
+        "TccRecvRespBandwidth": 0.607231,
+        "TCCHitRate": 0.845739,
+        "TCPCacheLineHitRate": 0.325418,
+        "SQCIHitRate": 0.998179,
+        "missSQCIRequests": 216.0,
+        "missDuplicatedSQCIRequests": 42079.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 578.3125,
+          "maximum": 691.0,
+          "sum": 27759.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 64.20833333333333,
+          "maximum": 96.0,
+          "sum": 3082.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 62.229166666666664,
+          "maximum": 104.0,
+          "sum": 2987.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 507.1875,
+          "maximum": 1020.0,
+          "sum": 24345.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 964.0,
+          "maximum": 1221.0,
+          "sum": 46272.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 2.8125,
+          "maximum": 135.0,
+          "sum": 135.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 12525.833333333334,
+          "maximum": 14030.0,
+          "sum": 601240.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 16371976,
+        "duration_ticks": 16371976,
+        "duration_us": 16.371976,
+        "gui_duration_us": 16.371,
+        "section_offset": 7813,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/split-scatter-p1-delayed-legal-waits/m5out/0/0/2371906_python3.10.perf",
+        "source_perf_sha256": "931085bf6545d44310fcf4d148f5ac1119b244262d0868c7985c4a8ddacaa4ae"
+      },
+      "full_n_regression": false,
+      "repeat": false,
+      "generic_wait_and_work_audit": {
+        "peak_live_waves_cu0": 16,
+        "per_simd_at_peak": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "starts": 16,
+        "ends": 16,
+        "cu0_mmac_count": 2048,
+        "exec0_mmac_count": 0,
+        "mmac_busy8_cycle_union_verified": true,
+        "simds": [
+          {
+            "simd": 0,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 1,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 2,
+            "mmac": 512,
+            "busy_cycles": 4096
+          },
+          {
+            "simd": 3,
+            "mmac": 512,
+            "busy_cycles": 4096
+          }
+        ],
+        "wait_id_audit": {
+          "12": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "13": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "15": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "14": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "9": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "11": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "10": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "8": {
+            "first_id": 1,
+            "waits": 12,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "1": {
+            "first_id": 3,
+            "waits": 13,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "3": {
+            "first_id": 3,
+            "waits": 13,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "2": {
+            "first_id": 3,
+            "waits": 13,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "0": {
+            "first_id": 3,
+            "waits": 13,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "5": {
+            "first_id": 6,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "7": {
+            "first_id": 6,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "6": {
+            "first_id": 6,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          },
+          "4": {
+            "first_id": 6,
+            "waits": 16,
+            "all_ids_in_range": true,
+            "no_adjacent_repeat": true
+          }
+        },
+        "numerical": {
+          "verified": true,
+          "mismatches": 0,
+          "checked_elements": 2630144,
+          "untouched_tail": true,
+          "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+          "shared": 117760,
+          "scope": "bounded_two_output_tiles_per_tg",
+          "tiles_per_tg": 2
+        },
+        "definition": "actual CU0 wave start/end sweep; all starts and ends included, not a sum across sequential TGs; MMAC denominator uses CU0 own lifetime; elapsed time uses full 48-CU dispatch"
+      }
+    },
+    {
+      "case": "adjacent-m-pair-scheduling-only",
+      "algorithm": "Adjacent M pairs, no explicit B reuse",
+      "time_us": 17.9171,
+      "whole_dispatch_mmac_percent": 12.710628394103956,
+      "change_percent": 21.25602046959665,
+      "source_sha256": "1408fde49f81e8d1699b4501c3e4562a7fa0e3ca37a7052c334b7d5ecf2de92b",
+      "hsaco_sha256": "4fa558d1b1e8d7d23287ec634c2612ec286f6ae6371e8e1762ccf3ed1b32d7d0",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/adjacent-m-pair-scheduling-only",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.111998,
+        "TccRecvRespBandwidth": 0.761284,
+        "TCCHitRate": 0.797651,
+        "TCPCacheLineHitRate": 0.3293,
+        "SQCIHitRate": 0.998816,
+        "missSQCIRequests": 145.0,
+        "missDuplicatedSQCIRequests": 48736.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 643.2083333333334,
+          "maximum": 777.0,
+          "sum": 30874.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 64.16666666666667,
+          "maximum": 96.0,
+          "sum": 3080.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 198.625,
+          "maximum": 446.0,
+          "sum": 9534.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1077.9791666666667,
+          "maximum": 1745.0,
+          "sum": 51743.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 953.8958333333334,
+          "maximum": 1311.0,
+          "sum": 45787.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 761.1666666666666,
+          "maximum": 1854.0,
+          "sum": 36536.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 12144.166666666666,
+          "maximum": 12757.0,
+          "sum": 582920.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 17917100,
+        "duration_ticks": 17917100,
+        "duration_us": 17.9171,
+        "gui_duration_us": 17.917,
+        "section_offset": 7735,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/adjacent-m-pair-scheduling-only/m5out/0/0/2372484_python3.10.perf",
+        "source_perf_sha256": "55331eabb05c62bfebb7c9e9d758a433fe2f3c7f0ddc20849ac09f58ffec124d"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "co-m64-single-full-m64-accumulator",
+      "algorithm": "Single M64 accumulator, consumer warps M1/N4",
+      "time_us": 15.130428,
+      "whole_dispatch_mmac_percent": 15.051629735788042,
+      "change_percent": 2.3968994581577308,
+      "source_sha256": "7298800d7e4fc5e4d0d6ca1480635c2023314e0501e20559f3d3a19f08f06378",
+      "hsaco_sha256": "bf3deeac1c96853c9a69967f16983bc5c0d8c3c715163657e77f99f5b1e80f72",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-single-full-m64-accumulator",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.316497,
+        "TccRecvRespBandwidth": 0.631374,
+        "TCCHitRate": 0.846079,
+        "TCPCacheLineHitRate": 0.325558,
+        "SQCIHitRate": 0.998665,
+        "missSQCIRequests": 144.0,
+        "missDuplicatedSQCIRequests": 36491.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 784.75,
+          "maximum": 922.0,
+          "sum": 37668.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 43.0625,
+          "maximum": 73.0,
+          "sum": 2067.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 103.04166666666667,
+          "maximum": 174.0,
+          "sum": 4946.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 2367.2708333333335,
+          "maximum": 3241.0,
+          "sum": 113629.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 561.75,
+          "maximum": 846.0,
+          "sum": 26964.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 5.583333333333333,
+          "maximum": 268.0,
+          "sum": 268.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11732.291666666666,
+          "maximum": 12156.0,
+          "sum": 563150.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15130428,
+        "duration_ticks": 15130428,
+        "duration_us": 15.130428,
+        "gui_duration_us": 15.13,
+        "section_offset": 7045,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-single-full-m64-accumulator/m5out/0/0/2372638_python3.10.perf",
+        "source_perf_sha256": "854262da6e365e9be5d5cbb2fee2ea9890bea21b5cf02b0165777e18c7c507a7"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "co-m64-full-accumulator-warps-m2n2",
+      "algorithm": "Single M64 accumulator, consumer warps M2/N2",
+      "time_us": 15.159896,
+      "whole_dispatch_mmac_percent": 15.022372185139002,
+      "change_percent": 2.5963275135460595,
+      "source_sha256": "38cd3981d85899a5fded50dff5966979f3853e4878e1764752acceaeb81cd371",
+      "hsaco_sha256": "7605e312b65c58b4cb54a36ce85716338acf198918e8b5cfd4103f2473a0adc3",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-full-accumulator-warps-m2n2",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.314344,
+        "TccRecvRespBandwidth": 0.63881,
+        "TCCHitRate": 0.845349,
+        "TCPCacheLineHitRate": 0.325558,
+        "SQCIHitRate": 0.99868,
+        "missSQCIRequests": 144.0,
+        "missDuplicatedSQCIRequests": 40558.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 690.5,
+          "maximum": 795.0,
+          "sum": 33144.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 50.729166666666664,
+          "maximum": 80.0,
+          "sum": 2435.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 28.0,
+          "maximum": 96.0,
+          "sum": 1344.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 2272.9166666666665,
+          "maximum": 3423.0,
+          "sum": 109100.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 480.0625,
+          "maximum": 956.0,
+          "sum": 23043.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 6.354166666666667,
+          "maximum": 305.0,
+          "sum": 305.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11659.9375,
+          "maximum": 12226.0,
+          "sum": 559677.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15159896,
+        "duration_ticks": 15159896,
+        "duration_us": 15.159896,
+        "gui_duration_us": 15.159,
+        "section_offset": 6908,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-full-accumulator-warps-m2n2/m5out/0/0/2372698_python3.10.perf",
+        "source_perf_sha256": "1fad0778e93c15ed02a0ad7fa35601c3ce67084382033da56c45c78368738664"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "p0-read-one-expert-word",
+      "algorithm": "Read one metadata expert word for P0",
+      "time_us": 15.428444,
+      "whole_dispatch_mmac_percent": 14.760892284406646,
+      "change_percent": 4.41375677302831,
+      "source_sha256": "63efdc75d43c35b9e6ae979714306392f3e49469c6b8170e981bf743cc3f94f6",
+      "hsaco_sha256": "b0512e155abd9ed9f2e29666f2bd1c3eccb7b28ac8c0ceba51627b89561dfe54",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/p0-read-one-expert-word",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.291068,
+        "TccRecvRespBandwidth": 0.626778,
+        "TCCHitRate": 0.845558,
+        "TCPCacheLineHitRate": 0.325558,
+        "SQCIHitRate": 0.998665,
+        "missSQCIRequests": 144.0,
+        "missDuplicatedSQCIRequests": 40592.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 659.375,
+          "maximum": 806.0,
+          "sum": 31650.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 71.10416666666667,
+          "maximum": 100.0,
+          "sum": 3413.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 102.45833333333333,
+          "maximum": 269.0,
+          "sum": 4918.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1602.3125,
+          "maximum": 2222.0,
+          "sum": 76911.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 956.6041666666666,
+          "maximum": 1460.0,
+          "sum": 45917.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 17.0,
+          "maximum": 508.0,
+          "sum": 816.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11930.3125,
+          "maximum": 12524.0,
+          "sum": 572655.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15428444,
+        "duration_ticks": 15428444,
+        "duration_us": 15.428444,
+        "gui_duration_us": 15.428,
+        "section_offset": 6628,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/p0-read-one-expert-word/m5out/0/0/2372896_python3.10.perf",
+        "source_perf_sha256": "0dd446751efd258542d07429d879fc13b0a5c3dc3d5fd20651a5a1c8a6eb6281"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "p1-expert-smem-explicit-wait",
+      "algorithm": "P1 expert via SMEM with explicit completion",
+      "time_us": 15.042024,
+      "whole_dispatch_mmac_percent": 15.14009018999039,
+      "change_percent": 1.7986152919927667,
+      "source_sha256": "7a84576c36a627f12a344c84dc68303034271d91aeabdeef93cbe31642db6c75",
+      "hsaco_sha256": "13d0e5de010ea6bea496c9932d356fd45b53eeca0c0d9c1d8ac8218f5838d11a",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/p1-expert-smem-explicit-wait",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.324541,
+        "TccRecvRespBandwidth": 0.638608,
+        "TCCHitRate": 0.845607,
+        "TCPCacheLineHitRate": 0.317384,
+        "SQCIHitRate": 0.998624,
+        "missSQCIRequests": 149.0,
+        "missDuplicatedSQCIRequests": 39636.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 784.25,
+          "maximum": 1054.0,
+          "sum": 37644.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 43.541666666666664,
+          "maximum": 73.0,
+          "sum": 2090.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 115.39583333333333,
+          "maximum": 223.0,
+          "sum": 5539.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1874.4583333333333,
+          "maximum": 2311.0,
+          "sum": 89974.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 695.2291666666666,
+          "maximum": 1096.0,
+          "sum": 33371.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 32.520833333333336,
+          "maximum": 493.0,
+          "sum": 1561.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11764.583333333334,
+          "maximum": 12313.0,
+          "sum": 564700.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15042024,
+        "duration_ticks": 15042024,
+        "duration_us": 15.042024,
+        "gui_duration_us": 15.042,
+        "section_offset": 6693,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/p1-expert-smem-explicit-wait/m5out/0/0/2373424_python3.10.perf",
+        "source_perf_sha256": "cc06585755e362341430968faac2527bc12c3b0bfcc5a7e420baeb0f0b784cce"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "p0-p1-expert-smem-explicit-wait",
+      "algorithm": "P0/P1 expert via SMEM with explicit completion",
+      "time_us": 15.118196,
+      "whole_dispatch_mmac_percent": 15.06380787760656,
+      "change_percent": 2.3141180012040907,
+      "source_sha256": "1ef995a322ed097c391f5e97e9d5020dd7f441052bee316d05e70b9fe82ef7ae",
+      "hsaco_sha256": "45c2863bb9fa8079f988d8f31ad5db766c7783ed38283c9720981e9cd176516b",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/p0-p1-expert-smem-explicit-wait",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.317461,
+        "TccRecvRespBandwidth": 0.637016,
+        "TCCHitRate": 0.84555,
+        "TCPCacheLineHitRate": 0.309776,
+        "SQCIHitRate": 0.99846,
+        "missSQCIRequests": 168.0,
+        "missDuplicatedSQCIRequests": 39433.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 707.3958333333334,
+          "maximum": 898.0,
+          "sum": 33955.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 15.1875,
+          "maximum": 36.0,
+          "sum": 729.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 90.6875,
+          "maximum": 153.0,
+          "sum": 4353.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1854.1875,
+          "maximum": 2497.0,
+          "sum": 89001.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 596.5208333333334,
+          "maximum": 1030.0,
+          "sum": 28633.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 9.625,
+          "maximum": 389.0,
+          "sum": 462.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11877.916666666666,
+          "maximum": 13326.0,
+          "sum": 570140.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15118196,
+        "duration_ticks": 15118196,
+        "duration_us": 15.118196,
+        "gui_duration_us": 15.118,
+        "section_offset": 6715,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/p0-p1-expert-smem-explicit-wait/m5out/0/0/2373423_python3.10.perf",
+        "source_perf_sha256": "39720b7c99b30b835f79edc9389bb9a2a478b1fa39b6a19ed5fb10e3a5c087e7"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "co-m64-read-right-before-left-store",
+      "algorithm": "Right LDS read before left store",
+      "time_us": 14.950284,
+      "whole_dispatch_mmac_percent": 15.232994904979732,
+      "change_percent": 1.1777543648404665,
+      "source_sha256": "e87940172c4228da7aeeff9db96ea722d8161fd01a0dcf01652d5130a3ca573c",
+      "hsaco_sha256": "c645e5bc8853df4e3c2eb2c615ea696556616d13e33ba9081dd17155074600f9",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-read-right-before-left-store",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.332583,
+        "TccRecvRespBandwidth": 0.64316,
+        "TCCHitRate": 0.846002,
+        "TCPCacheLineHitRate": 0.32534,
+        "SQCIHitRate": 0.998656,
+        "missSQCIRequests": 145.0,
+        "missDuplicatedSQCIRequests": 35204.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 720.9166666666666,
+          "maximum": 976.0,
+          "sum": 34604.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 28.3125,
+          "maximum": 67.0,
+          "sum": 1359.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 100.625,
+          "maximum": 265.0,
+          "sum": 4830.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 1996.4375,
+          "maximum": 3402.0,
+          "sum": 95829.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 558.1458333333334,
+          "maximum": 1083.0,
+          "sum": 26791.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 227.66666666666666,
+          "maximum": 698.0,
+          "sum": 10928.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11692.8125,
+          "maximum": 12116.0,
+          "sum": 561255.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 14950284,
+        "duration_ticks": 14950284,
+        "duration_us": 14.950284,
+        "gui_duration_us": 14.95,
+        "section_offset": 6735,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-read-right-before-left-store/m5out/0/0/2373818_python3.10.perf",
+        "source_perf_sha256": "7403d8fb8c9a3afb3c408e6735dd35eb10c323062dbceb93a0c43f9d4c24b0c4"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    },
+    {
+      "case": "co-m64-batch-both-result-reads",
+      "algorithm": "Batch both LDS result reads before completion wait",
+      "time_us": 15.00366,
+      "whole_dispatch_mmac_percent": 15.178803038725217,
+      "change_percent": 1.5389825406381785,
+      "source_sha256": "1198943a14621baa1394bf1855cdda32194f9b6d83da933144a71f8d450c1d61",
+      "hsaco_sha256": "b3145fbd581102dfca0f55793788ff5abcbf3c5fc6ea8baa8a3d217e615dcc3d",
+      "raw_directory": "/home/zhenx/temp/moe-gemm2-bm64bn512-20261115/co-m64-batch-both-result-reads",
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 2630144,
+        "untouched_tail": true,
+        "output_sha256": "85a4fdedaba972eb73dfdbad8601b8c4c60995284307e078fe737ed2642e0baa",
+        "shared": 117760,
+        "scope": "bounded_two_output_tiles_per_tg",
+        "tiles_per_tg": 2
+      },
+      "cache": {
+        "TccSendRespBandwidth": 1.327928,
+        "TccRecvRespBandwidth": 0.637698,
+        "TCCHitRate": 0.845771,
+        "TCPCacheLineHitRate": 0.325184,
+        "SQCIHitRate": 0.998408,
+        "missSQCIRequests": 173.0,
+        "missDuplicatedSQCIRequests": 37106.0
+      },
+      "cu_metrics": {
+        "ldsBankConflict": {
+          "mean": 1024.0,
+          "maximum": 1024.0,
+          "sum": 49152.0
+        },
+        "GlobalMemPipeline.cmdCreditStall": {
+          "mean": 736.2291666666666,
+          "maximum": 891.0,
+          "sum": 35339.0
+        },
+        "GlobalMemPipeline.addrCreditStall": {
+          "mean": 41.041666666666664,
+          "maximum": 71.0,
+          "sum": 1970.0
+        },
+        "GlobalMemPipeline.dataCreditStall": {
+          "mean": 110.83333333333333,
+          "maximum": 215.0,
+          "sum": 5320.0
+        },
+        "LocalMemPipeline.creditStall": {
+          "mean": 2002.2916666666667,
+          "maximum": 3088.0,
+          "sum": 96110.0
+        },
+        "tatd.TATD.taSendStallBytcp": {
+          "mean": 663.25,
+          "maximum": 1104.0,
+          "sum": 31836.0
+        },
+        "tatd.TATD.taSendStallByCredit": {
+          "mean": 133.45833333333334,
+          "maximum": 628.0,
+          "sum": 6406.0
+        },
+        "numCyclesWaitIFetchAfterBranchTaken": {
+          "mean": 11922.520833333334,
+          "maximum": 12448.0,
+          "sum": 572281.0
+        }
+      },
+      "perf_span": {
+        "begin_tick": 0,
+        "end_tick": 15003660,
+        "duration_ticks": 15003660,
+        "duration_us": 15.00366,
+        "gui_duration_us": 15.003,
+        "section_offset": 6857,
+        "section_type": 15,
+        "source_perf": "/zhenxin/temp/moe-gemm2-bm64bn512-20261115/co-m64-batch-both-result-reads/m5out/0/0/2373819_python3.10.perf",
+        "source_perf_sha256": "aadd6b06794aaf091a207627e472a183c294533e2518184d4cd9365fcfc4ab04"
+      },
+      "full_n_regression": false,
+      "repeat": false
+    }
+  ],
+  "excluded": [
+    {
+      "case": "split-scatter-p1-one-phase-delayed",
+      "reason": "Consecutive READY9 waits violate the hardware wait-ID constraint; no accepted performance result. Legal variant is separately measured."
+    },
+    {
+      "case": "p1-expert-scalar-memory-load / p0-p1-expert-scalar-memory-load",
+      "reason": "Scratch inline-assembly used semicolon instead of newline, which commented out its completion wait; data was used before completion. Implementation error, not attributed to PMD. Corrected variants above pass bounded numerics."
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "version": "old",
+    "test": "lds-common-base",
+    "mode": "IR",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-common-base.ll",
+      "--check-prefix=IR"
+    ]
+  },
+  {
+    "version": "old",
+    "test": "lds-common-base",
+    "mode": "GCN",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-common-base.ll",
+      "--check-prefix=GCN"
+    ]
+  },
+  {
+    "version": "old",
+    "test": "lds-wrapped-constant-read2",
+    "mode": "IR",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-wrapped-constant-read2.ll",
+      "--check-prefix=IR"
+    ]
+  },
+  {
+    "version": "old",
+    "test": "lds-wrapped-constant-read2",
+    "mode": "GCN",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-wrapped-constant-read2.ll",
+      "--check-prefix=GCN"
+    ]
+  },
+  {
+    "version": "new",
+    "test": "lds-common-base",
+    "mode": "IR",
+    "exit_code": 1,
+    "command": [
+      "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-common-base.ll",
+      "--check-prefix=IR"
+    ]
+  },
+  {
+    "version": "new",
+    "test": "lds-common-base",
+    "mode": "GCN",
+    "exit_code": 1,
+    "command": [
+      "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-common-base.ll",
+      "--check-prefix=GCN"
+    ]
+  },
+  {
+    "version": "new",
+    "test": "lds-wrapped-constant-read2",
+    "mode": "IR",
+    "exit_code": 1,
+    "command": [
+      "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-wrapped-constant-read2.ll",
+      "--check-prefix=IR"
+    ]
+  },
+  {
+    "version": "new",
+    "test": "lds-wrapped-constant-read2",
+    "mode": "GCN",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/FileCheck",
+      "/zhenxin/temp/llvm-sync-fd18-20261117/probes/lds-wrapped-constant-read2.ll",
+      "--check-prefix=GCN"
+    ]
+  },
+  {
+    "version": "new",
+    "test": "control-only-ebarrier-sync",
+    "mode": "DEFAULT",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/FileCheck",
+      "/zhenxin/llvm-project/llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir",
+      "--check-prefix=DEFAULT"
+    ]
+  },
+  {
+    "version": "new",
+    "test": "control-only-ebarrier-sync",
+    "mode": "CONTROL",
+    "exit_code": 0,
+    "command": [
+      "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/FileCheck",
+      "/zhenxin/llvm-project/llvm/test/CodeGen/AMDGPU/hcu-control-only-ebarrier-sync.mir",
+      "--check-prefix=CONTROL"
+    ]
+  }
+]

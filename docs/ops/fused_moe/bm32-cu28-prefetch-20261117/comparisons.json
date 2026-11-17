@@ -1,0 +1,1867 @@
+[
+  {
+    "label": "Retained 667abe0, CU0+28 trace",
+    "case": "bm32-early-store-trace28-output96-gc1800",
+    "dispatch_us": 36.55144,
+    "wave_active_us": 32.137912,
+    "B_active_TBps": 1.5661144382995387,
+    "merged_handoff_cycles": 677.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1434.0,
+      "max_same_wave_handoff_cycles": 1520.0,
+      "C0_mean": 1516.0,
+      "C1_mean": 1352.0,
+      "merged_CU0_mean_handoff_cycles": 677.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1520.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1520.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1520.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1504.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1352.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1352.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1352.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1352.0
+        }
+      ]
+    },
+    "CU28": {
+      "CU": 28,
+      "scope": "all eight consumers, two outputs; cycles relative to global first wave",
+      "mean_same_wave_handoff": 2108.5,
+      "max_same_wave_handoff": 2476.0,
+      "last_valid_MMAC_end_cycle": 57247.0,
+      "last_matrix_store_issue_cycle": 57475.0,
+      "global_wave_end_cycle": 57802.0,
+      "consumer": {
+        "8": {
+          "first_MMAC_cycle": 6371.0,
+          "last_output0_MMAC_end": 30187.0,
+          "first_output1_MMAC": 31947.0,
+          "last_MMAC_end": 56283.0,
+          "store_issue_cycles": [
+            28543.0,
+            30391.0,
+            55347.0,
+            56487.0
+          ],
+          "B_READY_gap_median": 1120.0,
+          "B_READY_gap_sum": 33036.0
+        },
+        "9": {
+          "first_MMAC_cycle": 6404.0,
+          "last_output0_MMAC_end": 30180.0,
+          "first_output1_MMAC": 31948.0,
+          "last_MMAC_end": 56284.0,
+          "store_issue_cycles": [
+            28496.0,
+            30424.0,
+            55360.0,
+            56500.0
+          ],
+          "B_READY_gap_median": 1124.0,
+          "B_READY_gap_sum": 33072.0
+        },
+        "10": {
+          "first_MMAC_cycle": 6405.0,
+          "last_output0_MMAC_end": 30181.0,
+          "first_output1_MMAC": 31949.0,
+          "last_MMAC_end": 56285.0,
+          "store_issue_cycles": [
+            28509.0,
+            30409.0,
+            55377.0,
+            56517.0
+          ],
+          "B_READY_gap_median": 1128.0,
+          "B_READY_gap_sum": 33104.0
+        },
+        "11": {
+          "first_MMAC_cycle": 6406.0,
+          "last_output0_MMAC_end": 30186.0,
+          "first_output1_MMAC": 31950.0,
+          "last_MMAC_end": 56290.0,
+          "store_issue_cycles": [
+            28526.0,
+            30374.0,
+            55394.0,
+            56534.0
+          ],
+          "B_READY_gap_median": 1124.0,
+          "B_READY_gap_sum": 33076.0
+        },
+        "12": {
+          "first_MMAC_cycle": 7563.0,
+          "last_output0_MMAC_end": 30715.0,
+          "first_output1_MMAC": 33175.0,
+          "last_MMAC_end": 57247.0,
+          "store_issue_cycles": [
+            29895.0,
+            30947.0,
+            55879.0,
+            57475.0
+          ],
+          "B_READY_gap_median": 990.0,
+          "B_READY_gap_sum": 29892.0
+        },
+        "13": {
+          "first_MMAC_cycle": 7572.0,
+          "last_output0_MMAC_end": 30748.0,
+          "first_output1_MMAC": 33176.0,
+          "last_MMAC_end": 57240.0,
+          "store_issue_cycles": [
+            29364.0,
+            30980.0,
+            55896.0,
+            57428.0
+          ],
+          "B_READY_gap_median": 986.0,
+          "B_READY_gap_sum": 30476.0
+        },
+        "14": {
+          "first_MMAC_cycle": 7569.0,
+          "last_output0_MMAC_end": 30733.0,
+          "first_output1_MMAC": 33177.0,
+          "last_MMAC_end": 57241.0,
+          "store_issue_cycles": [
+            29377.0,
+            30965.0,
+            55913.0,
+            57441.0
+          ],
+          "B_READY_gap_median": 988.0,
+          "B_READY_gap_sum": 30424.0
+        },
+        "15": {
+          "first_MMAC_cycle": 7570.0,
+          "last_output0_MMAC_end": 30706.0,
+          "first_output1_MMAC": 33182.0,
+          "last_MMAC_end": 57246.0,
+          "store_issue_cycles": [
+            29878.0,
+            30930.0,
+            55866.0,
+            57458.0
+          ],
+          "B_READY_gap_median": 986.0,
+          "B_READY_gap_sum": 29828.0
+        }
+      },
+      "producer": {
+        "0": {
+          "first_load_cycle": 4263.0,
+          "last_load_cycle": 55135.0,
+          "tile_or_panel_first_issue_cycles": [
+            4263.0,
+            4787.0,
+            5795.0,
+            6399.0,
+            7583.0,
+            8667.0,
+            8819.0,
+            9631.0,
+            10091.0,
+            11447.0,
+            11575.0,
+            12339.0,
+            13343.0,
+            14047.0,
+            15115.0,
+            15871.0,
+            16419.0,
+            17243.0,
+            18139.0,
+            18775.0,
+            19591.0,
+            20519.0,
+            21019.0,
+            22015.0,
+            22895.0,
+            23367.0,
+            24343.0,
+            25383.0,
+            25771.0,
+            26691.0,
+            27687.0,
+            28255.0,
+            29099.0,
+            30455.0,
+            30835.0,
+            31979.0,
+            33203.0,
+            33755.0,
+            34583.0,
+            35999.0,
+            36467.0,
+            37087.0,
+            38451.0,
+            38991.0,
+            39499.0,
+            40803.0,
+            41319.0,
+            41927.0,
+            43175.0,
+            43659.0,
+            44223.0,
+            45623.0,
+            46083.0,
+            46571.0,
+            47979.0,
+            48587.0,
+            49011.0,
+            50291.0,
+            50915.0,
+            51475.0,
+            52651.0,
+            53231.0,
+            53795.0,
+            55091.0
+          ]
+        },
+        "4": {
+          "first_load_cycle": 4619.0,
+          "last_load_cycle": 51615.0,
+          "tile_or_panel_first_issue_cycles": [
+            4619.0,
+            6867.0,
+            9775.0,
+            12519.0,
+            15991.0,
+            18895.0,
+            22159.0,
+            25503.0,
+            29247.0,
+            32191.0,
+            36119.0,
+            39127.0,
+            42055.0,
+            45743.0,
+            48707.0,
+            51599.0
+          ]
+        }
+      }
+    },
+    "source_sha256": "c2558222bf023fa1ad5ae99aa728fbc7e8546382d5457a79a226bc30e0cee87c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "0b6573a1e2183c5833079f194a43ed0f434d44a41f4398d3a5be9345b4df5250"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Grouped M2",
+    "case": "bm32-groupM2-early-store-output96-gc1800",
+    "dispatch_us": 37.252556,
+    "wave_active_us": 32.839028,
+    "B_active_TBps": 1.5326777637876492,
+    "merged_handoff_cycles": 2140.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 2916.0,
+      "max_same_wave_handoff_cycles": 3232.0,
+      "C0_mean": 2610.0,
+      "C1_mean": 3222.0,
+      "merged_CU0_mean_handoff_cycles": 2140.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 2608.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 2608.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 2608.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 2616.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 3228.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 3212.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 3216.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 3232.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "c2558222bf023fa1ad5ae99aa728fbc7e8546382d5457a79a226bc30e0cee87c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "15e20a8cbd626a1e013dbc58c35dbdd3c249250293922d9374b72079b707afea"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Grouped M4",
+    "case": "bm32-groupM4-early-store-retry-output96-gc1800",
+    "dispatch_us": 37.155256,
+    "wave_active_us": 32.741728,
+    "B_active_TBps": 1.5372324881570085,
+    "merged_handoff_cycles": 2023.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 2973.5,
+      "max_same_wave_handoff_cycles": 3344.0,
+      "C0_mean": 3340.0,
+      "C1_mean": 2607.0,
+      "merged_CU0_mean_handoff_cycles": 2023.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 3340.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 3336.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 3340.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 3344.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 2612.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 2608.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 2600.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 2608.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "c2558222bf023fa1ad5ae99aa728fbc7e8546382d5457a79a226bc30e0cee87c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "4c22191f49d678f1a11c3a089a5b5452ddc22d2d825ac44ca8d3f8853129e145"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Grouped M8",
+    "case": "bm32-groupM8-early-store-output96-gc1800",
+    "dispatch_us": 37.194176,
+    "wave_active_us": 32.780648,
+    "B_active_TBps": 1.5354073537533486,
+    "merged_handoff_cycles": 1640.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 2563.5,
+      "max_same_wave_handoff_cycles": 2728.0,
+      "C0_mean": 2722.0,
+      "C1_mean": 2405.0,
+      "merged_CU0_mean_handoff_cycles": 1640.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 2724.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 2724.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 2728.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 2712.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 2404.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 2392.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 2384.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 2440.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "c2558222bf023fa1ad5ae99aa728fbc7e8546382d5457a79a226bc30e0cee87c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "f604463d8ba4abf7835d3c683387d1cea3ad9adc14201d3d6560374a26372cf0"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Combined matrix_store",
+    "case": "bm32-combined-matrix-store-output96-gc1800",
+    "dispatch_us": 37.155812,
+    "wave_active_us": 32.742284,
+    "B_active_TBps": 1.5372063842583494,
+    "merged_handoff_cycles": 1514.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 2187.0,
+      "max_same_wave_handoff_cycles": 2648.0,
+      "C0_mean": 2614.0,
+      "C1_mean": 1760.0,
+      "merged_CU0_mean_handoff_cycles": 1514.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 2632.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 2648.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 2556.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 2620.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1756.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1780.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1744.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1760.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "a105921b6dd449093c9249f8db09c04abc3785e3fc1bcf133bc0215e3f50665c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 83968,
+      "text_sha256": "51fa77a8f8b4278c3bc9ace92f039ba387010db807da6129cca0ef411e05364c"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Peel final K",
+    "case": "bm32-peel-last-K-output96-gc1800",
+    "dispatch_us": 36.644848,
+    "wave_active_us": 32.23132,
+    "B_active_TBps": 1.5615757592304629,
+    "merged_handoff_cycles": 941.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1334.5,
+      "max_same_wave_handoff_cycles": 1732.0,
+      "C0_mean": 941.0,
+      "C1_mean": 1728.0,
+      "merged_CU0_mean_handoff_cycles": 941.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 952.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 984.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 884.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 944.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1732.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1720.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1728.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1732.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "ef796bdec89c6bed5cf3b72659eeccbec3ec7e101dcc0c52a8435c5cd59cb173",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "3546a2cf9bb60686fd809db31fa80371e37074be58e99773ead3842faf0f5ba2"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Flat P0 K loop",
+    "case": "bm32-flat-P0-loop-output96-gc1800",
+    "dispatch_us": 36.730472,
+    "wave_active_us": 32.316944,
+    "B_active_TBps": 1.5574383518441595,
+    "merged_handoff_cycles": 723.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1219.0,
+      "max_same_wave_handoff_cycles": 1452.0,
+      "C0_mean": 1447.0,
+      "C1_mean": 991.0,
+      "merged_CU0_mean_handoff_cycles": 723.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1448.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1444.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1444.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1452.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 984.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1000.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 992.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 988.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "ebbfea1de597758341b041b84866ab86ffc2a6159f70177cc0bb77edf14a142e",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "6f61e2d77490fb910f8b9008317b3619b4e6b65d03ae0c6990a911d9ac210c2b"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "P1 next metadata at tail",
+    "case": "bm32-P1-nextmeta-tail-output96-gc1800",
+    "dispatch_us": 36.564784,
+    "wave_active_us": 32.151256,
+    "B_active_TBps": 1.5654644409537222,
+    "merged_handoff_cycles": 387.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1097.0,
+      "max_same_wave_handoff_cycles": 1108.0,
+      "C0_mean": 1105.0,
+      "C1_mean": 1089.0,
+      "merged_CU0_mean_handoff_cycles": 387.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1108.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1108.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1108.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1096.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1080.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1108.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1100.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1068.0
+        }
+      ]
+    },
+    "CU28": {
+      "CU": 28,
+      "scope": "all eight consumers, two outputs; cycles relative to global first wave",
+      "mean_same_wave_handoff": 2353.5,
+      "max_same_wave_handoff": 2708.0,
+      "last_valid_MMAC_end_cycle": 57236.0,
+      "last_matrix_store_issue_cycle": 57476.0,
+      "global_wave_end_cycle": 57826.0,
+      "consumer": {
+        "8": {
+          "first_MMAC_cycle": 6411.0,
+          "last_output0_MMAC_end": 29675.0,
+          "first_output1_MMAC": 31867.0,
+          "last_MMAC_end": 56211.0,
+          "store_issue_cycles": [
+            28211.0,
+            29991.0,
+            55363.0,
+            56447.0
+          ],
+          "B_READY_gap_median": 1062.0,
+          "B_READY_gap_sum": 32368.0
+        },
+        "9": {
+          "first_MMAC_cycle": 6416.0,
+          "last_output0_MMAC_end": 29676.0,
+          "first_output1_MMAC": 31872.0,
+          "last_MMAC_end": 56204.0,
+          "store_issue_cycles": [
+            28228.0,
+            30004.0,
+            55380.0,
+            56400.0
+          ],
+          "B_READY_gap_median": 1060.0,
+          "B_READY_gap_sum": 32340.0
+        },
+        "10": {
+          "first_MMAC_cycle": 6377.0,
+          "last_output0_MMAC_end": 29669.0,
+          "first_output1_MMAC": 31873.0,
+          "last_MMAC_end": 56205.0,
+          "store_issue_cycles": [
+            28181.0,
+            29957.0,
+            55397.0,
+            56413.0
+          ],
+          "B_READY_gap_median": 1070.0,
+          "B_READY_gap_sum": 32476.0
+        },
+        "11": {
+          "first_MMAC_cycle": 6410.0,
+          "last_output0_MMAC_end": 29670.0,
+          "first_output1_MMAC": 31874.0,
+          "last_MMAC_end": 56206.0,
+          "store_issue_cycles": [
+            28194.0,
+            29974.0,
+            55350.0,
+            56430.0
+          ],
+          "B_READY_gap_median": 1070.0,
+          "B_READY_gap_sum": 32460.0
+        },
+        "12": {
+          "first_MMAC_cycle": 7671.0,
+          "last_output0_MMAC_end": 30319.0,
+          "first_output1_MMAC": 33027.0,
+          "last_MMAC_end": 57235.0,
+          "store_issue_cycles": [
+            29219.0,
+            31039.0,
+            55787.0,
+            57459.0
+          ],
+          "B_READY_gap_median": 1020.0,
+          "B_READY_gap_sum": 30784.0
+        },
+        "13": {
+          "first_MMAC_cycle": 7672.0,
+          "last_output0_MMAC_end": 30324.0,
+          "first_output1_MMAC": 33028.0,
+          "last_MMAC_end": 57236.0,
+          "store_issue_cycles": [
+            29232.0,
+            31052.0,
+            55800.0,
+            57476.0
+          ],
+          "B_READY_gap_median": 1024.0,
+          "B_READY_gap_sum": 30628.0
+        },
+        "14": {
+          "first_MMAC_cycle": 7669.0,
+          "last_output0_MMAC_end": 30705.0,
+          "first_output1_MMAC": 33033.0,
+          "last_MMAC_end": 57229.0,
+          "store_issue_cycles": [
+            30329.0,
+            31077.0,
+            55817.0,
+            57429.0
+          ],
+          "B_READY_gap_median": 1020.0,
+          "B_READY_gap_sum": 30000.0
+        },
+        "15": {
+          "first_MMAC_cycle": 7670.0,
+          "last_output0_MMAC_end": 30730.0,
+          "first_output1_MMAC": 33022.0,
+          "last_MMAC_end": 57230.0,
+          "store_issue_cycles": [
+            30342.0,
+            31090.0,
+            55834.0,
+            57442.0
+          ],
+          "B_READY_gap_median": 1024.0,
+          "B_READY_gap_sum": 29940.0
+        }
+      },
+      "producer": {
+        "0": {
+          "first_load_cycle": 4267.0,
+          "last_load_cycle": 55151.0,
+          "tile_or_panel_first_issue_cycles": [
+            4267.0,
+            4699.0,
+            5839.0,
+            6399.0,
+            7647.0,
+            8683.0,
+            8839.0,
+            9651.0,
+            10147.0,
+            11363.0,
+            11671.0,
+            12499.0,
+            13071.0,
+            13987.0,
+            15075.0,
+            15679.0,
+            16167.0,
+            17195.0,
+            17719.0,
+            18499.0,
+            19515.0,
+            20047.0,
+            20771.0,
+            21903.0,
+            22399.0,
+            23123.0,
+            24215.0,
+            24863.0,
+            25507.0,
+            26559.0,
+            27159.0,
+            27939.0,
+            28943.0,
+            30359.0,
+            30635.0,
+            31899.0,
+            33055.0,
+            33519.0,
+            34535.0,
+            35991.0,
+            36379.0,
+            37207.0,
+            38443.0,
+            38827.0,
+            39631.0,
+            40799.0,
+            41139.0,
+            42015.0,
+            43159.0,
+            43455.0,
+            44279.0,
+            45611.0,
+            45923.0,
+            46603.0,
+            47947.0,
+            48423.0,
+            48959.0,
+            50271.0,
+            50783.0,
+            51423.0,
+            52623.0,
+            53099.0,
+            53731.0,
+            55103.0
+          ]
+        },
+        "4": {
+          "first_load_cycle": 4619.0,
+          "last_load_cycle": 51559.0,
+          "tile_or_panel_first_issue_cycles": [
+            4619.0,
+            6547.0,
+            9783.0,
+            12647.0,
+            15799.0,
+            18631.0,
+            22035.0,
+            24991.0,
+            29103.0,
+            32099.0,
+            36111.0,
+            38951.0,
+            42135.0,
+            45731.0,
+            48567.0,
+            51543.0
+          ]
+        }
+      }
+    },
+    "source_sha256": "4ebfc28ba157229301b41cf5f69af90971c81217d8c853e134e6fb20826bf06a",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "9ed67b3c6922c693edb6e74bc3debc8c4185f7a3996c8b328eb1b7be44e4720c"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Both producers next metadata at tail",
+    "case": "bm32-both-nextmeta-tail-output96-gc1800",
+    "dispatch_us": 37.006248,
+    "wave_active_us": 32.59272,
+    "B_active_TBps": 1.544260436072841,
+    "merged_handoff_cycles": 507.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1189.5,
+      "max_same_wave_handoff_cycles": 1328.0,
+      "C0_mean": 1326.0,
+      "C1_mean": 1053.0,
+      "merged_CU0_mean_handoff_cycles": 507.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1324.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1328.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1328.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1324.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1044.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1060.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1060.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1048.0
+        }
+      ]
+    },
+    "CU28": {
+      "CU": 28,
+      "scope": "all eight consumers, two outputs; cycles relative to global first wave",
+      "mean_same_wave_handoff": 2303.0,
+      "max_same_wave_handoff": 2464.0,
+      "last_valid_MMAC_end_cycle": 57927.0,
+      "last_matrix_store_issue_cycle": 58171.0,
+      "global_wave_end_cycle": 58620.0,
+      "consumer": {
+        "8": {
+          "first_MMAC_cycle": 6523.0,
+          "last_output0_MMAC_end": 30447.0,
+          "first_output1_MMAC": 32683.0,
+          "last_MMAC_end": 57055.0,
+          "store_issue_cycles": [
+            29323.0,
+            30687.0,
+            56003.0,
+            57283.0
+          ],
+          "B_READY_gap_median": 1076.0,
+          "B_READY_gap_sum": 32724.0
+        },
+        "9": {
+          "first_MMAC_cycle": 6528.0,
+          "last_output0_MMAC_end": 30448.0,
+          "first_output1_MMAC": 32684.0,
+          "last_MMAC_end": 57048.0,
+          "store_issue_cycles": [
+            29336.0,
+            30700.0,
+            56020.0,
+            57236.0
+          ],
+          "B_READY_gap_median": 1078.0,
+          "B_READY_gap_sum": 32636.0
+        },
+        "10": {
+          "first_MMAC_cycle": 6489.0,
+          "last_output0_MMAC_end": 30441.0,
+          "first_output1_MMAC": 32685.0,
+          "last_MMAC_end": 57049.0,
+          "store_issue_cycles": [
+            29353.0,
+            30733.0,
+            56037.0,
+            57249.0
+          ],
+          "B_READY_gap_median": 1118.0,
+          "B_READY_gap_sum": 32804.0
+        },
+        "11": {
+          "first_MMAC_cycle": 6490.0,
+          "last_output0_MMAC_end": 30442.0,
+          "first_output1_MMAC": 32686.0,
+          "last_MMAC_end": 57054.0,
+          "store_issue_cycles": [
+            29370.0,
+            30718.0,
+            55990.0,
+            57266.0
+          ],
+          "B_READY_gap_median": 1078.0,
+          "B_READY_gap_sum": 32700.0
+        },
+        "12": {
+          "first_MMAC_cycle": 7751.0,
+          "last_output0_MMAC_end": 31595.0,
+          "first_output1_MMAC": 33879.0,
+          "last_MMAC_end": 57927.0,
+          "store_issue_cycles": [
+            31179.0,
+            31783.0,
+            56599.0,
+            58171.0
+          ],
+          "B_READY_gap_median": 1036.0,
+          "B_READY_gap_sum": 30284.0
+        },
+        "13": {
+          "first_MMAC_cycle": 7752.0,
+          "last_output0_MMAC_end": 31612.0,
+          "first_output1_MMAC": 33872.0,
+          "last_MMAC_end": 57920.0,
+          "store_issue_cycles": [
+            31192.0,
+            31800.0,
+            56612.0,
+            58124.0
+          ],
+          "B_READY_gap_median": 1042.0,
+          "B_READY_gap_sum": 30300.0
+        },
+        "14": {
+          "first_MMAC_cycle": 7729.0,
+          "last_output0_MMAC_end": 31417.0,
+          "first_output1_MMAC": 33873.0,
+          "last_MMAC_end": 57921.0,
+          "store_issue_cycles": [
+            30069.0,
+            31609.0,
+            56645.0,
+            58137.0
+          ],
+          "B_READY_gap_median": 1040.0,
+          "B_READY_gap_sum": 31352.0
+        },
+        "15": {
+          "first_MMAC_cycle": 7730.0,
+          "last_output0_MMAC_end": 31414.0,
+          "first_output1_MMAC": 33878.0,
+          "last_MMAC_end": 57926.0,
+          "store_issue_cycles": [
+            30054.0,
+            31626.0,
+            56630.0,
+            58154.0
+          ],
+          "B_READY_gap_median": 1036.0,
+          "B_READY_gap_sum": 31292.0
+        }
+      },
+      "producer": {
+        "0": {
+          "first_load_cycle": 4403.0,
+          "last_load_cycle": 55787.0,
+          "tile_or_panel_first_issue_cycles": [
+            4403.0,
+            4855.0,
+            5103.0,
+            6511.0,
+            7087.0,
+            9399.0,
+            9539.0,
+            10267.0,
+            10931.0,
+            11711.0,
+            12359.0,
+            13271.0,
+            14115.0,
+            15403.0,
+            15715.0,
+            16427.0,
+            17239.0,
+            18011.0,
+            18523.0,
+            19619.0,
+            20367.0,
+            20783.0,
+            21907.0,
+            22775.0,
+            23191.0,
+            24227.0,
+            25075.0,
+            25623.0,
+            26607.0,
+            27431.0,
+            27939.0,
+            29067.0,
+            29819.0,
+            31243.0,
+            31519.0,
+            32715.0,
+            33919.0,
+            34391.0,
+            35395.0,
+            36591.0,
+            37119.0,
+            38007.0,
+            39039.0,
+            39703.0,
+            40419.0,
+            41411.0,
+            42071.0,
+            42855.0,
+            43807.0,
+            44407.0,
+            45167.0,
+            46243.0,
+            46799.0,
+            47483.0,
+            48619.0,
+            49283.0,
+            49855.0,
+            50935.0,
+            51599.0,
+            52291.0,
+            53315.0,
+            53971.0,
+            54563.0,
+            55739.0
+          ]
+        },
+        "4": {
+          "first_load_cycle": 4791.0,
+          "last_load_cycle": 52483.0,
+          "tile_or_panel_first_issue_cycles": [
+            4791.0,
+            6659.0,
+            10451.0,
+            13963.0,
+            16547.0,
+            19795.0,
+            22907.0,
+            25823.0,
+            29983.0,
+            32915.0,
+            36779.0,
+            39887.0,
+            42975.0,
+            46419.0,
+            49407.0,
+            52467.0
+          ]
+        }
+      }
+    },
+    "source_sha256": "acc6f4a95216648f7f4612810692105c2079412e216913d111f5f9cdadd88f72",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "360ac77826fa4fc6505cb45d53c4c6acc23f3fb14755b66365ab09acf2a1c3cc"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "P1 metadata at tail + warmup",
+    "case": "bm32-P1-nextmeta-tail-warm-output96-gc1800",
+    "dispatch_us": 36.599256,
+    "wave_active_us": 32.185728,
+    "B_active_TBps": 1.5637877757495497,
+    "merged_handoff_cycles": 657.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1244.0,
+      "max_same_wave_handoff_cycles": 1304.0,
+      "C0_mean": 1189.0,
+      "C1_mean": 1299.0,
+      "merged_CU0_mean_handoff_cycles": 657.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1160.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1184.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1196.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1216.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1304.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1304.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1296.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1292.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "4ebfc28ba157229301b41cf5f69af90971c81217d8c853e134e6fb20826bf06a",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "e3996c7d5269437fc5656ebc7fe7d66469b612666b080c0e9e6e447232826699"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "P1 next metadata/scales after A1",
+    "case": "bm32-P1-nextmeta-after-A1-output96-gc1800",
+    "dispatch_us": 36.54032,
+    "wave_active_us": 32.126792,
+    "B_active_TBps": 1.5666565152225593,
+    "merged_handoff_cycles": 703.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1368.0,
+      "max_same_wave_handoff_cycles": 1420.0,
+      "C0_mean": 1407.0,
+      "C1_mean": 1329.0,
+      "merged_CU0_mean_handoff_cycles": 703.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1404.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1408.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1404.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1412.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1292.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1284.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1420.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1320.0
+        }
+      ]
+    },
+    "CU28": {
+      "CU": 28,
+      "scope": "all eight consumers, two outputs; cycles relative to global first wave",
+      "mean_same_wave_handoff": 2364.0,
+      "max_same_wave_handoff": 2536.0,
+      "last_valid_MMAC_end_cycle": 57116.0,
+      "last_matrix_store_issue_cycle": 57344.0,
+      "global_wave_end_cycle": 57782.0,
+      "consumer": {
+        "8": {
+          "first_MMAC_cycle": 6395.0,
+          "last_output0_MMAC_end": 29623.0,
+          "first_output1_MMAC": 31991.0,
+          "last_MMAC_end": 56335.0,
+          "store_issue_cycles": [
+            28351.0,
+            29859.0,
+            55223.0,
+            56567.0
+          ],
+          "B_READY_gap_median": 1020.0,
+          "B_READY_gap_sum": 33080.0
+        },
+        "9": {
+          "first_MMAC_cycle": 6360.0,
+          "last_output0_MMAC_end": 29628.0,
+          "first_output1_MMAC": 31992.0,
+          "last_MMAC_end": 56336.0,
+          "store_issue_cycles": [
+            28336.0,
+            29876.0,
+            55240.0,
+            56584.0
+          ],
+          "B_READY_gap_median": 1018.0,
+          "B_READY_gap_sum": 33100.0
+        },
+        "10": {
+          "first_MMAC_cycle": 6389.0,
+          "last_output0_MMAC_end": 29621.0,
+          "first_output1_MMAC": 31997.0,
+          "last_MMAC_end": 56329.0,
+          "store_issue_cycles": [
+            28305.0,
+            29909.0,
+            55257.0,
+            56537.0
+          ],
+          "B_READY_gap_median": 1024.0,
+          "B_READY_gap_sum": 33148.0
+        },
+        "11": {
+          "first_MMAC_cycle": 6394.0,
+          "last_output0_MMAC_end": 29622.0,
+          "first_output1_MMAC": 31990.0,
+          "last_MMAC_end": 56330.0,
+          "store_issue_cycles": [
+            28318.0,
+            29890.0,
+            55210.0,
+            56550.0
+          ],
+          "B_READY_gap_median": 1024.0,
+          "B_READY_gap_sum": 33184.0
+        },
+        "12": {
+          "first_MMAC_cycle": 7615.0,
+          "last_output0_MMAC_end": 30743.0,
+          "first_output1_MMAC": 32939.0,
+          "last_MMAC_end": 57115.0,
+          "store_issue_cycles": [
+            30367.0,
+            30943.0,
+            55615.0,
+            57327.0
+          ],
+          "B_READY_gap_median": 952.0,
+          "B_READY_gap_sum": 29372.0
+        },
+        "13": {
+          "first_MMAC_cycle": 7616.0,
+          "last_output0_MMAC_end": 30772.0,
+          "first_output1_MMAC": 32940.0,
+          "last_MMAC_end": 57116.0,
+          "store_issue_cycles": [
+            30384.0,
+            30964.0,
+            55628.0,
+            57344.0
+          ],
+          "B_READY_gap_median": 956.0,
+          "B_READY_gap_sum": 29392.0
+        },
+        "14": {
+          "first_MMAC_cycle": 7617.0,
+          "last_output0_MMAC_end": 30397.0,
+          "first_output1_MMAC": 32933.0,
+          "last_MMAC_end": 57109.0,
+          "store_issue_cycles": [
+            28961.0,
+            30849.0,
+            55645.0,
+            57297.0
+          ],
+          "B_READY_gap_median": 988.0,
+          "B_READY_gap_sum": 30416.0
+        },
+        "15": {
+          "first_MMAC_cycle": 7614.0,
+          "last_output0_MMAC_end": 30398.0,
+          "first_output1_MMAC": 32934.0,
+          "last_MMAC_end": 57110.0,
+          "store_issue_cycles": [
+            28974.0,
+            30862.0,
+            55662.0,
+            57310.0
+          ],
+          "B_READY_gap_median": 984.0,
+          "B_READY_gap_sum": 30320.0
+        }
+      },
+      "producer": {
+        "0": {
+          "first_load_cycle": 4263.0,
+          "last_load_cycle": 54975.0,
+          "tile_or_panel_first_issue_cycles": [
+            4263.0,
+            4699.0,
+            5731.0,
+            6383.0,
+            7599.0,
+            8631.0,
+            8803.0,
+            9643.0,
+            10083.0,
+            11439.0,
+            11667.0,
+            12431.0,
+            13271.0,
+            14055.0,
+            15079.0,
+            15607.0,
+            16323.0,
+            17051.0,
+            17603.0,
+            18603.0,
+            19255.0,
+            19963.0,
+            20847.0,
+            21655.0,
+            22343.0,
+            23215.0,
+            23955.0,
+            24791.0,
+            25603.0,
+            26339.0,
+            27135.0,
+            28067.0,
+            28715.0,
+            30431.0,
+            30735.0,
+            32023.0,
+            32975.0,
+            33511.0,
+            34675.0,
+            35799.0,
+            36227.0,
+            37339.0,
+            38307.0,
+            38755.0,
+            39727.0,
+            40687.0,
+            41115.0,
+            42171.0,
+            43075.0,
+            43431.0,
+            44447.0,
+            45511.0,
+            45835.0,
+            46739.0,
+            47819.0,
+            48335.0,
+            49107.0,
+            50147.0,
+            50647.0,
+            51511.0,
+            52523.0,
+            52975.0,
+            53863.0,
+            54935.0
+          ]
+        },
+        "4": {
+          "first_load_cycle": 4619.0,
+          "last_load_cycle": 51703.0,
+          "tile_or_panel_first_issue_cycles": [
+            4619.0,
+            6527.0,
+            9763.0,
+            12583.0,
+            15727.0,
+            18723.0,
+            21799.0,
+            24911.0,
+            28867.0,
+            32223.0,
+            35927.0,
+            38883.0,
+            42291.0,
+            45631.0,
+            48467.0,
+            51655.0
+          ]
+        }
+      }
+    },
+    "source_sha256": "6a08775e853b1033da7c753540803d360cb3f3634a5ba2e109c6790ee65fdc6c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "b69e418ea8183c89c690fcfe76bc3e09d31328a32d0593543841dfd6c83e86f2"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Same, independent repeat",
+    "case": "bm32-P1-nextmeta-after-A1-repeat-output96-gc1800",
+    "dispatch_us": 36.54032,
+    "wave_active_us": 32.126792,
+    "B_active_TBps": 1.5666565152225593,
+    "merged_handoff_cycles": 703.0,
+    "individual_handoff": null,
+    "CU28": null,
+    "source_sha256": "6a08775e853b1033da7c753540803d360cb3f3634a5ba2e109c6790ee65fdc6c",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "b69e418ea8183c89c690fcfe76bc3e09d31328a32d0593543841dfd6c83e86f2"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Return A turn before lowering priority",
+    "case": "bm32-A-unlock-before-prio-output96-gc1800",
+    "dispatch_us": 36.549216,
+    "wave_active_us": 32.135688,
+    "B_active_TBps": 1.5662228236719251,
+    "merged_handoff_cycles": 657.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1333.5,
+      "max_same_wave_handoff_cycles": 1452.0,
+      "C0_mean": 1231.0,
+      "C1_mean": 1436.0,
+      "merged_CU0_mean_handoff_cycles": 657.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1224.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1236.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1236.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1228.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 1452.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 1440.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 1432.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 1420.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "bacc45408c28b866e4bbde8e3b6f9b829e0c3f1f889f123f3c98b3367039818d",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 67584,
+      "text_sha256": "823a1ec262b16cf04db35856d6fc43f659b934c6276ee5c5316869330bccd5d5"
+    },
+    "wavefront_TT0_verified": true
+  },
+  {
+    "label": "Three full N128 B slots",
+    "case": "bm32-B3-wide128-output96-gc1800",
+    "dispatch_us": 37.353748,
+    "wave_active_us": 32.94022,
+    "B_active_TBps": 1.5279693942541976,
+    "merged_handoff_cycles": 123.0,
+    "individual_handoff": {
+      "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+      "mean_same_wave_handoff_cycles": 1981.0,
+      "max_same_wave_handoff_cycles": 2648.0,
+      "C0_mean": 1338.0,
+      "C1_mean": 2624.0,
+      "merged_CU0_mean_handoff_cycles": 123.0,
+      "waves": [
+        {
+          "wave": 8,
+          "consumer": "C0",
+          "handoff_cycles": 1392.0
+        },
+        {
+          "wave": 9,
+          "consumer": "C0",
+          "handoff_cycles": 1360.0
+        },
+        {
+          "wave": 10,
+          "consumer": "C0",
+          "handoff_cycles": 1356.0
+        },
+        {
+          "wave": 11,
+          "consumer": "C0",
+          "handoff_cycles": 1244.0
+        },
+        {
+          "wave": 12,
+          "consumer": "C1",
+          "handoff_cycles": 2632.0
+        },
+        {
+          "wave": 13,
+          "consumer": "C1",
+          "handoff_cycles": 2616.0
+        },
+        {
+          "wave": 14,
+          "consumer": "C1",
+          "handoff_cycles": 2600.0
+        },
+        {
+          "wave": 15,
+          "consumer": "C1",
+          "handoff_cycles": 2648.0
+        }
+      ]
+    },
+    "CU28": null,
+    "source_sha256": "cecac589de8a1398e7d26e52e906815284da1352111ac033cabcb9e5af3867b4",
+    "numeric": {
+      "BM": 32,
+      "BN": 256,
+      "BK": 256,
+      "blocks": 48,
+      "total": 96,
+      "grid": 48,
+      "errors": 0,
+      "padding_errors": 0,
+      "untouched_errors": 0,
+      "checked": 101376,
+      "shared": 116736,
+      "text_sha256": "04529e4ec2780fdd5d5238c287f87a18dc44228d6583136bd390eb52459784ac"
+    },
+    "wavefront_TT0_verified": true
+  }
+]

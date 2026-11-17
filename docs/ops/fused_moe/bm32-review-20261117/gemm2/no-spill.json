@@ -1,0 +1,137 @@
+[
+  {
+    "case": "eq-fp8-out7-True-a",
+    "metadata": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8-out7-True-a/cache/LQEW6TBK5GY4VH6I2KXEYKBV2G34KOQ4XRHIEJOHOA5OLTEJSPQA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      55,
+      11,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "requested_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "allocated_role_quotas": [
+      68,
+      108,
+      168,
+      168
+    ]
+  },
+  {
+    "case": "eq-fp8-out8-True-b",
+    "metadata": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8-out8-True-b/cache/OMOH6U4O3UIVW6UE4OYI2WSMNAJVHOGITL4SHK3RVXMNLZPKULAA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      44,
+      15,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "requested_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "allocated_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ]
+  },
+  {
+    "case": "eq-fp8-out9-True-c",
+    "metadata": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8-out9-True-c/cache/GB3J7XTJZ7MJSKHXM2PALYOQ4YI54G7LMQYXCX7CSTCYN2KC6BZA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      40,
+      11,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "requested_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "allocated_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ]
+  },
+  {
+    "case": "eq-fp8_mixed_reverse-out10-True-True",
+    "metadata": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8_mixed_reverse-out10-True-True/cache/PW56AARVOXKJTF2DSEX6FQKQD6MKWOGJVH3KXUJN3HUIYQVFCOUQ/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      48,
+      15,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "requested_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "allocated_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ]
+  },
+  {
+    "case": "eq-fp8_zero_work-out11-True-False",
+    "metadata": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8_zero_work-out11-True-False/cache/NKTJWXNMRLINII3DBQHWZNMP7CS4U4XWT7C34O3Z2TZ72ADF23PQ/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      40,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "requested_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "allocated_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ]
+  }
+]

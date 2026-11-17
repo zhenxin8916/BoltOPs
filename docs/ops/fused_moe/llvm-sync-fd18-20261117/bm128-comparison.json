@@ -1,0 +1,350 @@
+[
+  {
+    "case": "gemm1-bm128-bn128",
+    "old": {
+      "time_us": 72.42456,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 6,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 10,
+        "ds_read_matrix_trans_format": 32,
+        "ds_read2st64_b64": 16,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 8
+      },
+      "text_sha256": "68e270f4d76d714706ea556624432f9f74d3b7966a8a062d9d7933454a84b158",
+      "valu_count": 418,
+      "salu_count": 736,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 6291456,
+        "untouched_tail": true,
+        "output_sha256": "a93e8914bfdf21379f026d84ba104d5797520fffb7a75c5367a30a1447e139fe",
+        "shared": 131072
+      }
+    },
+    "new": {
+      "time_us": 73.076192,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 6,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 10,
+        "ds_read_matrix_trans_format": 32,
+        "ds_read2st64_b64": 4,
+        "ds_read_b64": 24,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 8
+      },
+      "text_sha256": "e89acaa9bb6602417056a4fa3a14eb76829dc1b76d99d6c9fc1921013e4832ce",
+      "valu_count": 454,
+      "salu_count": 736,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 6291456,
+        "untouched_tail": true,
+        "output_sha256": "a93e8914bfdf21379f026d84ba104d5797520fffb7a75c5367a30a1447e139fe",
+        "shared": 131072
+      }
+    },
+    "llvm_ir_identical": true,
+    "time_change_pct": 0.8997389835713188,
+    "text_identical": false,
+    "ds_identical": false,
+    "output_identical": true
+  },
+  {
+    "case": "gemm1-bm128-bn256",
+    "old": {
+      "time_us": 65.973848,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 6,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 18,
+        "ds_read_matrix_trans_format": 32,
+        "ds_read2st64_b64": 32,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 16
+      },
+      "text_sha256": "5277461209d25c820725d76b1961f15b73573423cd017a34d49efdf0a2043ab8",
+      "valu_count": 690,
+      "salu_count": 794,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 6291456,
+        "untouched_tail": true,
+        "output_sha256": "a93e8914bfdf21379f026d84ba104d5797520fffb7a75c5367a30a1447e139fe",
+        "shared": 131072
+      }
+    },
+    "new": {
+      "time_us": 67.652416,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 6,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 18,
+        "ds_read_matrix_trans_format": 32,
+        "ds_read_b64": 48,
+        "ds_read2st64_b64": 8,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 16
+      },
+      "text_sha256": "487a3b6ad157d442a7cdfe5ed0e40f62d0b848acd4bb416472babd81a81d44fc",
+      "valu_count": 798,
+      "salu_count": 796,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 6291456,
+        "untouched_tail": true,
+        "output_sha256": "a93e8914bfdf21379f026d84ba104d5797520fffb7a75c5367a30a1447e139fe",
+        "shared": 131072
+      }
+    },
+    "llvm_ir_identical": true,
+    "time_change_pct": 2.5442930053132473,
+    "text_identical": false,
+    "ds_identical": false,
+    "output_identical": true
+  },
+  {
+    "case": "gemm1-bm128-bn512",
+    "old": {
+      "time_us": 61.277316,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 5,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 18,
+        "ds_write2st64_b32": 1,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2st64_b64": 32,
+        "ds_read2_b64": 4
+      },
+      "mls_counts": {
+        "matrix_load_128x16_b8": 16
+      },
+      "text_sha256": "bd0d75218fd8d599bfa8c94684c3517d35d1545a707731f65af25070685e1d06",
+      "valu_count": 1222,
+      "salu_count": 944,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 6291456,
+        "untouched_tail": true,
+        "output_sha256": "a93e8914bfdf21379f026d84ba104d5797520fffb7a75c5367a30a1447e139fe",
+        "shared": 131072
+      }
+    },
+    "new": {
+      "exit_code": 1,
+      "compile_failed": true,
+      "reason": "WASP partition quotas exceed the per-SIMD VGPR budget",
+      "time_us": null
+    },
+    "text_identical": null,
+    "ds_identical": null,
+    "output_identical": null,
+    "time_change_pct": null
+  },
+  {
+    "case": "gemm2-bm128-bn256",
+    "old": {
+      "time_us": 23.61888,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 32
+      },
+      "text_sha256": "7e371c091c531cb6c8f3b98f0bcf699fb8e84490a3c9fbe56339f00f5c4f9795",
+      "valu_count": 701,
+      "salu_count": 580,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 4330752,
+        "untouched_tail": true,
+        "output_sha256": "e3e51b96278efcf40073ff502d35dee1f7ed4722fa8d9f567b80fb305f199382",
+        "shared": 119808
+      }
+    },
+    "new": {
+      "time_us": 23.61888,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 32,
+        "ds_write_b128": 2,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 32
+      },
+      "text_sha256": "7e371c091c531cb6c8f3b98f0bcf699fb8e84490a3c9fbe56339f00f5c4f9795",
+      "valu_count": 701,
+      "salu_count": 580,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 4330752,
+        "untouched_tail": true,
+        "output_sha256": "e3e51b96278efcf40073ff502d35dee1f7ed4722fa8d9f567b80fb305f199382",
+        "shared": 119808
+      }
+    },
+    "llvm_ir_identical": true,
+    "time_change_pct": 0.0,
+    "text_identical": true,
+    "ds_identical": true,
+    "output_identical": true
+  },
+  {
+    "case": "gemm2-bm128-bn512",
+    "old": {
+      "time_us": 20.994004,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 48,
+        "ds_write_b128": 4,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 48
+      },
+      "text_sha256": "6b4cb1ea056b78457a7501f777f34c067d413c6d67cc11e09473807fd1f215c0",
+      "valu_count": 785,
+      "salu_count": 688,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 4380672,
+        "untouched_tail": true,
+        "output_sha256": "f0255ea67340c26e187d688640ea8d0e1ce9784161e3dd52c270d2c1f75713d9",
+        "shared": 119808
+      }
+    },
+    "new": {
+      "time_us": 20.994004,
+      "ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write2_b32": 42,
+        "ds_write_b32": 12,
+        "ds_read2st64_b32": 1,
+        "ds_read2_b32": 6,
+        "ds_read_b32": 2,
+        "ds_read_b128": 48,
+        "ds_write_b128": 4,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2_b64": 2
+      },
+      "mls_counts": {
+        "matrix_load_64x16_b8": 48
+      },
+      "text_sha256": "6b4cb1ea056b78457a7501f777f34c067d413c6d67cc11e09473807fd1f215c0",
+      "valu_count": 785,
+      "salu_count": 688,
+      "spill_fields": [
+        "0",
+        "0",
+        "0"
+      ],
+      "result": {
+        "verified": true,
+        "mismatches": 0,
+        "checked_elements": 4380672,
+        "untouched_tail": true,
+        "output_sha256": "f0255ea67340c26e187d688640ea8d0e1ce9784161e3dd52c270d2c1f75713d9",
+        "shared": 119808
+      }
+    },
+    "llvm_ir_identical": true,
+    "time_change_pct": 0.0,
+    "text_identical": true,
+    "ds_identical": true,
+    "output_identical": true
+  }
+]

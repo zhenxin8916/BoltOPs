@@ -1,0 +1,152 @@
+[
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": "a",
+    "elements": 395264,
+    "differences": 0,
+    "sorted_row_capacity": 448,
+    "device_work_count": 448,
+    "inactive_output_rows": 0,
+    "inactive_sentinel": null,
+    "address_int64": {
+      "A": true,
+      "B": false,
+      "C": false
+    },
+    "case": "test_gluon_gemm2_matches_triton[fp8-out7-True-a]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": "b",
+    "elements": 395264,
+    "differences": 0,
+    "sorted_row_capacity": 448,
+    "device_work_count": 448,
+    "inactive_output_rows": 0,
+    "inactive_sentinel": null,
+    "address_int64": {
+      "A": false,
+      "B": true,
+      "C": false
+    },
+    "case": "test_gluon_gemm2_matches_triton[fp8-out8-True-b]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": "c",
+    "elements": 395264,
+    "differences": 0,
+    "sorted_row_capacity": 448,
+    "device_work_count": 448,
+    "inactive_output_rows": 0,
+    "inactive_sentinel": null,
+    "address_int64": {
+      "A": false,
+      "B": false,
+      "C": true
+    },
+    "case": "test_gluon_gemm2_matches_triton[fp8-out9-True-c]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "88bf84365b891944d7e90a685e8d5ab22a2bc1b9ce09bbdc28c04c96b55ac9e2",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8_mixed_reverse",
+    "output": "torch.float16",
+    "mul_routed_weight": true,
+    "forced_int64": true,
+    "elements": 395264,
+    "differences": 0,
+    "sorted_row_capacity": 448,
+    "device_work_count": 448,
+    "inactive_output_rows": 0,
+    "inactive_sentinel": null,
+    "address_int64": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "case": "test_gluon_gemm2_matches_triton[fp8_mixed_reverse-out10-True-True]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "kind": "fp8_zero_work",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 395264,
+    "differences": 0,
+    "sorted_row_capacity": 448,
+    "device_work_count": 0,
+    "inactive_output_rows": 386,
+    "inactive_sentinel": -11,
+    "address_int64": {
+      "A": false,
+      "B": false,
+      "C": false
+    },
+    "case": "test_gluon_gemm2_matches_triton[fp8_zero_work-out11-True-False]",
+    "passed": true
+  }
+]

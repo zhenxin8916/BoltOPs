@@ -1,0 +1,50 @@
+{
+  "scope": "CU0 all eight consumer waves; end of output0 valid MMAC to first output1 MMAC, each instruction charged eight cycles",
+  "mean_same_wave_handoff_cycles": 1332.5,
+  "max_same_wave_handoff_cycles": 1432.0,
+  "C0_mean": 1412.0,
+  "C1_mean": 1253.0,
+  "merged_CU0_mean_handoff_cycles": 849.0,
+  "waves": [
+    {
+      "wave": 8,
+      "consumer": "C0",
+      "handoff_cycles": 1424.0
+    },
+    {
+      "wave": 9,
+      "consumer": "C0",
+      "handoff_cycles": 1432.0
+    },
+    {
+      "wave": 10,
+      "consumer": "C0",
+      "handoff_cycles": 1376.0
+    },
+    {
+      "wave": 11,
+      "consumer": "C0",
+      "handoff_cycles": 1416.0
+    },
+    {
+      "wave": 12,
+      "consumer": "C1",
+      "handoff_cycles": 1280.0
+    },
+    {
+      "wave": 13,
+      "consumer": "C1",
+      "handoff_cycles": 1288.0
+    },
+    {
+      "wave": 14,
+      "consumer": "C1",
+      "handoff_cycles": 1176.0
+    },
+    {
+      "wave": 15,
+      "consumer": "C1",
+      "handoff_cycles": 1268.0
+    }
+  ]
+}

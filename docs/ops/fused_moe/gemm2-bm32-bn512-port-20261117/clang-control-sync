@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18 -mllvm -hcu-control-only-ebarrier-sync "$@"

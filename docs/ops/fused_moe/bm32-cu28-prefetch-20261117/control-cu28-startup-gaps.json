@@ -1,0 +1,353 @@
+{
+  "0": [
+    {
+      "at": 901.0,
+      "previous": "s_set_vgpr_size 16",
+      "next": 1091.0,
+      "following": "s_mov_b32 m0, s17",
+      "gap": 190.0
+    },
+    {
+      "at": 1183.0,
+      "previous": "s_mov_b64 s0, -1",
+      "next": 1423.0,
+      "following": "s_mov_b64 s4, 0",
+      "gap": 240.0
+    },
+    {
+      "at": 1555.0,
+      "previous": "s_branch label_c24",
+      "next": 1907.0,
+      "following": "s_and_b64 vcc_lo, exec_lo, s0",
+      "gap": 352.0
+    },
+    {
+      "at": 1947.0,
+      "previous": "s_branch label_ba0",
+      "next": 2227.0,
+      "following": "s_and_b64 vcc_lo, exec_lo, s34",
+      "gap": 280.0
+    },
+    {
+      "at": 2477.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 3231.0,
+      "following": "v_readfirstlane_b32 s0, v0",
+      "gap": 754.0
+    },
+    {
+      "at": 3273.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 3391.0,
+      "following": "v_readfirstlane_b32 s2, v1",
+      "gap": 118.0
+    },
+    {
+      "at": 3571.0,
+      "previous": "s_cselect_b64 s14, -1, 0",
+      "next": 3899.0,
+      "following": "s_and_b64 vcc_lo, exec_lo, s14",
+      "gap": 328.0
+    },
+    {
+      "at": 3941.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 4067.0,
+      "following": "v_readfirstlane_b32 s23, v1",
+      "gap": 126.0
+    },
+    {
+      "at": 4263.0,
+      "previous": "matrix_load_64x16_b8  s[0:3], s33 lds:1 row_off:1 bps",
+      "next": 4503.0,
+      "following": "matrix_load_64x16_b8  s[0:3], s34 offset:16 lds:1 row_off:1 bps",
+      "gap": 240.0
+    },
+    {
+      "at": 4595.0,
+      "previous": "s_ebarrier_sync s0, 4, 8",
+      "next": 4751.0,
+      "following": "s_abarrier_try_wait s0, s33, s0",
+      "gap": 156.0
+    },
+    {
+      "at": 4991.0,
+      "previous": "s_and_b32 s1, s28, 0x0000ffff",
+      "next": 5779.0,
+      "following": "s_mov_b32 s0, s27",
+      "gap": 788.0
+    },
+    {
+      "at": 5887.0,
+      "previous": "s_abarrier_try_wait s0, s33, s0",
+      "next": 6367.0,
+      "following": "s_add_i32 s34, s18, s34",
+      "gap": 480.0
+    },
+    {
+      "at": 6515.0,
+      "previous": "s_ebarrier_sync s0, 4, 8",
+      "next": 7531.0,
+      "following": "s_abarrier_try_wait s0, s33, s0",
+      "gap": 1016.0
+    },
+    {
+      "at": 7683.0,
+      "previous": "s_abarrier_try_wait s0, s33, s0",
+      "next": 8631.0,
+      "following": "s_add_i32 s33, s1, 7",
+      "gap": 948.0
+    }
+  ],
+  "4": [
+    {
+      "at": 989.0,
+      "previous": "s_set_vgpr_size 16",
+      "next": 1095.0,
+      "following": "s_mov_b32 m0, s17",
+      "gap": 106.0
+    },
+    {
+      "at": 1195.0,
+      "previous": "s_mov_b64 s0, -1",
+      "next": 1435.0,
+      "following": "s_mov_b64 s4, 0",
+      "gap": 240.0
+    },
+    {
+      "at": 1563.0,
+      "previous": "s_cbranch_scc1 label_bc0",
+      "next": 1979.0,
+      "following": "s_lshr_b32 s0, s6, 31",
+      "gap": 416.0
+    },
+    {
+      "at": 2083.0,
+      "previous": "s_ebarrier_sync s0, 0, 0",
+      "next": 2427.0,
+      "following": "s_cbranch_scc1 label_1c",
+      "gap": 344.0
+    },
+    {
+      "at": 2553.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 3295.0,
+      "following": "v_readfirstlane_b32 s50, v1",
+      "gap": 742.0
+    },
+    {
+      "at": 3309.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 3427.0,
+      "following": "v_readfirstlane_b32 s0, v1",
+      "gap": 118.0
+    },
+    {
+      "at": 3803.0,
+      "previous": "v_and_b32 v14, literl:0x00ffffff, v3",
+      "next": 3947.0,
+      "following": "v_and_b32 v13, literl:0x00ffffff, v4",
+      "gap": 144.0
+    },
+    {
+      "at": 3991.0,
+      "previous": "s_ebarrier_sync s0, 3, 8",
+      "next": 4597.0,
+      "following": "s_setprio 2",
+      "gap": 606.0
+    },
+    {
+      "at": 4787.0,
+      "previous": "s_cbranch_scc0 label_c",
+      "next": 4987.0,
+      "following": "global_load_dword v4, v[0:1], off offset: 64",
+      "gap": 200.0
+    },
+    {
+      "at": 5053.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 6671.0,
+      "following": "v_readfirstlane_b32 s40, v0",
+      "gap": 1618.0
+    },
+    {
+      "at": 6935.0,
+      "previous": "s_abarrier_try_wait s2, 4, s49",
+      "next": 7583.0,
+      "following": "s_ebarrier_sync s0, 3, 8",
+      "gap": 648.0
+    },
+    {
+      "at": 7583.0,
+      "previous": "s_ebarrier_sync s0, 3, 8",
+      "next": 9721.0,
+      "following": "s_setprio 2",
+      "gap": 2138.0
+    }
+  ],
+  "8": [
+    {
+      "at": 1207.0,
+      "previous": "s_mov_b64 s0, -1",
+      "next": 1447.0,
+      "following": "s_mov_b64 s4, 0",
+      "gap": 240.0
+    },
+    {
+      "at": 1475.0,
+      "previous": "s_branch label_1710",
+      "next": 1807.0,
+      "following": "s_and_b64 vcc_lo, exec_lo, s0",
+      "gap": 332.0
+    },
+    {
+      "at": 1811.0,
+      "previous": "s_cbranch_vccnz label_3f99c",
+      "next": 2211.0,
+      "following": "v_mov_b32 v1, 0",
+      "gap": 400.0
+    },
+    {
+      "at": 2215.0,
+      "previous": "s_ebarrier_sync s0, 0, 0",
+      "next": 2421.0,
+      "following": "s_waitcnt lgkmcnt(0)",
+      "gap": 206.0
+    },
+    {
+      "at": 2441.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 3147.0,
+      "following": "v_readfirstlane_b32 s2, v1",
+      "gap": 706.0
+    },
+    {
+      "at": 3403.0,
+      "previous": "s_ashr_i32 s1, s1, 1",
+      "next": 3695.0,
+      "following": "s_lshl_b32 s2, s1, 14",
+      "gap": 292.0
+    },
+    {
+      "at": 4023.0,
+      "previous": "s_abarrier_try_wait s2, s41, s2",
+      "next": 5927.0,
+      "following": "s_lshl_b32 s2, s3, 14",
+      "gap": 1904.0
+    },
+    {
+      "at": 5979.0,
+      "previous": "s_abarrier_try_wait s2, s41, s37",
+      "next": 6191.0,
+      "following": "s_lshl_b32 s2, s38, 13",
+      "gap": 212.0
+    },
+    {
+      "at": 6269.0,
+      "previous": "s_waitcnt lgkmcnt(0)",
+      "next": 6351.0,
+      "following": "s_abarrier_arrive s2, s3, 1",
+      "gap": 82.0
+    },
+    {
+      "at": 6427.0,
+      "previous": "v_mmac_f32_16x16x32_fp8_fp8 v[12:15], v[60:61], v[30:31], v[12:15] lts",
+      "next": 7499.0,
+      "following": "v_mmac_f32_16x16x32_fp8_fp8 v[8:11], v[62:63], v[32:33], v[8:11] lts",
+      "gap": 1072.0
+    },
+    {
+      "at": 7615.0,
+      "previous": "s_cselect_b32 s40, s40, s42",
+      "next": 8371.0,
+      "following": "s_mul_hi_i32 s42, s40, 0x55555556",
+      "gap": 756.0
+    }
+  ],
+  "12": [
+    {
+      "at": 1219.0,
+      "previous": "s_mov_b64 s0, -1",
+      "next": 1403.0,
+      "following": "s_mov_b64 s4, 0",
+      "gap": 184.0
+    },
+    {
+      "at": 1479.0,
+      "previous": "s_cbranch_scc1 label_1700",
+      "next": 1811.0,
+      "following": "v_mov_b32 v1, 0",
+      "gap": 332.0
+    },
+    {
+      "at": 1815.0,
+      "previous": "s_ebarrier_sync s0, 0, 0",
+      "next": 2421.0,
+      "following": "s_waitcnt lgkmcnt(0)",
+      "gap": 606.0
+    },
+    {
+      "at": 2473.0,
+      "previous": "s_waitcnt vmcnt(0)",
+      "next": 3203.0,
+      "following": "v_readfirstlane_b32 s1, v1",
+      "gap": 730.0
+    },
+    {
+      "at": 3415.0,
+      "previous": "v_or3_b32 v70, v2, v7, v3, opsel4:0",
+      "next": 3619.0,
+      "following": "s_add_i32 s30, s2, 0",
+      "gap": 204.0
+    },
+    {
+      "at": 3687.0,
+      "previous": "s_and_b32 s2, s2, 0x00002000",
+      "next": 3795.0,
+      "following": "s_and_b32 s0, s0, 32",
+      "gap": 108.0
+    },
+    {
+      "at": 4111.0,
+      "previous": "v_mov_b32 v48, 0",
+      "next": 4263.0,
+      "following": "s_mov_b32 s26, 0",
+      "gap": 152.0
+    },
+    {
+      "at": 4363.0,
+      "previous": "s_abarrier_try_wait s39, s38, s28",
+      "next": 6203.0,
+      "following": "s_lshl_b32 s39, s34, 13",
+      "gap": 1840.0
+    },
+    {
+      "at": 6415.0,
+      "previous": "s_abarrier_try_wait s26, s39, s26",
+      "next": 6607.0,
+      "following": "s_lshl_b32 s26, s27, 14",
+      "gap": 192.0
+    },
+    {
+      "at": 6657.0,
+      "previous": "s_waitcnt lgkmcnt(0)",
+      "next": 6823.0,
+      "following": "s_abarrier_arrive s26, s27, 1",
+      "gap": 166.0
+    },
+    {
+      "at": 6823.0,
+      "previous": "s_abarrier_arrive s26, s27, 1",
+      "next": 7519.0,
+      "following": "s_add_i32 s26, s34, 4",
+      "gap": 696.0
+    },
+    {
+      "at": 7707.0,
+      "previous": "s_cbranch_scc1 label_9c",
+      "next": 8411.0,
+      "following": "s_add_i32 s39, s37, 2",
+      "gap": 704.0
+    }
+  ]
+}

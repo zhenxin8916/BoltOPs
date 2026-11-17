@@ -1,0 +1,1154 @@
+{
+  "BM": 64,
+  "BN": 256,
+  "BK": 256,
+  "completed_CU0_outputs": 2,
+  "MMAC_per_wave_per_output": 64,
+  "MMAC_counts": {
+    "8": 128,
+    "9": 128,
+    "10": 128,
+    "11": 128,
+    "12": 128,
+    "13": 128,
+    "14": 128,
+    "15": 128
+  },
+  "per_output_hot_percent": [
+    35.237439779766,
+    82.84789644012945
+  ],
+  "mean_tail_head_gap_cycles": 3276.0,
+  "tail_head_gaps_cycles": [
+    2800.0,
+    3376.0,
+    3464.0,
+    3464.0
+  ],
+  "rounds": [
+    [
+      {
+        "simd": 0,
+        "first": 15557.0,
+        "last": 18989.0,
+        "busy": 1024.0,
+        "span": 3432.0
+      },
+      {
+        "simd": 1,
+        "first": 15591.0,
+        "last": 18315.0,
+        "busy": 1024.0,
+        "span": 2724.0
+      },
+      {
+        "simd": 2,
+        "first": 15562.0,
+        "last": 18314.0,
+        "busy": 1024.0,
+        "span": 2752.0
+      },
+      {
+        "simd": 3,
+        "first": 15600.0,
+        "last": 18316.0,
+        "busy": 1024.0,
+        "span": 2716.0
+      }
+    ],
+    [
+      {
+        "simd": 0,
+        "first": 21789.0,
+        "last": 23013.0,
+        "busy": 1024.0,
+        "span": 1224.0
+      },
+      {
+        "simd": 1,
+        "first": 21691.0,
+        "last": 22963.0,
+        "busy": 1024.0,
+        "span": 1272.0
+      },
+      {
+        "simd": 2,
+        "first": 21778.0,
+        "last": 23002.0,
+        "busy": 1024.0,
+        "span": 1224.0
+      },
+      {
+        "simd": 3,
+        "first": 21780.0,
+        "last": 23004.0,
+        "busy": 1024.0,
+        "span": 1224.0
+      }
+    ]
+  ],
+  "top_wait_issue_to_next_instruction_cycles": {
+    "0": [
+      {
+        "cycles": 6174.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00000d3a",
+        "tick_cycle": 17733.0
+      },
+      {
+        "cycles": 1722.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "00000a14",
+        "tick_cycle": 15487.0
+      },
+      {
+        "cycles": 1362.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "0000074f",
+        "tick_cycle": 11627.0
+      },
+      {
+        "cycles": 1006.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "0000079b",
+        "tick_cycle": 13003.0
+      },
+      {
+        "cycles": 672.0,
+        "op": "s_ebarrier_sync s0, 6, 4",
+        "pc": "00000849",
+        "tick_cycle": 14085.0
+      },
+      {
+        "cycles": 110.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000850",
+        "tick_cycle": 14791.0
+      },
+      {
+        "cycles": 94.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a35",
+        "tick_cycle": 17223.0
+      },
+      {
+        "cycles": 86.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000c3c",
+        "tick_cycle": 17575.0
+      },
+      {
+        "cycles": 48.0,
+        "op": "s_ebarrier_sync s0, 6, 4",
+        "pc": "00000c1a",
+        "tick_cycle": 17481.0
+      },
+      {
+        "cycles": 30.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000beb",
+        "tick_cycle": 17451.0
+      }
+    ],
+    "1": [
+      {
+        "cycles": 6186.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00000d32",
+        "tick_cycle": 17722.0
+      },
+      {
+        "cycles": 1690.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "00000a1c",
+        "tick_cycle": 15520.0
+      },
+      {
+        "cycles": 1646.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000007b4",
+        "tick_cycle": 13020.0
+      },
+      {
+        "cycles": 902.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "0000075f",
+        "tick_cycle": 12104.0
+      },
+      {
+        "cycles": 118.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a40",
+        "tick_cycle": 17224.0
+      },
+      {
+        "cycles": 110.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000008c4",
+        "tick_cycle": 14792.0
+      },
+      {
+        "cycles": 78.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000c56",
+        "tick_cycle": 17572.0
+      },
+      {
+        "cycles": 40.0,
+        "op": "s_ebarrier_sync s0, 6, 4",
+        "pc": "00000c35",
+        "tick_cycle": 17486.0
+      },
+      {
+        "cycles": 24.0,
+        "op": "s_ebarrier_sync s0, 4, 4",
+        "pc": "000002e7",
+        "tick_cycle": 9958.0
+      },
+      {
+        "cycles": 18.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000000c8",
+        "tick_cycle": 9060.0
+      }
+    ],
+    "2": [
+      {
+        "cycles": 6170.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00000d3c",
+        "tick_cycle": 17735.0
+      },
+      {
+        "cycles": 1658.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "00000a2a",
+        "tick_cycle": 15553.0
+      },
+      {
+        "cycles": 1642.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000007bf",
+        "tick_cycle": 13037.0
+      },
+      {
+        "cycles": 854.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "0000076d",
+        "tick_cycle": 12169.0
+      },
+      {
+        "cycles": 138.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a4b",
+        "tick_cycle": 17225.0
+      },
+      {
+        "cycles": 114.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000008c8",
+        "tick_cycle": 14793.0
+      },
+      {
+        "cycles": 82.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000c70",
+        "tick_cycle": 17581.0
+      },
+      {
+        "cycles": 24.0,
+        "op": "s_ebarrier_sync s0, 6, 4",
+        "pc": "00000c4f",
+        "tick_cycle": 17507.0
+      },
+      {
+        "cycles": 20.0,
+        "op": "s_ebarrier_sync s0, 4, 4",
+        "pc": "000002ea",
+        "tick_cycle": 9959.0
+      },
+      {
+        "cycles": 18.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000000cf",
+        "tick_cycle": 9061.0
+      }
+    ],
+    "3": [
+      {
+        "cycles": 6174.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00000d38",
+        "tick_cycle": 17732.0
+      },
+      {
+        "cycles": 1670.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "00000a32",
+        "tick_cycle": 15570.0
+      },
+      {
+        "cycles": 1634.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000007a9",
+        "tick_cycle": 13006.0
+      },
+      {
+        "cycles": 950.0,
+        "op": "s_waitcnt vmcnt(3)",
+        "pc": "00000757",
+        "tick_cycle": 12042.0
+      },
+      {
+        "cycles": 126.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a50",
+        "tick_cycle": 17254.0
+      },
+      {
+        "cycles": 114.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000008b4",
+        "tick_cycle": 14794.0
+      },
+      {
+        "cycles": 86.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000c78",
+        "tick_cycle": 17574.0
+      },
+      {
+        "cycles": 44.0,
+        "op": "s_ebarrier_sync s0, 6, 4",
+        "pc": "000008a3",
+        "tick_cycle": 14716.0
+      },
+      {
+        "cycles": 20.0,
+        "op": "s_ebarrier_sync s0, 4, 4",
+        "pc": "000002ed",
+        "tick_cycle": 9960.0
+      },
+      {
+        "cycles": 18.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000000d6",
+        "tick_cycle": 9062.0
+      }
+    ],
+    "4": [
+      {
+        "cycles": 3386.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "000010f1",
+        "tick_cycle": 20521.0
+      },
+      {
+        "cycles": 2514.0,
+        "op": "s_waitcnt vmcnt(0) & lgkmcnt(0)",
+        "pc": "00000771",
+        "tick_cycle": 12083.0
+      },
+      {
+        "cycles": 1858.0,
+        "op": "s_waitcnt vmcnt(0) & lgkmcnt(0)",
+        "pc": "00000e9e",
+        "tick_cycle": 18499.0
+      },
+      {
+        "cycles": 1462.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a77",
+        "tick_cycle": 15995.0
+      },
+      {
+        "cycles": 1146.0,
+        "op": "s_waitcnt vmcnt(0) & lgkmcnt(0)",
+        "pc": "0000088b",
+        "tick_cycle": 14791.0
+      },
+      {
+        "cycles": 740.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "00000279",
+        "tick_cycle": 9981.0
+      },
+      {
+        "cycles": 670.0,
+        "op": "s_waitcnt vmcnt(0) & lgkmcnt(0)",
+        "pc": "00000ca3",
+        "tick_cycle": 17635.0
+      },
+      {
+        "cycles": 450.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000005bb",
+        "tick_cycle": 10975.0
+      },
+      {
+        "cycles": 106.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000264",
+        "tick_cycle": 9835.0
+      },
+      {
+        "cycles": 22.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000000ff",
+        "tick_cycle": 9063.0
+      }
+    ],
+    "5": [
+      {
+        "cycles": 3386.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "000010f3",
+        "tick_cycle": 20522.0
+      },
+      {
+        "cycles": 2796.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000795",
+        "tick_cycle": 11806.0
+      },
+      {
+        "cycles": 1920.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000eae",
+        "tick_cycle": 18442.0
+      },
+      {
+        "cycles": 1486.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a7e",
+        "tick_cycle": 16000.0
+      },
+      {
+        "cycles": 1208.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "000008a0",
+        "tick_cycle": 14734.0
+      },
+      {
+        "cycles": 744.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "00000280",
+        "tick_cycle": 9978.0
+      },
+      {
+        "cycles": 716.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000cb5",
+        "tick_cycle": 17594.0
+      },
+      {
+        "cycles": 458.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000005e5",
+        "tick_cycle": 10988.0
+      },
+      {
+        "cycles": 106.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000268",
+        "tick_cycle": 9836.0
+      },
+      {
+        "cycles": 22.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000010c",
+        "tick_cycle": 9064.0
+      }
+    ],
+    "6": [
+      {
+        "cycles": 3386.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "000010ed",
+        "tick_cycle": 20519.0
+      },
+      {
+        "cycles": 2824.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000784",
+        "tick_cycle": 11775.0
+      },
+      {
+        "cycles": 1928.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000ea5",
+        "tick_cycle": 18431.0
+      },
+      {
+        "cycles": 1518.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a69",
+        "tick_cycle": 15989.0
+      },
+      {
+        "cycles": 1216.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000897",
+        "tick_cycle": 14723.0
+      },
+      {
+        "cycles": 744.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "00000287",
+        "tick_cycle": 9979.0
+      },
+      {
+        "cycles": 676.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000cd7",
+        "tick_cycle": 17631.0
+      },
+      {
+        "cycles": 454.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000005ec",
+        "tick_cycle": 10985.0
+      },
+      {
+        "cycles": 106.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000026c",
+        "tick_cycle": 9837.0
+      },
+      {
+        "cycles": 22.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000111",
+        "tick_cycle": 9065.0
+      }
+    ],
+    "7": [
+      {
+        "cycles": 3386.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "000010ef",
+        "tick_cycle": 20520.0
+      },
+      {
+        "cycles": 2856.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "0000077d",
+        "tick_cycle": 11744.0
+      },
+      {
+        "cycles": 1928.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000ea8",
+        "tick_cycle": 18432.0
+      },
+      {
+        "cycles": 1530.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "00000a70",
+        "tick_cycle": 15990.0
+      },
+      {
+        "cycles": 1212.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "0000089a",
+        "tick_cycle": 14728.0
+      },
+      {
+        "cycles": 740.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "0000028e",
+        "tick_cycle": 9980.0
+      },
+      {
+        "cycles": 596.0,
+        "op": "s_ebarrier_sync s0, 7, 4",
+        "pc": "00000cdf",
+        "tick_cycle": 17712.0
+      },
+      {
+        "cycles": 450.0,
+        "op": "s_waitcnt vmcnt(0)",
+        "pc": "000005d0",
+        "tick_cycle": 10982.0
+      },
+      {
+        "cycles": 106.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000270",
+        "tick_cycle": 9838.0
+      },
+      {
+        "cycles": 22.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000116",
+        "tick_cycle": 9066.0
+      }
+    ],
+    "8": [
+      {
+        "cycles": 1988.0,
+        "op": "s_abarrier_try_wait s1, 5, s0",
+        "pc": "000007ce",
+        "tick_cycle": 13021.0
+      },
+      {
+        "cycles": 1952.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "00000557",
+        "tick_cycle": 10997.0
+      },
+      {
+        "cycles": 624.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001a8d",
+        "tick_cycle": 23285.0
+      },
+      {
+        "cycles": 372.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "0000033b",
+        "tick_cycle": 10353.0
+      },
+      {
+        "cycles": 330.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000009b8",
+        "tick_cycle": 15183.0
+      },
+      {
+        "cycles": 318.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000013b9",
+        "tick_cycle": 21427.0
+      },
+      {
+        "cycles": 26.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000014d",
+        "tick_cycle": 9067.0
+      },
+      {
+        "cycles": 8.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "00001256",
+        "tick_cycle": 21077.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000038",
+        "tick_cycle": 8843.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000012d",
+        "tick_cycle": 9027.0
+      }
+    ],
+    "9": [
+      {
+        "cycles": 2012.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "00000573",
+        "tick_cycle": 10938.0
+      },
+      {
+        "cycles": 2012.0,
+        "op": "s_abarrier_try_wait s1, 5, s0",
+        "pc": "000007d3",
+        "tick_cycle": 12998.0
+      },
+      {
+        "cycles": 636.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001a78",
+        "tick_cycle": 23274.0
+      },
+      {
+        "cycles": 368.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "00000347",
+        "tick_cycle": 10358.0
+      },
+      {
+        "cycles": 330.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000009bf",
+        "tick_cycle": 15188.0
+      },
+      {
+        "cycles": 326.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000013ab",
+        "tick_cycle": 21408.0
+      },
+      {
+        "cycles": 26.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000159",
+        "tick_cycle": 9068.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000003e",
+        "tick_cycle": 8852.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000134",
+        "tick_cycle": 9028.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000032b",
+        "tick_cycle": 10316.0
+      }
+    ],
+    "10": [
+      {
+        "cycles": 2020.0,
+        "op": "s_abarrier_try_wait s1, 5, s0",
+        "pc": "000007d8",
+        "tick_cycle": 12999.0
+      },
+      {
+        "cycles": 1960.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "0000055e",
+        "tick_cycle": 10991.0
+      },
+      {
+        "cycles": 732.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001a25",
+        "tick_cycle": 23175.0
+      },
+      {
+        "cycles": 376.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "00000341",
+        "tick_cycle": 10351.0
+      },
+      {
+        "cycles": 330.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00001387",
+        "tick_cycle": 21313.0
+      },
+      {
+        "cycles": 322.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000009c6",
+        "tick_cycle": 15201.0
+      },
+      {
+        "cycles": 26.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000015b",
+        "tick_cycle": 9069.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000044",
+        "tick_cycle": 8853.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000013b",
+        "tick_cycle": 9029.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000032f",
+        "tick_cycle": 10313.0
+      }
+    ],
+    "11": [
+      {
+        "cycles": 1992.0,
+        "op": "s_abarrier_try_wait s1, 5, s0",
+        "pc": "000007c9",
+        "tick_cycle": 13020.0
+      },
+      {
+        "cycles": 1960.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "00000565",
+        "tick_cycle": 10988.0
+      },
+      {
+        "cycles": 632.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001a80",
+        "tick_cycle": 23276.0
+      },
+      {
+        "cycles": 364.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "0000034d",
+        "tick_cycle": 10360.0
+      },
+      {
+        "cycles": 334.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000009cd",
+        "tick_cycle": 15190.0
+      },
+      {
+        "cycles": 322.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000013b2",
+        "tick_cycle": 21414.0
+      },
+      {
+        "cycles": 26.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000169",
+        "tick_cycle": 9070.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000004a",
+        "tick_cycle": 8854.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000142",
+        "tick_cycle": 9030.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000333",
+        "tick_cycle": 10318.0
+      }
+    ],
+    "12": [
+      {
+        "cycles": 3796.0,
+        "op": "s_abarrier_try_wait s1, 7, s0",
+        "pc": "000007e3",
+        "tick_cycle": 13053.0
+      },
+      {
+        "cycles": 1908.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "0000056b",
+        "tick_cycle": 11053.0
+      },
+      {
+        "cycles": 720.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "000002c6",
+        "tick_cycle": 10009.0
+      },
+      {
+        "cycles": 330.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000015a2",
+        "tick_cycle": 22039.0
+      },
+      {
+        "cycles": 326.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000b88",
+        "tick_cycle": 17031.0
+      },
+      {
+        "cycles": 38.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000002a0",
+        "tick_cycle": 9895.0
+      },
+      {
+        "cycles": 34.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000165",
+        "tick_cycle": 9071.0
+      },
+      {
+        "cycles": 8.0,
+        "op": "s_abarrier_try_wait s2, s3, s2",
+        "pc": "0000152d",
+        "tick_cycle": 21933.0
+      },
+      {
+        "cycles": 8.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001c79",
+        "tick_cycle": 23905.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000050",
+        "tick_cycle": 8859.0
+      }
+    ],
+    "13": [
+      {
+        "cycles": 3792.0,
+        "op": "s_abarrier_try_wait s1, 7, s0",
+        "pc": "000007e9",
+        "tick_cycle": 13054.0
+      },
+      {
+        "cycles": 1908.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "0000057e",
+        "tick_cycle": 11054.0
+      },
+      {
+        "cycles": 728.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "000002ca",
+        "tick_cycle": 10002.0
+      },
+      {
+        "cycles": 330.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000b70",
+        "tick_cycle": 17024.0
+      },
+      {
+        "cycles": 326.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000015ba",
+        "tick_cycle": 22052.0
+      },
+      {
+        "cycles": 42.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000002a6",
+        "tick_cycle": 9896.0
+      },
+      {
+        "cycles": 34.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000016e",
+        "tick_cycle": 9072.0
+      },
+      {
+        "cycles": 20.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001c71",
+        "tick_cycle": 23894.0
+      },
+      {
+        "cycles": 8.0,
+        "op": "s_abarrier_try_wait s2, s3, s2",
+        "pc": "00001533",
+        "tick_cycle": 21946.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000056",
+        "tick_cycle": 8864.0
+      }
+    ],
+    "14": [
+      {
+        "cycles": 3792.0,
+        "op": "s_abarrier_try_wait s1, 7, s0",
+        "pc": "000007ef",
+        "tick_cycle": 13055.0
+      },
+      {
+        "cycles": 1908.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "0000059b",
+        "tick_cycle": 11055.0
+      },
+      {
+        "cycles": 724.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "000002d6",
+        "tick_cycle": 10007.0
+      },
+      {
+        "cycles": 330.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000b78",
+        "tick_cycle": 17025.0
+      },
+      {
+        "cycles": 322.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000015c7",
+        "tick_cycle": 22065.0
+      },
+      {
+        "cycles": 96.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001c6a",
+        "tick_cycle": 23815.0
+      },
+      {
+        "cycles": 42.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000002ac",
+        "tick_cycle": 9897.0
+      },
+      {
+        "cycles": 34.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000175",
+        "tick_cycle": 9073.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000005c",
+        "tick_cycle": 8865.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000156",
+        "tick_cycle": 9033.0
+      }
+    ],
+    "15": [
+      {
+        "cycles": 3796.0,
+        "op": "s_abarrier_try_wait s1, 7, s0",
+        "pc": "000007dd",
+        "tick_cycle": 13052.0
+      },
+      {
+        "cycles": 1908.0,
+        "op": "s_abarrier_try_wait s1, s1, s2",
+        "pc": "00000594",
+        "tick_cycle": 11052.0
+      },
+      {
+        "cycles": 712.0,
+        "op": "s_ebarrier_sync s0, 0, 0",
+        "pc": "000002e2",
+        "tick_cycle": 10016.0
+      },
+      {
+        "cycles": 326.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000b80",
+        "tick_cycle": 17030.0
+      },
+      {
+        "cycles": 326.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00001596",
+        "tick_cycle": 22038.0
+      },
+      {
+        "cycles": 78.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "000002b2",
+        "tick_cycle": 9898.0
+      },
+      {
+        "cycles": 34.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000017c",
+        "tick_cycle": 9074.0
+      },
+      {
+        "cycles": 12.0,
+        "op": "s_ebarrier_sync s0, 5, 0",
+        "pc": "00001c75",
+        "tick_cycle": 23900.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "00000062",
+        "tick_cycle": 8866.0
+      },
+      {
+        "cycles": 6.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "pc": "0000015f",
+        "tick_cycle": 9034.0
+      }
+    ]
+  },
+  "EXEC0_warmup": 0,
+  "partial": false,
+  "time_us": 13.561396,
+  "wave_span_us": 9.005532,
+  "CU0_overall_MMAC_percent": 12.64431684879916,
+  "numeric": {
+    "verified": true,
+    "mismatches": 0,
+    "checked_elements": 785920,
+    "untouched_tail": true,
+    "output_sha256": "a519021d9a18558f564e278223abe771ad8861469e056c9986eb391027a5ddf5",
+    "shared": 102400,
+    "scope": "bounded_two_output_tiles_per_tg",
+    "tiles_per_tg": 2
+  },
+  "whole_GPU_MMAC_percent": 8.396539707269074,
+  "expected_all_CU_MMAC": 49152,
+  "all_CU_MMAC_counts": {
+    "0": 1024,
+    "1": 1024,
+    "2": 1024,
+    "3": 1024,
+    "4": 1024,
+    "5": 1024,
+    "6": 1024,
+    "7": 1024,
+    "8": 1024,
+    "9": 1024,
+    "10": 1024,
+    "11": 1024,
+    "12": 1024,
+    "13": 1024,
+    "14": 1024,
+    "15": 1024,
+    "16": 1024,
+    "17": 1024,
+    "18": 1024,
+    "19": 1024,
+    "20": 1024,
+    "21": 1024,
+    "22": 1024,
+    "23": 1024,
+    "24": 1024,
+    "25": 1024,
+    "26": 1024,
+    "27": 1024,
+    "28": 1024,
+    "29": 1024,
+    "30": 1024,
+    "31": 1024,
+    "32": 1024,
+    "33": 1024,
+    "34": 1024,
+    "35": 1024,
+    "36": 1024,
+    "37": 1024,
+    "38": 1024,
+    "39": 1024,
+    "40": 1024,
+    "41": 1024,
+    "42": 1024,
+    "43": 1024,
+    "44": 1024,
+    "45": 1024,
+    "46": 1024,
+    "47": 1024
+  },
+  "weighted_hot_percent": 49.44471269917914,
+  "perf": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm64/new-bn256/GEMM2_M128_N2048_K256_BM64_BN256_BK256_GRID48_OUTPUT96_2TILEperTG_GC1800_CU0.perf",
+  "perf_Wavefront_TT_verified": true
+}

@@ -1,0 +1,108 @@
+{
+  "old_build_revision": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "new_build_revision": "c49fb46267bc821ddae82940aed7cec8c8f7d374",
+  "same_input_routing": true,
+  "same_output_prefix": true,
+  "identical_elf_text": true,
+  "identical_static_ds_counts": true,
+  "time_delta_us": 0.0,
+  "rows": [
+    {
+      "name": "old",
+      "exit_code": 0,
+      "numeric": {
+        "BM": 32,
+        "BN": 256,
+        "BK": 256,
+        "blocks": 48,
+        "total": 96,
+        "grid": 48,
+        "errors": 0,
+        "padding_errors": 0,
+        "untouched_errors": 0,
+        "checked": 101376,
+        "shared": 65536,
+        "output_prefix_sha256": "7321d54df6866da9d2154d10ef91bc4f5001090b8882205df96310bb1fedf408",
+        "text_sha256": "4317dd052dbcf1c0f1e22be3e4aa41adcef8b9263fc7be03b0dce5db63520389"
+      },
+      "time_us": 36.580352,
+      "wave_span_time_us": 31.437908,
+      "mmac_total_pct": 14.60127690430292,
+      "hot_loop_mmac_pct": 16.83970287187823,
+      "mmac_scope": "cu0_wave_lifetime",
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 35851436,
+      "static_ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write2_b32": 1,
+        "ds_write_b32": 1,
+        "ds_read_matrix_trans_format": 32,
+        "ds_read_b64": 16,
+        "ds_read2_b32": 4,
+        "ds_read2_b64": 2
+      },
+      "elf_text_sha256": "0b9fe3907a747ac833538a26cd115143a52fca100ceb0fb8c89cd1af53fe08b3",
+      "elf_text_bytes": 7828,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "name": "new",
+      "exit_code": 0,
+      "numeric": {
+        "BM": 32,
+        "BN": 256,
+        "BK": 256,
+        "blocks": 48,
+        "total": 96,
+        "grid": 48,
+        "errors": 0,
+        "padding_errors": 0,
+        "untouched_errors": 0,
+        "checked": 101376,
+        "shared": 65536,
+        "output_prefix_sha256": "7321d54df6866da9d2154d10ef91bc4f5001090b8882205df96310bb1fedf408",
+        "text_sha256": "339db42a9820ee589d366652cf719274524bcf932aedcca5af7a3913cd3355d6"
+      },
+      "time_us": 36.580352,
+      "wave_span_time_us": 31.437908,
+      "mmac_total_pct": 14.60127690430292,
+      "hot_loop_mmac_pct": 16.83970287187823,
+      "mmac_scope": "cu0_wave_lifetime",
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 35851436,
+      "static_ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write2_b32": 1,
+        "ds_write_b32": 1,
+        "ds_read_matrix_trans_format": 32,
+        "ds_read_b64": 16,
+        "ds_read2_b32": 4,
+        "ds_read2_b64": 2
+      },
+      "elf_text_sha256": "0b9fe3907a747ac833538a26cd115143a52fca100ceb0fb8c89cd1af53fe08b3",
+      "elf_text_bytes": 7828,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_fixed_size": 0
+    }
+  ],
+  "compilers": [
+    {
+      "name": "old",
+      "clang": "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/clang-18",
+      "sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add"
+    },
+    {
+      "name": "new",
+      "clang": "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18",
+      "sha256": "11c1d097a7852b060c803f0bf509431bfaac812498ab22a472d0ea0f361cb1e2"
+    }
+  ],
+  "counter_contract": "capacity48 Mblocks, active48 Mblocks, grid48, actual96tiles, two outputs/TG",
+  "mmac_endpoint_method": "CU0 first IT WAVE_START to last IT s_endpgm + one GC period; active MMAC 8cycle unions including BF16zero, excludingEXEC0",
+  "note": "result.json text_sha256 is SHA of ISA text serialization; elf_text_sha256 here hashes executable .text bytes"
+}

@@ -4,33 +4,41 @@
 
 Contiguous FP8 (E4M3FN/E5M2, including mixed formats) or signed INT8 A/B;
 FP32 channel scales; BF16/FP16 sorted C. CK token[23:0] selects A.
-CPU selection is limited to M128; K>=1024, K%512=0, N%256=0. Four waves per role; grid is caller-supplied.
+CPU selection covers M128, K>=1024/K%512=0 and N%256=0.
+Four waves per role; the caller supplies the persistent grid and CK work count.
 
-    P0: B-left panel0 -> B-right panel0 -> B-left panel1 -> B-right panel1
-    P1:               A0/A1, with EB3/EB4 granting exclusive issue turns
+    P0: first B-left panel -> grant A0 -> wait -> remaining B panels ->
+        grant A1 -> wait -> all four B panels -> grant A2 -> ...
+    P1:                     A0 -> return grant; A1 -> return grant; ...
+    A0/A1 slots alternate across K. EB3/EB4 serialize A/B issue.
     C0: left N128 = two N64 panels; C1: right N128 = two N64 panels
 
-VGPR role budgets: P0/P1/C0/C1 = 16/16/96/96; no spill in the target probe.
+Static VGPR allocation: 82 registers per wave in the target probe, no spill.
+One resident TG fits without WDRA entry resizing or its LDS save/restore.
 Consumer ping-pong ebarriers are disabled; the existing MMAC priorities remain.
-The 64-KiB LDS footprint permits two TGs per CU when the launch supplies enough work.
+The 66-KiB LDS footprint permits one TG per 128-KiB CU.
 
 One K256 step, per consumer (arrows describe issue/dependency order):
     panel0: wait B/A -> read A/B -> complete LDS reads -> MMAC
     panel1: reuse A registers -> read B -> complete reads -> MMAC
-    Final panel1 prefetches scales before MMAC; EB5 protects the scale reads.
-    Normal K: return A after panel1. Final K: return A after panel0 read.
+    Final panel0 publishes its store before panel1 MMAC; EB5 protects scale reads.
+    Return A after panel0 reads; panel1 retains its A registers.
 
 LDS and abarrier ownership (all 16 IDs initialized):
     A: 2 x [32,256] = 16 KiB; READY1,2 / EMPTY4,5
     B: 3 x [256,64] = 48 KiB FIFO; READY7..9 / EMPTY10..12
     A EMPTY: 4 C0 + 4 C1 waves. B EMPTY: four owning-consumer waves.
-    Routes/expert are prefetched independently by each producer into registers.
-    Scales alias retired A1. EB5 protects scales
-    across outputs; FIFO slot/phase tickets continue when tile_id += grid.
+    Both producers prefetch expert IDs; only P1 retains CK route vectors.
+    Scales: one independent 512-FP32 bank = 2 KiB. EB5 protects scales
+    before each later publication; FIFO tickets continue when tile_id += grid.
 
 B always uses MLS; A uses buffer-to-LDS (or typed load/store for wide A).
 INT8 accumulates in INT32, FP8 in FP32; scales apply after K. Instruction
 warmup defaults off; FP8 retains the original zero-MMAC initialization.
+
+Addressing: A/C independently select 64-bit offsets at compile time; B MLS
+always uses a 64-bit expert/panel base. FP32 scale strides are also widened.
+GROUP_SIZE_M follows ordinary Triton; the GPU count bounds TOTAL_TILES capacity.
 """
 
 from triton.experimental import gluon
@@ -57,7 +65,7 @@ DEFAULT_LAUNCH_OPTIONS = dict(
     num_stages=2,
     use_async_copy=True,
     wasp_partition_warps=(4, 4, 4, 4),
-    wasp_wdra=True,
+    wasp_wdra=False,
 )
 
 
@@ -107,7 +115,7 @@ def store_channel_output(
     if acc.dtype == gl.int32:
         acc = acc.to(gl.float32)
     part = _cast_for_matrix_store(acc * sa[:, None] * sb[None, :], C.dtype.element_ty, result)
-    C = C + (block_m.to(gl.int64) if USE_ADDR_OFFSET_INT64_C else block_m) * 32 * N
+    C = C + (gl.cast(block_m, gl.int64) if USE_ADDR_OFFSET_INT64_C else block_m) * 32 * N
     hcu.matrix_store(C, part, (32, N), (N, 1),
                      (0, block_n * BN + PARTITION * 64), tile=(16, 32), boundary_check=())
 
@@ -138,8 +146,8 @@ def _icache_label(partition, slot, kind):
 @gluon.jit
 def _warm_mmac_instructions(PARTITION: gl.constexpr, SLOT: gl.constexpr):
     # Visit the real MMAC block with EXEC=0, skipping LDS and handoff code.
-    # Ping/pong are visited concurrently by separate waves; a shared consumer
-    # rendezvous below waits for both visits before reusing the B ring.
+    # Separate waves visit panel0/panel1 concurrently. The visits touch no
+    # LDS or accumulator data, so they do not consume A/B FIFO credits.
     # Symbolic labels avoid fixed code addresses. Normal compute pays one
     # untaken EXEC=0 return guard per BK; scalar temporaries are allocated.
     """Visit one real MMAC block with EXEC=0; ping/pong warm concurrently on different SIMDs."""
@@ -231,7 +239,11 @@ def _load_b_panel(B, bm, base, k, slot, phase, N: gl.constexpr, K: gl.constexpr,
 
 @gluon.jit
 def _load_a_tile(am, A, k, slot, phase, offsets, mask, USE_A64: gl.constexpr = False):
-    """Take the P0 issue grant, fill one A slot, and publish READY."""
+    """P1: wait EMPTY, borrow P0's issue turn, fill A, publish READY, return the turn.
+
+    k%2 -> A slot0/1; READY=1+slot, EMPTY=4+slot.
+    P0 --EB3--> P1: copy A --EB4--> P0: resume B.
+    """
     hcu.abarrier_try_wait(4 + slot, phase)
     hcu.ebarrier_sync(3, 8)
     hcu.sched_barrier()
@@ -254,6 +266,17 @@ def _load_a_tile(am, A, k, slot, phase, offsets, mask, USE_A64: gl.constexpr = F
     hcu.set_priority(1)
     hcu.sched_barrier()
     hcu.ebarrier_arrive(4, 8)
+
+
+@gluon.jit
+def _load_padded_rows(ptr):
+    # ASM Note: Gluon has no explicit SMEM-load API. This uniform count needs
+    # one scalar load, and its result is consumed only after the owned wait.
+    return gl.inline_asm_elementwise(
+        "s_load_dword $0, $1, 0x0\n\ts_waitcnt lgkmcnt(0)",
+        constraints="=s,s,~{memory}", args=[ptr.to(gl.uint64)],
+        dtype=gl.int32, is_pure=False, pack=1,
+    )
 
 
 @gluon.jit
@@ -292,7 +315,7 @@ def _produce_a_and_scales(
         seed_routes = gl.load(Routes + first_row * BM + gl.arange(0, BM, gl.SliceLayout(1, al)), first_output < total, other=0)
         seed_expert = gl.load(Experts + first_row + gl.arange(0, 1, layout), first_output < total, other=-1)
     if num_tokens_post_padded_ptr is not None:
-        padded_rows = gl.load(num_tokens_post_padded_ptr)
+        padded_rows = _load_padded_rows(num_tokens_post_padded_ptr)
         total = gl.minimum(total, gl.cdiv(padded_rows, 32) * gl.cdiv(N, BN))
     # ### ASM Note: Keep K bounds in SGPRs; Python constants permit unwanted loop unrolling.
     q = gl.inline_asm_elementwise(
@@ -332,6 +355,8 @@ def _produce_a_and_scales(
         mask = valid[:, None] & gl.full((BM, width), True, gl.int1, al)
         scale_routes = seed_routes.to(gl.uint32) & 16777215
         _load_a_tile(am, A, 0, 0, phase, offsets, mask, USE_A64)
+        # Do not let next-output expert scalarization or scale loads gate A1.
+        _load_a_tile(am, A, 1, 1, phase, offsets, mask, USE_A64)
         if GROUP_SIZE_M == 1:
             next_output = output + (PERSISTENT_GRID if PERSISTENT_GRID > 0 else gl.num_programs(0))
             next_row = next_output // gl.cdiv(N, BN)
@@ -343,9 +368,6 @@ def _produce_a_and_scales(
             SB + safe.to(gl.int64) * stride_bse + rn.to(gl.int64) * stride_bsn, rn < N, other=0
         )
         hcu.sched_barrier()
-        if iteration > 0:
-            hcu.ebarrier_sync(5, 12)
-        _load_a_tile(am, A, 1, 1, phase, offsets, mask, USE_A64)
         phase = phase ^ 1
         for pair in range(1, q // 2):
             for half in gl.static_range(2):
@@ -353,10 +375,12 @@ def _produce_a_and_scales(
                 _load_a_tile(am, A, k, half, phase, offsets, mask, USE_A64)
                 if half == 1:
                     phase = phase ^ 1
-        hcu.abarrier_try_wait(4, phase)
-        hcu.abarrier_try_wait(5, phase)
-        scales.index(bank).slice(0, BM).store(sa)
-        scales.index(bank).slice(BN, BN).store(sb)
+        # Independent scale storage leaves A slots available to the next output.
+        # Consume the preceding output's read-completion arrivals before reuse.
+        if iteration > 0:
+            hcu.ebarrier_sync(5, 12)
+        scales.index(0).slice(0, BM).store(sa)
+        scales.index(0).slice(BN, BN).store(sb)
         hcu.wait_lgkmcnt(0)
         hcu.ebarrier_arrive(2, 8)
         hcu.ebarrier_arrive(0, 8)
@@ -432,6 +456,7 @@ def gemm_top_w8a8_channel_wasp_persistent(
     gl.static_assert(
         a_scale_ptr.dtype.element_ty == gl.float32 and b_scale_ptr.dtype.element_ty == gl.float32
     )
+    gl.static_assert(c_ptr.dtype.element_ty == gl.bfloat16 or c_ptr.dtype.element_ty == gl.float16)
     gl.static_assert(WAVES % PRODUCER_WAVES == 0)
     gl.static_assert(not PINGPONG, "consumer ping-pong is disabled in this specialization")
     _run(
@@ -509,7 +534,7 @@ def _produce_b_and_routes(
             Experts + first_row + gl.arange(0, 1, layout), first_output < total, other=-1
         )
     if num_tokens_post_padded_ptr is not None:
-        padded_rows = gl.load(num_tokens_post_padded_ptr)
+        padded_rows = _load_padded_rows(num_tokens_post_padded_ptr)
         total = gl.minimum(total, gl.cdiv(padded_rows, 32) * gl.cdiv(N, BN))
     # ### ASM Note: Keep K bounds in SGPRs; Python constants permit unwanted loop unrolling.
     q = gl.inline_asm_elementwise(
@@ -595,19 +620,24 @@ def _consume_panel(
     sb0=None,
     sb1=None,
 ):
-    """Read one N64 panel; retain A registers across both panels of this K256."""
+    """Read one N64 panel; retain A registers across both panels of this K256.
+
+    Panel1 reuses A registers without another READY_A wait or A LDS read.
+    """
     bslot = b_state % 3
     bphase = (b_state // 3) & 1
     if PARTITION == 0:
         hcu.abarrier_try_wait(7 + bslot, bphase)
         b = bm.index(bslot).load(hcu.MmacInterleave2Layout(gl.DotOperandLayout(1, MMA, 8)))
-        hcu.abarrier_try_wait(1 + slot, phase)
+        if SLOT == 0:
+            hcu.abarrier_try_wait(1 + slot, phase)
         if SLOT == 0:
             a = am.index(slot).load(gl.DotOperandLayout(0, MMA, 8))
         else:
             a = retained_a
     else:
-        hcu.abarrier_try_wait(1 + slot, phase)
+        if SLOT == 0:
+            hcu.abarrier_try_wait(1 + slot, phase)
         if SLOT == 0:
             a = am.index(slot).load(gl.DotOperandLayout(0, MMA, 8))
         else:
@@ -621,27 +651,22 @@ def _consume_panel(
     hcu.sched_barrier()
     hcu.wait_lgkmcnt(0)
     hcu.abarrier_arrive(10 + bslot)
-    # The final A operand has no later shared-memory reader: both N quarters
-    # reuse its registers. Return only after the complete A/B LDS wait above.
+    # Both N quarters retain A in registers after SLOT0's complete LDS wait.
+    # Independent scales no longer require either A slot at publication.
     if SLOT == 0:
-        if final_k:
-            hcu.abarrier_arrive(4 + slot)
-    else:
-        if not final_k:
-            hcu.abarrier_arrive(4 + slot)
+        hcu.abarrier_arrive(4 + slot)
     hcu.sched_barrier()
-    # The last A readers already returned their slots. Read scales now so
-    # their LDS latency can overlap the final panel MMAC; EB5 is released
+    # Read the independently published scales so their LDS latency can
+    # overlap the final panel MMAC; EB5 is released
     # only after these reads complete in the consumer epilogue.
     if SLOT == 1:
         if final_k:
-            hcu.ebarrier_sync(2 if PARTITION == 0 else 0, 8)
             result: gl.constexpr = acc.type.layout
             cm: gl.constexpr = acc.shape[0]
             cn: gl.constexpr = acc.shape[1]
-            sa = scales.index(scale_bank).slice(0, cm).load(gl.SliceLayout(1, result))
-            sb0 = scales.index(scale_bank).slice(BN + PARTITION * (2 * cn), cn).load(gl.SliceLayout(0, result))
-            sb1 = scales.index(scale_bank).slice(BN + PARTITION * (2 * cn) + cn, cn).load(gl.SliceLayout(0, result))
+            sa = scales.index(0).slice(0, cm).load(gl.SliceLayout(1, result))
+            sb0 = scales.index(0).slice(BN + PARTITION * (2 * cn), cn).load(gl.SliceLayout(0, result))
+            sb1 = scales.index(0).slice(BN + PARTITION * (2 * cn) + cn, cn).load(gl.SliceLayout(0, result))
             hcu.sched_barrier()
     hcu.set_priority(1 + 2 * SLOT if PARTITION == 0 else 2 * SLOT)
     hcu.sched_barrier()
@@ -701,7 +726,7 @@ def _consumer(
     # pre-WASP GPU scalar currently requires an unallocated compiler scratch slot.
     """C0/C1: accumulate an N128 half and store scaled sorted output."""
     if num_tokens_post_padded_ptr is not None:
-        padded_rows = gl.load(num_tokens_post_padded_ptr)
+        padded_rows = _load_padded_rows(num_tokens_post_padded_ptr)
         total = gl.minimum(total, gl.cdiv(padded_rows, 32) * gl.cdiv(N, BN))
     BM: gl.constexpr = 32
     CN: gl.constexpr = 64
@@ -806,6 +831,12 @@ def _consumer(
                 final_k=(k == K // 256 - 1),
                 scales=scales, scale_bank=iteration & 1, BN=BN, sa=sa, sb0=sb0, sb1=sb1,
             )
+            # Store the completed first quarter while the second quarter is pending.
+            if k == K // 256 - 1:
+                hcu.ebarrier_sync(2 if PARTITION == 0 else 0, 8)
+                early_sa = scales.index(0).slice(0, BM).load(gl.SliceLayout(1, result))
+                early_sb = scales.index(0).slice(BN + PARTITION * (2 * CN), CN).load(gl.SliceLayout(0, result))
+                store_channel_output(output_base, acc0, early_sa, early_sb, 0, 0, N, 128, 0, WM, WN, USE_C64)
             acc1, slot, phase, b_state, _, sa, sb0, sb1 = _consume_panel(
                 acc1,
                 am,
@@ -826,7 +857,6 @@ def _consumer(
         if output + (PERSISTENT_GRID if PERSISTENT_GRID > 0 else gl.num_programs(0)) < total:
             hcu.wait_lgkmcnt(0)
             hcu.ebarrier_arrive(5, 12)
-        store_channel_output(output_base, acc0, sa, sb0, 0, 0, N, 128, 0, WM, WN, USE_C64)
         store_channel_output(output_base, acc1, sa, sb1, 0, 0, N, 128, 1, WM, WN, USE_C64)
         iteration += 1
 
@@ -867,7 +897,7 @@ def _run(
     num_tokens_post_padded_ptr=None,
     PERSISTENT_GRID: gl.constexpr = 0,
 ):
-    """Allocate the 64-KiB A/B pools and launch four WASP roles."""
+    """Allocate 64-KiB A/B pools plus 2-KiB scales and launch four WASP roles."""
     BM: gl.constexpr = 32
     BK: gl.constexpr = 256
     BN: gl.constexpr = BLOCK_SIZE_N
@@ -886,9 +916,9 @@ def _run(
     )
     am = gl.allocate_shared_memory(storage_dtype, [A_STAGES, BM, BK], al)
     bm = gl.allocate_shared_memory(B.dtype.element_ty, [3, BK, 64], bl)
-    # Channel scales use retired A1; routes/expert remain in producer registers.
+    # Independent scales let the next output issue A before scale reuse is safe.
     meta = am.index(0)._reinterpret(gl.int32, [2, 128], sl)
-    scales = am.index(1)._reinterpret(gl.float32, [2, 1024], sl)
+    scales = gl.allocate_shared_memory(gl.float32, [1, 512], sl)
     flat_am = am._reinterpret(
         storage_dtype, [A_STAGES, BM, BK], gl.SwizzledSharedLayout(16, 1, 1, [1, 0])
     )
@@ -1057,4 +1087,5 @@ def is_persistent_channel_gemm1_supported(
         256,
     ):
         return False
-    return m == 128 and n % 256 == 0 and k >= 1024 and k % 512 == 0
+    return (m == 128 and n % 256 == 0 and k >= 1024 and k % 512 == 0
+            and config.get("GROUP_SIZE_M", 1) >= 1)

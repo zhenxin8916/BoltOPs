@@ -1,0 +1,116 @@
+{
+  "old_build_revision": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "new_build_revision": "c49fb46267bc821ddae82940aed7cec8c8f7d374",
+  "same_input_routing": true,
+  "same_launch_options": true,
+  "identical_elf_text": true,
+  "identical_static_ds_counts": true,
+  "time_delta_us": 0.0,
+  "rows": [
+    {
+      "name": "old",
+      "exit_code": 0,
+      "numeric": {
+        "actual_dispatcher_used": false,
+        "frozen_algorithm": "BN512-B3-single-ticket",
+        "experimental_kernel_snapshot": false,
+        "INSN_WARMUP": false,
+        "capacity_logical_tiles": 512,
+        "selected_logical_tiles": 96,
+        "equivalent_BN256_tiles": 192,
+        "experimental_launch_option_adapter": false,
+        "GPU_padded_counter_used": true,
+        "mismatches": 0,
+        "padded_row_errors": 0,
+        "remaining_nan": 0,
+        "checked_valid_elements": 1580032,
+        "untouched_modified": 0,
+        "shared": 131072
+      },
+      "time_us": 69.403808,
+      "wave_span_time_us": 64.549932,
+      "mmac_total_pct": 28.4451794620016,
+      "hot_loop_mmac_pct": 31.7359103122816,
+      "mmac_scope": "cu0_wave_lifetime",
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 68963460,
+      "static_ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 3,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 10,
+        "ds_write2st64_b32": 1,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2st64_b64": 16,
+        "ds_read2_b64": 4
+      },
+      "elf_text_sha256": "d0a9244a7a36fef12caaaccb5002c77c13ae20d6d3b64b8a40998de7c7d5838b",
+      "elf_text_bytes": 12960,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_fixed_size": 0
+    },
+    {
+      "name": "new",
+      "exit_code": 0,
+      "numeric": {
+        "actual_dispatcher_used": false,
+        "frozen_algorithm": "BN512-B3-single-ticket",
+        "experimental_kernel_snapshot": false,
+        "INSN_WARMUP": false,
+        "capacity_logical_tiles": 512,
+        "selected_logical_tiles": 96,
+        "equivalent_BN256_tiles": 192,
+        "experimental_launch_option_adapter": false,
+        "GPU_padded_counter_used": true,
+        "mismatches": 0,
+        "padded_row_errors": 0,
+        "remaining_nan": 0,
+        "checked_valid_elements": 1580032,
+        "untouched_modified": 0,
+        "shared": 131072
+      },
+      "time_us": 69.403808,
+      "wave_span_time_us": 64.549932,
+      "mmac_total_pct": 28.4451794620016,
+      "hot_loop_mmac_pct": 31.7359103122816,
+      "mmac_scope": "cu0_wave_lifetime",
+      "cu0_first_wave_start_tick": 4413528,
+      "cu0_last_wave_end_tick": 68963460,
+      "static_ds_counts": {
+        "ds_write_addtid_b32": 1,
+        "ds_read_addtid_b32": 4,
+        "ds_write_b32": 3,
+        "ds_read_b32": 3,
+        "ds_read2_b32": 10,
+        "ds_write2st64_b32": 1,
+        "ds_read_matrix_trans_format": 64,
+        "ds_read2st64_b64": 16,
+        "ds_read2_b64": 4
+      },
+      "elf_text_sha256": "d0a9244a7a36fef12caaaccb5002c77c13ae20d6d3b64b8a40998de7c7d5838b",
+      "elf_text_bytes": 12960,
+      "sgpr_spill_count": 0,
+      "vgpr_spill_count": 0,
+      "private_segment_fixed_size": 0
+    }
+  ],
+  "compilers": [
+    {
+      "name": "old",
+      "clang": "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/clang-18",
+      "sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add"
+    },
+    {
+      "name": "new",
+      "clang": "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18",
+      "sha256": "11c1d097a7852b060c803f0bf509431bfaac812498ab22a472d0ea0f361cb1e2"
+    }
+  ],
+  "fixture": "/home/zhenx/temp/bm64-gemm1-port-20261116/frozen_inputs.pt",
+  "fixture_sha256": "eb2b2bbd6e3ec3e68f4e01cdae618e55a0f9d0c7b55ec07cab1e6a24bc561a02",
+  "output_byte_hash_comparison": false,
+  "numeric_method": "Each side independently checks fixed CPU reference with rtol=.02,atol=.002 after BF16 rounding, plus exact zero padding and unchanged NaN regions",
+  "mmac_endpoint_method": "CU0 first IT WAVE_START to last IT s_endpgm + one GC period; active MMAC 8cycle unions including BF16zero, excludingEXEC0"
+}

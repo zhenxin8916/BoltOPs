@@ -1,0 +1,27 @@
+{
+  "kernel_parent_commit": "8fd70e378a9b9495ed0af106e3e39ba180c645b1",
+  "kernel_branch": "experiment/moe-bm32-scale-bank-20261117",
+  "kernel_source_sha256": "1145b65230a0f4abd866177cf902157de6a3aa2315e3b2ecaa6a8220080ce24f",
+  "frozen_source_record": "../bm32-scale-bank-20261117/versions-1800.json",
+  "LLVM_compiled_source_commit": "89bee503d8e9d0bdcfbb4d97e204d5e346f02550",
+  "LLVM_branch": "dtk-llvm-6.3.3",
+  "clang_sha256": "b547297d968762bbcb017e1dd0a802e6b8b5e1afcef9b5072d8a5d0626b765c2",
+  "clang_wrapper": "/home/zhenx/temp/llvm-ds-read2-wrap-20261115/clang-after-control",
+  "Triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "Triton_branch": "release/3.6.x",
+  "libtriton_sha256": "49ae398b737f663ebe5dd369b66edc453f6de5a1a1a22156f4faf48e4941efe4",
+  "compiler_changes_by_this_commit": false,
+  "PMD": "b61a79c5 / CoreArch1769 / gfx946",
+  "live_source_check": {
+    "LLVM": {
+      "branch": "dtk-llvm-6.3.3",
+      "commit": "c49fb46267bc821ddae82940aed7cec8c8f7d374",
+      "local_changes": ""
+    },
+    "Triton": {
+      "branch": "release/3.6.x",
+      "commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+      "local_changes": ""
+    }
+  }
+}

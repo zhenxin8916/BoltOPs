@@ -1,0 +1,223 @@
+{
+  "scope": "all eight CU0 consumer waves, both outputs",
+  "no_consumer_ebarrier_ids_8_to_15": true,
+  "priorities_exactly_match_control": true,
+  "waves": {
+    "8": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "9": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "10": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "11": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 2,
+          "op": "s_ebarrier_sync s0, 2, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "12": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "13": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "14": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    },
+    "15": {
+      "priority_sequence_same_as_control": true,
+      "priority_instructions": 64,
+      "consumer_pingpong_events": 0,
+      "other_barriers": [
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 0"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_arrive s0, 5, 12"
+        },
+        {
+          "ID": 0,
+          "op": "s_ebarrier_sync s0, 0, 8"
+        },
+        {
+          "ID": 5,
+          "op": "s_ebarrier_sync s0, 5, 0"
+        }
+      ]
+    }
+  }
+}

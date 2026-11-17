@@ -1,0 +1,217 @@
+{
+  "CU": 28,
+  "scope": "all eight consumers, two outputs; cycles relative to global first wave",
+  "mean_same_wave_handoff": 1717.5,
+  "max_same_wave_handoff": 2124.0,
+  "last_valid_MMAC_end_cycle": 56379.0,
+  "last_matrix_store_issue_cycle": 56627.0,
+  "global_wave_end_cycle": 57130.0,
+  "consumer": {
+    "8": {
+      "first_MMAC_cycle": 5795.0,
+      "last_output0_MMAC_end": 29219.0,
+      "first_output1_MMAC": 31343.0,
+      "last_MMAC_end": 55851.0,
+      "store_issue_cycles": [
+        27795.0,
+        29691.0,
+        54235.0,
+        56095.0
+      ],
+      "B_READY_gap_median": 1092.0,
+      "B_READY_gap_sum": 32312.0
+    },
+    "9": {
+      "first_MMAC_cycle": 5792.0,
+      "last_output0_MMAC_end": 29224.0,
+      "first_output1_MMAC": 31348.0,
+      "last_MMAC_end": 55844.0,
+      "store_issue_cycles": [
+        27748.0,
+        29708.0,
+        54252.0,
+        56048.0
+      ],
+      "B_READY_gap_median": 1096.0,
+      "B_READY_gap_sum": 32352.0
+    },
+    "10": {
+      "first_MMAC_cycle": 5793.0,
+      "last_output0_MMAC_end": 29225.0,
+      "first_output1_MMAC": 31349.0,
+      "last_MMAC_end": 55845.0,
+      "store_issue_cycles": [
+        27761.0,
+        29725.0,
+        54205.0,
+        56061.0
+      ],
+      "B_READY_gap_median": 1096.0,
+      "B_READY_gap_sum": 32316.0
+    },
+    "11": {
+      "first_MMAC_cycle": 5794.0,
+      "last_output0_MMAC_end": 29218.0,
+      "first_output1_MMAC": 31342.0,
+      "last_MMAC_end": 55850.0,
+      "store_issue_cycles": [
+        27778.0,
+        29742.0,
+        54218.0,
+        56078.0
+      ],
+      "B_READY_gap_median": 1090.0,
+      "B_READY_gap_sum": 32412.0
+    },
+    "12": {
+      "first_MMAC_cycle": 6279.0,
+      "last_output0_MMAC_end": 30363.0,
+      "first_output1_MMAC": 31635.0,
+      "last_MMAC_end": 56379.0,
+      "store_issue_cycles": [
+        29915.0,
+        30583.0,
+        54767.0,
+        56627.0
+      ],
+      "B_READY_gap_median": 1036.0,
+      "B_READY_gap_sum": 30088.0
+    },
+    "13": {
+      "first_MMAC_cycle": 6328.0,
+      "last_output0_MMAC_end": 30320.0,
+      "first_output1_MMAC": 31628.0,
+      "last_MMAC_end": 56372.0,
+      "store_issue_cycles": [
+        29852.0,
+        30544.0,
+        54736.0,
+        56580.0
+      ],
+      "B_READY_gap_median": 1038.0,
+      "B_READY_gap_sum": 30140.0
+    },
+    "14": {
+      "first_MMAC_cycle": 6325.0,
+      "last_output0_MMAC_end": 30301.0,
+      "first_output1_MMAC": 31629.0,
+      "last_MMAC_end": 56373.0,
+      "store_issue_cycles": [
+        29837.0,
+        30529.0,
+        54749.0,
+        56593.0
+      ],
+      "B_READY_gap_median": 1036.0,
+      "B_READY_gap_sum": 30092.0
+    },
+    "15": {
+      "first_MMAC_cycle": 6278.0,
+      "last_output0_MMAC_end": 30294.0,
+      "first_output1_MMAC": 31630.0,
+      "last_MMAC_end": 56378.0,
+      "store_issue_cycles": [
+        29806.0,
+        30514.0,
+        54782.0,
+        56610.0
+      ],
+      "B_READY_gap_median": 1028.0,
+      "B_READY_gap_sum": 30084.0
+    }
+  },
+  "producer": {
+    "0": {
+      "first_load_cycle": 3551.0,
+      "last_load_cycle": 54027.0,
+      "tile_or_panel_first_issue_cycles": [
+        3551.0,
+        3807.0,
+        4327.0,
+        5783.0,
+        6311.0,
+        7947.0,
+        8175.0,
+        8647.0,
+        9867.0,
+        10295.0,
+        10923.0,
+        11819.0,
+        12743.0,
+        13243.0,
+        14191.0,
+        15175.0,
+        15739.0,
+        16423.0,
+        17351.0,
+        18091.0,
+        18739.0,
+        19675.0,
+        20351.0,
+        21135.0,
+        22019.0,
+        22691.0,
+        23435.0,
+        24423.0,
+        25067.0,
+        25807.0,
+        26723.0,
+        27495.0,
+        28183.0,
+        29051.0,
+        30199.0,
+        31375.0,
+        31751.0,
+        32699.0,
+        33975.0,
+        34559.0,
+        35495.0,
+        36667.0,
+        37127.0,
+        38019.0,
+        39103.0,
+        39531.0,
+        40303.0,
+        41571.0,
+        41943.0,
+        42635.0,
+        43887.0,
+        44383.0,
+        45027.0,
+        46211.0,
+        46675.0,
+        47459.0,
+        48575.0,
+        49027.0,
+        49751.0,
+        51039.0,
+        51447.0,
+        52103.0,
+        53387.0,
+        53975.0
+      ]
+    },
+    "4": {
+      "first_load_cycle": 3719.0,
+      "last_load_cycle": 51199.0,
+      "tile_or_panel_first_issue_cycles": [
+        3719.0,
+        5927.0,
+        8887.0,
+        11951.0,
+        15371.0,
+        18223.0,
+        21343.0,
+        24567.0,
+        28335.0,
+        31579.0,
+        34683.0,
+        38139.0,
+        41763.0,
+        44503.0,
+        47647.0,
+        51171.0
+      ]
+    }
+  }
+}

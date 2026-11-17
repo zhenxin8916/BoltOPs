@@ -1,0 +1,25 @@
+{
+  "final_source_sha256": "a6fd5bbb604a13b4981080af8f65f0cd9fd4f3ace18cb76c0851072abfaf02e8",
+  "final_text_sha256": "0b9fe3907a747ac833538a26cd115143a52fca100ceb0fb8c89cd1af53fe08b3",
+  "rows": [
+    {
+      "gc_ghz": 2.2,
+      "text_match_final": true,
+      "text_sha256": "0b9fe3907a747ac833538a26cd115143a52fca100ceb0fb8c89cd1af53fe08b3",
+      "text_bytes": 7828
+    },
+    {
+      "gc_ghz": 1.8,
+      "text_match_final": true,
+      "text_sha256": "0b9fe3907a747ac833538a26cd115143a52fca100ceb0fb8c89cd1af53fe08b3",
+      "text_bytes": 7828
+    },
+    {
+      "gc_ghz": 1.5,
+      "text_match_final": true,
+      "text_sha256": "0b9fe3907a747ac833538a26cd115143a52fca100ceb0fb8c89cd1af53fe08b3",
+      "text_bytes": 7828
+    }
+  ],
+  "comment_only_updates_after_compile": true
+}

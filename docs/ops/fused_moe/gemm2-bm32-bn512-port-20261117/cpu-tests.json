@@ -1,0 +1,6 @@
+{
+  "command": "pytest test/fused_moe/test_channel_gemm2_bm32_bn512_equivalence.py -q",
+  "passed": 3,
+  "skipped": 7,
+  "note": "GPU opt-in cases separately passed; see correctness.json"
+}

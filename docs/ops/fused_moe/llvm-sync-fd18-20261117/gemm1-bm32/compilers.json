@@ -1,0 +1,12 @@
+[
+  {
+    "name": "old",
+    "clang": "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/clang-18",
+    "sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add"
+  },
+  {
+    "name": "new",
+    "clang": "/zhenxin/llvm-project/build-dtk-llvm-6.3.3/bin/clang-18",
+    "sha256": "11c1d097a7852b060c803f0bf509431bfaac812498ab22a472d0ea0f361cb1e2"
+  }
+]

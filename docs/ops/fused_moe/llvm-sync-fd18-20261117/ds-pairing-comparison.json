@@ -1,0 +1,29 @@
+[
+  {
+    "test": "lds-common-base",
+    "changed_functions": [
+      {
+        "name": "loop_nested_disjoint_or",
+        "old": {
+          "ds_read2st64_b64": 1
+        },
+        "new": {
+          "ds_read_b64": 2
+        }
+      },
+      {
+        "name": "variable_disjoint_or",
+        "old": {
+          "ds_read2st64_b64": 1
+        },
+        "new": {
+          "ds_read_b64": 2
+        }
+      }
+    ]
+  },
+  {
+    "test": "lds-wrapped-constant-read2",
+    "changed_functions": []
+  }
+]

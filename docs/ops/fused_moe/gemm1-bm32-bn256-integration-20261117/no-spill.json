@@ -1,0 +1,93 @@
+[
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/PLFCBQ5475VCB4EX6E5DXOFCCGRORWFJXGLRUMZPVWWYIQYY5LLA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/VFJ5QPI26X5DJOC6Y4M5PCB75JI7WU5DJVTNH5V64NEFBDUDXEBA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/N54OU57KR5NGFSLTFO4DB3IH7YTIK6TEUWXBWS4KJCF6XAPYBZGA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "int8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/KSBD4LUSWQW4E7S243COJDCWBPLR6NN62TEOOX2QGJFCKDVA3QBQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/44BNUYKWZVIHJIFZ3WKLKM6JI66VBK3RU7P4HFM5DHUBK2KC4HWQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/Z27GY4JREDB2FKSCW4OCJVC4XCMRWCQEV2EX75LAZ52OKCLGXKAA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "int8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/UQJSI7BIRJ52CYNJ3M25Y74FZPUMXNKBXBG5OBEGPPQDEMDRTNDA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/BRJSR6D4DHCW7EO2Y5HMUDW77ZSWFJ44TTG327QD26FALRPQ5B4Q/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/D33IW5LCHJ27X6ANL5K2S5ZIVJCFXDF4OUUFTDQ4JREDC2FO4BTQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/UASA7TLYZQS4ORA2CLOJXWVNEC5O3TBXG7LH7I4OOQKHMNPKBM3A/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/DXJJ3ZQVE7YJ5DA5A3AINBDS7SSAMU76BKRLST4BRVFXJO2FAJPA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/equivalence-final/cache/O5XYU7IV3X6ATWDS4T23K45AYKA4B4YMXFAFETS4YC2R2YECYLRA/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  },
+  {
+    "file": "/zhenxin/temp/bm32-gemm1-migration-20261117/warmup/cache/2B354JFHYH7EBE7XH7OTRD2JA4MFFOGAR5KKUXGMTOG2BJ5IC5VQ/gemm_top_w8a8_channel_wasp_persistent.amdgcn",
+    "kind": "fp8_warmup",
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 0,
+    "private_segment_fixed_size": 0
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "scope": "CU0 four P1 and all eight consumer waves; two outputs",
+  "next_output_all_A_issued_before_previous_scale_reuse_wait": true,
+  "next_scale_write_after_all_old_consumer_completion_arrivals": true,
+  "producer": {
+    "4": {
+      "A_load_instructions_before_scale_reuse_wait": 32,
+      "scale_reuse_sync_tick": 32435372,
+      "first_next_scale_store_tick": 33511788
+    },
+    "5": {
+      "A_load_instructions_before_scale_reuse_wait": 32,
+      "scale_reuse_sync_tick": 32429256,
+      "first_next_scale_store_tick": 33487880
+    },
+    "6": {
+      "A_load_instructions_before_scale_reuse_wait": 32,
+      "scale_reuse_sync_tick": 32434260,
+      "first_next_scale_store_tick": 33492884
+    },
+    "7": {
+      "A_load_instructions_before_scale_reuse_wait": 32,
+      "scale_reuse_sync_tick": 32434816,
+      "first_next_scale_store_tick": 33502336
+    }
+  },
+  "consumer": {
+    "8": {
+      "previous_scale_read_completion_arrive_tick": 20592572
+    },
+    "9": {
+      "previous_scale_read_completion_arrive_tick": 20595352
+    },
+    "10": {
+      "previous_scale_read_completion_arrive_tick": 20595908
+    },
+    "11": {
+      "previous_scale_read_completion_arrive_tick": 20592016
+    },
+    "12": {
+      "previous_scale_read_completion_arrive_tick": 21422124
+    },
+    "13": {
+      "previous_scale_read_completion_arrive_tick": 21436024
+    },
+    "14": {
+      "previous_scale_read_completion_arrive_tick": 21447700
+    },
+    "15": {
+      "previous_scale_read_completion_arrive_tick": 21399328
+    }
+  }
+}

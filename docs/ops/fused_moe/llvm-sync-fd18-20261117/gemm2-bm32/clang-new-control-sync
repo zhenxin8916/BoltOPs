@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm32/new-bin/clang-18 -mllvm -hcu-control-only-ebarrier-sync "$@"

@@ -1,0 +1,8 @@
+{
+  "clang_sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+  "wrapper": "/zhenxin/temp/bm32-gemm1-migration-20261117/clang-control",
+  "llvm_checkout_head": "89bee503d8e9d0bdcfbb4d97e204d5e346f02550",
+  "llvm_binary_build_commit": "fd18eddbaf4a662ae5ce86c516d28e5b16952513",
+  "clang_version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git fd18eddbaf4a662ae5ce86c516d28e5b16952513)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/temp/bm32-gemm1-migration-20261117",
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f"
+}

@@ -1,0 +1,20 @@
+{
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "cases": [
+    "test_gluon_gemm1_matches_triton[e4m3-out0-False]",
+    "test_gluon_gemm1_matches_triton[int8-out1-False]",
+    "test_gluon_gemm1_matches_triton[e5m2-out2-False]",
+    "test_gluon_gemm1_matches_triton[mixed-out3-False]",
+    "test_gluon_gemm1_matches_triton[mixed_reverse-out4-False]",
+    "test_gluon_gemm1_matches_triton[e4m3-out5-True]",
+    "test_gluon_gemm1_matches_triton[int8-out6-True]",
+    "test_gluon_gemm1_matches_triton[e4m3-out7-a]",
+    "test_gluon_gemm1_matches_triton[e4m3-out8-b]",
+    "test_gluon_gemm1_matches_triton[e4m3-out9-c]",
+    "test_gluon_gemm1_matches_triton[grouped-out10-False]",
+    "test_gluon_gemm1_matches_triton[warmup-out11-False]"
+  ]
+}

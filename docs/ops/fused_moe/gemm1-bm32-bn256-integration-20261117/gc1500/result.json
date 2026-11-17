@@ -1,0 +1,14 @@
+{
+  "BM": 32,
+  "BN": 256,
+  "BK": 256,
+  "blocks": 48,
+  "total": 96,
+  "grid": 48,
+  "errors": 0,
+  "padding_errors": 0,
+  "untouched_errors": 0,
+  "checked": 101376,
+  "shared": 65536,
+  "text_sha256": "506b834ee6698319dcd65e724bda51c83f9e53343589a780ca6a379591678503"
+}

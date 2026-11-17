@@ -1,0 +1,10 @@
+{
+  "option": "INSN_WARMUP=True",
+  "expected_compile_failure": true,
+  "exit_code": 1,
+  "reason": "BM32 instruction warmup is not supported",
+  "source_sha256": "966068a32b9e5640e19d0fe705c4b24d0aff5035ba29dd701abda11f1b79c892",
+  "log": "/zhenxin/temp/bm32-gemm2-migration-20261117/negative-warmup-compile/run.log",
+  "log_sha256": "7f804f8360406b54b1c1a20a510e6e1a481b9daef8ff6ecef9b6ce2606564c99",
+  "gpu_dispatches": 0
+}

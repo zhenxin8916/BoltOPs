@@ -1,0 +1,32 @@
+[
+  {
+    "type": "eq",
+    "name": "fp8-out7-True-a",
+    "exit_code": 0,
+    "path": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8-out7-True-a"
+  },
+  {
+    "type": "eq",
+    "name": "fp8-out8-True-b",
+    "exit_code": 0,
+    "path": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8-out8-True-b"
+  },
+  {
+    "type": "eq",
+    "name": "fp8-out9-True-c",
+    "exit_code": 0,
+    "path": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8-out9-True-c"
+  },
+  {
+    "type": "eq",
+    "name": "fp8_mixed_reverse-out10-True-True",
+    "exit_code": 0,
+    "path": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8_mixed_reverse-out10-True-True"
+  },
+  {
+    "type": "eq",
+    "name": "fp8_zero_work-out11-True-False",
+    "exit_code": 0,
+    "path": "/zhenxin/temp/bm32-gemm2-review-20261117/eq-fp8_zero_work-out11-True-False"
+  }
+]

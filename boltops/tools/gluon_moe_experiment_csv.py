@@ -4,6 +4,7 @@
 
 These diagnostic dispatches are not full-MoE timings. BM128 uses
 BN512/256/128 x 2/4/8 outputs per TG; BM64 uses two tiles per TG at M1024.
+BM32 uses two tiles per TG at M128.
 Publish a validated record with --stage top|bottom --record record.json.
 """
 import argparse
@@ -58,14 +59,20 @@ def upsert_record(stage, record, directory=CONFIG_DIR):
     if record.get("mismatches") != 0 or not record.get("verified"):
         raise ValueError("only verified, numerically correct runs may be published")
     bm, bn = int(row["bm"]), int(row["bn"])
-    if bm == 64:
+    if bm == 32:
+        expected_tiles, expected_scope = 2, "bounded_two_tiles_per_tg"
+        expected_bn = 256 if stage == "top" else 512
+        expected_bk = 256 if stage == "top" else 64
+        if int(row["token"]) != 128 or bn != expected_bn or int(row["bk"]) != expected_bk:
+            raise ValueError("BM32 uses M128, GEMM1 BN256/BK256 or GEMM2 BN512/BK64")
+    elif bm == 64:
         expected_tiles, expected_scope = 2, "bounded_two_tiles_per_tg"
         if int(row["token"]) != 1024 or bn not in (256, 512):
             raise ValueError("BM64 measurements use M1024 and BN256/512")
     elif bm == 128:
         expected_tiles, expected_scope = tiles_per_tg(bn), "bounded_equal_padded_output_work"
     else:
-        raise ValueError("BM must be 64 or 128")
+        raise ValueError("BM must be 32, 64 or 128")
     if int(row["tiles_per_tg"]) != expected_tiles:
         raise ValueError("unexpected number of output tiles per TG")
     if int(row["total_tiles"]) != int(row["cu_count"]) * int(row["tiles_per_tg"]):

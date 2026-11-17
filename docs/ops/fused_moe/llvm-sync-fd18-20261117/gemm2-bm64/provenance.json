@@ -1,0 +1,35 @@
+{
+  "kernel_source_sha256": "966068a32b9e5640e19d0fe705c4b24d0aff5035ba29dd701abda11f1b79c892",
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "pmd_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a",
+  "old": {
+    "clang_path": "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/clang-18",
+    "clang_sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+    "lld_path": "/zhenxin/temp/llvm-sync-fd18-20261117/old-bin/ld.lld",
+    "lld_sha256": "0700bdbe96890128fc9dc20dbdd20d89277a3b34a057d7e2be0e1270c484a395",
+    "clang_version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git fd18eddbaf4a662ae5ce86c516d28e5b16952513)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/temp/llvm-sync-fd18-20261117/old-bin\n",
+    "wrapper": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm32/clang-old-control-sync",
+    "clang_sha256_after_runs": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+    "lld_sha256_after_runs": "0700bdbe96890128fc9dc20dbdd20d89277a3b34a057d7e2be0e1270c484a395"
+  },
+  "new": {
+    "clang_path": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm32/new-bin/clang-18",
+    "clang_sha256": "11c1d097a7852b060c803f0bf509431bfaac812498ab22a472d0ea0f361cb1e2",
+    "lld_path": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm32/new-bin/ld.lld",
+    "lld_sha256": "e6bdff13df8bf309f82840d4e70574019da17b9812bf005bf45cc050e966fa4c",
+    "clang_version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git c49fb46267bc821ddae82940aed7cec8c8f7d374)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm32/new-bin\n",
+    "wrapper": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm32/clang-new-control-sync",
+    "clang_sha256_after_runs": "11c1d097a7852b060c803f0bf509431bfaac812498ab22a472d0ea0f361cb1e2",
+    "lld_sha256_after_runs": "e6bdff13df8bf309f82840d4e70574019da17b9812bf005bf45cc050e966fa4c"
+  },
+  "kernel_sources": {
+    "BN256": {
+      "source": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm64/kernel_bn256.py",
+      "sha256": "254179e2b40294f94aab848b6dca931e4333e8afd8592afea4ee78795f742883"
+    },
+    "BN512": {
+      "source": "/zhenxin/temp/llvm-sync-fd18-20261117/gemm2-bm64/kernel_bn512.py",
+      "sha256": "89f5727adfac862cebaf0a0b4d681b82dfdef7e23513650f272695d85bec1c47"
+    }
+  }
+}

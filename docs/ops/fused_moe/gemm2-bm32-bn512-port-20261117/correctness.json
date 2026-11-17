@@ -1,0 +1,153 @@
+[
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 395264,
+    "differences": 0,
+    "case": "test_gluon_gemm2_matches_triton[fp8-out0-True-False]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8",
+    "output": "torch.float16",
+    "mul_routed_weight": false,
+    "forced_int64": true,
+    "elements": 395264,
+    "differences": 0,
+    "case": "test_gluon_gemm2_matches_triton[fp8-out2-False-True]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "e6ad0c31ef92089c4f30455683c75a0522b80e3db7c10215d6693169e2ead44a",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "9d3cb9dc07cef68ac19a224d83c7bf6d7a66c562ca7ef58ddf7bdad0a17b6e0d"
+    },
+    "kind": "fp8_capped",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 395264,
+    "differences": 0,
+    "sorted_row_capacity": 448,
+    "device_work_count": 416,
+    "inactive_output_rows": 1,
+    "inactive_sentinel": -11,
+    "case": "test_gluon_gemm2_matches_triton[fp8_capped-out6-True-False]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "88bf84365b891944d7e90a685e8d5ab22a2bc1b9ce09bbdc28c04c96b55ac9e2",
+      "B": "5b906700d557e3bf37fa4364be19268941530c2433853fc4f1bf574d684506d5",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8_e5m2",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 395264,
+    "differences": 0,
+    "case": "test_gluon_gemm2_matches_triton[fp8_e5m2-out4-True-False]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "4695fd3e13ddef052ffbea9f735e07f37de5f1034c232a530bf179f685aa43de",
+      "B": "5b906700d557e3bf37fa4364be19268941530c2433853fc4f1bf574d684506d5",
+      "SA": "44de379f3b633892fb7cea57d0ffdc30ce651bacdd7da306a206ff6e757ba9a2",
+      "SB": "cb3cfcd3f061e641975590b607fe8bc3018668610826a10cd5228b1c6cbeeaa8",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "fp8_mixed",
+    "output": "torch.float16",
+    "mul_routed_weight": true,
+    "forced_int64": true,
+    "elements": 395264,
+    "differences": 0,
+    "case": "test_gluon_gemm2_matches_triton[fp8_mixed-out5-True-True]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "757b6c136d739e3cd6dbded5fe5c8fa7f3ecd84d08163ca02039e855f8155520",
+      "B": "cfb1868e302cd5e34488c253368d365bbce7d972720f461fb9f8e70b20e3ab2a",
+      "SA": "bb867e6ed6aaacde2ba8bc7f3cf0900f13e43f0cb8d5c8b9b913639929b8333b",
+      "SB": "644742af499ad4ed821f12502e4578c0f4e5ce72f3c29f77c08b5728edb1bbca",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "int8",
+    "output": "torch.bfloat16",
+    "mul_routed_weight": true,
+    "forced_int64": false,
+    "elements": 395264,
+    "differences": 0,
+    "case": "test_gluon_gemm2_matches_triton[int8-out1-True-False]",
+    "passed": true
+  },
+  {
+    "input_sha256": {
+      "A": "757b6c136d739e3cd6dbded5fe5c8fa7f3ecd84d08163ca02039e855f8155520",
+      "B": "cfb1868e302cd5e34488c253368d365bbce7d972720f461fb9f8e70b20e3ab2a",
+      "SA": "bb867e6ed6aaacde2ba8bc7f3cf0900f13e43f0cb8d5c8b9b913639929b8333b",
+      "SB": "644742af499ad4ed821f12502e4578c0f4e5ce72f3c29f77c08b5728edb1bbca",
+      "Sorted": "e649d64bce4f1867f5ecc42ab213911760efeb3ca5454aa3526684e0ebfe8efd",
+      "Experts": "ab0708d83efac14e48953708cbbab9eb36a141fc7f961f084911b2e5e5e898ec",
+      "RouteWeights": "549ab889649b1a242f0ead4ea7667ba78d9f2fdec1bf194b85acdb4e01ac6923",
+      "SortedWeights": "2b0861701d42ce65de9f8db764080c44a5fe1455d5dbeddf23bd924df350ab39",
+      "WorkCount": "0d10a1656a262873081168b1f66a88a9a4f47ec881d30372893d52973ac0abd9"
+    },
+    "kind": "int8",
+    "output": "torch.float16",
+    "mul_routed_weight": false,
+    "forced_int64": true,
+    "elements": 395264,
+    "differences": 0,
+    "case": "test_gluon_gemm2_matches_triton[int8-out3-False-True]",
+    "passed": true
+  }
+]

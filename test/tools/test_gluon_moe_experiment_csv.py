@@ -70,3 +70,17 @@ def test_bm64_records_two_tiles_per_tg(tmp_path, bn, bk):
     with path.open() as stream:
         saved, = csv.DictReader(stream)
     assert saved["bm"] == "64" and saved["time_us_1_8ghz"] == "60.000000"
+
+
+@pytest.mark.parametrize("stage,bn,bk", [("top",256,256),("bottom",512,64)])
+def test_bm32_records_m128_two_tiles_per_tg(tmp_path,stage,bn,bk):
+    row=record(bn)
+    row.update(token=128,bm=32,bk=bk,tiles_per_tg=2,total_tiles=96,
+               output_elements_per_tg=32*bn*2,work_scope="bounded_two_tiles_per_tg")
+    path=upsert_record(stage,row,tmp_path)
+    with path.open() as stream:
+        saved,=csv.DictReader(stream)
+    assert saved["token"]=="128" and saved["bm"]=="32"
+    assert saved["time_us_1_8ghz"]=="60.000000"
+    row["token"]=1024
+    with pytest.raises(ValueError):upsert_record(stage,row,tmp_path)

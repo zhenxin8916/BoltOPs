@@ -1,0 +1,12 @@
+{
+  "executable_ast_unchanged": true,
+  "comparison_head": "598f0ece4de9287b492aa5be2c746bb62c0ef1db",
+  "current_source_sha256": "5d91ab47f95fffd9a6382c599bfdc79604ea2d466897ae64c8ab2742e33fd5f5",
+  "comment_updates": [
+    "panel1 still checks A READY but retains registers (no new A LDS read)",
+    "P0 unused route expressions removed by DCE; only expert loads remain"
+  ],
+  "optimized_p0_route_pointer": "%arg15",
+  "optimized_p0_route_pointer_occurrences": 1,
+  "p0_routes_dead_code_eliminated": true
+}

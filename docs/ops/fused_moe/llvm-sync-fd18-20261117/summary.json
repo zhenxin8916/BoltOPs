@@ -1,0 +1,108 @@
+{
+  "gc_ghz": 1.8,
+  "cu_count": 48,
+  "quantization": "FP8 channel",
+  "comparison": "matched frozen inputs and compilers",
+  "rows": [
+    {
+      "case": "GEMM1 BM32 BN256",
+      "old_time_us": 36.580352,
+      "new_time_us": 36.580352,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "gemm1-bm32/comparison.json"
+    },
+    {
+      "case": "GEMM1 BM64 BN512",
+      "old_time_us": 69.403808,
+      "new_time_us": 69.403808,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "gemm1-bm64/comparison.json"
+    },
+    {
+      "case": "GEMM2 BM32 BN512",
+      "old_time_us": 15.466808,
+      "new_time_us": 15.466808,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "gemm2-bm32/comparison.json"
+    },
+    {
+      "case": "GEMM2 BM64 BN256",
+      "old_time_us": 13.561396,
+      "new_time_us": 13.561396,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "gemm2-bm64/comparison.json"
+    },
+    {
+      "case": "GEMM2 BM64 BN512",
+      "old_time_us": 18.65102,
+      "new_time_us": 18.65102,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "gemm2-bm64/comparison.json"
+    },
+    {
+      "case": "GEMM1 BM128 BN128",
+      "old_time_us": 72.42456,
+      "new_time_us": 73.076192,
+      "time_change_percent": 0.8997389835713188,
+      "text_identical": false,
+      "ds_identical": false,
+      "status": "passed",
+      "details": "bm128-comparison.json"
+    },
+    {
+      "case": "GEMM1 BM128 BN256",
+      "old_time_us": 65.973848,
+      "new_time_us": 67.652416,
+      "time_change_percent": 2.5442930053132473,
+      "text_identical": false,
+      "ds_identical": false,
+      "status": "passed",
+      "details": "bm128-comparison.json"
+    },
+    {
+      "case": "GEMM1 BM128 BN512",
+      "old_time_us": 61.277316,
+      "new_time_us": null,
+      "time_change_percent": null,
+      "text_identical": null,
+      "ds_identical": null,
+      "status": "compile_failed",
+      "details": "bm128-comparison.json"
+    },
+    {
+      "case": "GEMM2 BM128 BN256",
+      "old_time_us": 23.61888,
+      "new_time_us": 23.61888,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "bm128-comparison.json"
+    },
+    {
+      "case": "GEMM2 BM128 BN512",
+      "old_time_us": 20.994004,
+      "new_time_us": 20.994004,
+      "time_change_percent": 0.0,
+      "text_identical": true,
+      "ds_identical": true,
+      "status": "passed",
+      "details": "bm128-comparison.json"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "csv": "boltops/fused_moe/gluon/tuned_experiment_fmoe_gluon_w8a8channel_top_fp8.csv",
+    "existing_rows_unchanged": 4,
+    "added_rows": 1,
+    "three_clocks_present": true
+  },
+  {
+    "csv": "boltops/fused_moe/gluon/tuned_experiment_fmoe_gluon_w8a8channel_bottom.csv",
+    "existing_rows_unchanged": 4,
+    "added_rows": 1,
+    "three_clocks_present": true
+  }
+]

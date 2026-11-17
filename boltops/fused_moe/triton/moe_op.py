@@ -2852,6 +2852,9 @@ def _gluon_channel_gemm2_module(block_n=256, block_m=128):
         available = False
     if not available:
         return None
+    if block_m == 32:
+        from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm32xbn512xbk64
+        return gemm_bottom_w8a8_channel_wasp_persistent_bm32xbn512xbk64
     if block_m == 64:
         if block_n == 512:
             from boltops.fused_moe.gluon import gemm_bottom_w8a8_channel_wasp_persistent_bm64xbn512xbk64
@@ -2972,7 +2975,13 @@ def _try_gluon_channel_gemm1(
     bm = config.get("BLOCK_SIZE_M")
     # BN512 retains each A pair across two N panels; complete K512 cycles
     # preserve its cross-output slot phases. Other shapes keep BN128/256.
-    if bm == 64:
+    if bm == 32:
+        from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm32xbn256xbk256 import (
+            DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
+            is_persistent_channel_gemm1_supported,
+        )
+        bn, bk = 256, 256
+    elif bm == 64:
         from boltops.fused_moe.gluon.gemm_top_w8a8_channel_wasp_persistent_bm64xbn512xbk256 import (
             DEFAULT_LAUNCH_OPTIONS, gemm_top_w8a8_channel_wasp_persistent,
             is_persistent_channel_gemm1_supported,
@@ -3019,14 +3028,14 @@ def _try_gluon_channel_gemm1(
         return False
     opts = dict(DEFAULT_LAUNCH_OPTIONS)
     opts.update(candidate)
-    if bm == 64:
+    if bm in (32, 64):
         # The grid is already known on the host; keep its loop step constant.
         opts["PERSISTENT_GRID"] = device.cu_count
     def byte_span(tensor):
         return (1 + sum((size - 1) * stride for size, stride in zip(tensor.shape, tensor.stride()))) * tensor.element_size()
     for name, tensor in (("A", A), ("B", B), ("C", C)):
         opts["USE_ADDR_OFFSET_INT64_" + name] = tensor.numel() * tensor.element_size() >= 4 * 1024**3 - 1
-    if bn == 512:
+    if bm == 32 or bn == 512:
         opts["USE_ADDR_OFFSET_INT64_A"] = max(byte_span(t) for t in (A, A_scale, *metadata)) >= 4 * 1024**3 - 1
         opts["USE_ADDR_OFFSET_INT64_B"] = max(byte_span(B), byte_span(B_scale)) >= 4 * 1024**3 - 1
     gemm_top_w8a8_channel_wasp_persistent[(device.cu_count,)](

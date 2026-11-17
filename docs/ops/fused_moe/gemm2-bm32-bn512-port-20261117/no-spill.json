@@ -1,0 +1,167 @@
+[
+  {
+    "case": "eq-fp8_e5m2-out4-True-False",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-fp8_e5m2-out4-True-False/cache/6VKS7DJ6CNUP2VNQGNNK7XSDVKD47D2ZVGJJGPJOCEG7EUC7HSKQ/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      40,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "eq-int8-out1-True-False",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-int8-out1-True-False/cache/I5KAMDNAFX6MPV4UC5G422X57ERGSVNCVNXOKDE2Z77FKT3V2JIA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      40,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "eq-fp8_mixed-out5-True-True",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-fp8_mixed-out5-True-True/cache/DUXI64W2PKNV4US242W4BOJYR5Z5T3INUV2DJ2GVU3PMKQZSJ5KA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      48,
+      15,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "eq-fp8-out2-False-True",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-fp8-out2-False-True/cache/BVSN35LBP5LYKOHLTKYVG2YWFFUMMA5R35ECIKW55KVLEKD3A3FA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      45,
+      15,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "eq-fp8-out0-True-False",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-fp8-out0-True-False/cache/GYOQEBBIQ3SG6ZBF4GU2JIASG2S3YYKNJORQWNAXJJMC2RZSKGDA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      40,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "eq-int8-out3-False-True",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-int8-out3-False-True/cache/YJDRHMBSZHWOHX7L66TVQKQW4QDQRFGIRKGVXKPFM5G33P4LCO7Q/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      45,
+      15,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "gc15",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/gc15/gemm/compiled.json",
+    "role_vgprs": [
+      35,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "gc18",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/gc18/gemm/compiled.json",
+    "role_vgprs": [
+      35,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "gc22",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/gc22/gemm/compiled.json",
+    "role_vgprs": [
+      35,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "final-default-compile",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/final-default-compile/gemm/compiled.json",
+    "role_vgprs": [
+      35,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  },
+  {
+    "case": "eq-fp8_capped-out6-True-False",
+    "metadata": "/zhenxin/temp/bm32-gemm2-migration-20261117/eq-fp8_capped-out6-True-False/cache/TS3Q5YXHS6HMAC6YZ4TXO2V7NYC7S5KFEVTJDEXTQA7ZR7EK4ZVA/gemm_bottom_w8a8_channel_wasp_persistent.json",
+    "role_vgprs": [
+      40,
+      12,
+      74,
+      74
+    ],
+    "LDS": 50688,
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false
+  }
+]

@@ -1,0 +1,86 @@
+{
+  "stage": "top",
+  "bn": 512,
+  "bm": 128,
+  "bk": 128,
+  "kind": "fp8",
+  "warmup": 0,
+  "grid": 48,
+  "cu_count": 48,
+  "tiles_per_tg": 2,
+  "total_tiles": 96,
+  "output_elements_per_tg": 131072,
+  "source_path": "/zhenxin/BoltOPs/boltops/fused_moe/gluon/gemm_top_w8a8_channel_wasp_persistent_bm128xbn512xbk128.py",
+  "source_sha256": "c90105b88c2d825f14808347c983606d9b57dbd78c5b78c56b446966b865f2af",
+  "input_sha256": {
+    "A": "904d9b082ed85e572d95fec99e70773054e2b7f170829394d7dee0af2b7279c8",
+    "B": "5f5647ecd80bfabe6c7e78edd5c3b87ad9dd321ab9de305b6ff0f63b23635847",
+    "SA": "0ec159ae321db0a90583ad45ac4777424586a7abd86118fcfe2e6c39ad7ec03b",
+    "SB": "74c964cd94f917078e4e4ff07d56e660348d903db4162b63d9fc6585f18f8fe9",
+    "Sorted": "8adc203633ea8ada4cb04adfccc0b1347c9b4f2d3e4d5fe24186c7302d3042f3",
+    "Experts": "78b2fd24d7182f7e72859f4659016c5dc67a7e8d480aab2641e0dea5492d28c6",
+    "RouteWeights": "aca8410f160cfcf0530fb1c74fdd7cdf97eb707c047e5452e831a26de047a397",
+    "SortedWeights": "4424c0ad8fbb20cee5cdd8959214cc9502dc747c80a92672c038f9e713caa365",
+    "golden": "badc27a5b16e15ebb4f58cc2d57c822dccb7a419802407bd93bf69efa26b1d96"
+  },
+  "frozen_path": "/zhenxin/temp/moe-gemm1-bn512-port-20261115",
+  "options": {
+    "num_warps": 4,
+    "num_stages": 2,
+    "use_async_copy": true,
+    "wasp_partition_warps": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "wasp_wdra": true,
+    "TOTAL_TILES": 96,
+    "BLOCK_SIZE_M": 128,
+    "BLOCK_SIZE_N": 512,
+    "BLOCK_SIZE_K": 128,
+    "INSN_WARMUP": false,
+    "USE_ADDR_OFFSET_INT64_A": false,
+    "USE_ADDR_OFFSET_INT64_B": false,
+    "USE_ADDR_OFFSET_INT64_C": false
+  },
+  "clang_path": "/zhenxin/temp/llvm-sync-fd18-20261117/old-control",
+  "gpu_buffers": {
+    "A": {
+      "address": 140728059559936,
+      "bytes": 8388608
+    },
+    "B": {
+      "address": 140721382227968,
+      "bytes": 536870912
+    },
+    "SA": {
+      "address": 140728034394112,
+      "bytes": 16384
+    },
+    "SB": {
+      "address": 140728034410496,
+      "bytes": 1048576
+    },
+    "Sorted": {
+      "address": 140728035459072,
+      "bytes": 191488
+    },
+    "Experts": {
+      "address": 140728035650560,
+      "bytes": 1496
+    },
+    "RouteWeights": {
+      "address": 140728035652096,
+      "bytes": 131072
+    },
+    "SortedWeights": {
+      "address": 140728035783168,
+      "bytes": 191488
+    },
+    "C": {
+      "address": 140727489134592,
+      "bytes": 98041856
+    }
+  }
+}

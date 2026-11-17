@@ -1,0 +1,13 @@
+{
+  "clang_path": "/zhenxin/temp/bm32-gemm2-review-20261117/toolchain/clang-18",
+  "clang_sha256": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+  "clang_version": "clang version 18.0.0git (ssh://git@10.65.42.70:8022/ROCm/llvm-project.git fd18eddbaf4a662ae5ce86c516d28e5b16952513)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /zhenxin/temp/bm32-gemm2-review-20261117/toolchain\n",
+  "source_sha256": "966068a32b9e5640e19d0fe705c4b24d0aff5035ba29dd701abda11f1b79c892",
+  "test_sha256": "fc7a5903c827a3f8770432c2cebf8dd81f1a1d93b0c9a49e337f3e61484225af",
+  "triton_commit": "5b24821ee57eeb7560074cc7979ce7b59604079f",
+  "pmd_sha256": "c45e6168add916ac3c5ae3f4ab06d3d4c245e1970ea91cb09a470b745936040a",
+  "lld_path": "/zhenxin/temp/bm32-gemm2-review-20261117/toolchain/ld.lld",
+  "lld_sha256": "0700bdbe96890128fc9dc20dbdd20d89277a3b34a057d7e2be0e1270c484a395",
+  "clang_sha256_after_runs": "0ec2b806f4f940fa67310006c3c2ef3ca602a0f6823538f988b0162405ea2add",
+  "lld_sha256_after_runs": "0700bdbe96890128fc9dc20dbdd20d89277a3b34a057d7e2be0e1270c484a395"
+}

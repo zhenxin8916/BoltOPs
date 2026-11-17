@@ -1,0 +1,102 @@
+{
+  "scope": "CU0 all eight consumers, both outputs",
+  "first_quarter_store_before_last_quarter_MMAC": true,
+  "waves": {
+    "8": [
+      {
+        "first_quarter_store_tick": 19907580,
+        "last_quarter_first_MMAC_tick": 20617036,
+        "last_quarter_store_tick": 20821644
+      },
+      {
+        "first_quarter_store_tick": 34067788,
+        "last_quarter_first_MMAC_tick": 34892892,
+        "last_quarter_store_tick": 35084156
+      }
+    ],
+    "9": [
+      {
+        "first_quarter_store_tick": 19917032,
+        "last_quarter_first_MMAC_tick": 20617592,
+        "last_quarter_store_tick": 20831096
+      },
+      {
+        "first_quarter_store_tick": 34077240,
+        "last_quarter_first_MMAC_tick": 34895672,
+        "last_quarter_store_tick": 35093608
+      }
+    ],
+    "10": [
+      {
+        "first_quarter_store_tick": 19890900,
+        "last_quarter_first_MMAC_tick": 20613700,
+        "last_quarter_store_tick": 20804964
+      },
+      {
+        "first_quarter_store_tick": 34051108,
+        "last_quarter_first_MMAC_tick": 34896228,
+        "last_quarter_store_tick": 35103060
+      }
+    ],
+    "11": [
+      {
+        "first_quarter_store_tick": 19898128,
+        "last_quarter_first_MMAC_tick": 20616480,
+        "last_quarter_store_tick": 20812192
+      },
+      {
+        "first_quarter_store_tick": 34058336,
+        "last_quarter_first_MMAC_tick": 34892336,
+        "last_quarter_store_tick": 35076928
+      }
+    ],
+    "12": [
+      {
+        "first_quarter_store_tick": 20992892,
+        "last_quarter_first_MMAC_tick": 21164140,
+        "last_quarter_store_tick": 21373196
+      },
+      {
+        "first_quarter_store_tick": 34588204,
+        "last_quarter_first_MMAC_tick": 35210924,
+        "last_quarter_store_tick": 35404412
+      }
+    ],
+    "13": [
+      {
+        "first_quarter_store_tick": 21017912,
+        "last_quarter_first_MMAC_tick": 21231416,
+        "last_quarter_store_tick": 21438248
+      },
+      {
+        "first_quarter_store_tick": 34597656,
+        "last_quarter_first_MMAC_tick": 35213704,
+        "last_quarter_store_tick": 35413864
+      }
+    ],
+    "14": [
+      {
+        "first_quarter_store_tick": 21000676,
+        "last_quarter_first_MMAC_tick": 21198612,
+        "last_quarter_store_tick": 21400996
+      },
+      {
+        "first_quarter_store_tick": 34571524,
+        "last_quarter_first_MMAC_tick": 35214260,
+        "last_quarter_store_tick": 35423316
+      }
+    ],
+    "15": [
+      {
+        "first_quarter_store_tick": 21010128,
+        "last_quarter_first_MMAC_tick": 21214736,
+        "last_quarter_store_tick": 21417120
+      },
+      {
+        "first_quarter_store_tick": 34578752,
+        "last_quarter_first_MMAC_tick": 35210368,
+        "last_quarter_store_tick": 35397184
+      }
+    ]
+  }
+}

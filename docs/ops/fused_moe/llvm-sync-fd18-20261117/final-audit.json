@@ -1,0 +1,12 @@
+{
+  "configurations": 10,
+  "successful_new_gpu_runs": 9,
+  "identical_native_code_and_time": 7,
+  "gemm1_bm128_time_regressions": 2,
+  "new_compile_rejections": 1,
+  "all_successful_final_hsacos_spill_free": true,
+  "llvm_worktree_clean": true,
+  "only_requested_patch_above_upstream": true,
+  "frozen_new_compiler_matches_active": true,
+  "triton_tracked_changes": false
+}

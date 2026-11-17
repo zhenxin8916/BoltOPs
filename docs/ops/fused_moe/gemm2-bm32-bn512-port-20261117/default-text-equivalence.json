@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/zhenxin/temp/bm32-gemm2-migration-20261117/gc18/gemm/kernel.hsaco",
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043"
+  },
+  {
+    "path": "/zhenxin/temp/bm32-gemm2-migration-20261117/gc15/gemm/kernel.hsaco",
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043"
+  },
+  {
+    "path": "/zhenxin/temp/bm32-gemm2-migration-20261117/gc22/gemm/kernel.hsaco",
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043"
+  },
+  {
+    "path": "/zhenxin/temp/bm32-gemm2-migration-20261117/final-default-compile/gemm/kernel.hsaco",
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043"
+  },
+  {
+    "path": "/zhenxin/temp/moe-gemm2-bm32-M128-BN512-20261116/bm32-prefetch-expert-production-compile/gemm/kernel.hsaco",
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043"
+  }
+]

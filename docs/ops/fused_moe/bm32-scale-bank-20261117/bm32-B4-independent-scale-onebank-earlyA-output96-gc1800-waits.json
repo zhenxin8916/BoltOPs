@@ -1,0 +1,43 @@
+{
+  "scope": "CU0 all 16 role waves; gap to next issued instruction includes scheduling",
+  "B_slots": 4,
+  "A_slots": 2,
+  "categories": {
+    "P0_wait_A_turn_return": {
+      "count": 72,
+      "total_cycles": 20204.0,
+      "median_cycles": 176.0,
+      "max_cycles": 2408.0
+    },
+    "P0_B_EMPTY": {
+      "count": 256,
+      "total_cycles": 146528.0,
+      "median_cycles": 632.0,
+      "max_cycles": 1112.0
+    },
+    "P1_A_EMPTY": {
+      "count": 64,
+      "total_cycles": 68856.0,
+      "median_cycles": 1258.0,
+      "max_cycles": 2004.0
+    },
+    "P1_wait_A_turn": {
+      "count": 64,
+      "total_cycles": 90620.0,
+      "median_cycles": 1742.0,
+      "max_cycles": 1930.0
+    },
+    "C_B_READY": {
+      "count": 256,
+      "total_cycles": 266364.0,
+      "median_cycles": 1092.0,
+      "max_cycles": 2060.0
+    },
+    "C_A_READY": {
+      "count": 128,
+      "total_cycles": 8880.0,
+      "median_cycles": 4.0,
+      "max_cycles": 1896.0
+    }
+  }
+}

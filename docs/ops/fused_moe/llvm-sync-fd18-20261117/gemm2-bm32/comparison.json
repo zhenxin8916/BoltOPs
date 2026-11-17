@@ -1,0 +1,102 @@
+[
+  {
+    "compiler": "old",
+    "time_us": 15.466808,
+    "cu0_whole_mmac_percent": 11.194315386717683,
+    "cu0_hot_mmac_percent": 19.07956027575927,
+    "cu0_wave_span_us": 10.17202,
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043",
+    "LDS": 50688,
+    "actual_role_vgprs": [
+      35,
+      12,
+      74,
+      74
+    ],
+    "allocated_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "static_ds_and_mls_instructions": {
+      "ds_write_addtid_b32": 1,
+      "ds_read_addtid_b32": 4,
+      "matrix_load_64x16_b8": 4,
+      "ds_write_b32": 16,
+      "ds_write2_b32": 8,
+      "ds_read2_b32": 1,
+      "ds_read_b32": 2,
+      "ds_read_b128": 20,
+      "matrix_load_64x32_b8": 16,
+      "ds_write_b128": 8,
+      "ds_read_matrix_trans_format": 72,
+      "ds_read_b64": 8,
+      "ds_write2st64_b32": 16
+    },
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "numeric": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 197632,
+      "untouched_tail": true,
+      "output_sha256": "52427fdcae53ab76ea05d560f76c4856de943a39fd03faabf53edd0c7f9cb6ad",
+      "shared": 50688,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    }
+  },
+  {
+    "compiler": "new",
+    "time_us": 15.466808,
+    "cu0_whole_mmac_percent": 11.194315386717683,
+    "cu0_hot_mmac_percent": 19.07956027575927,
+    "cu0_wave_span_us": 10.17202,
+    "text_sha256": "85eeec2be054a4ab0c6e41c66dd66cadfdfcebf3a0cbc317d5224e5ad490b043",
+    "LDS": 50688,
+    "actual_role_vgprs": [
+      35,
+      12,
+      74,
+      74
+    ],
+    "allocated_role_quotas": [
+      48,
+      16,
+      224,
+      224
+    ],
+    "static_ds_and_mls_instructions": {
+      "ds_write_addtid_b32": 1,
+      "ds_read_addtid_b32": 4,
+      "matrix_load_64x16_b8": 4,
+      "ds_write_b32": 16,
+      "ds_write2_b32": 8,
+      "ds_read2_b32": 1,
+      "ds_read_b32": 2,
+      "ds_read_b128": 20,
+      "matrix_load_64x32_b8": 16,
+      "ds_write_b128": 8,
+      "ds_read_matrix_trans_format": 72,
+      "ds_read_b64": 8,
+      "ds_write2st64_b32": 16
+    },
+    "private_bytes": 0,
+    "sgpr_spills": 0,
+    "vgpr_spills": 0,
+    "scratch_instructions": false,
+    "numeric": {
+      "verified": true,
+      "mismatches": 0,
+      "checked_elements": 197632,
+      "untouched_tail": true,
+      "output_sha256": "52427fdcae53ab76ea05d560f76c4856de943a39fd03faabf53edd0c7f9cb6ad",
+      "shared": 50688,
+      "scope": "bounded_two_output_tiles_per_tg",
+      "tiles_per_tg": 2
+    }
+  }
+]

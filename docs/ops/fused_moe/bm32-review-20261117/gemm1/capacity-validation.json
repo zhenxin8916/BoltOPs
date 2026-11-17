@@ -1,0 +1,38 @@
+[
+  {
+    "name": "test_gluon_gemm1_capacity_and_inactive_tgs[64]",
+    "passed": true,
+    "report": {
+      "active_rows": 64,
+      "capacity_rows": 192,
+      "total_tiles": 6,
+      "grid": 8,
+      "inactive_tgs": 6,
+      "elements": 49152,
+      "mismatches": 0,
+      "padded_rows_zeroed_by_gluon": 8,
+      "ordinary_padded_rows_unchanged": true,
+      "inactive_elements_unchanged": 32768,
+      "shared_bytes": 65536,
+      "routing_sha256": "3e0e3abbcae27e38eae3c01df314a44d4e0e6b42f86de5c53510f86daad3f817"
+    }
+  },
+  {
+    "name": "test_gluon_gemm1_capacity_and_inactive_tgs[0]",
+    "passed": true,
+    "report": {
+      "active_rows": 0,
+      "capacity_rows": 192,
+      "total_tiles": 6,
+      "grid": 8,
+      "inactive_tgs": 8,
+      "elements": 49152,
+      "mismatches": 0,
+      "padded_rows_zeroed_by_gluon": 0,
+      "ordinary_padded_rows_unchanged": true,
+      "inactive_elements_unchanged": 49152,
+      "shared_bytes": 65536,
+      "routing_sha256": "3e0e3abbcae27e38eae3c01df314a44d4e0e6b42f86de5c53510f86daad3f817"
+    }
+  }
+]

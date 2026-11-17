@@ -1,0 +1,122 @@
+{
+  "scope": "CU0, all four waves of each producer, both persistent outputs",
+  "A_instructions": 128,
+  "B_MLS_instructions": 1024,
+  "A_B_issue_overlap": 0,
+  "B_panel_issue_positions_before_A": [
+    1,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    33,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    60
+  ],
+  "windows": [
+    {
+      "A_tile": 0,
+      "B_panels_issued_on_wave0": 1,
+      "first_A_tick": 7013940,
+      "last_A_tick": 7028952
+    },
+    {
+      "A_tile": 1,
+      "B_panels_issued_on_wave0": 4,
+      "first_A_tick": 8020856,
+      "last_A_tick": 8046988
+    },
+    {
+      "A_tile": 2,
+      "B_panels_issued_on_wave0": 8,
+      "first_A_tick": 9866776,
+      "last_A_tick": 9904028
+    },
+    {
+      "A_tile": 3,
+      "B_panels_issued_on_wave0": 12,
+      "first_A_tick": 11623180,
+      "last_A_tick": 11659876
+    },
+    {
+      "A_tile": 4,
+      "B_panels_issued_on_wave0": 16,
+      "first_A_tick": 13200552,
+      "last_A_tick": 13237248
+    },
+    {
+      "A_tile": 5,
+      "B_panels_issued_on_wave0": 20,
+      "first_A_tick": 14859100,
+      "last_A_tick": 14896352
+    },
+    {
+      "A_tile": 6,
+      "B_panels_issued_on_wave0": 24,
+      "first_A_tick": 16801208,
+      "last_A_tick": 16834012
+    },
+    {
+      "A_tile": 7,
+      "B_panels_issued_on_wave0": 28,
+      "first_A_tick": 18365236,
+      "last_A_tick": 18404156
+    },
+    {
+      "A_tile": 8,
+      "B_panels_issued_on_wave0": 33,
+      "first_A_tick": 20722120,
+      "last_A_tick": 20739356
+    },
+    {
+      "A_tile": 9,
+      "B_panels_issued_on_wave0": 36,
+      "first_A_tick": 21880268,
+      "last_A_tick": 21895280
+    },
+    {
+      "A_tile": 10,
+      "B_panels_issued_on_wave0": 40,
+      "first_A_tick": 23515464,
+      "last_A_tick": 23552160
+    },
+    {
+      "A_tile": 11,
+      "B_panels_issued_on_wave0": 44,
+      "first_A_tick": 25483148,
+      "last_A_tick": 25519844
+    },
+    {
+      "A_tile": 12,
+      "B_panels_issued_on_wave0": 48,
+      "first_A_tick": 27409688,
+      "last_A_tick": 27446384
+    },
+    {
+      "A_tile": 13,
+      "B_panels_issued_on_wave0": 52,
+      "first_A_tick": 28965932,
+      "last_A_tick": 29002628
+    },
+    {
+      "A_tile": 14,
+      "B_panels_issued_on_wave0": 56,
+      "first_A_tick": 30696204,
+      "last_A_tick": 30732900
+    },
+    {
+      "A_tile": 15,
+      "B_panels_issued_on_wave0": 60,
+      "first_A_tick": 32648876,
+      "last_A_tick": 32685572
+    }
+  ]
+}

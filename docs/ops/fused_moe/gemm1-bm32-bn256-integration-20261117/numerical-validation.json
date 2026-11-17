@@ -1,0 +1,122 @@
+[
+  {
+    "name": "test_gluon_gemm1_matches_triton[e4m3-out0-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"e4m3\", \"output\": \"torch.bfloat16\", \"forced_int64\": [false, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[int8-out1-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"int8\", \"output\": \"torch.bfloat16\", \"forced_int64\": [false, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[e5m2-out2-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"e5m2\", \"output\": \"torch.bfloat16\", \"forced_int64\": [false, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[mixed-out3-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"mixed\", \"output\": \"torch.bfloat16\", \"forced_int64\": [false, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[mixed_reverse-out4-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"mixed_reverse\", \"output\": \"torch.float16\", \"forced_int64\": [false, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[e4m3-out5-True]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"e4m3\", \"output\": \"torch.float16\", \"forced_int64\": [true, true, true], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[int8-out6-True]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"int8\", \"output\": \"torch.float16\", \"forced_int64\": [true, true, true], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[e4m3-out7-a]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"e4m3\", \"output\": \"torch.float16\", \"forced_int64\": [true, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[e4m3-out8-b]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"e4m3\", \"output\": \"torch.float16\", \"forced_int64\": [false, true, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[e4m3-out9-c]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"e4m3\", \"output\": \"torch.float16\", \"forced_int64\": [false, false, true], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[grouped-out10-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"grouped\", \"output\": \"torch.bfloat16\", \"forced_int64\": [false, false, false], \"group_size_m\": 4, \"grid\": 2, \"elements\": 32768, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  },
+  {
+    "name": "test_gluon_gemm1_matches_triton[warmup-out11-False]",
+    "passed": true,
+    "properties": [
+      {
+        "name": "equivalence",
+        "value": "{\"kind\": \"warmup\", \"output\": \"torch.bfloat16\", \"forced_int64\": [false, false, false], \"group_size_m\": 1, \"grid\": 1, \"elements\": 16384, \"mismatches\": 0, \"routing_sha256\": \"4ecddde32b73414d57bbb163ab2799a9cef8838ea99ade50f8077eed6113e0db\"}"
+      }
+    ]
+  }
+]

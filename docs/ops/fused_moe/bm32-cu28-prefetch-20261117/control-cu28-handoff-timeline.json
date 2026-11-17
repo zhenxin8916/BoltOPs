@@ -1,0 +1,1851 @@
+{
+  "8": {
+    "last_output0_MMAC_end": 30187.0,
+    "first_output1_MMAC": 31947.0,
+    "same_wave_handoff": 1760.0,
+    "store_issue_cycles": [
+      30391.0
+    ],
+    "long_issue_gaps": [
+      {
+        "at": 30707.0,
+        "previous": "s_abarrier_try_wait s2, s41, s2",
+        "cycles": 920.0,
+        "following": "s_lshl_b32 s2, s3, 14"
+      },
+      {
+        "at": 31679.0,
+        "previous": "s_abarrier_try_wait s2, s41, s37",
+        "cycles": 84.0,
+        "following": "s_lshl_b32 s2, s38, 13"
+      },
+      {
+        "at": 31841.0,
+        "previous": "s_waitcnt lgkmcnt(0)",
+        "cycles": 86.0,
+        "following": "s_abarrier_arrive s2, s3, 1"
+      }
+    ],
+    "ops": [
+      {
+        "cycle": 30179.0,
+        "op": "v_mmac_f32_16x16x32_fp8_fp8 v[0:3], v[68:69], v[18:19], v[0:3] lts",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30181.0,
+        "op": "s_setprio 3",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30187.0,
+        "op": "s_cmp_eq_u32 s38, 1",
+        "scalar_reads": {
+          "s38": 1
+        }
+      },
+      {
+        "cycle": 30191.0,
+        "op": "s_cselect_b32 s2, 1, 0",
+        "scalar_reads": {
+          "s128": 0,
+          "s253": 1
+        }
+      },
+      {
+        "cycle": 30195.0,
+        "op": "s_cselect_b32 s38, 0, s41",
+        "scalar_reads": {
+          "s128": 0,
+          "s41": 2,
+          "s253": 1
+        }
+      },
+      {
+        "cycle": 30199.0,
+        "op": "s_xor_b32 s37, s37, s2",
+        "scalar_reads": {
+          "s37": 1,
+          "s2": 1
+        }
+      },
+      {
+        "cycle": 30203.0,
+        "op": "s_add_i32 s2, s40, 2",
+        "scalar_reads": {
+          "s40": 0
+        }
+      },
+      {
+        "cycle": 30207.0,
+        "op": "s_add_i32 s40, s40, -4",
+        "scalar_reads": {
+          "s40": 0
+        }
+      },
+      {
+        "cycle": 30211.0,
+        "op": "s_cmp_gt_i32 s2, 5",
+        "scalar_reads": {
+          "s2": 2
+        }
+      },
+      {
+        "cycle": 30215.0,
+        "op": "s_cselect_b32 s40, s40, s2",
+        "scalar_reads": {
+          "s40": 4294967292,
+          "s2": 2,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30219.0,
+        "op": "s_add_i32 s1, s1, 1",
+        "scalar_reads": {
+          "s1": 6
+        }
+      },
+      {
+        "cycle": 30223.0,
+        "op": "s_cmp_lt_i32 s1, 7",
+        "scalar_reads": {
+          "s1": 7
+        }
+      },
+      {
+        "cycle": 30227.0,
+        "op": "s_cbranch_scc0 label_8",
+        "scalar_reads": {
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30247.0,
+        "op": "s_add_i32 s39, s39, 48",
+        "scalar_reads": {
+          "s39": 19
+        }
+      },
+      {
+        "cycle": 30251.0,
+        "op": "s_cmp_ge_i32 s39, s30",
+        "scalar_reads": {
+          "s39": 67,
+          "s30": 96
+        }
+      },
+      {
+        "cycle": 30263.0,
+        "op": "s_cselect_b64 s2, -1, 0",
+        "scalar_reads": {
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30267.0,
+        "op": "s_and_b64 vcc_lo, exec_lo, s2",
+        "scalar_reads": {
+          "s2": 0,
+          "s3": 0
+        }
+      },
+      {
+        "cycle": 30271.0,
+        "op": "s_cbranch_vccnz label_c",
+        "scalar_reads": {
+          "s62": 0,
+          "s63": 0
+        }
+      },
+      {
+        "cycle": 30273.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30279.0,
+        "op": "s_ebarrier_arrive s0, 5, 12",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30283.0,
+        "op": "s_add_u32 s1, s28, s36",
+        "scalar_reads": {
+          "s28": 3573842432,
+          "s36": 0
+        }
+      },
+      {
+        "cycle": 30287.0,
+        "op": "s_addc_u32 s25, s29, 0",
+        "scalar_reads": {
+          "s29": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30291.0,
+        "op": "s_add_u32 s24, s1, 0x00000080",
+        "scalar_reads": {
+          "s1": 3573842432
+        }
+      },
+      {
+        "cycle": 30293.0,
+        "op": "s_waitcnt lgkmcnt(2)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30299.0,
+        "op": "v_pk_mul_f32 v[4:5], v[50:51], v[4:5] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30301.0,
+        "op": "s_waitcnt lgkmcnt(1)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30307.0,
+        "op": "v_pk_mul_f32 v[6:7], v[52:53], v[6:7] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30311.0,
+        "op": "v_pk_mul_f32 v[0:1], v[50:51], v[0:1] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30315.0,
+        "op": "v_pk_mul_f32 v[2:3], v[52:53], v[2:3] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30317.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30323.0,
+        "op": "v_mov_b32 v8, v49",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30327.0,
+        "op": "s_addc_u32 s1, s25, 0",
+        "scalar_reads": {
+          "s25": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30331.0,
+        "op": "v_pk_mul_f32 v[4:5], v[48:49], v[4:5] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30335.0,
+        "op": "v_pk_mul_f32 v[6:7], v[48:49], v[6:7] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30339.0,
+        "op": "v_pk_mul_f32 v[0:1], v[8:9], v[0:1] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30343.0,
+        "op": "v_pk_mul_f32 v[2:3], v[8:9], v[2:3] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30347.0,
+        "op": "s_and_b32 s25, s1, 0x0000ffff",
+        "scalar_reads": {
+          "s1": 32765
+        }
+      },
+      {
+        "cycle": 30351.0,
+        "op": "v_cvt_pk_bf16_f32 v0, v4, v0, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30355.0,
+        "op": "v_cvt_pk_bf16_f32 v1, v5, v1, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30359.0,
+        "op": "v_cvt_pk_bf16_f32 v2, v6, v2, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30363.0,
+        "op": "v_cvt_pk_bf16_f32 v3, v7, v3, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30367.0,
+        "op": "s_and_b64 s2, exec_lo, s2",
+        "scalar_reads": {
+          "s2": 0,
+          "s3": 0
+        }
+      },
+      {
+        "cycle": 30391.0,
+        "op": "matrix_store_32x16_b16  v[0:] s[24:27], s0 row_off:1 trans:1",
+        "scalar_reads": {
+          "s24": 3573842560,
+          "s25": 32765,
+          "s26": 512,
+          "s27": 65536
+        }
+      },
+      {
+        "cycle": 30395.0,
+        "op": "s_cbranch_scc0 label_3fae8",
+        "scalar_reads": {
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30415.0,
+        "op": "s_lshr_b32 s1, s39, 31",
+        "scalar_reads": {
+          "s39": 67
+        }
+      },
+      {
+        "cycle": 30419.0,
+        "op": "s_add_i32 s1, s39, s1",
+        "scalar_reads": {
+          "s39": 67,
+          "s1": 0
+        }
+      },
+      {
+        "cycle": 30423.0,
+        "op": "s_ashr_i32 s1, s1, 1",
+        "scalar_reads": {
+          "s1": 67
+        }
+      },
+      {
+        "cycle": 30431.0,
+        "op": "s_lshl_b32 s2, s1, 14",
+        "scalar_reads": {
+          "s1": 33
+        }
+      },
+      {
+        "cycle": 30435.0,
+        "op": "s_ashr_i32 s3, s2, 31",
+        "scalar_reads": {
+          "s2": 540672
+        }
+      },
+      {
+        "cycle": 30439.0,
+        "op": "s_lshl_b64 s2, s2, 1",
+        "scalar_reads": {
+          "s2": 540672,
+          "s3": 0
+        }
+      },
+      {
+        "cycle": 30443.0,
+        "op": "s_add_u32 s24, s16, s2",
+        "scalar_reads": {
+          "s16": 3573547008,
+          "s2": 1081344
+        }
+      },
+      {
+        "cycle": 30447.0,
+        "op": "s_addc_u32 s25, s17, s3",
+        "scalar_reads": {
+          "s17": 32765,
+          "s3": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30451.0,
+        "op": "s_lshl_b32 s1, s1, 9",
+        "scalar_reads": {
+          "s1": 33
+        }
+      },
+      {
+        "cycle": 30455.0,
+        "op": "s_lshl_b32 s2, s39, 8",
+        "scalar_reads": {
+          "s39": 67
+        }
+      },
+      {
+        "cycle": 30459.0,
+        "op": "s_sub_i32 s2, s2, s1",
+        "scalar_reads": {
+          "s2": 17152,
+          "s1": 16896
+        }
+      },
+      {
+        "cycle": 30463.0,
+        "op": "s_ashr_i32 s3, s2, 31",
+        "scalar_reads": {
+          "s2": 256
+        }
+      },
+      {
+        "cycle": 30467.0,
+        "op": "s_lshl_b64 s2, s2, 1",
+        "scalar_reads": {
+          "s2": 256,
+          "s3": 0
+        }
+      },
+      {
+        "cycle": 30471.0,
+        "op": "s_add_u32 s2, s24, s2",
+        "scalar_reads": {
+          "s24": 3574628352,
+          "s2": 512
+        }
+      },
+      {
+        "cycle": 30475.0,
+        "op": "s_addc_u32 s3, s25, s3",
+        "scalar_reads": {
+          "s25": 32765,
+          "s3": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30479.0,
+        "op": "s_mov_b32 s1, s0",
+        "scalar_reads": {
+          "s0": 0
+        }
+      },
+      {
+        "cycle": 30483.0,
+        "op": "s_mov_b64 s28, s2",
+        "scalar_reads": {
+          "s2": 3574628864,
+          "s3": 32765
+        }
+      },
+      {
+        "cycle": 30487.0,
+        "op": "s_mov_b32 s2, s0",
+        "scalar_reads": {
+          "s0": 0
+        }
+      },
+      {
+        "cycle": 30491.0,
+        "op": "s_mov_b32 s3, s0",
+        "scalar_reads": {
+          "s0": 0
+        }
+      },
+      {
+        "cycle": 30495.0,
+        "op": "v_mov_b64 v0, s0",
+        "scalar_reads": {
+          "s0": 0,
+          "s1": 0
+        }
+      },
+      {
+        "cycle": 30499.0,
+        "op": "v_mov_b32 v16, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30503.0,
+        "op": "v_mov_b32 v17, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30507.0,
+        "op": "v_mov_b32 v4, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30511.0,
+        "op": "v_mov_b32 v5, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30515.0,
+        "op": "v_mov_b32 v6, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30519.0,
+        "op": "v_mov_b32 v7, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30523.0,
+        "op": "v_mov_b64 v2, s2",
+        "scalar_reads": {
+          "s2": 0,
+          "s3": 0
+        }
+      },
+      {
+        "cycle": 30527.0,
+        "op": "s_add_u32 s24, s28, s33",
+        "scalar_reads": {
+          "s28": 3574628864,
+          "s33": 0
+        }
+      },
+      {
+        "cycle": 30531.0,
+        "op": "v_mov_b32 v18, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30533.0,
+        "op": "s_nop 0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30547.0,
+        "op": "v_mmac_f32_16x16x16_bf16 v[8:11], v[16:17], v[4:5], v[0:3] lts",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30555.0,
+        "op": "v_mov_b32 v19, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30563.0,
+        "op": "v_mmac_f32_16x16x16_bf16 v[12:15], v[16:17], v[6:7], v[0:3] lts",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30571.0,
+        "op": "v_mov_b32 v20, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30579.0,
+        "op": "v_mmac_f32_16x16x16_bf16 v[4:7], v[16:17], v[18:19], v[0:3] lts",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30587.0,
+        "op": "v_mov_b32 v21, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30589.0,
+        "op": "s_nop 1",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30611.0,
+        "op": "v_mmac_f32_16x16x16_bf16 v[0:3], v[16:17], v[20:21], v[0:3] lts",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30615.0,
+        "op": "s_mov_b32 s1, 0",
+        "scalar_reads": {
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 30619.0,
+        "op": "s_addc_u32 s2, s29, 0",
+        "scalar_reads": {
+          "s29": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30623.0,
+        "op": "s_and_b32 s25, s2, 0x0000ffff",
+        "scalar_reads": {
+          "s2": 32765
+        }
+      },
+      {
+        "cycle": 30627.0,
+        "op": "s_add_i32 s1, s1, -1",
+        "scalar_reads": {
+          "s1": 0
+        }
+      },
+      {
+        "cycle": 30635.0,
+        "op": "v_mov_b32 v48, 0",
+        "scalar_reads": {
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 30643.0,
+        "op": "v_mov_b32 v49, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30651.0,
+        "op": "v_mov_b32 v50, 0",
+        "scalar_reads": {
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 30659.0,
+        "op": "v_mov_b32 v51, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30667.0,
+        "op": "v_mov_b32 v52, 0",
+        "scalar_reads": {
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 30675.0,
+        "op": "v_mov_b32 v53, v82",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30679.0,
+        "op": "s_mul_hi_i32 s2, s40, 0x55555556",
+        "scalar_reads": {
+          "s40": 2
+        }
+      },
+      {
+        "cycle": 30683.0,
+        "op": "s_lshr_b32 s3, s2, 31",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 30687.0,
+        "op": "s_add_i32 s2, s2, s3",
+        "scalar_reads": {
+          "s2": 0,
+          "s3": 0
+        }
+      },
+      {
+        "cycle": 30691.0,
+        "op": "s_mul_i32 s3, s2, -3",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 30695.0,
+        "op": "s_add_i32 s3, s3, s40",
+        "scalar_reads": {
+          "s3": 0,
+          "s40": 2
+        }
+      },
+      {
+        "cycle": 30699.0,
+        "op": "s_and_b32 s2, s2, 1",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 30703.0,
+        "op": "s_add_i32 s41, s3, 7",
+        "scalar_reads": {
+          "s3": 2
+        }
+      },
+      {
+        "cycle": 30707.0,
+        "op": "s_abarrier_try_wait s2, s41, s2",
+        "scalar_reads": {
+          "s41": 9,
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31627.0,
+        "op": "s_lshl_b32 s2, s3, 14",
+        "scalar_reads": {
+          "s3": 2
+        }
+      },
+      {
+        "cycle": 31631.0,
+        "op": "s_add_i32 s2, s31, s2",
+        "scalar_reads": {
+          "s31": 0,
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31633.0,
+        "op": "s_nop 0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31643.0,
+        "op": "ds_read_matrix_trans_format v[16:19], s[2], row:2, col:2, alt:1, elem:1",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31647.0,
+        "op": "ds_read_matrix_trans_format v[20:23], s[2], row:2, col:2, alt:1, elem:1, offset:32",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31651.0,
+        "op": "ds_read_matrix_trans_format v[24:27], s[2], row:2, col:2, alt:1, elem:1, offset:2048",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31655.0,
+        "op": "ds_read_matrix_trans_format v[28:31], s[2], row:2, col:2, alt:1, elem:1, offset:2080",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31659.0,
+        "op": "ds_read_matrix_trans_format v[32:35], s[2], row:2, col:2, alt:1, elem:1, offset:4096",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31663.0,
+        "op": "ds_read_matrix_trans_format v[36:39], s[2], row:2, col:2, alt:1, elem:1, offset:4128",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31667.0,
+        "op": "ds_read_matrix_trans_format v[40:43], s[2], row:2, col:2, alt:1, elem:1, offset:6144",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31671.0,
+        "op": "ds_read_matrix_trans_format v[44:47], s[2], row:2, col:2, alt:1, elem:1, offset:6176",
+        "scalar_reads": {
+          "s2": 32768
+        }
+      },
+      {
+        "cycle": 31675.0,
+        "op": "s_add_i32 s41, s38, 1",
+        "scalar_reads": {
+          "s38": 0
+        }
+      },
+      {
+        "cycle": 31679.0,
+        "op": "s_abarrier_try_wait s2, s41, s37",
+        "scalar_reads": {
+          "s41": 1,
+          "s37": 0
+        }
+      },
+      {
+        "cycle": 31763.0,
+        "op": "s_lshl_b32 s2, s38, 13",
+        "scalar_reads": {
+          "s38": 0
+        }
+      },
+      {
+        "cycle": 31767.0,
+        "op": "s_add_i32 s2, s2, 0",
+        "scalar_reads": {
+          "s2": 0,
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 31771.0,
+        "op": "v_add_u32 v54, s2, v70",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31775.0,
+        "op": "v_add_u32 v56, s2, v71",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31779.0,
+        "op": "v_add_u32 v58, s2, v72",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31783.0,
+        "op": "v_add_u32 v60, s2, v73",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31787.0,
+        "op": "v_add_u32 v62, s2, v74",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31791.0,
+        "op": "v_add_u32 v64, s2, v75",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31795.0,
+        "op": "v_add_u32 v66, s2, v76",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31799.0,
+        "op": "v_add_u32 v68, s2, v77",
+        "scalar_reads": {
+          "s2": 0
+        }
+      },
+      {
+        "cycle": 31807.0,
+        "op": "ds_read_b64 v54, v54, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31811.0,
+        "op": "ds_read_b64 v56, v56, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31815.0,
+        "op": "ds_read_b64 v58, v58, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31819.0,
+        "op": "ds_read_b64 v60, v60, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31823.0,
+        "op": "ds_read_b64 v62, v62, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31827.0,
+        "op": "ds_read_b64 v64, v64, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31831.0,
+        "op": "ds_read_b64 v66, v66, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31835.0,
+        "op": "ds_read_b64 v68, v68, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31839.0,
+        "op": "s_add_i32 s3, s3, 10",
+        "scalar_reads": {
+          "s3": 2
+        }
+      },
+      {
+        "cycle": 31841.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31927.0,
+        "op": "s_abarrier_arrive s2, s3, 1",
+        "scalar_reads": {
+          "s3": 12
+        }
+      },
+      {
+        "cycle": 31931.0,
+        "op": "s_add_i32 s2, s38, 4",
+        "scalar_reads": {
+          "s38": 0
+        }
+      },
+      {
+        "cycle": 31935.0,
+        "op": "s_abarrier_arrive s2, s2, 1",
+        "scalar_reads": {
+          "s2": 4
+        }
+      },
+      {
+        "cycle": 31937.0,
+        "op": "s_setprio 1",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31947.0,
+        "op": "v_mmac_f32_16x16x32_fp8_fp8 v[8:11], v[54:55], v[16:17], v[8:11] lts",
+        "scalar_reads": {}
+      }
+    ]
+  },
+  "12": {
+    "last_output0_MMAC_end": 30715.0,
+    "first_output1_MMAC": 33175.0,
+    "same_wave_handoff": 2460.0,
+    "store_issue_cycles": [
+      30947.0
+    ],
+    "long_issue_gaps": [
+      {
+        "at": 31163.0,
+        "previous": "s_abarrier_try_wait s39, s38, s28",
+        "cycles": 612.0,
+        "following": "s_lshl_b32 s39, s34, 13"
+      },
+      {
+        "at": 31967.0,
+        "previous": "s_abarrier_try_wait s26, s39, s26",
+        "cycles": 976.0,
+        "following": "s_lshl_b32 s26, s27, 14"
+      },
+      {
+        "at": 32993.0,
+        "previous": "s_waitcnt lgkmcnt(0)",
+        "cycles": 162.0,
+        "following": "s_abarrier_arrive s26, s27, 1"
+      }
+    ],
+    "ops": [
+      {
+        "cycle": 30707.0,
+        "op": "v_mmac_f32_16x16x32_fp8_fp8 v[0:3], v[68:69], v[18:19], v[0:3] lts",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30709.0,
+        "op": "s_setprio 2",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30715.0,
+        "op": "s_cmp_eq_u32 s34, 1",
+        "scalar_reads": {
+          "s34": 1
+        }
+      },
+      {
+        "cycle": 30719.0,
+        "op": "s_cselect_b32 s26, 1, 0",
+        "scalar_reads": {
+          "s128": 0,
+          "s253": 1
+        }
+      },
+      {
+        "cycle": 30723.0,
+        "op": "s_cselect_b32 s34, 0, s38",
+        "scalar_reads": {
+          "s128": 0,
+          "s38": 2,
+          "s253": 1
+        }
+      },
+      {
+        "cycle": 30727.0,
+        "op": "s_xor_b32 s28, s28, s26",
+        "scalar_reads": {
+          "s28": 1,
+          "s26": 1
+        }
+      },
+      {
+        "cycle": 30731.0,
+        "op": "s_add_i32 s26, s37, 2",
+        "scalar_reads": {
+          "s37": 1
+        }
+      },
+      {
+        "cycle": 30735.0,
+        "op": "s_add_i32 s37, s37, -4",
+        "scalar_reads": {
+          "s37": 1
+        }
+      },
+      {
+        "cycle": 30739.0,
+        "op": "s_cmp_gt_i32 s26, 5",
+        "scalar_reads": {
+          "s26": 3
+        }
+      },
+      {
+        "cycle": 30743.0,
+        "op": "s_cselect_b32 s37, s37, s26",
+        "scalar_reads": {
+          "s37": 4294967293,
+          "s26": 3,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30747.0,
+        "op": "s_add_i32 s36, s36, 1",
+        "scalar_reads": {
+          "s36": 6
+        }
+      },
+      {
+        "cycle": 30751.0,
+        "op": "s_cmp_lt_i32 s36, 7",
+        "scalar_reads": {
+          "s36": 7
+        }
+      },
+      {
+        "cycle": 30755.0,
+        "op": "s_cbranch_scc0 label_8",
+        "scalar_reads": {
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30775.0,
+        "op": "s_add_i32 s35, s35, 48",
+        "scalar_reads": {
+          "s35": 19
+        }
+      },
+      {
+        "cycle": 30779.0,
+        "op": "s_cmp_ge_i32 s35, s29",
+        "scalar_reads": {
+          "s35": 67,
+          "s29": 96
+        }
+      },
+      {
+        "cycle": 30783.0,
+        "op": "s_cselect_b64 s26, -1, 0",
+        "scalar_reads": {
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30787.0,
+        "op": "s_and_b64 vcc_lo, exec_lo, s26",
+        "scalar_reads": {
+          "s26": 0,
+          "s27": 0
+        }
+      },
+      {
+        "cycle": 30791.0,
+        "op": "s_cbranch_vccnz label_c",
+        "scalar_reads": {
+          "s62": 0,
+          "s63": 0
+        }
+      },
+      {
+        "cycle": 30793.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30799.0,
+        "op": "s_ebarrier_arrive s0, 5, 12",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30811.0,
+        "op": "s_add_u32 s0, s24, s33",
+        "scalar_reads": {
+          "s24": 3573842688,
+          "s33": 0
+        }
+      },
+      {
+        "cycle": 30815.0,
+        "op": "s_addc_u32 s1, s25, 0",
+        "scalar_reads": {
+          "s25": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30819.0,
+        "op": "s_add_u32 s0, s0, 0x00000080",
+        "scalar_reads": {
+          "s0": 3573842688
+        }
+      },
+      {
+        "cycle": 30821.0,
+        "op": "s_waitcnt lgkmcnt(2)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30827.0,
+        "op": "v_pk_mul_f32 v[4:5], v[50:51], v[4:5] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30829.0,
+        "op": "s_waitcnt lgkmcnt(1)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30835.0,
+        "op": "v_pk_mul_f32 v[6:7], v[52:53], v[6:7] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30839.0,
+        "op": "v_pk_mul_f32 v[0:1], v[50:51], v[0:1] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30843.0,
+        "op": "v_pk_mul_f32 v[2:3], v[52:53], v[2:3] opsel: 0x38",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30845.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30851.0,
+        "op": "v_mov_b32 v8, v49",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30855.0,
+        "op": "s_addc_u32 s1, s1, 0",
+        "scalar_reads": {
+          "s1": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30859.0,
+        "op": "v_pk_mul_f32 v[4:5], v[48:49], v[4:5] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30863.0,
+        "op": "v_pk_mul_f32 v[6:7], v[48:49], v[6:7] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30867.0,
+        "op": "v_pk_mul_f32 v[0:1], v[8:9], v[0:1] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30871.0,
+        "op": "v_pk_mul_f32 v[2:3], v[8:9], v[2:3] opsel: 0x28",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30875.0,
+        "op": "s_and_b32 s1, s1, 0x0000ffff",
+        "scalar_reads": {
+          "s1": 32765
+        }
+      },
+      {
+        "cycle": 30879.0,
+        "op": "v_cvt_pk_bf16_f32 v0, v4, v0, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30883.0,
+        "op": "v_cvt_pk_bf16_f32 v1, v5, v1, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30887.0,
+        "op": "v_cvt_pk_bf16_f32 v2, v6, v2, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30891.0,
+        "op": "v_cvt_pk_bf16_f32 v3, v7, v3, s0, opsel4:0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 30895.0,
+        "op": "s_and_b64 s24, exec_lo, s26",
+        "scalar_reads": {
+          "s26": 0,
+          "s27": 0
+        }
+      },
+      {
+        "cycle": 30947.0,
+        "op": "matrix_store_32x16_b16  v[0:] s[0:3], s0 row_off:1 trans:1",
+        "scalar_reads": {
+          "s0": 3573842816,
+          "s1": 32765,
+          "s2": 512,
+          "s3": 65536
+        }
+      },
+      {
+        "cycle": 30951.0,
+        "op": "s_cbranch_scc0 label_3fb00",
+        "scalar_reads": {
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 30971.0,
+        "op": "s_lshr_b32 s0, s35, 31",
+        "scalar_reads": {
+          "s35": 67
+        }
+      },
+      {
+        "cycle": 30975.0,
+        "op": "s_add_i32 s0, s35, s0",
+        "scalar_reads": {
+          "s35": 67,
+          "s0": 0
+        }
+      },
+      {
+        "cycle": 30987.0,
+        "op": "s_ashr_i32 s24, s0, 1",
+        "scalar_reads": {
+          "s0": 67
+        }
+      },
+      {
+        "cycle": 30991.0,
+        "op": "s_lshl_b32 s0, s24, 14",
+        "scalar_reads": {
+          "s24": 33
+        }
+      },
+      {
+        "cycle": 30995.0,
+        "op": "s_ashr_i32 s1, s0, 31",
+        "scalar_reads": {
+          "s0": 540672
+        }
+      },
+      {
+        "cycle": 30999.0,
+        "op": "s_lshl_b64 s0, s0, 1",
+        "scalar_reads": {
+          "s0": 540672,
+          "s1": 0
+        }
+      },
+      {
+        "cycle": 31003.0,
+        "op": "s_add_u32 s25, s16, s0",
+        "scalar_reads": {
+          "s16": 3573547008,
+          "s0": 1081344
+        }
+      },
+      {
+        "cycle": 31007.0,
+        "op": "s_addc_u32 s26, s17, s1",
+        "scalar_reads": {
+          "s17": 32765,
+          "s1": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 31011.0,
+        "op": "s_lshl_b32 s0, s24, 9",
+        "scalar_reads": {
+          "s24": 33
+        }
+      },
+      {
+        "cycle": 31015.0,
+        "op": "s_lshl_b32 s1, s35, 8",
+        "scalar_reads": {
+          "s35": 67
+        }
+      },
+      {
+        "cycle": 31019.0,
+        "op": "s_sub_i32 s0, s1, s0",
+        "scalar_reads": {
+          "s1": 17152,
+          "s0": 16896
+        }
+      },
+      {
+        "cycle": 31023.0,
+        "op": "s_ashr_i32 s1, s0, 31",
+        "scalar_reads": {
+          "s0": 256
+        }
+      },
+      {
+        "cycle": 31027.0,
+        "op": "s_lshl_b64 s0, s0, 1",
+        "scalar_reads": {
+          "s0": 256,
+          "s1": 0
+        }
+      },
+      {
+        "cycle": 31031.0,
+        "op": "s_add_u32 s0, s25, s0",
+        "scalar_reads": {
+          "s25": 3574628352,
+          "s0": 512
+        }
+      },
+      {
+        "cycle": 31035.0,
+        "op": "s_addc_u32 s1, s26, s1",
+        "scalar_reads": {
+          "s26": 32765,
+          "s1": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 31039.0,
+        "op": "s_add_u32 s0, s0, 0x00000100",
+        "scalar_reads": {
+          "s0": 3574628864
+        }
+      },
+      {
+        "cycle": 31043.0,
+        "op": "s_addc_u32 s1, s1, 0",
+        "scalar_reads": {
+          "s1": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 31047.0,
+        "op": "s_mov_b64 s24, s0",
+        "scalar_reads": {
+          "s0": 3574629120,
+          "s1": 32765
+        }
+      },
+      {
+        "cycle": 31051.0,
+        "op": "s_add_u32 s0, s24, s31",
+        "scalar_reads": {
+          "s24": 3574629120,
+          "s31": 0
+        }
+      },
+      {
+        "cycle": 31055.0,
+        "op": "s_addc_u32 s1, s25, 0",
+        "scalar_reads": {
+          "s25": 32765,
+          "s128": 0,
+          "s253": 0
+        }
+      },
+      {
+        "cycle": 31059.0,
+        "op": "v_mov_b32 v48, 0",
+        "scalar_reads": {
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 31063.0,
+        "op": "s_mov_b32 s26, 0",
+        "scalar_reads": {
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 31067.0,
+        "op": "s_and_b32 s1, s1, 0x0000ffff",
+        "scalar_reads": {
+          "s1": 32765
+        }
+      },
+      {
+        "cycle": 31071.0,
+        "op": "s_add_i32 s36, s26, -1",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 31075.0,
+        "op": "v_mov_b32 v49, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31079.0,
+        "op": "v_mov_b32 v50, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31083.0,
+        "op": "v_mov_b32 v51, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31087.0,
+        "op": "v_mov_b32 v52, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31091.0,
+        "op": "v_mov_b32 v53, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31095.0,
+        "op": "v_mov_b32 v4, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31099.0,
+        "op": "v_mov_b32 v5, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31103.0,
+        "op": "v_mov_b32 v6, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31107.0,
+        "op": "v_mov_b32 v7, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31111.0,
+        "op": "v_mov_b32 v0, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31115.0,
+        "op": "v_mov_b32 v1, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31119.0,
+        "op": "v_mov_b32 v2, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31123.0,
+        "op": "v_mov_b32 v3, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31127.0,
+        "op": "v_mov_b32 v8, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31131.0,
+        "op": "v_mov_b32 v9, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31135.0,
+        "op": "v_mov_b32 v10, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31139.0,
+        "op": "v_mov_b32 v11, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31143.0,
+        "op": "v_mov_b32 v12, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31147.0,
+        "op": "v_mov_b32 v13, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31151.0,
+        "op": "v_mov_b32 v14, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31155.0,
+        "op": "v_mov_b32 v15, v48",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31159.0,
+        "op": "s_add_i32 s38, s34, 1",
+        "scalar_reads": {
+          "s34": 0
+        }
+      },
+      {
+        "cycle": 31163.0,
+        "op": "s_abarrier_try_wait s39, s38, s28",
+        "scalar_reads": {
+          "s38": 1,
+          "s28": 0
+        }
+      },
+      {
+        "cycle": 31775.0,
+        "op": "s_lshl_b32 s39, s34, 13",
+        "scalar_reads": {
+          "s34": 0
+        }
+      },
+      {
+        "cycle": 31779.0,
+        "op": "s_add_i32 s39, s39, 0",
+        "scalar_reads": {
+          "s39": 0,
+          "s128": 0
+        }
+      },
+      {
+        "cycle": 31803.0,
+        "op": "v_add_u32 v16, s39, v70",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31839.0,
+        "op": "ds_read_b64 v54, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31843.0,
+        "op": "v_add_u32 v16, s39, v71",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31847.0,
+        "op": "s_mul_hi_i32 s26, s37, 0x55555556",
+        "scalar_reads": {
+          "s37": 3
+        }
+      },
+      {
+        "cycle": 31855.0,
+        "op": "ds_read_b64 v56, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31859.0,
+        "op": "v_add_u32 v16, s39, v72",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31863.0,
+        "op": "s_lshr_b32 s27, s26, 31",
+        "scalar_reads": {
+          "s26": 1
+        }
+      },
+      {
+        "cycle": 31871.0,
+        "op": "ds_read_b64 v58, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31875.0,
+        "op": "v_add_u32 v16, s39, v73",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31879.0,
+        "op": "s_add_i32 s26, s26, s27",
+        "scalar_reads": {
+          "s26": 1,
+          "s27": 0
+        }
+      },
+      {
+        "cycle": 31887.0,
+        "op": "ds_read_b64 v60, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31891.0,
+        "op": "v_add_u32 v16, s39, v74",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31895.0,
+        "op": "s_mul_i32 s27, s26, -3",
+        "scalar_reads": {
+          "s26": 1
+        }
+      },
+      {
+        "cycle": 31903.0,
+        "op": "ds_read_b64 v62, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31907.0,
+        "op": "v_add_u32 v16, s39, v75",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31911.0,
+        "op": "s_add_i32 s27, s27, s37",
+        "scalar_reads": {
+          "s27": 4294967293,
+          "s37": 3
+        }
+      },
+      {
+        "cycle": 31919.0,
+        "op": "ds_read_b64 v64, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31923.0,
+        "op": "v_add_u32 v16, s39, v76",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31939.0,
+        "op": "s_and_b32 s26, s26, 1",
+        "scalar_reads": {
+          "s26": 1
+        }
+      },
+      {
+        "cycle": 31943.0,
+        "op": "ds_read_b64 v66, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31955.0,
+        "op": "v_add_u32 v16, s39, v77",
+        "scalar_reads": {
+          "s39": 0
+        }
+      },
+      {
+        "cycle": 31959.0,
+        "op": "s_add_i32 s39, s27, 7",
+        "scalar_reads": {
+          "s27": 0
+        }
+      },
+      {
+        "cycle": 31963.0,
+        "op": "ds_read_b64 v68, v16, offset:49152",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 31967.0,
+        "op": "s_abarrier_try_wait s26, s39, s26",
+        "scalar_reads": {
+          "s39": 7,
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32943.0,
+        "op": "s_lshl_b32 s26, s27, 14",
+        "scalar_reads": {
+          "s27": 0
+        }
+      },
+      {
+        "cycle": 32947.0,
+        "op": "s_add_i32 s26, s30, s26",
+        "scalar_reads": {
+          "s30": 0,
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32949.0,
+        "op": "s_nop 0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 32959.0,
+        "op": "ds_read_matrix_trans_format v[16:19], s[26], row:2, col:2, alt:1, elem:1",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32963.0,
+        "op": "ds_read_matrix_trans_format v[20:23], s[26], row:2, col:2, alt:1, elem:1, offset:32",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32967.0,
+        "op": "ds_read_matrix_trans_format v[24:27], s[26], row:2, col:2, alt:1, elem:1, offset:2048",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32971.0,
+        "op": "ds_read_matrix_trans_format v[28:31], s[26], row:2, col:2, alt:1, elem:1, offset:2080",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32975.0,
+        "op": "ds_read_matrix_trans_format v[32:35], s[26], row:2, col:2, alt:1, elem:1, offset:4096",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32979.0,
+        "op": "ds_read_matrix_trans_format v[36:39], s[26], row:2, col:2, alt:1, elem:1, offset:4128",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32983.0,
+        "op": "ds_read_matrix_trans_format v[40:43], s[26], row:2, col:2, alt:1, elem:1, offset:6144",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32987.0,
+        "op": "ds_read_matrix_trans_format v[44:47], s[26], row:2, col:2, alt:1, elem:1, offset:6176",
+        "scalar_reads": {
+          "s26": 0
+        }
+      },
+      {
+        "cycle": 32991.0,
+        "op": "s_add_i32 s27, s27, 10",
+        "scalar_reads": {
+          "s27": 0
+        }
+      },
+      {
+        "cycle": 32993.0,
+        "op": "s_waitcnt lgkmcnt(0)",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 33155.0,
+        "op": "s_abarrier_arrive s26, s27, 1",
+        "scalar_reads": {
+          "s27": 10
+        }
+      },
+      {
+        "cycle": 33159.0,
+        "op": "s_add_i32 s26, s34, 4",
+        "scalar_reads": {
+          "s34": 0
+        }
+      },
+      {
+        "cycle": 33163.0,
+        "op": "s_abarrier_arrive s26, s26, 1",
+        "scalar_reads": {
+          "s26": 4
+        }
+      },
+      {
+        "cycle": 33165.0,
+        "op": "s_setprio 0",
+        "scalar_reads": {}
+      },
+      {
+        "cycle": 33175.0,
+        "op": "v_mmac_f32_16x16x32_fp8_fp8 v[8:11], v[54:55], v[16:17], v[8:11] lts",
+        "scalar_reads": {}
+      }
+    ]
+  },
+  "producer_next_output_first_issue": {
+    "P0_B_wave0": 29099.0,
+    "P1_A_wave4": 29247.0
+  }
+}

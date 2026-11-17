@@ -1,0 +1,39 @@
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/opencl.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/ocml.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/ockl.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_daz_opt_off.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_unsafe_math_off.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_finite_only_off.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_correctly_rounded_sqrt_off.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_wavefrontsize64_on.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_isa_version_946.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+warning: Linking two modules of different data layouts: '/opt/rocm/amdgcn/bitcode/oclc_abi_version_500.bc' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9' whereas '/zhenxin/temp/llvm-sync-fd18-20261117/bm128/old-top-bn512/gemm/kernel.llir' is 'e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9'
+
+
+Branch VGPR Usage for kernel 'gemm_top_w8a8_channel_wasp_persistent':
+BranchSpillInfo[0] = false
+BranchRealOrSuggestedVgprs[0] = 8
+BranchAvailableVGPRs[0] = 32
+
+BranchSpillInfo[1] = false
+BranchRealOrSuggestedVgprs[1] = 16
+BranchAvailableVGPRs[1] = 48
+
+BranchSpillInfo[2] = true
+BranchRealOrSuggestedVgprs[2] = 240
+BranchAvailableVGPRs[2] = 216
+Branch 2 spilled; suggested VGPR limit 240, configured VGPR limit 216
+
+BranchSpillInfo[3] = true
+BranchRealOrSuggestedVgprs[3] = 252
+BranchAvailableVGPRs[3] = 216
+Branch 3 spilled; suggested VGPR limit 252, configured VGPR limit 216
